@@ -28,6 +28,14 @@ function RootComponent() {
           Locations
         </Link>
         <Link
+          to="/vessels"
+          activeProps={{
+            className: 'font-bold',
+          }}
+        >
+          Vessels
+        </Link>
+        <Link
           to="/about"
           activeProps={{
             className: 'font-bold',
