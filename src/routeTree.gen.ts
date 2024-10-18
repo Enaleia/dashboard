@@ -13,6 +13,8 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
+import { Route as LocationsIndexImport } from './routes/locations/index'
+import { Route as LocationsLocationIdImport } from './routes/locations/$locationId'
 
 // Create/Update Routes
 
@@ -23,6 +25,16 @@ const AboutRoute = AboutImport.update({
 
 const IndexRoute = IndexImport.update({
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LocationsIndexRoute = LocationsIndexImport.update({
+  path: '/locations/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LocationsLocationIdRoute = LocationsLocationIdImport.update({
+  path: '/locations/$locationId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -44,6 +56,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/locations/$locationId': {
+      id: '/locations/$locationId'
+      path: '/locations/$locationId'
+      fullPath: '/locations/$locationId'
+      preLoaderRoute: typeof LocationsLocationIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/locations/': {
+      id: '/locations/'
+      path: '/locations'
+      fullPath: '/locations'
+      preLoaderRoute: typeof LocationsIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -52,36 +78,46 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/locations/$locationId': typeof LocationsLocationIdRoute
+  '/locations': typeof LocationsIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/locations/$locationId': typeof LocationsLocationIdRoute
+  '/locations': typeof LocationsIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/locations/$locationId': typeof LocationsLocationIdRoute
+  '/locations/': typeof LocationsIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths: '/' | '/about' | '/locations/$locationId' | '/locations'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to: '/' | '/about' | '/locations/$locationId' | '/locations'
+  id: '__root__' | '/' | '/about' | '/locations/$locationId' | '/locations/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  LocationsLocationIdRoute: typeof LocationsLocationIdRoute
+  LocationsIndexRoute: typeof LocationsIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  LocationsLocationIdRoute: LocationsLocationIdRoute,
+  LocationsIndexRoute: LocationsIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,7 +133,9 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about"
+        "/about",
+        "/locations/$locationId",
+        "/locations/"
       ]
     },
     "/": {
@@ -105,6 +143,12 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/locations/$locationId": {
+      "filePath": "locations/$locationId.tsx"
+    },
+    "/locations/": {
+      "filePath": "locations/index.tsx"
     }
   }
 }

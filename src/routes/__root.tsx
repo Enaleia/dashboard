@@ -17,8 +17,16 @@ function RootComponent() {
           }}
           activeOptions={{ exact: true }}
         >
-          Home
+          Enaleia
         </Link>{' '}
+        <Link
+          to="/locations"
+          activeProps={{
+            className: 'font-bold',
+          }}
+        >
+          Locations
+        </Link>
         <Link
           to="/about"
           activeProps={{
