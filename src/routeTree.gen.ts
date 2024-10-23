@@ -11,6 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as EconomyImport } from './routes/economy'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as VesselsIndexImport } from './routes/vessels/index'
@@ -19,6 +20,11 @@ import { Route as VesselsVesselIdImport } from './routes/vessels/$vesselId'
 import { Route as LocationsLocationIdImport } from './routes/locations/$locationId'
 
 // Create/Update Routes
+
+const EconomyRoute = EconomyImport.update({
+  path: '/economy',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AboutRoute = AboutImport.update({
   path: '/about',
@@ -68,6 +74,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/economy': {
+      id: '/economy'
+      path: '/economy'
+      fullPath: '/economy'
+      preLoaderRoute: typeof EconomyImport
+      parentRoute: typeof rootRoute
+    }
     '/locations/$locationId': {
       id: '/locations/$locationId'
       path: '/locations/$locationId'
@@ -104,6 +117,7 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/economy': typeof EconomyRoute
   '/locations/$locationId': typeof LocationsLocationIdRoute
   '/vessels/$vesselId': typeof VesselsVesselIdRoute
   '/locations': typeof LocationsIndexRoute
@@ -113,6 +127,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/economy': typeof EconomyRoute
   '/locations/$locationId': typeof LocationsLocationIdRoute
   '/vessels/$vesselId': typeof VesselsVesselIdRoute
   '/locations': typeof LocationsIndexRoute
@@ -123,6 +138,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/economy': typeof EconomyRoute
   '/locations/$locationId': typeof LocationsLocationIdRoute
   '/vessels/$vesselId': typeof VesselsVesselIdRoute
   '/locations/': typeof LocationsIndexRoute
@@ -134,6 +150,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/economy'
     | '/locations/$locationId'
     | '/vessels/$vesselId'
     | '/locations'
@@ -142,6 +159,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/economy'
     | '/locations/$locationId'
     | '/vessels/$vesselId'
     | '/locations'
@@ -150,6 +168,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/economy'
     | '/locations/$locationId'
     | '/vessels/$vesselId'
     | '/locations/'
@@ -160,6 +179,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  EconomyRoute: typeof EconomyRoute
   LocationsLocationIdRoute: typeof LocationsLocationIdRoute
   VesselsVesselIdRoute: typeof VesselsVesselIdRoute
   LocationsIndexRoute: typeof LocationsIndexRoute
@@ -169,6 +189,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  EconomyRoute: EconomyRoute,
   LocationsLocationIdRoute: LocationsLocationIdRoute,
   VesselsVesselIdRoute: VesselsVesselIdRoute,
   LocationsIndexRoute: LocationsIndexRoute,
@@ -189,6 +210,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
+        "/economy",
         "/locations/$locationId",
         "/vessels/$vesselId",
         "/locations/",
@@ -200,6 +222,9 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/economy": {
+      "filePath": "economy.tsx"
     },
     "/locations/$locationId": {
       "filePath": "locations/$locationId.tsx"
