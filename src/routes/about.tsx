@@ -7,8 +7,6 @@ export const Route = createFileRoute('/about')({
 
 function AboutComponent() {
   return (
-    <div className="p-2">
-      <h3>About</h3>
-    </div>
+    <h3 className='pt-20 text-center text-4xl'>About</h3>
   )
 }

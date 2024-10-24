@@ -7,8 +7,6 @@ export const Route = createFileRoute('/')({
 
 function HomeComponent() {
   return (
-    <div className="p-2">
-      <h3>Welcome to Enaleia!</h3>
-    </div>
+    <h3 className='pt-20 text-center text-4xl'>Welcome to Enaleia!</h3>
   )
 }

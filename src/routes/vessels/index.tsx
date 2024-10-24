@@ -6,9 +6,9 @@ export const Route = createFileRoute('/vessels/')({
 
 function VesselsComponent() {
   return (
-    <div className="p-2">
-      <h3 className='pb-4 underline'>ExploreVessels</h3>
-      <div className='flex flex-col'>
+    <div className='pt-20 text-center '>
+      <h3 className='text-4xl pb-8'>Explore Vessels</h3>
+      <div className='flex flex-col text-xl'>
         <Link className='hover:font-bold' to="/vessels/$vesselId" params={{vesselId: '1234'}}>vessel 1234</Link>
         <Link className='hover:font-bold' to="/vessels/$vesselId" params={{vesselId: '5678'}}>vessel 5678</Link>
         <Link className='hover:font-bold' to="/vessels/$vesselId" params={{vesselId: '9012'}}>vessel 9012</Link> 
