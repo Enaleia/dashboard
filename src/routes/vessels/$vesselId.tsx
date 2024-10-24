@@ -7,6 +7,6 @@ export const Route = createFileRoute('/vessels/$vesselId')({
 function VesselDetailComponent() {
   const { vesselId } = Route.useParams()
   return (
-    <div>Details for vessel: {vesselId}</div>
+    <div className='pt-20 text-center text-4xl'>Details for vessel: {vesselId}</div>
   )
 }

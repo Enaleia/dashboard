@@ -7,8 +7,6 @@ export const Route = createFileRoute('/economy')({
 
 function EconomyComponent() {
   return (
-    <div className="p-2">
-      <h3>Circular Economy</h3>
-    </div>
+    <h3 className='pt-20 text-center text-4xl'>Circular Economy</h3>
   )
 }
