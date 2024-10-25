@@ -1,5 +1,7 @@
 import * as React from 'react'
 import { createFileRoute, Link } from '@tanstack/react-router'
+import { MapContainer, TileLayer } from 'react-leaflet'
+import 'leaflet/dist/leaflet.css'
 
 export const Route = createFileRoute('/')({
   component: HomeComponent,
@@ -29,7 +31,14 @@ function HomeComponent() {
           <p className='font-semibold text-2xl md:4xl'>145</p>
           <p className='font-semibold text-2xl md:4xl'>87</p>
         </article>
-        <article className='w-[90%] md:w-[94%] h-[300px] md:h-[500px] my-6 self-center bg-slate-300'></article>
+        <article className='w-[90%] md:w-[94%] h-[300px] md:h-[700px] my-6 self-center bg-slate-300'>
+          <MapContainer className='h-full z-0' center={[38.32217739504656, 23.952204640936014]} zoom={7} scrollWheelZoom={true}>
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+          </MapContainer>
+        </article>
       </section>
       <section className='flex flex-col gap-4 px-6 md:px-20'>
         <p className='w-full font-semibold text-2xl md:text-3xl'>Waste Collection Insights</p>
