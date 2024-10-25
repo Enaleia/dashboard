@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { ActivityMap } from '../components/activity-map'
+import { AreaChart } from '../components/area-chart'
+import chartData from '../chart_data.json'
 
 export const Route = createFileRoute('/')({
   component: HomeComponent,
@@ -44,7 +46,9 @@ function HomeComponent() {
           <button className='bg-slate-300 p-2'>Last year</button>
           <button className='bg-slate-300 p-2'>Last 30 days</button>
         </article>
-        <article className='w-[90%] md:w-[94%] h-[300px] md:h-[500px] mb-6 self-center bg-slate-300'></article>
+        <article className='w-[90%] md:w-[94%] h-[300px] md:h-[500px] mb-6 self-center'>
+          <AreaChart data={chartData}/>
+        </article>
       </section>
       <section className='flex flex-col gap-4 text-center px-6 md:px-48'>
         <p className='w-full font-semibold text-2xl md:text-3xl'>Circular Economy</p>
