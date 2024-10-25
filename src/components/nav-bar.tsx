@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { useState } from 'react';
 import { Menu } from 'lucide-react'
-import { NavMenu } from './navMenu';
+import { NavMenu } from './nav-menu';
 
 const NavBar = () => {
 	return (
