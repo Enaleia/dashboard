@@ -1,11 +1,28 @@
 import * as React from 'react'
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { MapContainer, TileLayer } from 'react-leaflet'
+import { useEffect } from 'react'
+import { MapContainer, TileLayer, useMap } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 
 export const Route = createFileRoute('/')({
   component: HomeComponent,
 })
+
+// Helper component to trigger invalidateSize
+const InvalidateMapSize = () => {
+  const map = useMap();
+  
+  useEffect(() => {
+    // Small delay to ensure the container has fully rendered
+    const timeout = setTimeout(() => {
+      map.invalidateSize();
+    }, 100);
+    
+    return () => clearTimeout(timeout);
+  }, [map]);
+  
+  return null;
+};
 
 function HomeComponent() {
   return (
@@ -37,6 +54,7 @@ function HomeComponent() {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
+            <InvalidateMapSize />
           </MapContainer>
         </article>
       </section>
