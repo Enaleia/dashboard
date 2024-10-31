@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router'
 import { useState } from 'react';
 import { Menu } from 'lucide-react'
 import { NavMenu } from './nav-menu';
+import { ArrowUpRight } from 'lucide-react';
 
 const NavBar = () => {
 	return (
@@ -34,19 +35,21 @@ const MobileNavBar = () => {
 const DesktopNavBar = () => {
 	return (
 		<nav>
-      <div className='hidden md:flex justify-between p-10'>
-        <div className=''>
-          <Link
-            to="/"
-            activeProps={{
-              className: 'font-bold',
-            }}
-            activeOptions={{ exact: true }}
-          >
-            Enaleia
-          </Link>
-        </div>
-        <div className='flex gap-16'>
+      <div className='hidden md:flex justify-between items-center'>
+        <Link
+          to="/"
+          activeProps={{
+            className: 'font-bold',
+          }}
+          activeOptions={{ exact: true }}
+        >
+          <div className='flex items-center gap-3'>
+            <img className="size-10" src={"/hub-logo.svg"} alt="Enaleia Logo" />
+            <p className='text-2xl'>ENALEIA Hub</p>
+          </div>
+        </Link>
+
+        <div className='flex gap-8 font-extralight'>
           <Link
             to="/locations"
             activeProps={{
@@ -84,11 +87,13 @@ const DesktopNavBar = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            EAS Explorer ↗️
+            <div className='flex gap-1'>
+              <p>Attestations</p>
+              <ArrowUpRight strokeWidth={1}/>
+            </div>
           </a>
         </div>
       </div>
-      <hr/>
     </nav>
   )
 }
