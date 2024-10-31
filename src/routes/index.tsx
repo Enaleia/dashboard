@@ -2,6 +2,7 @@ import * as React from 'react'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { ActivityMap } from '../components/activity-map'
 import { AreaChart } from '../components/area-chart'
+import { CircleArrowDown } from 'lucide-react';
 import chartData from '../chart_data.json'
 
 export const Route = createFileRoute('/')({
@@ -10,10 +11,14 @@ export const Route = createFileRoute('/')({
 
 function HomeComponent() {
   return (
-    <main className='flex flex-col gap-14 md:gap-24 pt-10 pb-32 md:pt-20 bg-slate-100'>
-      <section className='flex flex-col md:flex-row gap-6 md:gap-10 px-6 md:px-48'>
-        <p className='w-full md:w-3/5 font-semibold text-3xl md:text-4xl tracking-wide'>Working Together with Fishers for a Sustainable Marine Ecosystem</p>
-        <p className='w-full md:w-2/5 text-lg md:text-xl'>Welcome to the ENALEIA Hub—a dashboard that tracks the environmental efforts and impacts made by our community and partners. Our mission is to create a sustainable marine ecosystem by promoting circular and social economy solutions.</p>
+    <main className='flex flex-col justify-center items-center gap-14 md:gap-24 m-auto pt-10 pb-32 md:pt-16 max-w-[1500px]'>
+      <section className='flex flex-col items-center gap-6 px-6 text-center'>
+        <h1 className='w-full font-bold text-3xl md:text-6xl leading-10 md:px-80'>Working together with fishers for a sustainable marine ecosystem</h1>
+        <p className='w-full font-extralight text-base md:text-lg md:px-60'>Welcome to the ENALEIA Hub—a dashboard that tracks the environmental efforts and impacts made by our community and partners. Our mission is to create a sustainable marine ecosystem by promoting circular and social economy solutions.</p>
+        <div className='flex flex-row items-center gap-2 font-extralight text-[#2985D0]'>
+          <CircleArrowDown color="#2985D0" strokeWidth={1}/>
+          <p>Explore the data</p>
+        </div>
       </section>
       <section className='flex flex-col gap-4 text-center px-6 md:px-48'>
         <p className='w-full font-semibold text-2xl md:text-3xl'>Our Impact at a Glance</p>

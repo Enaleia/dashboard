@@ -11,12 +11,12 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   return (
-    <div className='flex flex-col'>
+    <>
       <div className='mx-24 my-8 border border-black rounded-full px-14 py-6 max-w-[1500px]'>
         <NavBar />
       </div>    
       <Outlet />
       <TanStackRouterDevtools position="bottom-right" />
-    </div>
+    </>
   )
 }
