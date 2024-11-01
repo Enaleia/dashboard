@@ -45,33 +45,36 @@ function HomeComponent() {
           <ActivityMap />
         </article>
       </section>
-
       
-      <section className='flex flex-col gap-4 px-6 md:px-20'>
-        <p className='w-full font-semibold text-2xl md:text-3xl'>Waste Collection Insights</p>
-        <p className='w-full text-base md-text-lg'>Plastic waste makes up the majority of what our community collects. Various factors, such as tourism and fishing seasons, influence the trends in our data. Explore how these dynamics shape our collection efforts over time.</p>
-      </section>
-      <section className='flex flex-col gap-3 md:gap-8 bg-white mx-6 md:mx-16'>
-        <article className='flex flex-row justify-around md:justify-start gap-2 p-4 md:p-8'>
-          <button className='bg-slate-300 p-2'>All time</button>
-          <button className='bg-slate-300 p-2'>Last year</button>
-          <button className='bg-slate-300 p-2'>Last 30 days</button>
+      <section className='flex flex-col border border-black rounded-3xl mx-2 md:mx-16 md:p-12'>
+        <article className='flex flex-col md:flex-row md:justify-between md:items-end'>
+          <div className='w-[55%]'>
+            <p className='font-bold text-2xl md:text-5xl pb-2 md:pb-4'>Waste collection insights</p>
+            <p className='font-extralight text-base md-text-xl'>Plastic waste makes up the majority of what our community collects. Various factors, such as tourism and fishing seasons, influence the trends in our data. Explore how these dynamics shape our collection efforts over time.</p>
+          </div>
+          <div className='flex flex-row justify-around md:justify-start gap-2 p-4 md:p-8'>
+            <button className='bg-slate-300 p-2'>All time</button>
+            <button className='bg-slate-300 p-2'>Last year</button>
+            <button className='bg-slate-300 p-2'>Last 30 days</button>
+          </div>
         </article>
         <article className='w-[90%] md:w-[94%] h-[300px] md:h-[500px] mb-6 self-center'>
           <AreaChart data={chartData}/>
         </article>
+        <p className='font-extralight text-lg md:text-xl text-center'>To understand the breakdown of plastic material and its origin, please view locations page.</p>
       </section>
-      <section className='flex flex-col gap-4 text-center px-6 md:px-48'>
-        <p className='w-full font-semibold text-2xl md:text-3xl'>Circular Economy</p>
-        <p className='w-full text-base md-text-lg'>Connecting with planet-conscious organizations and companies that are working on closing the loop on waste.</p>
-        <button className='w-fit self-center bg-slate-300 p-3'>
+
+      <section className='flex flex-col gap-4 m-auto w-full md:w-[60%] md:gap-8 py-10 md:py-20 text-center'>
+        <p className='font-bold text-3xl'>ENALEIA partners with environmentally conscious organizations and companies dedicated to closing the loop on waste and promoting sustainability.</p>
+        <p className='w-full text-base md-text-lg'>Collaboration is essential for a successful transition to circularity. ENALEIA partners with certified recycling and upcycling organizations that are transforming collected marine plastic into valuable resources, seamlessly integrating it into the circular economy.</p>
+        <button className='w-fit self-center bg-black text-white px-8 py-4 rounded-full'>
           <Link
             to="/economy"
             activeProps={{
               className: 'font-bold',
             }}
           >
-            Learn more
+            Learn more about circular economy
           </Link>
         </button>
       </section>
