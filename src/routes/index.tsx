@@ -1,8 +1,9 @@
-import * as React from 'react'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { ActivityMap } from '../components/activity-map'
 import { AreaChart } from '../components/area-chart'
 import { CircleArrowDown } from 'lucide-react'
+import { Button } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import chartData from '../chart_data.json'
 
 export const Route = createFileRoute('/')({
@@ -64,19 +65,18 @@ function HomeComponent() {
         <p className='font-extralight text-lg md:text-xl text-center'>To understand the breakdown of plastic material and its origin, please view locations page.</p>
       </section>
 
-      <section className='flex flex-col gap-4 m-auto w-full md:w-[60%] md:gap-8 py-10 md:py-20 text-center'>
+      <section className='flex flex-col items-center gap-4 m-auto w-full md:w-[60%] md:gap-8 py-10 md:py-20 text-center'>
         <p className='font-bold text-3xl'>ENALEIA partners with environmentally conscious organizations and companies dedicated to closing the loop on waste and promoting sustainability.</p>
         <p className='w-full text-base md-text-lg'>Collaboration is essential for a successful transition to circularity. ENALEIA partners with certified recycling and upcycling organizations that are transforming collected marine plastic into valuable resources, seamlessly integrating it into the circular economy.</p>
-        <button className='w-fit self-center bg-black text-white px-8 py-4 rounded-full'>
-          <Link
-            to="/economy"
+        <Link 
+          className={buttonVariants({ variant: "default" })}
+          to="/economy"
             activeProps={{
               className: 'font-bold',
             }}
-          >
-            Learn more about circular economy
-          </Link>
-        </button>
+        >
+          Learn more about the circular economy
+        </Link>
       </section>
     </main>
   )
