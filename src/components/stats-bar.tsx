@@ -15,7 +15,7 @@ const StatCard = ({ title, stat, isWeight, description }: StatCardProps) => {
   )
 }
 
-const StatBar = () => {
+const StatsBar = () => {
   const landingStats = [
     {
       title: "Waste removed (Kgs)",
@@ -58,4 +58,4 @@ const StatBar = () => {
   )
 }
 
-export { StatBar };
+export { StatsBar };

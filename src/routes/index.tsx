@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { StatBar } from '@/components/stat-bar'
+import { useState } from 'react'
+import { StatsBar } from '@/components/stats-bar'
 import { ActivityMap } from '../components/activity-map'
 import { AreaChart } from '../components/area-chart'
 import { CircleArrowDown, CircleArrowUp } from 'lucide-react'
-import { buttonVariants } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import chartData from '../chart_data.json'
 
 export const Route = createFileRoute('/')({
@@ -11,6 +12,10 @@ export const Route = createFileRoute('/')({
 })
 
 function HomeComponent() {
+  const [selectedMapDates, setSelectedMapDates] = useState('All time')
+  const [selectedChartDates, setSelectedChartDates] = useState('All time')
+  const dateChoices = ["All time", "Last year", "Last 30 days"]
+
   return (
     <main className='flex flex-col justify-center items-center gap-14 md:gap-24 m-auto pt-10 pb-32 md:pt-16 max-w-[1500px]'>
       <section className='flex flex-col items-center gap-6 px-6 text-center'>
@@ -32,13 +37,18 @@ function HomeComponent() {
             <p className='w-full font-bold text-2xl md:text-5xl pt-4 md:pt-10'>Our impact at a glance</p>
             <p className='w-[90%] md:w-[60%] font-extralight text-base md-text-xl py-2 md:py-6'>Since 2023, we’ve partnered with local fishers to promote a healthier marine environment. Alongside our professional training programs, we empower fishers to be active stewards of the ocean by incentivizing sustainable practices and marine conservation efforts.</p>
             <div className='flex flex-row justify-center gap-3 text-black text-sm'>
-              <button className='bg-white rounded-full py-2 px-4'>All time</button>
-              <button className='bg-white rounded-full py-2 px-4'>Last year</button>
-              <button className='bg-white rounded-full py-2 px-4'>Last 30 days</button>
+              {dateChoices.map((choice) => (
+                <Button 
+                variant={selectedMapDates === choice ? "secondary" : "outline2"}
+                onClick={() => setSelectedMapDates(choice)}
+              >
+                {choice}
+              </Button>
+              ))}
             </div>
           </div>
         </article>
-        <StatBar/>
+        <StatsBar/>
         <article className='w-full h-[300px] md:h-[700px]'>
           <ActivityMap />
         </article>
@@ -51,9 +61,14 @@ function HomeComponent() {
             <p className='font-extralight text-base md-text-xl'>Plastic waste makes up the majority of what our community collects. Various factors, such as tourism and fishing seasons, influence the trends in our data. Explore how these dynamics shape our collection efforts over time.</p>
           </div>
           <div className='flex flex-row justify-around md:justify-start gap-2 p-4 md:p-8'>
-            <button className='bg-slate-300 p-2'>All time</button>
-            <button className='bg-slate-300 p-2'>Last year</button>
-            <button className='bg-slate-300 p-2'>Last 30 days</button>
+            {dateChoices.map((choice) => (
+              <Button 
+                variant={selectedChartDates === choice ? "default" : "outline"}
+                onClick={() => setSelectedChartDates(choice)}
+              >
+                {choice}
+              </Button>
+            ))}
           </div>
         </article>
         <article className='w-[90%] md:w-[94%] h-[300px] md:h-[500px] mb-6 self-center'>
