@@ -2,10 +2,11 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import { StatsBar } from '@/components/stats-bar'
 import { ActivityMap } from '../components/activity-map'
-import { AreaChart } from '../components/area-chart'
+import { MaterialsChart } from '@/components/materials-chart'
+// import { AreaChart } from '../components/area-chart'
 import { CircleArrowDown, CircleArrowUp } from 'lucide-react'
 import { Button, buttonVariants } from "@/components/ui/button"
-import chartData from '../chart_data.json'
+// import chartData from '../chart_data.json'
 
 export const Route = createFileRoute('/')({
   component: HomeComponent,
@@ -38,7 +39,8 @@ function HomeComponent() {
             <p className='w-[90%] md:w-[60%] font-extralight text-base md-text-xl py-2 md:py-6'>Since 2023, we’ve partnered with local fishers to promote a healthier marine environment. Alongside our professional training programs, we empower fishers to be active stewards of the ocean by incentivizing sustainable practices and marine conservation efforts.</p>
             <div className='flex flex-row justify-center gap-3'>
               {dateChoices.map((choice) => (
-                <Button 
+                <Button
+                key={choice} 
                 variant={selectedMapDates === choice ? "secondary" : "outline2"}
                 onClick={() => setSelectedMapDates(choice)}
               >
@@ -49,9 +51,7 @@ function HomeComponent() {
           </div>
         </article>
         <StatsBar/>
-        <article className='w-full h-[300px] md:h-[700px]'>
-          <ActivityMap />
-        </article>
+        <ActivityMap />
       </section>
       
       <section className='flex flex-col border border-primary rounded-3xl mx-2 md:mx-16 md:p-12'>
@@ -63,6 +63,7 @@ function HomeComponent() {
           <div className='flex flex-row justify-around md:justify-start gap-2 p-4 md:p-8'>
             {dateChoices.map((choice) => (
               <Button 
+                key={choice}
                 variant={selectedChartDates === choice ? "default" : "outline"}
                 onClick={() => setSelectedChartDates(choice)}
               >
@@ -71,9 +72,10 @@ function HomeComponent() {
             ))}
           </div>
         </article>
-        <article className='w-[90%] md:w-[94%] h-[300px] md:h-[500px] mb-6 self-center'>
-          <AreaChart data={chartData}/>
-        </article>
+        <MaterialsChart timeRange={selectedChartDates}/>
+        {/* <article className='w-[90%] md:w-[94%] h-[300px] md:h-[500px] mb-6 self-center'> */}
+          {/* <AreaChart data={chartData}/> */}       
+        {/* </article> */}
         <p className='font-extralight text-lg md:text-xl text-center'>To understand the breakdown of plastic material and its origin, please view locations page.</p>
       </section>
 

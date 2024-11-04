@@ -52,7 +52,7 @@ const StatsBar = () => {
   return (
     <article className='flex flex-col md:flex-row md:gap-5 items-center p-12'>
       {landingStats.map((stat: StatCardProps) => (
-        <StatCard title={stat.title} stat={stat.stat} isWeight={stat.isWeight} description={stat.description} />
+        <StatCard key={stat.title} title={stat.title} stat={stat.stat} isWeight={stat.isWeight} description={stat.description} />
       ))}
     </article>
   )
