@@ -2,7 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { StatBar } from '@/components/stat-bar'
 import { ActivityMap } from '../components/activity-map'
 import { AreaChart } from '../components/area-chart'
-import { CircleArrowDown } from 'lucide-react'
+import { CircleArrowDown, CircleArrowUp } from 'lucide-react'
 import { buttonVariants } from "@/components/ui/button"
 import chartData from '../chart_data.json'
 
@@ -16,7 +16,10 @@ function HomeComponent() {
       <section className='flex flex-col items-center gap-6 px-6 text-center'>
         <h1 className='w-full font-bold text-3xl md:text-6xl leading-10 md:px-80'>Working together with fishers for a sustainable marine ecosystem</h1>
         <p className='w-full font-extralight text-base md:text-lg md:px-60'>Welcome to the ENALEIA Hub—a dashboard that tracks the environmental efforts and impacts made by our community and partners. Our mission is to create a sustainable marine ecosystem by promoting circular and social economy solutions.</p>
-        <div className='flex flex-row items-center gap-2 font-extralight text-[#2985D0]'>
+        <div 
+          className='flex flex-row items-center gap-2 font-extralight text-[#2985D0] cursor-pointer'
+          onClick={() => window.scrollTo({ top: 2000, behavior: 'smooth'})}
+        >
           <CircleArrowDown color="#2985D0" strokeWidth={1}/>
           <p>Explore the data</p>
         </div>
@@ -59,7 +62,7 @@ function HomeComponent() {
         <p className='font-extralight text-lg md:text-xl text-center'>To understand the breakdown of plastic material and its origin, please view locations page.</p>
       </section>
 
-      <section className='flex flex-col items-center gap-4 m-auto w-full md:w-[60%] md:gap-8 py-10 md:py-20 text-center'>
+      <section className='flex flex-col items-center gap-4 m-auto w-full md:w-[60%] md:gap-8 text-center'>
         <p className='font-bold text-3xl'>ENALEIA partners with environmentally conscious organizations and companies dedicated to closing the loop on waste and promoting sustainability.</p>
         <p className='w-full text-base md-text-lg'>Collaboration is essential for a successful transition to circularity. ENALEIA partners with certified recycling and upcycling organizations that are transforming collected marine plastic into valuable resources, seamlessly integrating it into the circular economy.</p>
         <Link 
@@ -71,6 +74,13 @@ function HomeComponent() {
         >
           Learn more about the circular economy
         </Link>
+        <div 
+          className='flex flex-row items-center gap-2 pt-8 font-extralight text-[#2985D0] cursor-pointer'
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth'})}
+        >
+          <CircleArrowUp color="#2985D0" strokeWidth={1}/>
+          <p>Back to top</p>
+        </div>
       </section>
     </main>
   )
