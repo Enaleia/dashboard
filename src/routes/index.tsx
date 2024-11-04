@@ -22,7 +22,7 @@ function HomeComponent() {
         <h1 className='w-full font-bold text-3xl md:text-6xl leading-10 md:px-80'>Working together with fishers for a sustainable marine ecosystem</h1>
         <p className='w-full font-extralight text-base md:text-lg md:px-60'>Welcome to the ENALEIA Hub—a dashboard that tracks the environmental efforts and impacts made by our community and partners. Our mission is to create a sustainable marine ecosystem by promoting circular and social economy solutions.</p>
         <div 
-          className='flex flex-row items-center gap-2 font-extralight text-[#2985D0] cursor-pointer'
+          className='flex flex-row items-center gap-2 font-extralight text-ocean cursor-pointer'
           onClick={() => window.scrollTo({ top: 2000, behavior: 'smooth'})}
         >
           <CircleArrowDown color="#2985D0" strokeWidth={1}/>
@@ -30,13 +30,13 @@ function HomeComponent() {
         </div>
       </section>
 
-      <section className='overflow-hidden border border-black rounded-3xl mx-2 md:mx-16'>
+      <section className='overflow-hidden border border-primary rounded-3xl mx-2 md:mx-16'>
         <article className='relative w-full'>
           <img src='/impact_photo.jpg' alt="photo of port operations" className='object-cover bg-center'/>
-          <div className='absolute inset-0 flex flex-col items-center justify-center text-center text-[#F6F4F2]'>
+          <div className='absolute inset-0 flex flex-col items-center justify-center text-center text-sand'>
             <p className='w-full font-bold text-2xl md:text-5xl pt-4 md:pt-10'>Our impact at a glance</p>
             <p className='w-[90%] md:w-[60%] font-extralight text-base md-text-xl py-2 md:py-6'>Since 2023, we’ve partnered with local fishers to promote a healthier marine environment. Alongside our professional training programs, we empower fishers to be active stewards of the ocean by incentivizing sustainable practices and marine conservation efforts.</p>
-            <div className='flex flex-row justify-center gap-3 text-black text-sm'>
+            <div className='flex flex-row justify-center gap-3'>
               {dateChoices.map((choice) => (
                 <Button 
                 variant={selectedMapDates === choice ? "secondary" : "outline2"}
@@ -54,7 +54,7 @@ function HomeComponent() {
         </article>
       </section>
       
-      <section className='flex flex-col border border-black rounded-3xl mx-2 md:mx-16 md:p-12'>
+      <section className='flex flex-col border border-primary rounded-3xl mx-2 md:mx-16 md:p-12'>
         <article className='flex flex-col md:flex-row md:justify-between md:items-end'>
           <div className='w-[55%]'>
             <p className='font-bold text-2xl md:text-5xl pb-2 md:pb-4'>Waste collection insights</p>
@@ -90,7 +90,7 @@ function HomeComponent() {
           Learn more about the circular economy
         </Link>
         <div 
-          className='flex flex-row items-center gap-2 pt-8 font-extralight text-[#2985D0] cursor-pointer'
+          className='flex flex-row items-center gap-2 pt-8 font-extralight text-ocean cursor-pointer'
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth'})}
         >
           <CircleArrowUp color="#2985D0" strokeWidth={1}/>

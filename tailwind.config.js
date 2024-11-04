@@ -18,6 +18,15 @@ export default {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
+        sand: 'hsl(var(--sand))',
+        ocean: 'hsl(var(--ocean))',
+        plastic: 'hsl(var(--plastic))',
+        prevention: 'hsl(var(--prevention))',
+        metal: 'hsl(var(--metal))',
+        ghostnet: 'hsl(var(--ghostnet))',
+        port: 'hsl(var(--port))',
+        recycler: 'hsl(var(--recycler))',
+        factory: 'hsl(var(--factory))',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
