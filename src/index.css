@@ -6,6 +6,15 @@ body {
   font-family: 'DM Sans Variable', sans-serif;
 }
 
+.leaflet-container .leaflet-tile-pane img {
+  filter: saturate(50%)opacity(70%);
+}
+
+.leaflet-tooltip {
+  background-color: var(--sand);
+  border-radius: 12px;
+}
+
 @layer base {
   :root {
     --background: 30, 18%, 96%;
