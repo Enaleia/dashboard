@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
+import { StatBar } from '@/components/stat-bar'
 import { ActivityMap } from '../components/activity-map'
 import { AreaChart } from '../components/area-chart'
 import { CircleArrowDown } from 'lucide-react'
-import { Button } from "@/components/ui/button"
 import { buttonVariants } from "@/components/ui/button"
 import chartData from '../chart_data.json'
 
@@ -35,13 +35,7 @@ function HomeComponent() {
             </div>
           </div>
         </article>
-        <article className='flex flex-row items-center justify-around'>
-          <p className='font-semibold text-2xl md:4xl'>107k</p>
-          <p className='font-semibold text-2xl md:4xl'>132</p>
-          <p className='font-semibold text-2xl md:4xl'>2,901</p>
-          <p className='font-semibold text-2xl md:4xl'>92</p>
-          <p className='font-semibold text-2xl md:4xl'>4</p>
-        </article>
+        <StatBar/>
         <article className='w-full h-[300px] md:h-[700px]'>
           <ActivityMap />
         </article>
