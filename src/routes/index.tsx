@@ -50,7 +50,7 @@ function HomeComponent() {
             </div>
           </div>
         </article>
-        <StatsBar/>
+        <StatsBar pageId='landing'/>
         <ActivityMap />
       </section>
       
