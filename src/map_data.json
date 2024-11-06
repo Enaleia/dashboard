@@ -37,7 +37,7 @@
   },
   {
     "name": "ΚΕΡΚΥΡΑ",
-    "country": "Greece",
+    "country": "Italy",
     "latitude": 39.62747648666418,
     "longitude": 19.90624965817071,
     "type": "port",
@@ -226,7 +226,7 @@
   },
   {
     "name": "ΒΑΡΚΙΖΑ",
-    "country": "Greece",
+    "country": "Italy",
     "latitude": 37.81666472020753,
     "longitude": 23.801770408926448,
     "type": "port",
@@ -280,7 +280,7 @@
   },
   {
     "name": "ΣΠΕΤΣΕΣ",
-    "country": "Portugal",
+    "country": "Greece",
     "latitude": 37.269201231399265,
     "longitude": 23.156763857242673,
     "type": "port",
