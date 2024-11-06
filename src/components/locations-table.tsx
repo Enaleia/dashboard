@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router"
+import { useNavigate } from "@tanstack/react-router"
 import {
   Table,
   TableBody,
@@ -11,6 +11,7 @@ import { Button } from "./ui/button"
 import tableData from '../map_data.json'
 
 const LocationsTable = () => {
+  const navigate = useNavigate()
   return (
     <>
       <Table>
@@ -25,15 +26,17 @@ const LocationsTable = () => {
         </TableHeader>
         <TableBody>
           {tableData.map((location) => (
-            // <Link className='hover:font-bold' to="/locations/$locationId" params={{locationId: location.name}}>
-              <TableRow key={location.name}>             
-                <TableCell>{location.name}</TableCell>
-                <TableCell>{location.country}</TableCell>
-                <TableCell>{String(location.latitude).slice(0, 10)}, {String(location.longitude).slice(0, 10)} </TableCell>
-                <TableCell>{location.type}</TableCell>
-                <TableCell>{location.actions}</TableCell>            
-              </TableRow>
-            // </Link>
+            <TableRow 
+              key={location.name}
+              onClick={() => navigate({to: `/locations/${location.name}`})}
+              className="cursor-pointer hover:font-bold"
+            >
+              <TableCell>{location.name}</TableCell>
+              <TableCell>{location.country}</TableCell>
+              <TableCell>{String(location.latitude).slice(0, 10)}, {String(location.longitude).slice(0, 10)} </TableCell>
+              <TableCell>{location.type}</TableCell>
+              <TableCell>{location.actions}</TableCell>            
+            </TableRow>
           ))}
         </TableBody>
       </Table>

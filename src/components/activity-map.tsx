@@ -43,7 +43,7 @@ const ActivityMap = () => {
               <Popup>
                 <div className='flex items-center gap-6 text-lg'>
                   <p>{location.name}</p>
-                  <Link to="/locations/$locationId" params={{locationId: location.name}}>
+                  <Link to={`/locations/${location.name}`}>
                     <CircleArrowRight color='#2985D0'/>
                   </Link>
                 </div>
