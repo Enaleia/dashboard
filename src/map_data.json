@@ -166,7 +166,7 @@
     "country": "Greece",
     "latitude": 37.838848742959165,
     "longitude": 24.937208160099665,
-    "type": "Factory",
+    "type": "Manufacturer",
     "kg": 2780,
     "actions": 210
   },
@@ -301,7 +301,7 @@
     "country": "Italy",
     "latitude": 36.622342305955705,
     "longitude": 27.841942476140886,
-    "type": "Factory",
+    "type": "Manufacturer",
     "kg": 10060,
     "actions": 200
   }

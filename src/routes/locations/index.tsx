@@ -10,7 +10,7 @@ export const Route = createFileRoute('/locations/')({
 })
 
 function LocationsComponent() {
-  const locationTypes = ["See all", "Ports", "Recyclers", "Manufacturers"]
+  const locationTypes = ["See all", "Port", "Recycler", "Manufacturer"]
   const viewTypes = ["List", "Map"]
   const [selectedLocationType, setSelectedLocationType] = useState("See all")
   const [selectedViewType, setSelectedViewType] = useState("List")
@@ -54,7 +54,7 @@ function LocationsComponent() {
         </article>
 
         <article className='overflow-hidden rounded-3xl mt-6'>
-          {selectedViewType === "List" && <LocationsTable />}
+          {selectedViewType === "List" && <LocationsTable  selectedLocationType={selectedLocationType}/>}
           {selectedViewType === "Map" && <ActivityMap />}
         </article>          
       </section> 
