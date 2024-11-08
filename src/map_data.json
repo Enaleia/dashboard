@@ -4,7 +4,7 @@
     "country": "Greece",
     "latitude": 40.46614880219318,
     "longitude": 22.8545901825901,
-    "type": "port",
+    "type": "Port",
     "kg": 24760,
     "actions": 200
   },
@@ -13,7 +13,7 @@
     "country": "Greece",
     "latitude": 40.23954649913149,
     "longitude": 23.279096048233473,
-    "type": "port",
+    "type": "Port",
     "kg": 925,
     "actions": 200
   },
@@ -22,7 +22,7 @@
     "country": "Greece",
     "latitude": 39.971015364992695,
     "longitude": 23.91760015021697,
-    "type": "port",
+    "type": "Port",
     "kg": 5540,
     "actions": 200
   },
@@ -31,7 +31,7 @@
     "country": "Greece",
     "latitude": 37.95977990970762,
     "longitude": 23.60790881559715,
-    "type": "port",
+    "type": "Port",
     "kg": 18720,
     "actions": 200
   },
@@ -40,7 +40,7 @@
     "country": "Italy",
     "latitude": 39.62747648666418,
     "longitude": 19.90624965817071,
-    "type": "port",
+    "type": "Port",
     "kg": 7105,
     "actions": 200
   },
@@ -49,7 +49,7 @@
     "country": "Greece",
     "latitude": 37.93724142624388,
     "longitude": 21.147712118664355,
-    "type": "port",
+    "type": "Port",
     "kg": 8500,
     "actions": 200
   },
@@ -58,7 +58,7 @@
     "country": "Greece",
     "latitude": 35.51865015628125,
     "longitude": 24.018592718415473,
-    "type": "port",
+    "type": "Port",
     "kg": 983,
     "actions": 200
   },
@@ -67,7 +67,7 @@
     "country": "Greece",
     "latitude": 35.18687763666635,
     "longitude": 25.716497938394546,
-    "type": "port",
+    "type": "Port",
     "kg": 1380,
     "actions": 200
   },
@@ -76,7 +76,7 @@
     "country": "Greece",
     "latitude": 36.94675222414254,
     "longitude": 26.9845007822738,
-    "type": "port",
+    "type": "Port",
     "kg": 7945,
     "actions": 200
   },
@@ -85,7 +85,7 @@
     "country": "Greece",
     "latitude": 35.3434284566139,
     "longitude": 25.14246576087459,
-    "type": "port",
+    "type": "Port",
     "kg": 1280,
     "actions": 200
   },
@@ -94,7 +94,7 @@
     "country": "Greece",
     "latitude": 38.472481832611216,
     "longitude": 23.611513295709265,
-    "type": "port",
+    "type": "Port",
     "kg": 5170,
     "actions": 200
   },
@@ -103,7 +103,7 @@
     "country": "Greece",
     "latitude": 38.63068422716857,
     "longitude": 24.12366162751605,
-    "type": "port",
+    "type": "Port",
     "kg": 4955,
     "actions": 200
   },
@@ -112,7 +112,7 @@
     "country": "Greece",
     "latitude": 38.23258477799047,
     "longitude": 21.721309485280024,
-    "type": "port",
+    "type": "Port",
     "kg": 3680,
     "actions": 200
   },
@@ -121,7 +121,7 @@
     "country": "Greece",
     "latitude": 39.491201433596345,
     "longitude": 20.257672641933194,
-    "type": "port",
+    "type": "Port",
     "kg": 350,
     "actions": 200
   },
@@ -130,7 +130,7 @@
     "country": "Greece",
     "latitude": 36.54722086850505,
     "longitude": 26.355454687476822,
-    "type": "port",
+    "type": "Port",
     "kg": 650,
     "actions": 100
   },
@@ -139,7 +139,7 @@
     "country": "Greece",
     "latitude": 38.20095400656163,
     "longitude": 20.442970013708088,
-    "type": "port",
+    "type": "Port",
     "kg": 15,
     "actions": 200
   },
@@ -148,7 +148,7 @@
     "country": "Greece",
     "latitude": 36.82978906934533,
     "longitude": 25.865952735835503,
-    "type": "port",
+    "type": "Port",
     "kg": 1000,
     "actions": 90
   },
@@ -157,7 +157,7 @@
     "country": "Greece",
     "latitude": 38.96026350557748,
     "longitude": 20.755274137418237,
-    "type": "port",
+    "type": "Port",
     "kg": 7000,
     "actions": 200
   },
@@ -166,7 +166,7 @@
     "country": "Greece",
     "latitude": 37.838848742959165,
     "longitude": 24.937208160099665,
-    "type": "factory",
+    "type": "Factory",
     "kg": 2780,
     "actions": 210
   },
@@ -175,7 +175,7 @@
     "country": "Greece",
     "latitude": 39.359480083140745,
     "longitude": 22.944682403839764,
-    "type": "recycler",
+    "type": "Recycler",
     "kg": 700,
     "actions": 200
   },
@@ -184,7 +184,7 @@
     "country": "Greece",
     "latitude": 38.01307521942295,
     "longitude": 24.419113626679977,
-    "type": "port",
+    "type": "Port",
     "kg": 1048,
     "actions": 150
   },
@@ -193,7 +193,7 @@
     "country": "Greece",
     "latitude": 37.712246549544474,
     "longitude": 24.055911094901795,
-    "type": "recycler",
+    "type": "Recycler",
     "kg": 11580,
     "actions": 200
   },
@@ -202,7 +202,7 @@
     "country": "Greece",
     "latitude": 37.96238060360595,
     "longitude": 23.491569103029516,
-    "type": "port",
+    "type": "Port",
     "kg": 2650,
     "actions": 60
   },
@@ -211,7 +211,7 @@
     "country": "Greece",
     "latitude": 40.93375139256846,
     "longitude": 24.406376643387386,
-    "type": "port",
+    "type": "Port",
     "kg": 4950,
     "actions": 200
   },
@@ -220,7 +220,7 @@
     "country": "Greece",
     "latitude": 37.752288012318346,
     "longitude": 26.960092022102714,
-    "type": "port",
+    "type": "Port",
     "kg": 1050,
     "actions": 20
   },
@@ -229,7 +229,7 @@
     "country": "Italy",
     "latitude": 37.81666472020753,
     "longitude": 23.801770408926448,
-    "type": "port",
+    "type": "Port",
     "kg": 1700,
     "actions": 200
   },
@@ -238,7 +238,7 @@
     "country": "Greece",
     "latitude": 37.58406235010875,
     "longitude": 22.746694366190873,
-    "type": "port",
+    "type": "Port",
     "kg": 600,
     "actions": 400
   },
@@ -247,7 +247,7 @@
     "country": "Greece",
     "latitude": 38.53364745701822,
     "longitude": 21.081418013650772,
-    "type": "port",
+    "type": "Port",
     "kg": 500,
     "actions": 200
   },
@@ -256,7 +256,7 @@
     "country": "Greece",
     "latitude": 38.92130847269666,
     "longitude": 20.894010245287006,
-    "type": "port",
+    "type": "Port",
     "kg": 1000,
     "actions": 300
   },
@@ -265,7 +265,7 @@
     "country": "Greece",
     "latitude": 37.38970202118642,
     "longitude": 24.397907731648736,
-    "type": "port",
+    "type": "Port",
     "kg": 2130,
     "actions": 200
   },
@@ -274,7 +274,7 @@
     "country": "Greece",
     "latitude": 37.35030292134663,
     "longitude": 23.4652459182793,
-    "type": "port",
+    "type": "Port",
     "kg": 700,
     "actions": 200
   },
@@ -283,7 +283,7 @@
     "country": "Greece",
     "latitude": 37.269201231399265,
     "longitude": 23.156763857242673,
-    "type": "port",
+    "type": "Port",
     "kg": 500,
     "actions": 200
   },
@@ -292,7 +292,7 @@
     "country": "Italy",
     "latitude": 37.41722477408152,
     "longitude": 23.12731074629627,
-    "type": "port",
+    "type": "Port",
     "kg": 3600,
     "actions": 200
   },
@@ -301,7 +301,7 @@
     "country": "Italy",
     "latitude": 36.622342305955705,
     "longitude": 27.841942476140886,
-    "type": "factory",
+    "type": "Factory",
     "kg": 10060,
     "actions": 200
   }

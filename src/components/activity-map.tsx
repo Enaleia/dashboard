@@ -41,16 +41,16 @@ const ActivityMap = () => {
           return (
             <Marker key={location.name} position={[location.latitude, location.longitude]} icon={customIcon}>
               <Popup>
-                <div className='flex items-center gap-6 text-lg'>
+                <div className='flex items-center gap-10 text-lg mt-8 h-[24px] mx-8'>
                   <p>{location.name}</p>
                   <Link to={`/locations/${location.name}`}>
                     <CircleArrowRight color='#2985D0'/>
                   </Link>
                 </div>
-                <div className='flex items-center gap-2 text-sm'>
+                <div className='flex items-center gap-2 text-sm mt-4 mb-8 h-[16px] mx-8'>
                   <img src={`/${location.type}_icon.svg`} className='h-6 w-6' />
-                  <p>{location.type}:</p> 
-                  <p>{location.kg}kg</p>            
+                  <p>{location.type}</p> 
+                  {/* <p>{location.kg}kg</p>             */}
                 </div>
               </Popup>
             </Marker>
