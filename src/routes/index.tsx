@@ -76,7 +76,10 @@ function HomeComponent() {
         {/* <article className='w-[90%] md:w-[94%] h-[300px] md:h-[500px] mb-6 self-center'> */}
           {/* <AreaChart data={chartData}/> */}       
         {/* </article> */}
-        <p className='font-extralight text-lg md:text-xl text-center'>To understand the breakdown of plastic material and its origin, please view locations page.</p>
+        <div className='flex gap-2 font-extralight text-lg md:text-xl justify-center'>
+          <p>To understand the breakdown of plastic material and its origin, please view</p>
+          <Link to="/locations" className='font-bold'>locations page</Link>
+        </div>
       </section>
 
       <section className='flex flex-col items-center gap-4 m-auto w-full md:w-[60%] md:gap-8 text-center'>

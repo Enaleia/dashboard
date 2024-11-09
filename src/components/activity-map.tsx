@@ -2,7 +2,7 @@ import { useEffect, useMemo } from 'react'
 import { Link } from '@tanstack/react-router'
 import { MapContainer, TileLayer, useMap, Marker, Tooltip, Popup } from 'react-leaflet'
 import { Icon } from "leaflet";
-import { CircleArrowRight } from 'lucide-react';
+import { MoveRight } from 'lucide-react';
 import mapData from '../map_data.json'
 import 'leaflet/dist/leaflet.css'
 
@@ -55,7 +55,7 @@ const ActivityMap = ({ selectedLocationType }: {selectedLocationType: string}) =
                 <div className='flex items-center gap-10 text-lg mt-8 h-[24px] mx-8'>
                   <p>{location.name}</p>
                   <Link to={`/locations/${location.name}`}>
-                    <CircleArrowRight color='#2985D0'/>
+                    <MoveRight color='black'/>
                   </Link>
                 </div>
                 <div className='flex items-center gap-2 text-sm mt-4 mb-8 h-[16px] mx-8'>
