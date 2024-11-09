@@ -51,7 +51,7 @@ function HomeComponent() {
           </div>
         </article>
         <StatsBar pageId='landing'/>
-        <ActivityMap />
+        <ActivityMap selectedLocationType='See all'/>
       </section>
       
       <section className='flex flex-col border border-primary rounded-3xl mx-2 md:mx-16 md:p-12'>

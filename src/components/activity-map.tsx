@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { Link } from '@tanstack/react-router'
 import { MapContainer, TileLayer, useMap, Marker, Tooltip, Popup } from 'react-leaflet'
 import { Icon } from "leaflet";
@@ -22,7 +22,15 @@ const InvalidateMapSize = () => {
   return null;
 };
 
-const ActivityMap = () => {
+const ActivityMap = ({ selectedLocationType }: {selectedLocationType: string}) => {
+  const filteredLocations = useMemo(() => {
+    return mapData
+      .filter(record => {
+        if (selectedLocationType === 'See all') return true;
+        return record.type === selectedLocationType;
+      })
+  }, [selectedLocationType, mapData])
+
 	return (
     <article className='w-full h-[300px] md:h-[700px]'>
       <MapContainer className='h-full z-0' center={[38.32217739504656, 23.952204640936014]} zoom={6} scrollWheelZoom={false}>
@@ -31,7 +39,7 @@ const ActivityMap = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <InvalidateMapSize />
-        {mapData.map(location => {
+        {filteredLocations.map(location => {
           const customIcon = new Icon({
             iconUrl: `/${location.type}_icon.svg`,
             iconSize: [16, 16], 

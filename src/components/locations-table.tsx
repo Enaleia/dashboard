@@ -1,5 +1,5 @@
 import { useNavigate } from "@tanstack/react-router"
-import { useMemo } from "react"
+import { useState, useMemo } from "react"
 import {
   Table,
   TableBody,
@@ -31,13 +31,13 @@ const LocationsTable = ({ selectedLocationType }: {selectedLocationType: string}
             <TableHead className="p-0">
               <div className="flex justify-between text-xs font-bold text-black mt-2 mb-5 px-8 py-2 border border-black rounded-l-3xl">
               <p>NAME</p>
-              <ArrowUpDown size={16} strokeWidth={1}/>
+              <ArrowUpDown size={16} strokeWidth={1} className="cursor-pointer"/>
               </div>
             </TableHead>
             <TableHead className="p-0">
               <div className="flex justify-between text-xs font-bold text-black mt-2 mb-5 px-8 py-2 border-y border-black">
                 <p>COUNTRY</p>
-                <ArrowUpDown size={16} strokeWidth={1}/>
+                <ArrowUpDown size={16} strokeWidth={1} className="cursor-pointer"/>
               </div>
             </TableHead>
             <TableHead className="p-0">
@@ -49,7 +49,11 @@ const LocationsTable = ({ selectedLocationType }: {selectedLocationType: string}
             <TableHead className="p-0">
               <div className="flex justify-between text-xs font-bold text-black mt-2 mb-5 px-8 py-2 border border-black rounded-r-3xl">
                 <p>ACTION COUNT</p>
-                <ArrowUpDown size={16} strokeWidth={1}/>
+                <ArrowUpDown 
+                  size={16} 
+                  strokeWidth={1} 
+                  className="cursor-pointer"
+                />
               </div>
             </TableHead>
           </TableRow>
