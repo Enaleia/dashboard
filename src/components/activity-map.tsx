@@ -24,6 +24,9 @@ const InvalidateMapSize = () => {
 
 const ActivityMap = ({ selectedLocationType }: {selectedLocationType: string}) => {
   const filteredLocations = useMemo(() => {
+    if (selectedLocationType === 'Most active') {
+      return mapData.sort((a, b) => b.actions - a.actions); // Sort in descending order
+    }
     return mapData
       .filter(record => {
         if (selectedLocationType === 'See all') return true;

@@ -16,6 +16,9 @@ const LocationsTable = ({ selectedLocationType }: {selectedLocationType: string}
   const navigate = useNavigate()
 
   const filteredLocations = useMemo(() => {
+    if (selectedLocationType === 'Most active') {
+      return tableData.sort((a, b) => b.actions - a.actions); // Sort in descending order
+    }
     return tableData
       .filter(record => {
         if (selectedLocationType === 'See all') return true;

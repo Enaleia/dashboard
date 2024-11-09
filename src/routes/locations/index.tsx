@@ -10,7 +10,7 @@ export const Route = createFileRoute('/locations/')({
 })
 
 function LocationsComponent() {
-  const locationTypes = ["See all", "Port", "Recycler", "Manufacturer"]
+  const locationTypes = ["See all", "Port", "Recycler", "Manufacturer", "Most active"]
   const viewTypes = ["List", "Map"]
   const [selectedLocationType, setSelectedLocationType] = useState("See all")
   const [selectedViewType, setSelectedViewType] = useState("List")
