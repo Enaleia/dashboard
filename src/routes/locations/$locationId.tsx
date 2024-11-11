@@ -9,19 +9,13 @@ export const Route = createFileRoute('/locations/$locationId')({
   component: LocationDetailComponent,
 })
 
-const locationTexts = {
-  "Port": ["As a key port, it is responsible for receiving the waste collected by fishers during their harvest trips. A designated coordinator weighs the amount of waste brought back by each fisherman, ensuring accurate tracking. At the end of each month, a reward is issued based on their contributions to the ocean clean-up efforts.", "Each time a fisherman delivers collected waste, our port coordinator weighs the haul using a digital scale. The data is then recorded via a mobile application, verifying the amount of waste collected by the fisherman. This information is securely submitted to a blockchain, ensuring that the data is stored immutably, promoting transparency and accountability in our efforts to track waste collection."],
-  "Recycler": ["As a key recycling facility, it is responsible for receiving containers filled with waste collected by fishers during their ocean clean-up activities. A designated team weighs each container to ensure precise tracking of the total waste. The materials are then carefully sorted by type, including different categories of plastics such as PET, HDPE, and PP, to optimize the recycling process. This ensures that each material is appropriately processed and repurposed.", "Each time a fisherman delivers collected waste, our port coordinator weighs the haul using a digital scale. The data is then recorded via a mobile application, verifying the amount of waste collected by the fisherman. This information is securely submitted to a blockchain, ensuring that the data is stored immutably, promoting transparency and accountability in our efforts to track waste collection."],
-  "Manufacturer": ["As a manufacturer committed to sustainability, it is responsible for receiving sorted, ocean-collected plastic waste from recycling partners. Each shipment is carefully weighed and categorized by type, including PET, HDPE, and PP, ensuring that the materials are ready for repurposing. Through this process, the recycled plastic is transformed into new, high-quality consumer products, contributing to a more sustainable future.", "Each time a fisherman delivers collected waste, our port coordinator weighs the haul using a digital scale. The data is then recorded via a mobile application, verifying the amount of waste collected by the fisherman. This information is securely submitted to a blockchain, ensuring that the data is stored immutably, promoting transparency and accountability in our efforts to track waste collection."]
-}
-
 function LocationDetailComponent() {
   const { locationId } = Route.useParams()
   const locationData = data.filter(record => record.name === locationId)
   const { name, country, latitude, longitude, type, actions } = locationData[0]
 
   return (
-    <main className='flex flex-col justify-center items-center gap-10 md:gap-16 m-auto px-6 md:px-28 pt-0 pb-32 md:pt-16 max-w-[1500px]'>
+    <main className='flex flex-col justify-center items-center gap-10 md:gap-16 m-auto px-6 md:px-16 pt-0 pb-32 md:pt-16 max-w-[1500px]'>
       <section className='flex flex-row justify-between w-full'>
         <div>
           <p className='font-extralight'>Location detail</p>
@@ -53,21 +47,26 @@ function LocationDetailComponent() {
       <section className='border border-primary rounded-3xl overflow-hidden'>
         <article className='flex flex-col gap-3 border-b border-primary p-4 md:p-12'>
           <h2 className='font-bold text-3xl tracking-tight'>Actions performed at this location</h2>
-          {type === "Port" &&
-            <p className='font-extralight text-lg tracking-tight'>As a key port, it is responsible for receiving the waste collected by fishers during their harvest trips. A designated coordinator weighs the amount of waste brought back by each fisherman, ensuring accurate tracking. At the end of each month, a reward is issued based on their contributions to the ocean clean-up efforts.</p>
-          }  
-          {type === "Recycler" &&
-            <p className='font-extralight text-lg tracking-tight'>As a key recycling facility, it is responsible for receiving containers filled with waste collected by fishers during their ocean clean-up activities. A designated team weighs each container to ensure precise tracking of the total waste. The materials are then carefully sorted by type, including different categories of plastics such as PET, HDPE, and PP, to optimize the recycling process. This ensures that each material is appropriately processed and repurposed.</p>
-          } 
-          {type === "Manufacturer" &&
-            <p className='font-extralight text-lg tracking-tight'>As a manufacturer committed to sustainability, it is responsible for receiving sorted, ocean-collected plastic waste from recycling partners. Each shipment is carefully weighed and categorized by type, including PET, HDPE, and PP, ensuring that the materials are ready for repurposing. Through this process, the recycled plastic is transformed into new, high-quality consumer products, contributing to a more sustainable future.</p>
-          }
-          </article>
-          <StatsBar pageId='port'/>
+          <div className='flex flex-row md:gap-60 justify-between items-end'>
+            {type === "Port" &&
+              <p className='font-extralight text-lg tracking-tight'>As a key port, it is responsible for receiving the waste collected by fishers during their harvest trips. A designated coordinator weighs the amount of waste brought back by each fisherman, ensuring accurate tracking. At the end of each month, a reward is issued based on their contributions to the ocean clean-up efforts.</p>
+            }  
+            {type === "Recycler" &&
+              <p className='font-extralight text-lg tracking-tight'>As a key recycling facility, it is responsible for receiving containers filled with waste collected by fishers during their ocean clean-up activities. A designated team weighs each container to ensure precise tracking of the total waste. The materials are then carefully sorted by type, including different categories of plastics such as PET, HDPE, and PP, to optimize the recycling process. This ensures that each material is appropriately processed and repurposed.</p>
+            } 
+            {type === "Manufacturer" &&
+              <p className='font-extralight text-lg tracking-tight'>As a manufacturer committed to sustainability, it is responsible for receiving sorted, ocean-collected plastic waste from recycling partners. Each shipment is carefully weighed and categorized by type, including PET, HDPE, and PP, ensuring that the materials are ready for repurposing. Through this process, the recycled plastic is transformed into new, high-quality consumer products, contributing to a more sustainable future.</p>
+            }
+            <p className='font-extralight'>Last update: mm/dd/yyyy</p>
+           </div> 
+        </article>
+        <StatsBar pageId='port'/>
+        <div className='p-5'>
           <MaterialsChart timeRange='All time'/>
+        </div>
       </section>
 
-      <section className='flex flex-col gap-3 md:mt-20 md:px-48'>
+      <section className='flex flex-col gap-3 md:my-20 md:px-48'>
         <h2 className='font-bold text-2xl md:text-4xl'>Attestations</h2>
         <p className='font-extralight'>Each time a fisherman delivers collected waste, our port coordinator weighs the haul using a digital scale. The data is then recorded via a mobile application, verifying the amount of waste collected by the fisherman. This information is securely submitted to a blockchain, ensuring that the data is stored immutably, promoting transparency and accountability in our efforts to track waste collection.</p>
         <Separator className='bg-black'/>
