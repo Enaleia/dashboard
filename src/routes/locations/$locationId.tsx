@@ -98,6 +98,16 @@ function LocationDetailComponent() {
           <a href='' className='p-4'><ArrowUpRight strokeWidth={1}/></a>
         </div>
       </section>
+      
+      <section className='relative w-full'>
+        <img src='/location_img.jpg' alt="underwater scene" className='object-cover bg-center'/>
+        <Link 
+          to='/locations' 
+          className='absolute inset-0 flex flex-col items-center justify-center text-center text-sand text-2xl font-semibold'
+        >
+          Go back to all locations
+        </Link>
+      </section>
     </main>
   )
 }
