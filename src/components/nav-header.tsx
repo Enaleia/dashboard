@@ -13,7 +13,7 @@ const NavHeader = () => {
         <Menu onClick={() => setIsMenuOpened(true)} />
         {isMenuOpened && <NavMenu closeMenu={() => setIsMenuOpened(false)} />}
       </nav>
-      <nav className='px-32 py-8'>
+      <nav className='px-16 py-8'>
         <div className='hidden md:flex justify-between items-center m-auto border border-black rounded-full px-14 py-6 max-w-[1500px]'>
           <NavLogo showSubtitle={false}/>
           <NavLinks />

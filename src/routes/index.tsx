@@ -20,7 +20,7 @@ function HomeComponent() {
   return (
     <main className='flex flex-col justify-center items-center gap-14 md:gap-24 m-auto pt-10 pb-32 md:pt-16 max-w-[1500px]'>
       <section className='flex flex-col items-center gap-6 px-6 text-center'>
-        <h1 className='w-full font-bold text-3xl md:text-6xl leading-10 md:px-80'>Working together with fishers for a sustainable marine ecosystem</h1>
+        <h1 className='w-full font-bold text-3xl md:text-6xl tracking-tight md:px-80'>Working together with fishers for a sustainable marine ecosystem</h1>
         <p className='w-full font-extralight text-base md:text-lg md:px-60'>Welcome to the ENALEIA Hub—a dashboard that tracks the environmental efforts and impacts made by our community and partners. Our mission is to create a sustainable marine ecosystem by promoting circular and social economy solutions.</p>
         <div 
           className='flex flex-row items-center gap-2 font-extralight text-ocean cursor-pointer'
@@ -50,8 +50,8 @@ function HomeComponent() {
             </div>
           </div>
         </article>
-        <StatsBar/>
-        <ActivityMap />
+        <StatsBar pageId='landing'/>
+        <ActivityMap selectedLocationType='See all'/>
       </section>
       
       <section className='flex flex-col border border-primary rounded-3xl mx-2 md:mx-16 md:p-12'>
@@ -76,7 +76,10 @@ function HomeComponent() {
         {/* <article className='w-[90%] md:w-[94%] h-[300px] md:h-[500px] mb-6 self-center'> */}
           {/* <AreaChart data={chartData}/> */}       
         {/* </article> */}
-        <p className='font-extralight text-lg md:text-xl text-center'>To understand the breakdown of plastic material and its origin, please view locations page.</p>
+        <div className='flex gap-2 font-extralight text-lg md:text-xl justify-center'>
+          <p>To understand the breakdown of plastic material and its origin, please view</p>
+          <Link to="/locations" className='font-bold'>locations page</Link>
+        </div>
       </section>
 
       <section className='flex flex-col items-center gap-4 m-auto w-full md:w-[60%] md:gap-8 text-center'>
