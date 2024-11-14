@@ -1,18 +1,46 @@
-import { Link, createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
+import { useState } from 'react'
+import { StatsBar } from '@/components/stats-bar'
+import { VesselsTable } from '@/components/vessels-table'
+import { Button } from '@/components/ui/button'
 
 export const Route = createFileRoute('/vessels/')({
   component: VesselsComponent,
 })
 
 function VesselsComponent() {
+  const vesselTypes = ["See all", "Trawler", "Seiner", "Other", "Most active"]
+  const [selectedVesselType, setSelectedVesselType] = useState("See all")
+
   return (
-    <div className='pt-20 text-center '>
-      <h3 className='text-4xl pb-8'>Explore Vessels</h3>
-      <div className='flex flex-col text-xl'>
-        <Link className='hover:font-bold' to="/vessels/$vesselId" params={{vesselId: '1234'}}>vessel 1234</Link>
-        <Link className='hover:font-bold' to="/vessels/$vesselId" params={{vesselId: '5678'}}>vessel 5678</Link>
-        <Link className='hover:font-bold' to="/vessels/$vesselId" params={{vesselId: '9012'}}>vessel 9012</Link> 
-      </div>          
-    </div>
+    <main className='flex flex-col justify-center items-center gap-10 md:gap-16 m-auto pt-10 pb-32 md:pt-16 max-w-[1500px]'>
+      <section className='flex flex-col items-center gap-6 px-6 text-center'>
+        <h1 className='w-full font-bold text-3xl md:text-6xl tracking-tight md:px-[25%]'>Vessels and fishers on the frontline of the marine plastic pollution crisis</h1>
+        <p className='w-full font-extralight text-base md:text-lg md:px-56'>We collaborate with fishing communities across the Mediterranean, empowering them to adopt sustainable fishing practices while incentivizing the collection of plastic bycatch. By bringing this waste back to port, fishers play a crucial role in addressing marine plastic pollution and protecting the health of our oceans.</p>
+      </section>
+
+      <StatsBar pageId='locations'/>
+
+      <section className='w-full px-16'>
+        <article className='flex flex-col md:flex-row items-center md:gap-2'>
+          <p className='text-xs md:text-sm font-extralight'>Vessel type:</p>
+          <div className='flex flex-row justify-center gap-2'>
+            {vesselTypes.map((type) => (
+              <Button
+                key={type} 
+                variant={selectedVesselType === type ? "default" : "outline"}
+                onClick={() => setSelectedVesselType(type)}
+              >
+                {type}
+              </Button>
+            ))}
+          </div>
+        </article>
+
+        <article className='overflow-hidden rounded-3xl mt-6'>
+          <VesselsTable  selectedVesselType={selectedVesselType}/>
+        </article>          
+      </section> 
+    </main>
   )
 }
