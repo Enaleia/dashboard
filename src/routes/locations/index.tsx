@@ -4,6 +4,13 @@ import { StatsBar } from '@/components/stats-bar'
 import { LocationsTable } from '@/components/locations-table'
 import { ActivityMap } from '@/components/activity-map'
 import { Button } from '@/components/ui/button'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 export const Route = createFileRoute('/locations/')({
   component: LocationsComponent,
@@ -25,31 +32,53 @@ function LocationsComponent() {
       <StatsBar pageId='locations'/>
 
       <section className='w-full px-16'>
-        <article className='flex flex-col md:flex-row items-center md:justify-between'>
-          <div className='flex flex-col md:flex-row items-center md:gap-2'>
-            <p className='text-xs md:text-sm font-extralight'>Location type:</p>
+        <article>
+          <div className='flex flex-col md:flex-row items-center md:justify-between'>
+            <div className='flex flex-col md:flex-row items-center md:gap-2'>
+              <p className='text-xs md:text-sm font-extralight'>Location type:</p>
+              <div className='flex flex-row justify-center gap-2'>
+                {locationTypes.map((type) => (
+                  <Button
+                    key={type} 
+                    variant={selectedLocationType === type ? "default" : "outline"}
+                    onClick={() => setSelectedLocationType(type)}
+                  >
+                    {type}
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            {selectedViewType === "List" &&
+              <Select>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Sort by" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="nameAZ">Name (A-Z)</SelectItem>
+                  <SelectItem value="nameZA">Name (Z-A)</SelectItem>
+                  <SelectItem value="countryAZ">Country (A-Z)</SelectItem>
+                  <SelectItem value="countryZA">Country (Z-A)</SelectItem>
+                  <SelectItem value="typeAZ">Type (A-Z)</SelectItem>
+                  <SelectItem value="typeZA">Type (Z-A)</SelectItem>
+                  <SelectItem value="activityDesc">Activity (most - least)</SelectItem>
+                  <SelectItem value="activityAsc">Activity (most - least)</SelectItem>
+                </SelectContent>
+              </Select>
+            
+            }
+            
             <div className='flex flex-row justify-center gap-2'>
-              {locationTypes.map((type) => (
+              {viewTypes.map((type) => (
                 <Button
                   key={type} 
-                  variant={selectedLocationType === type ? "default" : "outline"}
-                  onClick={() => setSelectedLocationType(type)}
+                  variant={selectedViewType === type ? "default" : "outline"}
+                  onClick={() => setSelectedViewType(type)}
                 >
                   {type}
                 </Button>
               ))}
             </div>
-          </div>
-          <div className='flex flex-row justify-center gap-2'>
-            {viewTypes.map((type) => (
-              <Button
-                key={type} 
-                variant={selectedViewType === type ? "default" : "outline"}
-                onClick={() => setSelectedViewType(type)}
-              >
-                {type}
-              </Button>
-            ))}
           </div>
         </article>
 
