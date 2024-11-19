@@ -21,6 +21,7 @@ function LocationsComponent() {
   const viewTypes = ["List", "Map"]
   const [selectedLocationType, setSelectedLocationType] = useState("See all")
   const [selectedViewType, setSelectedViewType] = useState("List")
+  const [selectedSortOrder, setSelectedSortOrder] = useState("")
 
   return (
     <main className='flex flex-col justify-center items-center gap-10 md:gap-16 m-auto pt-10 pb-32 md:pt-16 max-w-[1500px]'>
@@ -50,22 +51,21 @@ function LocationsComponent() {
             </div>
 
             {selectedViewType === "List" &&
-              <Select>
-                <SelectTrigger className="w-[180px]">
+              <Select name="sort" onValueChange={(value) => setSelectedSortOrder(value)}>
+                <SelectTrigger className="w-[200px] border-black rounded-3xl">
                   <SelectValue placeholder="Sort by" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className='border-black rounded-3xl'>
                   <SelectItem value="nameAZ">Name (A-Z)</SelectItem>
                   <SelectItem value="nameZA">Name (Z-A)</SelectItem>
                   <SelectItem value="countryAZ">Country (A-Z)</SelectItem>
                   <SelectItem value="countryZA">Country (Z-A)</SelectItem>
                   <SelectItem value="typeAZ">Type (A-Z)</SelectItem>
                   <SelectItem value="typeZA">Type (Z-A)</SelectItem>
-                  <SelectItem value="activityDesc">Activity (most - least)</SelectItem>
-                  <SelectItem value="activityAsc">Activity (most - least)</SelectItem>
+                  <SelectItem value="activityDesc">Most to least active</SelectItem>
+                  <SelectItem value="activityAsc">Least to most active</SelectItem>
                 </SelectContent>
-              </Select>
-            
+              </Select>           
             }
             
             <div className='flex flex-row justify-center gap-2'>
@@ -83,8 +83,8 @@ function LocationsComponent() {
         </article>
 
         <article className='overflow-hidden rounded-3xl mt-6'>
-          {selectedViewType === "List" && <LocationsTable  selectedLocationType={selectedLocationType}/>}
-          {selectedViewType === "Map" && <ActivityMap selectedLocationType={selectedLocationType}/>}
+          {selectedViewType === "List" && <LocationsTable  locationType={selectedLocationType} sortOrder={selectedSortOrder}/>}
+          {selectedViewType === "Map" && <ActivityMap locationType={selectedLocationType}/>}
         </article>          
       </section> 
     </main>

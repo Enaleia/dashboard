@@ -22,17 +22,17 @@ const InvalidateMapSize = () => {
   return null;
 };
 
-const ActivityMap = ({ selectedLocationType }: {selectedLocationType: string}) => {
+const ActivityMap = ({ locationType }: {locationType: string}) => {
   const filteredLocations = useMemo(() => {
-    if (selectedLocationType === 'Most active') {
+    if (locationType === 'Most active') {
       return mapData.sort((a, b) => b.actions - a.actions); // Sort in descending order
     }
     return mapData
       .filter(record => {
-        if (selectedLocationType === 'See all') return true;
-        return record.type === selectedLocationType;
+        if (locationType === 'See all') return true;
+        return record.type === locationType;
       })
-  }, [selectedLocationType, mapData])
+  }, [locationType, mapData])
 
 	return (
     <article className='w-full h-[300px] md:h-[700px]'>
@@ -50,7 +50,7 @@ const ActivityMap = ({ selectedLocationType }: {selectedLocationType: string}) =
             // popupAnchor: [0, -5] // Point from which the popup should open relative to the iconAnchor
           });
           return (
-            <Marker key={location.name} position={[location.latitude, location.longitude]} icon={customIcon}>
+            <Marker key={location.name} position={[location.coordinates[0], location.coordinates[1]]} icon={customIcon}>
               <Popup>
                 <div className='flex items-center gap-10 text-lg mt-8 h-[24px] mx-8'>
                   <p>{location.name}</p>

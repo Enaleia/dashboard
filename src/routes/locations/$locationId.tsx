@@ -12,7 +12,7 @@ export const Route = createFileRoute('/locations/$locationId')({
 function LocationDetailComponent() {
   const { locationId } = Route.useParams()
   const locationData = data.filter(record => record.name === locationId)
-  const { name, country, latitude, longitude, type, actions } = locationData[0]
+  const { name, country, coordinates, type, actions } = locationData[0]
 
   return (
     <main className='flex flex-col justify-center items-center gap-10 md:gap-16 m-auto px-6 md:px-16 pt-0 pb-32 md:pt-16 max-w-[1500px]'>
@@ -29,7 +29,7 @@ function LocationDetailComponent() {
               <Separator orientation='vertical' className='bg-gray-400 w-[1px]'/>
             </div>
             <a href='' className='flex flex-row items-center gap-1 hover:font-semibold'>
-              <p>{String(latitude).slice(0, 9)}, {String(longitude).slice(0, 9)}</p>
+              <p>{String(coordinates[0]).slice(0, 9)}, {String(coordinates[1]).slice(0, 9)}</p>
               <ArrowUpRight strokeWidth={1}/>
             </a>
             <div className='hidden md:flex'>
