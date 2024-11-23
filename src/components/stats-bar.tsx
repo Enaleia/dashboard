@@ -1,6 +1,8 @@
+import { Separator } from "@radix-ui/react-select";
+
 const landingStats = [
   {
-    title: "Waste removed (Kgs)",
+    title: "Waste removed (kgs)",
     stat: 107.7,
     isWeight: true,
     description: "Collection containing plastic, metal, fishing nets, etc.",
@@ -65,10 +67,10 @@ interface StatCardProps {
   description: string
 }
 
-const StatCard = ({ title, stat, isWeight, description }: StatCardProps) => {
+const StatCard = ({ title, stat, isWeight, description, borderClass }: StatCardProps & { borderClass: string }) => {
   return (
-    <div className="flex flex-col md:w-[20%] justify-center items-center text-center font-extralight">
-      <p className="text-sm md:text-xl">{title}</p>
+    <div className={`flex flex-col w-full md:w-[20%] justify-center items-center text-center font-extralight ${borderClass} md:border-none md:pb-0`}>
+      <p className="text-base md:text-xl font-medium md:font-extralight">{title}</p>
       <p className="text-3xl md:text-5xl font-bold pt-4 pb-1">{stat}{isWeight && <span>K</span>}</p>
       <p className="text-xs md:text-sm w-[80%]">{description}</p>
     </div>
@@ -84,9 +86,9 @@ const StatsBar = ({ pageId }: {pageId: string}) => {
   }
 
   return (
-    <article className='flex flex-col md:flex-row justify-around md:gap-5 items-center p-12'>
-      {pageStats.map((stat: StatCardProps) => (
-        <StatCard key={stat.title} title={stat.title} stat={stat.stat} isWeight={stat.isWeight} description={stat.description} />
+    <article className='flex flex-col md:flex-row justify-around gap-8 md:gap-5 items-center p-12 md:py-16'>
+      {pageStats.map((stat: StatCardProps, index: number) => (
+        <StatCard key={stat.title} title={stat.title} stat={stat.stat} isWeight={stat.isWeight} description={stat.description} borderClass={index === pageStats.length - 1? "" : "border-b border-black pb-6"}/>
       ))}
     </article>
   )
