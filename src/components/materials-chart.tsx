@@ -107,10 +107,30 @@ const chartData = [
   { date: "2024-10-30", plastics: 446, nets: 400, metal: 100, rubber: 300 },
 ]
 
+const legendData = {
+  "plastics": "All types of plastics, from beverage packaging to light weight plastics.",
+  "nets": "Used fishing gear and nets, collected from fishers to prevent disposal in the sea.",
+  "metal": "All types of metal collected from the ocean. Often these metals can be reused elsewhere.",
+  "rubber": "Mainly tires and other rubber material. This category has been recently added to the platform."
+}
+
+const CustomChartLegend = () => {
+  return (
+    <article className="flex flex-col md:flex-row gap-5 p-6 md:px-28">
+      {Object.entries(legendData).map(([type, description]) => (
+        <div key={type} className="flex flex-row gap-3 w-full md:w-[25%]">
+          <div className={`h-8 w-8 rounded-full bg-${type}`}></div>
+          <div>
+            <h3 className="text-lg font-bold capitalize">{type}</h3>
+            <p className="text-xs md:text-sm font-extralight">{description}</p>
+          </div>
+        </div>
+      ))}
+    </article>
+  )
+}
+
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
   plastics: {
     label: "Plastics",
     color: "hsl(var(--chart-1))",
@@ -144,100 +164,105 @@ export function MaterialsChart({ timeRange }: {timeRange: string}) {
   })
 
   return (
-    <ScrollArea className=" max-w-[350px] md:max-w-[1500px]">
-      <Card className="border-none shadow-none"> 
-        <CardContent className="md:p-12">   
-          <ChartContainer config={chartConfig} className="min-h-[500px]">         
-            <AreaChart
-              accessibilityLayer
-              data={filteredData}
-              margin={{
-                left: -20,
-                right: 12,
-              }}
-            >
-              <CartesianGrid vertical={false} />
-              <XAxis
-                dataKey="date"
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                tickCount={4}
-                tickFormatter={(value) => {
-                  const date = new Date(value)
-                  return date.toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                  })
+    <>
+      <ScrollArea className=" max-w-[350px] md:max-w-[1500px]">
+        <Card className="border-none shadow-none"> 
+          <CardContent className="md:p-12">   
+            <ChartContainer config={chartConfig} className="min-h-[500px]">         
+              <AreaChart
+                accessibilityLayer
+                data={filteredData}
+                margin={{
+                  left: -20,
+                  right: 12,
                 }}
-              />
-              <YAxis
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                tickCount={4}
-              />
-              <ChartTooltip 
-                cursor={false} 
-                content={
-                  <ChartTooltipContent 
-                    labelFormatter={(value) => {
-                      return new Date(value).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric"
-                      })
-                    }}
-                    // formatter={(value) => {
-                    //   return [`${value} KG`]
-                    // }}
-                    indicator="dot"
-                    className="rounded-3xl gap-4 text-lg p-4"
-                  />
-                } 
-              />
-              <Area
-                dataKey="plastics"
-                type="natural"
-                fill="var(--color-plastics)"
-                fillOpacity={0.4}
-                stroke="var(--color-plastics)"
-                strokeWidth={3}
-                stackId="d"
-              />
-              <Area
-                dataKey="nets"
-                type="natural"
-                fill="var(--color-nets)"
-                fillOpacity={0.4}
-                stroke="var(--color-nets)"
-                strokeWidth={3}
-                stackId="c"
-              />
-              <Area
-                dataKey="metal"
-                type="natural"
-                fill="var(--color-metal)"
-                fillOpacity={0.4}
-                stroke="var(--color-metal)"
-                strokeWidth={3}
-                stackId="b"
-              />
-              <Area
-                dataKey="rubber"
-                type="natural"
-                fill="var(--color-rubber)"
-                fillOpacity={0.4}
-                stroke="var(--color-rubber)"
-                strokeWidth={3}
-                stackId="a"
-              />
-              <ChartLegend content={<ChartLegendContent className="gap-16 rounded-full text-base font-semibold py-10"/>} />
-            </AreaChart>            
-          </ChartContainer>       
-        </CardContent>
-      </Card>
-      <ScrollBar orientation="horizontal" />
-    </ScrollArea>
+              >
+                <CartesianGrid vertical={false} />
+                <XAxis
+                  dataKey="date"
+                  tickLine={false}
+                  axisLine={false}
+                  tickMargin={8}
+                  tickCount={4}
+                  tickFormatter={(value) => {
+                    const date = new Date(value)
+                    return date.toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                    })
+                  }}
+                />
+                <YAxis
+                  tickLine={false}
+                  axisLine={false}
+                  tickMargin={8}
+                  tickCount={4}
+                />
+                <ChartTooltip 
+                  cursor={false} 
+                  content={
+                    <ChartTooltipContent 
+                      labelFormatter={(value) => {
+                        return new Date(value).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric"
+                        })
+                      }}
+                      // formatter={(value) => {
+                      //   return [`${value} KG`]
+                      // }}
+                      indicator="dot"
+                      className="rounded-3xl gap-4 text-lg p-4"
+                    />
+                  } 
+                />
+                <Area
+                  dataKey="plastics"
+                  type="natural"
+                  fill="var(--color-plastics)"
+                  fillOpacity={0.4}
+                  stroke="var(--color-plastics)"
+                  strokeWidth={3}
+                  stackId="d"
+                />
+                <Area
+                  dataKey="nets"
+                  type="natural"
+                  fill="var(--color-nets)"
+                  fillOpacity={0.4}
+                  stroke="var(--color-nets)"
+                  strokeWidth={3}
+                  stackId="c"
+                />
+                <Area
+                  dataKey="metal"
+                  type="natural"
+                  fill="var(--color-metal)"
+                  fillOpacity={0.4}
+                  stroke="var(--color-metal)"
+                  strokeWidth={3}
+                  stackId="b"
+                />
+                <Area
+                  dataKey="rubber"
+                  type="natural"
+                  fill="var(--color-rubber)"
+                  fillOpacity={0.4}
+                  stroke="var(--color-rubber)"
+                  strokeWidth={3}
+                  stackId="a"
+                />
+                {/* <ChartLegend content={<ChartLegendContent className="gap-16 rounded-full text-base font-semibold py-10"/>} /> */}
+              </AreaChart>            
+            </ChartContainer>       
+          </CardContent>
+        </Card>
+        <ScrollBar orientation="horizontal" />
+      </ScrollArea>
+
+      <CustomChartLegend />
+    </>
+
   )
 }
