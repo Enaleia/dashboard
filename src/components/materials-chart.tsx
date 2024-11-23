@@ -1,4 +1,5 @@
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import {
   Card,
   CardContent,
@@ -143,97 +144,101 @@ export function MaterialsChart({ timeRange }: {timeRange: string}) {
   })
 
   return (
-    <Card className="border-none shadow-none"> 
-      <CardContent className="p-0">
-        <ChartContainer config={chartConfig} className="min-h-[500px] max-w-[350px] md:max-w-[1500px]">
-          <AreaChart
-            accessibilityLayer
-            data={filteredData}
-            margin={{
-              left: -20,
-              right: 12,
-            }}
-          >
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="date"
-              tickLine={false}
-              axisLine={false}
-              tickMargin={8}
-              tickCount={4}
-              tickFormatter={(value) => {
-                const date = new Date(value)
-                return date.toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                })
+    <ScrollArea className=" max-w-[300px] md:max-w-[1500px]">
+      <Card className="border-none shadow-none"> 
+        <CardContent className="p-0">   
+          <ChartContainer config={chartConfig} className="min-h-[500px]">
+            
+            <AreaChart
+              accessibilityLayer
+              data={filteredData}
+              margin={{
+                left: -20,
+                right: 12,
               }}
-            />
-            <YAxis
-              tickLine={false}
-              axisLine={false}
-              tickMargin={8}
-              tickCount={4}
-            />
-            <ChartTooltip 
-              cursor={false} 
-              content={
-                <ChartTooltipContent 
-                  labelFormatter={(value) => {
-                    return new Date(value).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric"
-                    })
-                  }}
-                  // formatter={(value) => {
-                  //   return [`${value} KG`]
-                  // }}
-                  indicator="dot"
-                  className="rounded-3xl gap-4 text-lg p-4"
-                />
-              } 
-            />
-            <Area
-              dataKey="plastic"
-              type="natural"
-              fill="var(--color-plastic)"
-              fillOpacity={0.4}
-              stroke="var(--color-plastic)"
-              strokeWidth={3}
-              stackId="d"
-            />
-            <Area
-              dataKey="prevention"
-              type="natural"
-              fill="var(--color-prevention)"
-              fillOpacity={0.4}
-              stroke="var(--color-prevention)"
-              strokeWidth={3}
-              stackId="c"
-            />
-            <Area
-              dataKey="metal"
-              type="natural"
-              fill="var(--color-metal)"
-              fillOpacity={0.4}
-              stroke="var(--color-metal)"
-              strokeWidth={3}
-              stackId="b"
-            />
-            <Area
-              dataKey="ghostnet"
-              type="natural"
-              fill="var(--color-ghostnet)"
-              fillOpacity={0.4}
-              stroke="var(--color-ghostnet)"
-              strokeWidth={3}
-              stackId="a"
-            />
-            <ChartLegend content={<ChartLegendContent className="gap-16 rounded-full text-base font-semibold py-10"/>} />
-          </AreaChart>
-        </ChartContainer>
-      </CardContent>
-    </Card>
+            >
+              <CartesianGrid vertical={false} />
+              <XAxis
+                dataKey="date"
+                tickLine={false}
+                axisLine={false}
+                tickMargin={8}
+                tickCount={4}
+                tickFormatter={(value) => {
+                  const date = new Date(value)
+                  return date.toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                  })
+                }}
+              />
+              <YAxis
+                tickLine={false}
+                axisLine={false}
+                tickMargin={8}
+                tickCount={4}
+              />
+              <ChartTooltip 
+                cursor={false} 
+                content={
+                  <ChartTooltipContent 
+                    labelFormatter={(value) => {
+                      return new Date(value).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric"
+                      })
+                    }}
+                    // formatter={(value) => {
+                    //   return [`${value} KG`]
+                    // }}
+                    indicator="dot"
+                    className="rounded-3xl gap-4 text-lg p-4"
+                  />
+                } 
+              />
+              <Area
+                dataKey="plastic"
+                type="natural"
+                fill="var(--color-plastic)"
+                fillOpacity={0.4}
+                stroke="var(--color-plastic)"
+                strokeWidth={3}
+                stackId="d"
+              />
+              <Area
+                dataKey="prevention"
+                type="natural"
+                fill="var(--color-prevention)"
+                fillOpacity={0.4}
+                stroke="var(--color-prevention)"
+                strokeWidth={3}
+                stackId="c"
+              />
+              <Area
+                dataKey="metal"
+                type="natural"
+                fill="var(--color-metal)"
+                fillOpacity={0.4}
+                stroke="var(--color-metal)"
+                strokeWidth={3}
+                stackId="b"
+              />
+              <Area
+                dataKey="ghostnet"
+                type="natural"
+                fill="var(--color-ghostnet)"
+                fillOpacity={0.4}
+                stroke="var(--color-ghostnet)"
+                strokeWidth={3}
+                stackId="a"
+              />
+              <ChartLegend content={<ChartLegendContent className="gap-16 rounded-full text-base font-semibold py-10"/>} />
+            </AreaChart>            
+          </ChartContainer>       
+        </CardContent>
+      </Card>
+      <ScrollBar orientation="horizontal" />
+    </ScrollArea>
   )
 }
