@@ -13,17 +13,16 @@ export const Route = createFileRoute('/')({
 })
 
 function HomeComponent() {
-  const [selectedMapDates, setSelectedMapDates] = useState('All time')
   const [selectedChartDates, setSelectedChartDates] = useState('All time')
   const dateChoices = ["All time", "Last year", "Last 30 days"]
 
   return (
-    <main className='flex flex-col justify-center items-center gap-14 md:gap-24 m-auto pt-0 pb-32 md:pt-16 max-w-[1500px]'>
+    <main className='flex flex-col justify-center items-center gap-14 md:gap-24 m-auto pt-0 pb-20 md:pb-32 md:pt-16 max-w-[1500px]'>
       <section className='flex flex-col items-center gap-6 px-6 text-center'>
         <h1 className='w-full font-bold text-5xl md:text-7xl tracking-tight md:px-60'>Working together with fishers for a sustainable marine ecosystem</h1>
         <p className='w-full font-extralight text-base md:text-lg tracking-tight md:px-60'>Welcome to the ENALEIA Hub—a dashboard that tracks the environmental efforts and impacts made by our community and partners. Our mission is to create a sustainable marine ecosystem by promoting circular and social economy solutions.</p>
         <div 
-          className='flex flex-row items-center gap-2 font-extralight text-ocean cursor-pointer pt-8'
+          className='flex flex-row items-center gap-2 font-extralight text-ocean cursor-pointer'
           onClick={() => window.scrollTo({ top: 2000, behavior: 'smooth'})}
         >
           <CircleArrowDown color="#2985D0" strokeWidth={1}/>
@@ -31,7 +30,7 @@ function HomeComponent() {
         </div>
       </section>
 
-      <section className='overflow-hidden border border-primary rounded-3xl mx-2 md:mx-16'>
+      <section className='overflow-hidden border border-primary rounded-3xl mx-4 md:mx-16'>
         <article className='relative w-full'>
           <img src='/impact_photo.jpg' alt="photo of port operations" className='object-cover bg-center h-[350px] md:h-auto w-full'/>
           <div className='absolute inset-0 flex flex-col items-center justify-center text-center text-sand'>
@@ -43,13 +42,13 @@ function HomeComponent() {
         <ActivityMap locationType='See all'/>
       </section>
       
-      <section className='flex flex-col border border-primary rounded-3xl mx-2 md:mx-16 md:p-12'>
-        <article className='flex flex-col md:flex-row md:justify-between md:items-end'>
-          <div className='w-[55%]'>
-            <p className='font-bold text-2xl md:text-5xl pb-2 md:pb-4'>Waste collection insights</p>
+      <section className='flex flex-col border border-primary rounded-3xl mx-4 md:mx-16'>
+        <article className='flex flex-col md:flex-row md:justify-between md:items-end p-6 md:p-12'>
+          <div className='w-full md:w-[55%] tracking-tight'>
+            <p className='font-bold text-5xl md:text-6xl pb-4'>Waste collection insights</p>
             <p className='font-extralight text-base md-text-xl'>Plastic waste makes up the majority of what our community collects. Various factors, such as tourism and fishing seasons, influence the trends in our data. Explore how these dynamics shape our collection efforts over time.</p>
           </div>
-          <div className='flex flex-row justify-around md:justify-start gap-2 p-4 md:p-8'>
+          <div className='flex flex-row justify-around md:justify-start gap-2 py-4 md:p-8'>
             {dateChoices.map((choice) => (
               <Button 
                 key={choice}
@@ -65,15 +64,17 @@ function HomeComponent() {
         {/* <article className='w-[90%] md:w-[94%] h-[300px] md:h-[500px] mb-6 self-center'> */}
           {/* <AreaChart data={chartData}/> */}       
         {/* </article> */}
-        <div className='flex gap-2 font-extralight text-lg md:text-xl justify-center'>
-          <p>To understand the breakdown of plastic material and its origin, please view</p>
-          <Link to="/locations" className='font-bold'>locations page</Link>
-        </div>
+        <article className='font-extralight text-base md:text-lg text-center p-6 md:p-12'>
+          <p>
+            To understand the breakdown of plastic material and its origin, please view our
+            <Link to="/locations" className='font-bold'>&nbsp;&nbsp;locations page</Link>
+          </p>
+        </article>
       </section>
 
-      <section className='flex flex-col items-center gap-4 m-auto w-full md:w-[60%] md:gap-8 text-center'>
-        <p className='font-bold text-3xl'>ENALEIA partners with environmentally conscious organizations and companies dedicated to closing the loop on waste and promoting sustainability.</p>
-        <p className='w-full text-base md-text-lg'>Collaboration is essential for a successful transition to circularity. ENALEIA partners with certified recycling and upcycling organizations that are transforming collected marine plastic into valuable resources, seamlessly integrating it into the circular economy.</p>
+      <section className='flex flex-col items-center gap-8 m-auto w-full md:w-[70%] text-center tracking-tight pt-10 px-4 md:px-0'>
+        <p className='font-bold text-2xl md:text-5xl'>ENALEIA partners with environmentally conscious organizations and companies dedicated to closing the loop on waste and promoting sustainability.</p>
+        <p className='w-full text-base md-text-lg font-extralight'>Collaboration is essential for a successful transition to circularity. ENALEIA partners with certified recycling and upcycling organizations that are transforming collected marine plastic into valuable resources, seamlessly integrating it into the circular economy.</p>
         <Link 
           className={buttonVariants({ variant: "default" })}
           to="/economy"
@@ -84,7 +85,7 @@ function HomeComponent() {
           Learn more about the circular economy
         </Link>
         <div 
-          className='flex flex-row items-center gap-2 pt-8 font-extralight text-ocean cursor-pointer'
+          className='flex flex-row items-center gap-2 font-extralight text-ocean cursor-pointer'
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth'})}
         >
           <CircleArrowUp color="#2985D0" strokeWidth={1}/>

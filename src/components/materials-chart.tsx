@@ -144,8 +144,8 @@ export function MaterialsChart({ timeRange }: {timeRange: string}) {
 
   return (
     <Card className="border-none shadow-none"> 
-      <CardContent>
-        <ChartContainer config={chartConfig}>
+      <CardContent className="p-0">
+        <ChartContainer config={chartConfig} className="min-h-[500px] max-w-[350px] md:max-w-[1500px]">
           <AreaChart
             accessibilityLayer
             data={filteredData}
