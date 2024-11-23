@@ -118,11 +118,13 @@ const CustomChartLegend = () => {
   return (
     <article className="flex flex-col md:flex-row gap-5 p-6 md:px-28">
       {Object.entries(legendData).map(([type, description]) => (
-        <div key={type} className="flex flex-row gap-3 w-full md:w-[25%]">
-          <div className={`h-8 w-8 rounded-full bg-${type}`}></div>
+        <div key={type} className="flex flex-row gap-4 w-full md:w-[25%]">
+          <div className="w-[24px]">
+            <div className={`h-7 w-7 rounded-full bg-${type}`}></div>
+          </div>
           <div>
             <h3 className="text-lg font-bold capitalize">{type}</h3>
-            <p className="text-xs md:text-sm font-extralight">{description}</p>
+            <p className="text-xs font-extralight">{description}</p>
           </div>
         </div>
       ))}
