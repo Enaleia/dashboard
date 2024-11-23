@@ -18,12 +18,12 @@ function HomeComponent() {
   const dateChoices = ["All time", "Last year", "Last 30 days"]
 
   return (
-    <main className='flex flex-col justify-center items-center gap-14 md:gap-24 m-auto pt-10 pb-32 md:pt-16 max-w-[1500px]'>
+    <main className='flex flex-col justify-center items-center gap-14 md:gap-24 m-auto pt-0 pb-32 md:pt-16 max-w-[1500px]'>
       <section className='flex flex-col items-center gap-6 px-6 text-center'>
-        <h1 className='w-full font-bold text-3xl md:text-6xl tracking-tight md:px-80'>Working together with fishers for a sustainable marine ecosystem</h1>
-        <p className='w-full font-extralight text-base md:text-lg md:px-60'>Welcome to the ENALEIA Hub—a dashboard that tracks the environmental efforts and impacts made by our community and partners. Our mission is to create a sustainable marine ecosystem by promoting circular and social economy solutions.</p>
+        <h1 className='w-full font-bold text-5xl md:text-7xl tracking-tight md:px-60'>Working together with fishers for a sustainable marine ecosystem</h1>
+        <p className='w-full font-extralight text-base md:text-lg tracking-tight md:px-60'>Welcome to the ENALEIA Hub—a dashboard that tracks the environmental efforts and impacts made by our community and partners. Our mission is to create a sustainable marine ecosystem by promoting circular and social economy solutions.</p>
         <div 
-          className='flex flex-row items-center gap-2 font-extralight text-ocean cursor-pointer'
+          className='flex flex-row items-center gap-2 font-extralight text-ocean cursor-pointer pt-8'
           onClick={() => window.scrollTo({ top: 2000, behavior: 'smooth'})}
         >
           <CircleArrowDown color="#2985D0" strokeWidth={1}/>
@@ -33,21 +33,10 @@ function HomeComponent() {
 
       <section className='overflow-hidden border border-primary rounded-3xl mx-2 md:mx-16'>
         <article className='relative w-full'>
-          <img src='/impact_photo.jpg' alt="photo of port operations" className='object-cover bg-center'/>
+          <img src='/impact_photo.jpg' alt="photo of port operations" className='object-cover bg-center h-[350px] md:h-auto w-full'/>
           <div className='absolute inset-0 flex flex-col items-center justify-center text-center text-sand'>
-            <p className='w-full font-bold text-2xl md:text-5xl pt-4 md:pt-10'>Our impact at a glance</p>
-            <p className='w-[90%] md:w-[60%] font-extralight text-base md-text-xl py-2 md:py-6'>Since 2023, we’ve partnered with local fishers to promote a healthier marine environment. Alongside our professional training programs, we empower fishers to be active stewards of the ocean by incentivizing sustainable practices and marine conservation efforts.</p>
-            <div className='flex flex-row justify-center gap-3'>
-              {dateChoices.map((choice) => (
-                <Button
-                key={choice} 
-                variant={selectedMapDates === choice ? "secondary" : "outline2"}
-                onClick={() => setSelectedMapDates(choice)}
-              >
-                {choice}
-              </Button>
-              ))}
-            </div>
+            <p className='w-full font-bold text-5xl md:text-7xl tracking-tight px-10 pt-4 md:pt-10'>Our impact at a glance</p>
+            <p className='w-[90%] md:w-[60%] font-extralight text-base md-text-xl tracking-tight py-2 md:py-6'>Since 2023, we’ve partnered with local fishers to promote a healthier marine environment. Alongside our professional training programs, we empower fishers to be active stewards of the ocean by incentivizing sustainable practices and marine conservation efforts.</p>
           </div>
         </article>
         <StatsBar pageId='landing'/>

@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from 'react'
 import { Link } from '@tanstack/react-router'
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { MapContainer, TileLayer, useMap, Marker, Tooltip, Popup } from 'react-leaflet'
 import { Icon } from "leaflet";
 import { MoveRight } from 'lucide-react';
@@ -23,6 +24,10 @@ const InvalidateMapSize = () => {
 };
 
 const ActivityMap = ({ locationType }: {locationType: string}) => {
+  // set map zoom according to screen size
+  // const isDesktop = useMediaQuery("(min-width: 568px)");
+  // const zoom = isDesktop ? 6 : 4;
+
   const filteredLocations = useMemo(() => {
     if (locationType === 'Most active') {
       return mapData.sort((a, b) => b.actions - a.actions); // Sort in descending order
@@ -36,7 +41,7 @@ const ActivityMap = ({ locationType }: {locationType: string}) => {
 
 	return (
     <article className='w-full h-[300px] md:h-[700px]'>
-      <MapContainer className='h-full z-0' center={[38.32217739504656, 23.952204640936014]} zoom={6} scrollWheelZoom={false}>
+      <MapContainer className='h-full z-0' center={[38.32217739504656, 23.952204640936014]} zoom={5} scrollWheelZoom={false}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
