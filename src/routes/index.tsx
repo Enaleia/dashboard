@@ -44,20 +44,23 @@ function HomeComponent() {
       
       <section className='flex flex-col border border-primary rounded-3xl mx-4 md:mx-16'>
         <article className='flex flex-col md:flex-row md:justify-between md:items-end p-6 md:p-12'>
-          <div className='w-full md:w-[55%] tracking-tight'>
+          <div className='w-full md:w-[65%] tracking-tight'>
             <p className='font-bold text-5xl md:text-6xl pb-4'>Waste collection insights</p>
             <p className='font-extralight text-base md-text-xl'>Plastic waste makes up the majority of what our community collects. Various factors, such as tourism and fishing seasons, influence the trends in our data. Explore how these dynamics shape our collection efforts over time.</p>
           </div>
-          <div className='flex flex-row justify-around md:justify-start gap-2 py-4 md:p-8'>
-            {dateChoices.map((choice) => (
-              <Button 
-                key={choice}
-                variant={selectedChartDates === choice ? "default" : "outline"}
-                onClick={() => setSelectedChartDates(choice)}
-              >
-                {choice}
-              </Button>
-            ))}
+          <div className='flex flex-col justify-end items-end pt-4 md:pt-0'>
+            <p className='text-xs font-extralight'>Last update: mm/dd/yyyy</p>
+            <div className='flex flex-row justify-between md:justify-start gap-2 py-4'>
+              {dateChoices.map((choice) => (
+                <Button 
+                  key={choice}
+                  variant={selectedChartDates === choice ? "default" : "outline"}
+                  onClick={() => setSelectedChartDates(choice)}
+                >
+                  {choice}
+                </Button>
+              ))}
+            </div>
           </div>
         </article>
         <MaterialsChart timeRange={selectedChartDates}/>
