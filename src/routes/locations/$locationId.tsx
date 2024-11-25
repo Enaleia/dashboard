@@ -3,6 +3,7 @@ import { Separator } from '@/components/ui/separator'
 import { ArrowUpRight } from 'lucide-react'
 import { StatsBar } from '@/components/stats-bar'
 import { MaterialsChart } from '@/components/materials-chart'
+import { BackToTopButton } from '@/components/back-to-top'
 import { useMediaQuery } from "@/hooks/use-media-query";
 import data from '@/map_data.json'
 
@@ -162,6 +163,8 @@ function LocationDetailComponent() {
           Go back to all locations
         </Link>
       </section>
+
+      <BackToTopButton />
     </main>
   )
 }

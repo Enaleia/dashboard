@@ -3,6 +3,7 @@ import { Separator } from '@/components/ui/separator'
 import { ArrowUpRight } from 'lucide-react'
 import { StatsBar } from '@/components/stats-bar'
 import { MaterialsChart } from '@/components/materials-chart'
+import { BackToTopButton } from '@/components/back-to-top'
 import data from '@/vessel_data.json'
 
 export const Route = createFileRoute('/vessels/$vesselId')({
@@ -96,6 +97,8 @@ function VesselDetailComponent() {
           Go back to all vessels
         </Link>
       </section>
+
+      <BackToTopButton />
     </main>
   )
 }
