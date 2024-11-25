@@ -59,17 +59,32 @@ function LocationDetailComponent() {
               {type === "Port" && "As one of our coordinated ports, it is responsible for receiving the waste collected by fishers during their harvest trips. A designated coordinator weighs the amount of waste brought back by each fisherman, ensuring accurate tracking. There are several different actions conducted per location."}
               {type === "Recycler" && "As a key recycling facility, it receives and weighs waste from ocean clean-ups, sorting materials like PET, HDPE, and PP to ensure proper processing and repurposing."} 
               {type === "Manufacturer" && "As a sustainable manufacturer, it receives sorted ocean plastic, weighed and categorized by type (PET, HDPE, PP), to transform into high-quality consumer products, supporting a sustainable future."}
-            </p>         
-            <p className='text-xs md:text-base font-extralight py-8 md:py-0'>Last update: mm/dd/yyyy</p>
-           </div> 
+            </p> 
+            {type === "Port" &&         
+              <p className='text-xs md:text-base font-extralight py-8 md:py-0'>Last update: mm/dd/yyyy</p>
+            }
+              </div> 
         </article>
-        <StatsBar pageId='port'/>
-        <MaterialsChart timeRange='All time'/>
+        {type === "Port" ? (
+          <>
+            <StatsBar pageId='port'/>
+            <MaterialsChart timeRange='All time'/>
+          </>
+        ):(
+          <div className='flex flex-col items-center md:p-16'>
+            <img src='/turtles.svg' alt='illustration of turtles' className='object-cover bg-center h-[150px] md:h-auto w-full mt-10 md:mt-0'/>
+            <p className='md:w-[60%] text-center text-xs md:text-lg p-8 md:p-0'>We are currently exploring the best ways to represent data from this partner. If you’re a data scientist and would like to contribute, we’d love to hear from you!</p>
+          </div>
+        )}
       </section>
 
       <section className='flex flex-col gap-3 my-10 md:my-20 w-full md:w-[75%]'>
         <h2 className='font-bold text-3xl md:text-4xl tracking-tight'>Attestations</h2>
-        <p className='w-full md:w-[70%] font-extralight tracking-tight'>Each time a fisherman delivers waste, the port coordinator weighs it, records the data via a mobile app, and submits it to a blockchain for secure, transparent tracking.</p>
+        <p className='w-full md:w-[70%] font-extralight tracking-tight'>
+          {type === "Port" && "Each time a fisherman delivers waste, the port coordinator weighs it, records the data via a mobile app, and submits it to a blockchain for secure, transparent tracking."}
+          {type === "Recycler" && "Each time the recycling company receives a container, it is weighed on a bridge, issued a proof of weight slip, and then sorted for repurposing."}
+          {type === "Manufacturer" && "Production may not be as frequent as desired, which is normal since not all waste can be repurposed into new products. As a result, there are often long intervals between production cycles."}        
+        </p>
         <Separator className='bg-black my-3'/>
         <p className='font-bold py-2'>Total attestations: 321</p>
         <div className='flex flex-col md:flex-row justify-between md:gap-40 w-full items-start md:items-center border border-black rounded-3xl py-2 px-4 md:p-0 text-sm'>
