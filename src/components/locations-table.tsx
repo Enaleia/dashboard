@@ -11,9 +11,11 @@ import {
 import { usePagination } from "@/hooks/use-pagination"
 import { ShowingDisplay, Paginator } from "@/components/paginator"
 import tableData from '../map_data.json'
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 const LocationsTable = ({ locationType, sortOrder }: { locationType: string, sortOrder: string }) => {
   const navigate = useNavigate()
+  const isDesktop = useMediaQuery("(min-width: 768px)");
   const itemsPerPage = 8
 
   const filteredLocations = useMemo(() => {
@@ -41,11 +43,15 @@ const LocationsTable = ({ locationType, sortOrder }: { locationType: string, sor
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="p-0"><div className="text-xs font-bold text-black mt-2 mb-5 px-8 py-2 border border-black rounded-l-3xl">NAME</div></TableHead>
-              <TableHead className="p-0"><div className="text-xs font-bold text-black mt-2 mb-5 px-8 py-2 border-y border-black">COUNTRY</div></TableHead>
-              <TableHead className="p-0"><div className="text-xs font-bold text-black mt-2 mb-5 px-8 py-2 border border-black">COORDINATES</div></TableHead>
-              <TableHead className="p-0"><div className="text-xs font-bold text-black mt-2 mb-5 px-8 py-2 border-y border-black">TYPE</div></TableHead>
-              <TableHead className="p-0"><div className="text-xs font-bold text-black mt-2 mb-5 px-8 py-2 border border-black rounded-r-3xl">ACTION COUNT</div></TableHead>
+              <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black rounded-l-3xl">NAME</div></TableHead>
+              {isDesktop &&
+                <>
+                  <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">COUNTRY</div></TableHead>
+                  <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black">COORDINATES</div></TableHead>
+                  <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">TYPE</div></TableHead>
+                </>
+              }
+              <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black rounded-r-3xl">ACTION COUNT</div></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -56,9 +62,13 @@ const LocationsTable = ({ locationType, sortOrder }: { locationType: string, sor
                 className="cursor-pointer hover:font-bold"
               >
                 <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black rounded-l-3xl">{location.name}</div></TableCell>
-                <TableCell className="p-0"><div className="mb-2 px-8 py-5 border-y border-black flex gap-2"><img src={`/flag_${location.country}.svg`} alt="country flag" className="h-5 w-5"/><span>{location.country}</span></div></TableCell>
-                <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black">{String(location.coordinates[0]).slice(0, 10)}, {String(location.coordinates[1]).slice(0, 10)}</div></TableCell>
-                <TableCell className="p-0"><div className="mb-2 px-8 py-5 border-y border-black flex gap-2"><img src={`/${location.type}_icon.svg`} alt="location icon" className="h-5 w-5"/><span>{location.type}</span></div></TableCell>
+                {isDesktop &&
+                  <>
+                    <TableCell className="p-0"><div className="mb-2 px-8 py-5 border-y border-black flex gap-2"><img src={`/flag_${location.country}.svg`} alt="country flag" className="h-5 w-5"/><span>{location.country}</span></div></TableCell>
+                    <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black">{String(location.coordinates[0]).slice(0, 10)}, {String(location.coordinates[1]).slice(0, 10)}</div></TableCell>
+                    <TableCell className="p-0"><div className="mb-2 px-8 py-5 border-y border-black flex gap-2"><img src={`/${location.type}_icon.svg`} alt="location icon" className="h-5 w-5"/><span>{location.type}</span></div></TableCell>
+                  </>
+                }
                 <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black rounded-r-3xl">{location.actions}</div></TableCell>            
               </TableRow>
             ))}

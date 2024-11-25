@@ -24,7 +24,6 @@ function LocationsComponent() {
   const [selectedViewType, setSelectedViewType] = useState("List")
   const [selectedSortOrder, setSelectedSortOrder] = useState("")
   const isDesktop = useMediaQuery("(min-width: 768px)");
-	// const maxPagesInPagination = isDesktop ? 7 : 3;
 
   return (
     <main className='flex flex-col justify-center items-center gap-10 md:gap-16 m-auto pt-10 pb-32 md:pt-16 max-w-[1500px]'>
