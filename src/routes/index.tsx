@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { StatsBar } from '@/components/stats-bar'
 import { ActivityMap } from '../components/activity-map'
 import { MaterialsChart } from '@/components/materials-chart'
+import { CustomChartLegend } from '@/components/custom-chart-legend'
 // import { AreaChart } from '../components/area-chart'
 import { CircleArrowDown, CircleArrowUp } from 'lucide-react'
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -65,6 +66,7 @@ function HomeComponent() {
           </div>
         </article>
         <MaterialsChart timeRange={selectedChartDates}/>
+        <CustomChartLegend category='materials' />
         {/* <article className='w-[90%] md:w-[94%] h-[300px] md:h-[500px] mb-6 self-center'> */}
           {/* <AreaChart data={chartData}/> */}       
         {/* </article> */}

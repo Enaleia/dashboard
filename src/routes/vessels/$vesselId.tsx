@@ -3,6 +3,7 @@ import { Separator } from '@/components/ui/separator'
 import { ArrowUpRight } from 'lucide-react'
 import { StatsBar } from '@/components/stats-bar'
 import { MaterialsChart } from '@/components/materials-chart'
+import { CustomChartLegend } from '@/components/custom-chart-legend'
 import { BackToTopButton } from '@/components/back-to-top'
 import data from '@/vessel_data.json'
 
@@ -50,9 +51,15 @@ function VesselDetailComponent() {
           <h2 className='font-bold text-3xl tracking-tight'>Actions performed at this location</h2>
           <p className='font-extralight'>Last update: mm/dd/yyyy</p>
         </article>
-        <StatsBar pageId='port'/>
-        <div className='p-5'>
+  
+        <div className='pb-6 md:pb-16'>
+          <StatsBar pageId='port'/>
           <MaterialsChart timeRange='All time'/>
+          <article className='text-center tracking-tight p-6 md:px-40'>
+            <p className='text-lg md:text-2xl font-bold'>What are the actions, and why do they matter?</p>
+            <p className='text-sm md:text-lg font-extralight'>While fishing for litter is most common, sponsors also request ad-hoc clean-ups in neglected areas like abandoned fish farms. Tracking waste per action helps evaluate performance, allocate resources, and ensure transparency in combating marine pollution.</p>
+          </article>
+          <CustomChartLegend category='activity' />
         </div>
       </section>
 

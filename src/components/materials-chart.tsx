@@ -7,8 +7,6 @@ import {
 import {
   ChartConfig,
   ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
@@ -107,30 +105,30 @@ const chartData = [
   { date: "2024-10-30", plastics: 446, nets: 400, metal: 100, rubber: 300 },
 ]
 
-const legendData = {
-  "plastics": "All types of plastics, from beverage packaging to light weight plastics.",
-  "nets": "Used fishing gear and nets, collected from fishers to prevent disposal in the sea.",
-  "metal": "All types of metal collected from the ocean. Often these metals can be reused elsewhere.",
-  "rubber": "Mainly tires and other rubber material. This category has been recently added to the platform."
-}
+// const legendData = {
+//   "plastics": "All types of plastics, from beverage packaging to light weight plastics.",
+//   "nets": "Used fishing gear and nets, collected from fishers to prevent disposal in the sea.",
+//   "metal": "All types of metal collected from the ocean. Often these metals can be reused elsewhere.",
+//   "rubber": "Mainly tires and other rubber material. This category has been recently added to the platform."
+// }
 
-const CustomChartLegend = () => {
-  return (
-    <article className="flex flex-col md:flex-row gap-5 p-6 md:px-28">
-      {Object.entries(legendData).map(([type, description]) => (
-        <div key={type} className="flex flex-row gap-4 w-full md:w-[25%]">
-          <div className="w-[24px]">
-            <div className={`h-7 w-7 rounded-full bg-${type}`}></div>
-          </div>
-          <div>
-            <h3 className="text-lg font-bold capitalize">{type}</h3>
-            <p className="text-xs font-extralight">{description}</p>
-          </div>
-        </div>
-      ))}
-    </article>
-  )
-}
+// const CustomChartLegend = () => {
+//   return (
+//     <article className="flex flex-col md:flex-row gap-5 p-6 md:px-28">
+//       {Object.entries(legendData).map(([type, description]) => (
+//         <div key={type} className="flex flex-row gap-4 w-full md:w-[25%]">
+//           <div className="w-[24px]">
+//             <div className={`h-7 w-7 rounded-full bg-${type}`}></div>
+//           </div>
+//           <div>
+//             <h3 className="text-lg font-bold capitalize">{type}</h3>
+//             <p className="text-xs font-extralight">{description}</p>
+//           </div>
+//         </div>
+//       ))}
+//     </article>
+//   )
+// }
 
 const chartConfig = {
   plastics: {
@@ -255,7 +253,6 @@ export function MaterialsChart({ timeRange }: {timeRange: string}) {
                   strokeWidth={3}
                   stackId="a"
                 />
-                {/* <ChartLegend content={<ChartLegendContent className="gap-16 rounded-full text-base font-semibold py-10"/>} /> */}
               </AreaChart>            
             </ChartContainer>       
           </CardContent>
@@ -263,7 +260,7 @@ export function MaterialsChart({ timeRange }: {timeRange: string}) {
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
 
-      <CustomChartLegend />
+      {/* <CustomChartLegend /> */}
     </>
 
   )

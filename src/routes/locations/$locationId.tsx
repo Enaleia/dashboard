@@ -3,6 +3,7 @@ import { Separator } from '@/components/ui/separator'
 import { ArrowUpRight } from 'lucide-react'
 import { StatsBar } from '@/components/stats-bar'
 import { MaterialsChart } from '@/components/materials-chart'
+import { CustomChartLegend } from '@/components/custom-chart-legend'
 import { BackToTopButton } from '@/components/back-to-top'
 import { useMediaQuery } from "@/hooks/use-media-query";
 import data from '@/map_data.json'
@@ -67,10 +68,15 @@ function LocationDetailComponent() {
               </div> 
         </article>
         {type === "Port" ? (
-          <>
+          <div className='pb-6 md:pb-16'>
             <StatsBar pageId='port'/>
             <MaterialsChart timeRange='All time'/>
-          </>
+            <article className='text-center tracking-tight p-6 md:px-40'>
+              <p className='text-lg md:text-2xl font-bold'>What are the actions, and why do they matter?</p>
+              <p className='text-sm md:text-lg font-extralight'>While fishing for litter is most common, sponsors also request ad-hoc clean-ups in neglected areas like abandoned fish farms. Tracking waste per action helps evaluate performance, allocate resources, and ensure transparency in combating marine pollution.</p>
+            </article>
+            <CustomChartLegend category='activity' />
+          </div>
         ):(
           <div className='flex flex-col items-center md:p-16'>
             <img src='/turtles.svg' alt='illustration of turtles' className='object-cover bg-center h-[150px] md:h-auto w-full mt-10 md:mt-0'/>
