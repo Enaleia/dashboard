@@ -20,10 +20,10 @@ export default {
   		colors: {
         sand: 'hsl(var(--sand))',
         ocean: 'hsl(var(--ocean))',
-        plastic: 'hsl(var(--plastic))',
-        prevention: 'hsl(var(--prevention))',
+        plastics: 'hsl(var(--plastics))',
+        nets: 'hsl(var(--nets))',
         metal: 'hsl(var(--metal))',
-        ghostnet: 'hsl(var(--ghostnet))',
+        rubber: 'hsl(var(--rubber))',
         port: 'hsl(var(--port))',
         recycler: 'hsl(var(--recycler))',
         factory: 'hsl(var(--factory))',

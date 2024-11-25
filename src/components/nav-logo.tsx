@@ -20,7 +20,7 @@ const NavLogo = ({ showSubtitle }: NavLogoProps) => {
         <img className="size-7 md:size-10" src={"/hub_logo.svg"} alt="Enaleia Logo" />
         }        
         <div>
-          <p className='text-xl md:text-2xl'>ENALEIA Hub</p>
+          <p className='text-lg md:text-2xl'>ENALEIA Hub</p>
           {showSubtitle && <p className="text-xs font-extralight">A project built on Ethereum</p>}
         </div>
       </div>

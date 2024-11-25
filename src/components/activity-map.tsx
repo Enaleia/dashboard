@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from 'react'
 import { Link } from '@tanstack/react-router'
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { MapContainer, TileLayer, useMap, Marker, Tooltip, Popup } from 'react-leaflet'
 import { Icon } from "leaflet";
 import { MoveRight } from 'lucide-react';
@@ -22,21 +23,25 @@ const InvalidateMapSize = () => {
   return null;
 };
 
-const ActivityMap = ({ selectedLocationType }: {selectedLocationType: string}) => {
+const ActivityMap = ({ locationType }: {locationType: string}) => {
+  // set map zoom according to screen size
+  // const isDesktop = useMediaQuery("(min-width: 568px)");
+  // const zoom = isDesktop ? 6 : 4;
+
   const filteredLocations = useMemo(() => {
-    if (selectedLocationType === 'Most active') {
+    if (locationType === 'Most active') {
       return mapData.sort((a, b) => b.actions - a.actions); // Sort in descending order
     }
     return mapData
       .filter(record => {
-        if (selectedLocationType === 'See all') return true;
-        return record.type === selectedLocationType;
+        if (locationType === 'See all') return true;
+        return record.type === locationType;
       })
-  }, [selectedLocationType, mapData])
+  }, [locationType, mapData])
 
 	return (
     <article className='w-full h-[300px] md:h-[700px]'>
-      <MapContainer className='h-full z-0' center={[38.32217739504656, 23.952204640936014]} zoom={6} scrollWheelZoom={false}>
+      <MapContainer className='h-full z-0' center={[38.32217739504656, 23.952204640936014]} zoom={5} scrollWheelZoom={false}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -50,7 +55,7 @@ const ActivityMap = ({ selectedLocationType }: {selectedLocationType: string}) =
             // popupAnchor: [0, -5] // Point from which the popup should open relative to the iconAnchor
           });
           return (
-            <Marker key={location.name} position={[location.latitude, location.longitude]} icon={customIcon}>
+            <Marker key={location.name} position={[location.coordinates[0], location.coordinates[1]]} icon={customIcon}>
               <Popup>
                 <div className='flex items-center gap-10 text-lg mt-8 h-[24px] mx-8'>
                   <p>{location.name}</p>
