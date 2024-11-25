@@ -167,10 +167,10 @@ export function MaterialsChart({ timeRange }: {timeRange: string}) {
 
   return (
     <>
-      <ScrollArea className=" max-w-[350px] md:max-w-[1500px]">
+      <ScrollArea className="max-w-[350px] md:max-w-[1500px]">
         <Card className="border-none shadow-none"> 
           <CardContent className="md:p-12">   
-            <ChartContainer config={chartConfig} className="min-h-[500px]">         
+            <ChartContainer config={chartConfig} className=" w-full min-h-[400px] max-h-[600px]">         
               <AreaChart
                 accessibilityLayer
                 data={filteredData}
