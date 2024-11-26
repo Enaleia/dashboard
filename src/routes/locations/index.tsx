@@ -26,7 +26,7 @@ function LocationsComponent() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   return (
-    <main className='flex flex-col justify-center items-center gap-10 md:gap-16 m-auto pt-10 pb-32 md:pt-16 max-w-[1500px]'>
+    <main className='flex flex-col justify-center items-center gap-10 md:gap-16 m-auto md:pt-16 max-w-[1500px]'>
       <section className='flex flex-col items-center gap-6 px-6 text-center'>
         <h1 className='w-full font-bold text-5xl md:text-7xl tracking-tight md:px-[24%]'>We are a global effort with focus on the Mediterranean Sea</h1>
         <p className='w-full font-extralight text-base md:text-lg md:px-56'>Our journey began in Greece, and we are now expanding to other Mediterranean countries. United by a shared mission and values, our partners are making impactful contributions in these regions to protect our common waters and marine ecosystems.</p>
@@ -35,7 +35,7 @@ function LocationsComponent() {
       <StatsBar pageId='locations'/>
 
       <section className='w-full'>
-        <article className={`flex items-center justify-between mx-4 md:mx-24`}>
+        <article className='flex items-center justify-between mx-4 md:mx-24'>
           <div className='hidden md:flex items-center md:gap-2'>
             <p className='text-xs md:text-sm font-extralight'>Location type:</p>
             <div className='flex flex-row justify-center gap-2'>
