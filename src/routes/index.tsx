@@ -65,7 +65,7 @@ function HomeComponent() {
             </div>
           </div>
         </article>
-        <MaterialsChart timeRange={selectedChartDates}/>
+        <MaterialsChart category='materials' timeRange={selectedChartDates}/>
         <CustomChartLegend category='materials' />
         {/* <article className='w-[90%] md:w-[94%] h-[300px] md:h-[500px] mb-6 self-center'> */}
           {/* <AreaChart data={chartData}/> */}       

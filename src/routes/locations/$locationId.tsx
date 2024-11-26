@@ -70,12 +70,12 @@ function LocationDetailComponent() {
         {type === "Port" ? (
           <div className='pb-6 md:pb-16'>
             <StatsBar pageId='port'/>
-            <MaterialsChart timeRange='All time'/>
+            <MaterialsChart category='activities' timeRange='All time'/>
             <article className='text-center tracking-tight p-6 md:px-40'>
               <p className='text-lg md:text-2xl font-bold'>What are the actions, and why do they matter?</p>
               <p className='text-sm md:text-lg font-extralight'>While fishing for litter is most common, sponsors also request ad-hoc clean-ups in neglected areas like abandoned fish farms. Tracking waste per action helps evaluate performance, allocate resources, and ensure transparency in combating marine pollution.</p>
             </article>
-            <CustomChartLegend category='activity' />
+            <CustomChartLegend category='activities' />
           </div>
         ):(
           <div className='flex flex-col items-center md:p-16'>
