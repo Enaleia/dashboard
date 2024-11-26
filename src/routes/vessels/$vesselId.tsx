@@ -4,6 +4,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { StatsBar } from '@/components/stats-bar'
 import { MaterialsChart } from '@/components/materials-chart'
 import { CustomChartLegend } from '@/components/custom-chart-legend'
+import { AttestationsTable } from '@/components/attestations-table'
 import { BackToTopButton } from '@/components/back-to-top'
 import data from '@/vessel_data.json'
 
@@ -48,7 +49,7 @@ function VesselDetailComponent() {
 
       <section className='border border-primary rounded-3xl overflow-hidden'>
         <article className='flex flex-row justify-between items-center border-b border-primary p-4 md:p-12'>
-          <h2 className='font-bold text-3xl tracking-tight'>Actions performed at this location</h2>
+          <h2 className='font-bold text-2xl md:text-3xl tracking-tight'>Actions performed at this location</h2>
           <p className='font-extralight'>Last update: mm/dd/yyyy</p>
         </article>
   
@@ -63,40 +64,15 @@ function VesselDetailComponent() {
         </div>
       </section>
 
-      <section className='flex flex-col gap-3 md:my-20 md:px-48'>
-        <h2 className='font-bold text-2xl md:text-4xl'>Attestations</h2>
-        <p className='font-extralight'>Each time a fisherman delivers collected waste, our port coordinator weighs the haul using a digital scale. The data is then recorded via a mobile application, verifying the amount of waste collected by the fisherman. This information is securely submitted to a blockchain, ensuring that the data is stored immutably, promoting transparency and accountability in our efforts to track waste collection.</p>
-        <Separator className='bg-black'/>
-        <p>Total attestations: 321</p>
-        <div className='flex flex-row justify-between items-center border border-black rounded-3xl text-sm'>
-          <div className='p-4'>0xa8a31029cc2bd3cff5c7624fb30246bd024b39ece791ed5b5f4e83868dd3d5dc</div>
-          <div className='p-4 border-x border-black'>10/28/2024 2:48:28 pm</div>
-          <a href='' className='p-4'><ArrowUpRight strokeWidth={1}/></a>
-        </div>
-        <div className='flex flex-row justify-between items-center border border-black rounded-3xl text-sm'>
-          <div className='p-4'>0xa8a31029cc2bd3cff5c7624fb30246bd024b39ece791ed5b5f4e83868dd3d5dc</div>
-          <div className='p-4 border-x border-black'>10/28/2024 2:48:28 pm</div>
-          <a href='' className='p-4'><ArrowUpRight strokeWidth={1}/></a>
-        </div>
-        <div className='flex flex-row justify-between items-center border border-black rounded-3xl text-sm'>
-          <div className='p-4'>0xa8a31029cc2bd3cff5c7624fb30246bd024b39ece791ed5b5f4e83868dd3d5dc</div>
-          <div className='p-4 border-x border-black'>10/28/2024 2:48:28 pm</div>
-          <a href='' className='p-4'><ArrowUpRight strokeWidth={1}/></a>
-        </div>
-        <div className='flex flex-row justify-between items-center border border-black rounded-3xl text-sm'>
-          <div className='p-4'>0xa8a31029cc2bd3cff5c7624fb30246bd024b39ece791ed5b5f4e83868dd3d5dc</div>
-          <div className='p-4 border-x border-black'>10/28/2024 2:48:28 pm</div>
-          <a href='' className='p-4'><ArrowUpRight strokeWidth={1}/></a>
-        </div>
-        <div className='flex flex-row justify-between items-center border border-black rounded-3xl text-sm'>
-          <div className='p-4'>0xa8a31029cc2bd3cff5c7624fb30246bd024b39ece791ed5b5f4e83868dd3d5dc</div>
-          <div className='p-4 border-x border-black'>10/28/2024 2:48:28 pm</div>
-          <a href='' className='p-4'><ArrowUpRight strokeWidth={1}/></a>
-        </div>
+      <section className='flex flex-col gap-3 my-10 md:my-20 w-full md:w-[75%]'>
+        <h2 className='font-bold text-3xl md:text-4xl tracking-tight'>Attestations</h2>
+        <p className='w-full md:w-[70%] font-extralight tracking-tight'>Each time a fisherman delivers waste, the port coordinator weighs it, records the data via a mobile app, and submits it to a blockchain for secure, transparent tracking.</p>
+        <Separator className='bg-black my-3'/>
+        <AttestationsTable />
       </section>
       
-      <section className='relative w-full'>
-        <img src='/vessel_img.jpg' alt="fishing vessel helm" className='object-cover bg-center'/>
+      <section className='relative w-full rounded-3xl overflow-hidden'>
+        <img src='/vessel_img.jpg' alt="fishing vessel helm" className='object-cover bg-center h-[120px] md:h-auto w-full'/>
         <Link 
           to='/vessels' 
           className='absolute inset-0 flex flex-col items-center justify-center text-center text-sand text-2xl font-semibold'

@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/table"
 import { usePagination } from "@/hooks/use-pagination"
 import { ShowingDisplay, Paginator } from "@/components/paginator"
-import { useMediaQuery } from "@/hooks/use-media-query";
+import { useMediaQuery } from "@/hooks/use-media-query"
 
 interface TableItem {
   name: string;
@@ -31,7 +31,7 @@ interface ActionsTableProps {
 
 const ActionsTable = ({ category, tableData, partnerType, sortOrder }: ActionsTableProps) => {
   const navigate = useNavigate()
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery("(min-width: 768px)")
   const itemsPerPage = 8
 
   const filteredLocations = useMemo(() => {
@@ -48,7 +48,7 @@ const ActionsTable = ({ category, tableData, partnerType, sortOrder }: ActionsTa
 		loadPage,
 		maxPage,
 		needsPagination,
-	} = usePagination(filteredLocations, itemsPerPage);
+	} = usePagination(filteredLocations, itemsPerPage)
   
   return (
     <>
@@ -93,7 +93,7 @@ const ActionsTable = ({ category, tableData, partnerType, sortOrder }: ActionsTa
       )}
 
       {needsPagination && (
-        <section className="flex flex-col justify-center items-center gap-4">
+        <article className="flex flex-col justify-center items-center gap-4">
           <Paginator
             needsPagination={needsPagination}
             currentPage={currentPage}
@@ -105,7 +105,7 @@ const ActionsTable = ({ category, tableData, partnerType, sortOrder }: ActionsTa
             totalItemAmount={filteredLocations.length}
             itemsPerPage={itemsPerPage}
           /> */}
-        </section>
+        </article>
 			)}
     </>
   )

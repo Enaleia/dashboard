@@ -4,8 +4,8 @@ import { ArrowUpRight } from 'lucide-react'
 import { StatsBar } from '@/components/stats-bar'
 import { MaterialsChart } from '@/components/materials-chart'
 import { CustomChartLegend } from '@/components/custom-chart-legend'
+import { AttestationsTable } from '@/components/attestations-table'
 import { BackToTopButton } from '@/components/back-to-top'
-import { useMediaQuery } from "@/hooks/use-media-query";
 import data from '@/map_data.json'
 
 export const Route = createFileRoute('/locations/$locationId')({
@@ -16,7 +16,6 @@ function LocationDetailComponent() {
   const { locationId } = Route.useParams()
   const locationData = data.filter(record => record.name === locationId)
   const { name, country, coordinates, type, actions } = locationData[0]
-  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   return (
     <main className='flex flex-col justify-center items-center gap-12 md:gap-16 m-auto px-6 md:px-16 pt-0 pb-24 md:pb-32 md:pt-16 max-w-[1500px]'>
@@ -93,71 +92,7 @@ function LocationDetailComponent() {
           {type === "Manufacturer" && "Production may not be as frequent as desired, which is normal since not all waste can be repurposed into new products. As a result, there are often long intervals between production cycles."}        
         </p>
         <Separator className='bg-black my-3'/>
-        <p className='font-bold py-2'>Total attestations: 321</p>
-        <div className='flex flex-col md:flex-row justify-between md:gap-40 w-full items-start md:items-center border border-black rounded-3xl py-2 px-4 md:p-0 text-sm'>
-          <div className='p-2 md:p-4'>
-            {isDesktop ? "0xa8a31029cc2bd3cff5c7624fb30246bd024b39ece791ed5b5f4e83868dd3d5dc" : "0xa8e31029cc2bd3cff5c7624fb30246bd..."}
-          </div>
-          <div className='w-full flex flex-row justify-between border-t md:border-none border-black'>
-            <div className='p-2 md:p-4 md:border-l border-black'>10/28/2024 2:48:28 pm</div>
-            <a href='' className='p-2 md:p-4 md:border-l border-black'><ArrowUpRight strokeWidth={1}/></a>
-          </div>
-        </div>
-        <div className='flex flex-col md:flex-row justify-between md:gap-40 w-full items-start md:items-center border border-black rounded-3xl py-2 px-4 md:p-0 text-sm'>
-          <div className='p-2 md:p-4'>
-            {isDesktop ? "0xa8a31029cc2bd3cff5c7624fb30246bd024b39ece791ed5b5f4e83868dd3d5dc" : "0xa8e31029cc2bd3cff5c7624fb30246bd..."}
-          </div>
-          <div className='w-full flex flex-row justify-between border-t md:border-none border-black'>
-            <div className='p-2 md:p-4 md:border-l border-black'>10/28/2024 2:48:28 pm</div>
-            <a href='' className='p-2 md:p-4 md:border-l border-black'><ArrowUpRight strokeWidth={1}/></a>
-          </div>
-        </div>
-        <div className='flex flex-col md:flex-row justify-between md:gap-40 w-full items-start md:items-center border border-black rounded-3xl py-2 px-4 md:p-0 text-sm'>
-          <div className='p-2 md:p-4'>
-            {isDesktop ? "0xa8a31029cc2bd3cff5c7624fb30246bd024b39ece791ed5b5f4e83868dd3d5dc" : "0xa8e31029cc2bd3cff5c7624fb30246bd..."}
-          </div>
-          <div className='w-full flex flex-row justify-between border-t md:border-none border-black'>
-            <div className='p-2 md:p-4 md:border-l border-black'>10/28/2024 2:48:28 pm</div>
-            <a href='' className='p-2 md:p-4 md:border-l border-black'><ArrowUpRight strokeWidth={1}/></a>
-          </div>
-        </div>
-        <div className='flex flex-col md:flex-row justify-between md:gap-40 w-full items-start md:items-center border border-black rounded-3xl py-2 px-4 md:p-0 text-sm'>
-          <div className='p-2 md:p-4'>
-            {isDesktop ? "0xa8a31029cc2bd3cff5c7624fb30246bd024b39ece791ed5b5f4e83868dd3d5dc" : "0xa8e31029cc2bd3cff5c7624fb30246bd..."}
-          </div>
-          <div className='w-full flex flex-row justify-between border-t md:border-none border-black'>
-            <div className='p-2 md:p-4 md:border-l border-black'>10/28/2024 2:48:28 pm</div>
-            <a href='' className='p-2 md:p-4 md:border-l border-black'><ArrowUpRight strokeWidth={1}/></a>
-          </div>
-        </div>
-        <div className='flex flex-col md:flex-row justify-between md:gap-40 w-full items-start md:items-center border border-black rounded-3xl py-2 px-4 md:p-0 text-sm'>
-          <div className='p-2 md:p-4'>
-            {isDesktop ? "0xa8a31029cc2bd3cff5c7624fb30246bd024b39ece791ed5b5f4e83868dd3d5dc" : "0xa8e31029cc2bd3cff5c7624fb30246bd..."}
-          </div>
-          <div className='w-full flex flex-row justify-between border-t md:border-none border-black'>
-            <div className='p-2 md:p-4 md:border-l border-black'>10/28/2024 2:48:28 pm</div>
-            <a href='' className='p-2 md:p-4 md:border-l border-black'><ArrowUpRight strokeWidth={1}/></a>
-          </div>
-        </div>
-        <div className='flex flex-col md:flex-row justify-between md:gap-40 w-full items-start md:items-center border border-black rounded-3xl py-2 px-4 md:p-0 text-sm'>
-          <div className='p-2 md:p-4'>
-            {isDesktop ? "0xa8a31029cc2bd3cff5c7624fb30246bd024b39ece791ed5b5f4e83868dd3d5dc" : "0xa8e31029cc2bd3cff5c7624fb30246bd..."}
-          </div>
-          <div className='w-full flex flex-row justify-between border-t md:border-none border-black'>
-            <div className='p-2 md:p-4 md:border-l border-black'>10/28/2024 2:48:28 pm</div>
-            <a href='' className='p-2 md:p-4 md:border-l border-black'><ArrowUpRight strokeWidth={1}/></a>
-          </div>
-        </div>
-        <div className='flex flex-col md:flex-row justify-between md:gap-40 w-full items-start md:items-center border border-black rounded-3xl py-2 px-4 md:p-0 text-sm'>
-          <div className='p-2 md:p-4'>
-            {isDesktop ? "0xa8a31029cc2bd3cff5c7624fb30246bd024b39ece791ed5b5f4e83868dd3d5dc" : "0xa8e31029cc2bd3cff5c7624fb30246bd..."}
-          </div>
-          <div className='w-full flex flex-row justify-between border-t md:border-none border-black'>
-            <div className='p-2 md:p-4 md:border-l border-black'>10/28/2024 2:48:28 pm</div>
-            <a href='' className='p-2 md:p-4 md:border-l border-black'><ArrowUpRight strokeWidth={1}/></a>
-          </div>
-        </div>
-
+        <AttestationsTable />
       </section>
       
       <section className='relative w-full rounded-3xl overflow-hidden'>
