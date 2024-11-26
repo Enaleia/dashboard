@@ -56,7 +56,7 @@ const ActionsTable = ({ category, tableData, partnerType, sortOrder }: ActionsTa
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black rounded-l-3xl">NAME</div></TableHead>
+              <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-1 md:py-2 border border-black rounded-l-3xl">NAME</div></TableHead>
               {isDesktop &&
                 <>
                   <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">COUNTRY</div></TableHead>
@@ -64,7 +64,7 @@ const ActionsTable = ({ category, tableData, partnerType, sortOrder }: ActionsTa
                   <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">TYPE</div></TableHead>
                 </>
               }
-              <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black rounded-r-3xl">ACTION COUNT</div></TableHead>
+              <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-1 md:py-2 border border-black rounded-r-3xl">ACTION COUNT</div></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -74,16 +74,16 @@ const ActionsTable = ({ category, tableData, partnerType, sortOrder }: ActionsTa
                 onClick={() => navigate({to: `/${category}/${partner.name}`})}
                 className="cursor-pointer hover:font-bold"
               >
-                <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black rounded-l-3xl">{partner.name}</div></TableCell>
+                <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black rounded-l-3xl">{partner.name}</div></TableCell>
                 {isDesktop &&
                   <>
-                    <TableCell className="p-0"><div className="mb-2 px-8 py-5 border-y border-black flex gap-2"><img src={`/flag_${partner.country}.svg`} alt="country flag" className="h-5 w-5"/><span>{partner.country}</span></div></TableCell>
-                    {partner.coordinates && <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black">{String(partner.coordinates[0]).slice(0, 10)}, {String(partner.coordinates[1]).slice(0, 10)}</div></TableCell>}
-                    {partner.port && <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black">{partner.port}</div></TableCell>}
-                    <TableCell className="p-0"><div className="mb-2 px-8 py-5 border-y border-black flex gap-2"><img src={`/${partner.type}_icon.svg`} alt="location icon" className="h-5 w-5"/><span>{partner.type}</span></div></TableCell>
+                    <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border-y border-black flex gap-2"><img src={`/flag_${partner.country}.svg`} alt="country flag" className="h-5 w-5"/><span>{partner.country}</span></div></TableCell>
+                    {partner.coordinates && <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black">{String(partner.coordinates[0]).slice(0, 10)}, {String(partner.coordinates[1]).slice(0, 10)}</div></TableCell>}
+                    {partner.port && <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black">{partner.port}</div></TableCell>}
+                    <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border-y border-black flex gap-2"><img src={`/${partner.type}_icon.svg`} alt="location icon" className="h-5 w-5"/><span>{partner.type}</span></div></TableCell>
                   </>
                 }
-                <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black rounded-r-3xl">{partner.actions}</div></TableCell>            
+                <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black rounded-r-3xl">{partner.actions}</div></TableCell>            
               </TableRow>
             ))}
           </TableBody>

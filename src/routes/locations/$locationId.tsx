@@ -18,12 +18,12 @@ function LocationDetailComponent() {
   const { name, country, coordinates, type, actions } = locationData[0]
 
   return (
-    <main className='flex flex-col justify-center items-center gap-12 md:gap-16 m-auto px-6 md:px-16 pt-0 pb-24 md:pb-32 md:pt-16 max-w-[1500px]'>
+    <main className='flex flex-col justify-center items-center gap-12 md:gap-16 m-auto px-6 md:px-16 pt-0 pb-16 md:pb-32 md:pt-16 max-w-[1500px]'>
       <section className='w-full'>
         <div className='flex flex-row justify-between items-center'>
           <div>
             <p className='text-xs md:text-sm font-extralight'>Location detail</p>
-            <h1 className='font-bold text-4xl md:text-7xl tracking-tight pt-1 pb-2 md:pt-4 md:pb-6'>{name}</h1>
+            <h1 className='font-bold text-4xl md:text-7xl tracking-tight'>{name}</h1>
           </div>
           <img src={`/${type}_icon.svg`} alt={`${locationData[0].type} icon`} className='h-16 w-16 md:h-28 md:w-28'/>
         </div>
@@ -52,11 +52,11 @@ function LocationDetailComponent() {
 
       <section className='border border-primary rounded-3xl overflow-hidden'>
         <article className='flex flex-col gap-3 border-b border-primary p-4 md:p-12'>
-          <h2 className='font-bold text-2xl md:text-3xl tracking-tight'>
+          <h2 className='font-bold text-2xl md:text-4xl tracking-tight'>
             {type === "Port" ? "Waste removed by actions at this location" : "Action performed at this location"}
           </h2>
           <div className='flex flex-col md:flex-row md:gap-60 justify-between'>
-            <p className='font-extralight text-sm md:text-lg tracking-tight'>
+            <p className='font-extralight text-sm md:text-lg tracking-tight leading-tight md:leading-tight'>
               {type === "Port" && "As one of our coordinated ports, it is responsible for receiving the waste collected by fishers during their harvest trips. A designated coordinator weighs the amount of waste brought back by each fisherman, ensuring accurate tracking. There are several different actions conducted per location."}
               {type === "Recycler" && "As a key recycling facility, it receives and weighs waste from ocean clean-ups, sorting materials like PET, HDPE, and PP to ensure proper processing and repurposing."} 
               {type === "Manufacturer" && "As a sustainable manufacturer, it receives sorted ocean plastic, weighed and categorized by type (PET, HDPE, PP), to transform into high-quality consumer products, supporting a sustainable future."}
@@ -67,12 +67,12 @@ function LocationDetailComponent() {
               </div> 
         </article>
         {type === "Port" ? (
-          <div className='pb-6 md:pb-16'>
+          <div className='py-6 md:py-0 md:pb-16'>
             <StatsBar pageId='port'/>
             <MaterialsChart category='activities' timeRange='All time'/>
             <article className='text-center tracking-tight p-6 md:px-40'>
-              <p className='text-lg md:text-2xl font-bold'>What are the actions, and why do they matter?</p>
-              <p className='text-sm md:text-lg font-extralight'>While fishing for litter is most common, sponsors also request ad-hoc clean-ups in neglected areas like abandoned fish farms. Tracking waste per action helps evaluate performance, allocate resources, and ensure transparency in combating marine pollution.</p>
+              <p className='text-xl md:text-2xl font-bold leading-none md:leading-none pb-1'>What are the actions, and why do they matter?</p>
+              <p className='text-sm md:text-lg font-extralight leading-tight md:leading-tight'>While fishing for litter is most common, sponsors also request ad-hoc clean-ups in neglected areas like abandoned fish farms. Tracking waste per action helps evaluate performance, allocate resources, and ensure transparency in combating marine pollution.</p>
             </article>
             <CustomChartLegend category='activities' />
           </div>
@@ -84,9 +84,9 @@ function LocationDetailComponent() {
         )}
       </section>
 
-      <section className='flex flex-col gap-3 my-10 md:my-20 w-full md:w-[75%]'>
-        <h2 className='font-bold text-3xl md:text-4xl tracking-tight'>Attestations</h2>
-        <p className='w-full md:w-[70%] font-extralight tracking-tight'>
+      <section className='flex flex-col gap-3 my-6 md:my-20 w-full md:w-[85%]'>
+        <h2 className='font-bold text-3xl md:text-5xl tracking-tight'>Attestations</h2>
+        <p className='w-full md:w-[70%] font-extralight tracking-tight leading-tight md:leading-tight'>
           {type === "Port" && "Each time a fisherman delivers waste, the port coordinator weighs it, records the data via a mobile app, and submits it to a blockchain for secure, transparent tracking."}
           {type === "Recycler" && "Each time the recycling company receives a container, it is weighed on a bridge, issued a proof of weight slip, and then sorted for repurposing."}
           {type === "Manufacturer" && "Production may not be as frequent as desired, which is normal since not all waste can be repurposed into new products. As a result, there are often long intervals between production cycles."}        

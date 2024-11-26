@@ -70,9 +70,9 @@ interface StatCardProps {
 const StatCard = ({ title, stat, isWeight, description, borderClass }: StatCardProps & { borderClass: string }) => {
   return (
     <div className={`flex flex-col w-full md:w-[20%] justify-center items-center text-center font-extralight ${borderClass} md:border-none md:pb-0`}>
-      <p className="text-lg md:text-xl font-medium md:font-extralight">{title}</p>
+      <p className="text-lg md:text-xl font-medium">{title}</p>
       <p className="text-3xl md:text-5xl font-bold pt-4 pb-1">{stat}{isWeight && <span>K</span>}</p>
-      <p className="text-xs md:text-sm w-[80%]">{description}</p>
+      <p className="text-xs md:text-sm w-[80%] leading tight md:leading-tight">{description}</p>
     </div>
   )
 }
@@ -86,7 +86,7 @@ const StatsBar = ({ pageId }: {pageId: string}) => {
   }
 
   return (
-    <article className='flex flex-col md:flex-row justify-around gap-8 md:gap-5 items-center pb-12 md:p-12'>
+    <article className='flex flex-col md:flex-row justify-around gap-8 md:gap-5 items-center px-12 pb-12 md:p-12'>
       {pageStats.map((stat: StatCardProps, index: number) => (
         <StatCard key={stat.title} title={stat.title} stat={stat.stat} isWeight={stat.isWeight} description={stat.description} borderClass={index === pageStats.length - 1? "" : "border-b border-black pb-6"}/>
       ))}

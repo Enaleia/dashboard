@@ -14,7 +14,7 @@ const NavHeader = () => {
         {isMenuOpened && <NavMenu closeMenu={() => setIsMenuOpened(false)} />}
       </nav>
       <nav className='px-16 py-8'>
-        <div className='hidden md:flex justify-between items-center m-auto border border-black rounded-full px-14 py-4 max-w-[1500px]'>
+        <div className='hidden md:flex justify-between items-center m-auto border border-black rounded-full px-14 py-4 max-w-[1400px]'>
           <NavLogo showSubtitle={false}/>
           <NavLinks />
       </div>

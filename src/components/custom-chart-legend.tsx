@@ -6,8 +6,8 @@ const materialsInfo = {
 }
 
 const activitesInfo = {
-  "fishing for litter": "Plastic collected from the sea by fishers or fishing vessels, through both active and passive efforts.",
-  "ad hoc": "Waste gathered through large-scale, one-off cleanup projects, often requiring divers for underwater efforts.",
+  "fishingForLitter": "Plastic collected from the sea by fishers or fishing vessels, through both active and passive efforts.",
+  "adHoc": "Waste gathered through large-scale, one-off cleanup projects, often requiring divers for underwater efforts.",
   "prevention": "Used fishing gear, primarily nets, collected from fishers to prevent disposal in the sea.",
   "beach cleanup": "Waste collected during occasional beach cleanups where fishers are not involved; tracked separately."
 }
@@ -23,7 +23,7 @@ const CustomChartLegend = ({ category }: {category: string}) => {
           </div>
           <div>
             <h3 className="text-lg font-bold capitalize">{type}</h3>
-            <p className="text-xs font-extralight">{description}</p>
+            <p className="text-xs font-extralight leading-tight md:leading-tight">{description}</p>
           </div>
         </div>
       ))}

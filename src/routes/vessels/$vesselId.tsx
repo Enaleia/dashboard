@@ -18,11 +18,11 @@ function VesselDetailComponent() {
   const { name, country, port, type, actions } = locationData[0]
 
   return (
-    <main className='flex flex-col justify-center items-center gap-10 md:gap-16 m-auto px-6 md:px-16 pt-0 pb-32 md:pt-16 max-w-[1500px]'>
+    <main className='flex flex-col justify-center items-center gap-10 md:gap-16 m-auto px-6 md:px-16 pt-0 pb-16 md:pb-32 md:pt-16 max-w-[1500px]'>
       <section className='flex flex-row justify-between w-full'>
         <div>
           <p className='font-extralight'>Vessel detail</p>
-          <h1 className='font-bold text-3xl md:text-6xl tracking-tight pt-1 pb-2 md:pt-4 md:pb-6'>{name}</h1>
+          <h1 className='font-bold text-3xl md:text-6xl tracking-tight'>{name}</h1>
           <div className='flex flex-col md:flex-row gap-0.5 md:gap-4 font-light'>
             <div className='flex flex-row items-center gap-1'>
               <img src={`/flag_${country}.svg`} alt={`country} flag`} className='h-7 w-7'/>
@@ -49,24 +49,24 @@ function VesselDetailComponent() {
 
       <section className='border border-primary rounded-3xl overflow-hidden'>
         <article className='flex flex-row justify-between items-center border-b border-primary p-4 md:p-12'>
-          <h2 className='font-bold text-2xl md:text-3xl tracking-tight'>Actions performed at this location</h2>
+          <h2 className='font-bold text-2xl md:text-4xl tracking-tight'>Waste removed by this vessel</h2>
           <p className='font-extralight'>Last update: mm/dd/yyyy</p>
         </article>
   
-        <div className='pb-6 md:pb-16'>
+        <div className='py-6 md:py-0 md:pb-16'>
           <StatsBar pageId='port'/>
           <MaterialsChart category='activities' timeRange='All time'/>
           <article className='text-center tracking-tight p-6 md:px-40'>
-            <p className='text-lg md:text-2xl font-bold'>What are the actions, and why do they matter?</p>
-            <p className='text-sm md:text-lg font-extralight'>While fishing for litter is most common, sponsors also request ad-hoc clean-ups in neglected areas like abandoned fish farms. Tracking waste per action helps evaluate performance, allocate resources, and ensure transparency in combating marine pollution.</p>
+            <p className='text-xl md:text-2xl font-bold leading-none md:leading-none pb-1'>What are the actions, and why do they matter?</p>
+            <p className='text-sm md:text-lg font-extralight leading-tight md:leading-tight'>While fishing for litter is most common, sponsors also request ad-hoc clean-ups in neglected areas like abandoned fish farms. Tracking waste per action helps evaluate performance, allocate resources, and ensure transparency in combating marine pollution.</p>
           </article>
           <CustomChartLegend category='activities' />
         </div>
       </section>
 
-      <section className='flex flex-col gap-3 my-10 md:my-20 w-full md:w-[75%]'>
-        <h2 className='font-bold text-3xl md:text-4xl tracking-tight'>Attestations</h2>
-        <p className='w-full md:w-[70%] font-extralight tracking-tight'>Each time a fisherman delivers waste, the port coordinator weighs it, records the data via a mobile app, and submits it to a blockchain for secure, transparent tracking.</p>
+      <section className='flex flex-col gap-3 my-6 md:my-20 w-full md:w-[85%]'>
+        <h2 className='font-bold text-3xl md:text-5xl tracking-tight'>Attestations</h2>
+        <p className='w-full md:w-[70%] font-extralight tracking-tight leading-tight md:leading-tight'>Each time a fisherman delivers waste, the port coordinator weighs it, records the data via a mobile app, and submits it to a blockchain for secure, transparent tracking.</p>
         <Separator className='bg-black my-3'/>
         <AttestationsTable />
       </section>

@@ -20,10 +20,10 @@ function LocationsComponent() {
   const [selectedViewType, setSelectedViewType] = useState("List")
 
   return (
-    <main className='flex flex-col justify-center items-center gap-10 md:gap-16 m-auto md:pt-16 max-w-[1500px]'>
+    <main className='flex flex-col justify-center items-center gap-8 md:gap-10 m-auto md:pt-16 max-w-[1500px]'>
       <section className='flex flex-col items-center gap-6 px-6 text-center'>
         <h1 className='w-full font-bold text-5xl md:text-7xl tracking-tight md:px-[24%]'>We are a global effort with focus on the Mediterranean Sea</h1>
-        <p className='w-full font-extralight text-base md:text-lg md:px-56'>Our journey began in Greece, and we are now expanding to other Mediterranean countries. United by a shared mission and values, our partners are making impactful contributions in these regions to protect our common waters and marine ecosystems.</p>
+        <p className='w-full font-extralight text-base md:text-lg md:px-56 leading-tight md:leading-tight'>Our journey began in Greece, and we are now expanding to other Mediterranean countries. United by a shared mission and values, our partners are making impactful contributions in these regions to protect our common waters and marine ecosystems.</p>
       </section>
 
       <StatsBar pageId='locations'/>
