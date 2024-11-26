@@ -242,7 +242,7 @@ interface WasteChartProps {
   timeRange: string;
 }
 
-export function MaterialsChart({ category, timeRange }: WasteChartProps) {
+export function CollectionsChart({ category, timeRange }: WasteChartProps) {
   const chartConfig = category === "materials" ? materialsChartConfig : activitiesChartConfig
   const chartData = category === "materials" ? materialsData : activitiesData
   const filteredData = chartData.filter((item) => {

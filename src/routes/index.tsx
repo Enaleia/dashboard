@@ -2,7 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import { StatsBar } from '@/components/stats-bar'
 import { ActivityMap } from '../components/activity-map'
-import { MaterialsChart } from '@/components/materials-chart'
+import { CollectionsChart } from '@/components/collections-chart'
 import { CustomChartLegend } from '@/components/custom-chart-legend'
 import { CircleArrowDown, CircleArrowUp } from 'lucide-react'
 import { Button } from "@/components/ui/button"
@@ -63,7 +63,7 @@ function HomeComponent() {
             </div>
           </div>
         </article>
-        <MaterialsChart category='materials' timeRange={selectedChartDates}/>
+        <CollectionsChart category='materials' timeRange={selectedChartDates}/>
         <CustomChartLegend category='materials' />
         <article className='font-extralight text-base md:text-lg text-center p-6 md:p-12'>
           <p>
