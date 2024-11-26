@@ -2,15 +2,16 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
 import { StatsBar } from '@/components/stats-bar'
 import { TableActionsBar } from '@/components/table-actions-bar'
-import { VesselsTable } from '@/components/vessels-table'
+import { ActionsTable } from '@/components/actions-table'
 import { ActivityMap } from '@/components/activity-map'
+import tableData from '@/vessel_data.json'
 
 export const Route = createFileRoute('/vessels/')({
   component: VesselsComponent,
 })
 
 function VesselsComponent() {
-  const vesselTypes = ["See all", "Trawler", "Seiner", "Other", "Most active"]
+  const vesselTypes = ["See all", "Trawler", "Seiner", "Other"]
   const sortByOptions = ["Most to least active", "Least to most active", "Name A-Z", "Name Z-A", "Country A-Z", "Country Z-A", "Type A-Z", "Type Z-A"]
   const viewTypes = ["List", "Map"]
   const [selectedVesselType, setSelectedVesselType] = useState("See all")
@@ -39,8 +40,8 @@ function VesselsComponent() {
           selectedViewType={selectedViewType}
           setSelectedViewType={setSelectedViewType}
         />
-        <article className='overflow-hidden rounded-3xl mt-6'>
-          {selectedViewType === "List" && <VesselsTable  selectedVesselType={selectedVesselType}/>}
+        <article className='overflow-hidden rounded-3xl m-4 md:mx-24'>
+          {selectedViewType === "List" && <ActionsTable category='vessels' tableData={tableData} partnerType={selectedVesselType} sortOrder={selectedSortOrder}/>}
           {selectedViewType === "Map" && <ActivityMap locationType={selectedVesselType}/>}
         </article>          
       </section> 

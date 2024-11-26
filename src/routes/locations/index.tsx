@@ -2,15 +2,17 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
 import { StatsBar } from '@/components/stats-bar'
 import { TableActionsBar } from '@/components/table-actions-bar'
-import { LocationsTable } from '@/components/locations-table'
+import { ActionsTable } from '@/components/actions-table'
 import { ActivityMap } from '@/components/activity-map'
+import tableData from '@/map_data.json'
+
 
 export const Route = createFileRoute('/locations/')({
   component: LocationsComponent,
 })
 
 function LocationsComponent() {
-  const locationTypes = ["See all", "Port", "Recycler", "Manufacturer", "Most active"]
+  const locationTypes = ["See all", "Port", "Recycler", "Manufacturer"]
   const viewTypes = ["List", "Map"]
   const sortByOptions = ["Most to least active", "Least to most active", "Name A-Z", "Name Z-A", "Country A-Z", "Country Z-A", "Type A-Z", "Type Z-A"]
   const [selectedLocationType, setSelectedLocationType] = useState("See all")
@@ -40,8 +42,8 @@ function LocationsComponent() {
           setSelectedViewType={setSelectedViewType}
         />
 
-        <article className='overflow-hidden rounded-3xl m-4 md:mx-24'>
-          {selectedViewType === "List" && <LocationsTable  locationType={selectedLocationType} sortOrder={selectedSortOrder}/>}
+        <article className='overflow-hidden rounded-3xl m-4 md:mx-24 pb-16'>
+          {selectedViewType === "List" && <ActionsTable category='locations' tableData={tableData} partnerType={selectedLocationType} sortOrder={selectedSortOrder}/>}
           {selectedViewType === "Map" && <ActivityMap locationType={selectedLocationType}/>}
         </article>          
       </section> 

@@ -1,5 +1,5 @@
 import { useNavigate } from "@tanstack/react-router"
-import { useState, useMemo } from "react"
+import { useMemo } from "react"
 import {
   Table,
   TableBody,
@@ -10,24 +10,37 @@ import {
 } from "@/components/ui/table"
 import { usePagination } from "@/hooks/use-pagination"
 import { ShowingDisplay, Paginator } from "@/components/paginator"
-import tableData from '../map_data.json'
 import { useMediaQuery } from "@/hooks/use-media-query";
 
-const LocationsTable = ({ locationType, sortOrder }: { locationType: string, sortOrder: string }) => {
+interface TableItem {
+  name: string;
+  country: string;
+  coordinates?: number[];
+  port?: string;
+  type: string;
+  kg: number;
+  actions: number
+}
+
+interface ActionsTableProps {
+  category: string;
+  tableData: TableItem[]
+  partnerType: string;
+  sortOrder: string
+}
+
+const ActionsTable = ({ category, tableData, partnerType, sortOrder }: ActionsTableProps) => {
   const navigate = useNavigate()
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const itemsPerPage = 8
 
   const filteredLocations = useMemo(() => {
-    if (locationType === 'Most active') {
-      return tableData.sort((a, b) => b.actions - a.actions); // Sort in descending order
-    }
     return tableData
       .filter(record => {
-        if (locationType === 'See all') return true;
-        return record.type === locationType;
+        if (partnerType === 'See all') return true;
+        return record.type === partnerType;
       })
-  }, [locationType, tableData])
+  }, [partnerType, tableData])
 
   const {
 		currentPage,
@@ -47,7 +60,7 @@ const LocationsTable = ({ locationType, sortOrder }: { locationType: string, sor
               {isDesktop &&
                 <>
                   <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">COUNTRY</div></TableHead>
-                  <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black">COORDINATES</div></TableHead>
+                  <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black">{category === 'locations' ? "COORDINATES" : "REGISTERED PORT"}</div></TableHead>
                   <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">TYPE</div></TableHead>
                 </>
               }
@@ -55,21 +68,22 @@ const LocationsTable = ({ locationType, sortOrder }: { locationType: string, sor
             </TableRow>
           </TableHeader>
           <TableBody>
-            {pageTransactions.map((location) => (
+            {pageTransactions.map((partner) => (
               <TableRow 
-                key={location.name}
-                onClick={() => navigate({to: `/locations/${location.name}`})}
+                key={partner.name}
+                onClick={() => navigate({to: `/${category}/${partner.name}`})}
                 className="cursor-pointer hover:font-bold"
               >
-                <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black rounded-l-3xl">{location.name}</div></TableCell>
+                <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black rounded-l-3xl">{partner.name}</div></TableCell>
                 {isDesktop &&
                   <>
-                    <TableCell className="p-0"><div className="mb-2 px-8 py-5 border-y border-black flex gap-2"><img src={`/flag_${location.country}.svg`} alt="country flag" className="h-5 w-5"/><span>{location.country}</span></div></TableCell>
-                    <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black">{String(location.coordinates[0]).slice(0, 10)}, {String(location.coordinates[1]).slice(0, 10)}</div></TableCell>
-                    <TableCell className="p-0"><div className="mb-2 px-8 py-5 border-y border-black flex gap-2"><img src={`/${location.type}_icon.svg`} alt="location icon" className="h-5 w-5"/><span>{location.type}</span></div></TableCell>
+                    <TableCell className="p-0"><div className="mb-2 px-8 py-5 border-y border-black flex gap-2"><img src={`/flag_${partner.country}.svg`} alt="country flag" className="h-5 w-5"/><span>{partner.country}</span></div></TableCell>
+                    {partner.coordinates && <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black">{String(partner.coordinates[0]).slice(0, 10)}, {String(partner.coordinates[1]).slice(0, 10)}</div></TableCell>}
+                    {partner.port && <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black">{partner.port}</div></TableCell>}
+                    <TableCell className="p-0"><div className="mb-2 px-8 py-5 border-y border-black flex gap-2"><img src={`/${partner.type}_icon.svg`} alt="location icon" className="h-5 w-5"/><span>{partner.type}</span></div></TableCell>
                   </>
                 }
-                <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black rounded-r-3xl">{location.actions}</div></TableCell>            
+                <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black rounded-r-3xl">{partner.actions}</div></TableCell>            
               </TableRow>
             ))}
           </TableBody>
@@ -97,4 +111,4 @@ const LocationsTable = ({ locationType, sortOrder }: { locationType: string, sor
   )
 }
 
-export { LocationsTable };
+export { ActionsTable };
