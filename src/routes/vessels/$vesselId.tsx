@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
+import { useState } from 'react'
 import { Separator } from '@/components/ui/separator'
+import { Button } from '@/components/ui/button'
 import { ArrowUpRight } from 'lucide-react'
 import { StatsBar } from '@/components/stats-bar'
 import { CollectionsChart } from '@/components/collections-chart'
@@ -16,6 +18,8 @@ function VesselDetailComponent() {
   const { vesselId } = Route.useParams()
   const locationData = data.filter(record => record.name === vesselId)
   const { name, country, port, type, actions } = locationData[0]
+  const [selectedChartDates, setSelectedChartDates] = useState('This year')
+  const dateChoices = ["All time", "Last year", "This year"]
 
   return (
     <main className='flex flex-col justify-center items-center gap-10 md:gap-16 m-auto px-6 md:px-16 pt-0 pb-16 md:pb-32 md:pt-16 max-w-[1500px]'>
@@ -48,9 +52,23 @@ function VesselDetailComponent() {
       </section>
 
       <section className='border border-primary rounded-3xl overflow-hidden'>
-        <article className='flex flex-row justify-between items-center border-b border-primary p-4 md:p-12'>
+        <article className='flex flex-col md:flex-row justify-between border-b border-primary p-4 pb-8 md:p-12'>
           <h2 className='font-bold text-2xl md:text-4xl tracking-tight'>Waste removed by this vessel</h2>
-          <p className='font-extralight'>Last update: mm/dd/yyyy</p>
+          <div className='flex flex-col justify-end'>
+            <p className='text-xs md:text-base font-extralight md:text-right pt-4 pb-2 md:py-0'>Last update: mm/dd/yyyy</p>
+            <div className='flex flex-row justify-between items-end gap-2 md:py-4'>
+              {dateChoices.map((choice) => (
+                <Button 
+                  key={choice}
+                  variant={selectedChartDates === choice ? "default" : "outline"}
+                  onClick={() => setSelectedChartDates(choice)}
+                >
+                  {choice}
+                </Button>
+              ))}
+            </div>
+          </div>
+
         </article>
   
         <div className='py-6 md:py-0 md:pb-16'>

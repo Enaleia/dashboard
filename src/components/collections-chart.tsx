@@ -106,94 +106,94 @@ const materialsData = [
 ]
 
 const activitiesData = [
-  { date: "2022-04-01", fishingForLitter: 222, adHoc: 150, beach: 130, prevention: 400 },
-  { date: "2022-04-02", fishingForLitter: 447, adHoc: 180, beach: 140, prevention: 340 },
-  { date: "2022-04-03", fishingForLitter: 167, adHoc: 120, beach: 160, prevention: 450 },
-  { date: "2022-04-04", fishingForLitter: 242, adHoc: 260, beach: 110, prevention: 300 },
-  { date: "2022-04-05", fishingForLitter: 373, adHoc: 290, beach: 130, prevention: 370 },
-  { date: "2022-04-06", fishingForLitter: 301, adHoc: 340, beach: 135, prevention: 460 },
-  { date: "2022-04-07", fishingForLitter: 245, adHoc: 180, beach: 155, prevention: 300 },
-  { date: "2022-04-08", fishingForLitter: 409, adHoc: 320, beach: 170, prevention: 330 },
-  { date: "2022-04-09", fishingForLitter: 459, adHoc: 110, beach: 180, prevention: 309 },
-  { date: "2022-04-10", fishingForLitter: 261, adHoc: 190, beach: 178, prevention: 400 },
-  { date: "2022-04-11", fishingForLitter: 327, adHoc: 350, beach: 135, prevention: 470 },
-  { date: "2022-04-12", fishingForLitter: 292, adHoc: 210, beach: 150, prevention: 370 },
-  { date: "2022-04-13", fishingForLitter: 342, adHoc: 380, beach: 130, prevention: 400 },
-  { date: "2023-04-14", fishingForLitter: 437, adHoc: 220, beach: 130, prevention: 300 },
-  { date: "2023-04-15", fishingForLitter: 420, adHoc: 170, beach: 140, prevention: 300 },
-  { date: "2023-04-16", fishingForLitter: 438, adHoc: 190, beach: 180, prevention: 300 },
-  { date: "2023-04-17", fishingForLitter: 446, adHoc: 360, beach: 165, prevention: 300 },
-  { date: "2023-04-18", fishingForLitter: 364, adHoc: 410, beach: 100, prevention: 300 },
-  { date: "2023-04-19", fishingForLitter: 243, adHoc: 180, beach: 110, prevention: 300 },
-  { date: "2023-04-20", fishingForLitter: 489, adHoc: 150, beach: 150, prevention: 300 },
-  { date: "2023-04-21", fishingForLitter: 437, adHoc: 200, beach: 170, prevention: 300 },
-  { date: "2023-04-22", fishingForLitter: 224, adHoc: 170, beach: 160, prevention: 300 },
-  { date: "2023-04-23", fishingForLitter: 438, adHoc: 230, beach: 100, prevention: 300 },
-  { date: "2023-04-24", fishingForLitter: 387, adHoc: 290, beach: 180, prevention: 300 },
-  { date: "2023-04-25", fishingForLitter: 215, adHoc: 250, beach: 160, prevention: 300 },
-  { date: "2023-04-26", fishingForLitter: 545, adHoc: 130, beach: 190, prevention: 300 },
-  { date: "2023-04-27", fishingForLitter: 383, adHoc: 420, beach: 130, prevention: 300 },
-  { date: "2023-04-28", fishingForLitter: 422, adHoc: 180, beach: 135, prevention: 300 },
-  { date: "2023-04-29", fishingForLitter: 315, adHoc: 240, beach: 145, prevention: 300 },
-  { date: "2023-04-30", fishingForLitter: 454, adHoc: 380, beach: 130, prevention: 300 },
-  { date: "2023-05-01", fishingForLitter: 465, adHoc: 220, beach: 160, prevention: 300 },
-  { date: "2023-05-02", fishingForLitter: 293, adHoc: 310, beach: 170, prevention: 300 },
-  { date: "2023-05-03", fishingForLitter: 247, adHoc: 190, beach: 130, prevention: 300 },
-  { date: "2023-05-04", fishingForLitter: 385, adHoc: 420, beach: 140, prevention: 300 },
-  { date: "2023-05-05", fishingForLitter: 481, adHoc: 390, beach: 190, prevention: 300 },
-  { date: "2023-05-06", fishingForLitter: 498, adHoc: 520, beach: 180, prevention: 200 },
-  { date: "2023-05-07", fishingForLitter: 388, adHoc: 300, beach: 170, prevention: 300 },
-  { date: "2023-05-08", fishingForLitter: 449, adHoc: 210, beach: 190, prevention: 300 },
-  { date: "2023-05-09", fishingForLitter: 427, adHoc: 180, beach: 190, prevention: 300 },
-  { date: "2023-05-10", fishingForLitter: 293, adHoc: 330, beach: 180, prevention: 200 },
-  { date: "2023-05-11", fishingForLitter: 335, adHoc: 270, beach: 170, prevention: 300 },
-  { date: "2023-05-12", fishingForLitter: 497, adHoc: 240, beach: 140, prevention: 300 },
-  { date: "2023-05-13", fishingForLitter: 497, adHoc: 160, beach: 100, prevention: 200 },
-  { date: "2023-05-14", fishingForLitter: 448, adHoc: 490, beach: 190, prevention: 300 },
-  { date: "2023-05-15", fishingForLitter: 473, adHoc: 380, beach: 170, prevention: 300 },
-  { date: "2023-05-16", fishingForLitter: 338, adHoc: 400, beach: 100, prevention: 300 },
-  { date: "2023-05-17", fishingForLitter: 499, adHoc: 420, beach: 140, prevention: 300 },
-  { date: "2023-05-18", fishingForLitter: 315, adHoc: 350, beach: 150, prevention: 300 },
-  { date: "2023-05-19", fishingForLitter: 235, adHoc: 180, beach: 140, prevention: 300 },
-  { date: "2023-05-20", fishingForLitter: 477, adHoc: 230, beach: 130, prevention: 300 },
-  { date: "2023-05-21", fishingForLitter: 482, adHoc: 140, beach: 150, prevention: 300 },
-  { date: "2024-05-22", fishingForLitter: 481, adHoc: 120, beach: 180, prevention: 400 },
-  { date: "2024-05-23", fishingForLitter: 252, adHoc: 290, beach: 300, prevention: 300 },
-  { date: "2024-05-24", fishingForLitter: 294, adHoc: 220, beach: 300, prevention: 300 },
-  { date: "2024-05-25", fishingForLitter: 201, adHoc: 250, beach: 300, prevention: 300 },
-  { date: "2024-05-26", fishingForLitter: 213, adHoc: 170, beach: 300, prevention: 200 },
-  { date: "2024-05-27", fishingForLitter: 420, adHoc: 460, beach: 200, prevention: 300 },
-  { date: "2024-05-28", fishingForLitter: 233, adHoc: 190, beach: 300, prevention: 300 },
-  { date: "2024-05-29", fishingForLitter: 478, adHoc: 130, beach: 300, prevention: 300 },
-  { date: "2024-05-30", fishingForLitter: 340, adHoc: 280, beach: 300, prevention: 300 },
-  { date: "2024-05-31", fishingForLitter: 478, adHoc: 230, beach: 300, prevention: 400 },
-  { date: "2024-06-01", fishingForLitter: 478, adHoc: 200, beach: 300, prevention: 300 },
-  { date: "2024-06-02", fishingForLitter: 470, adHoc: 410, beach: 400, prevention: 300 },
-  { date: "2024-06-03", fishingForLitter: 403, adHoc: 160, beach: 300, prevention: 300 },
-  { date: "2024-06-04", fishingForLitter: 439, adHoc: 380, beach: 300, prevention: 200 },
-  { date: "2024-06-05", fishingForLitter: 488, adHoc: 140, beach: 300, prevention: 300 },
-  { date: "2024-06-06", fishingForLitter: 294, adHoc: 250, beach: 200, prevention: 300 },
-  { date: "2024-06-07", fishingForLitter: 323, adHoc: 370, beach: 300, prevention: 300 },
-  { date: "2024-06-08", fishingForLitter: 385, adHoc: 320, beach: 300, prevention: 400 },
-  { date: "2024-06-09", fishingForLitter: 438, adHoc: 480, beach: 300, prevention: 300 },
-  { date: "2024-06-10", fishingForLitter: 455, adHoc: 200, beach: 400, prevention: 300 },
-  { date: "2024-06-11", fishingForLitter: 492, adHoc: 150, beach: 300, prevention: 300 },
-  { date: "2024-06-12", fishingForLitter: 492, adHoc: 420, beach: 300, prevention: 300 },
-  { date: "2024-06-13", fishingForLitter: 481, adHoc: 130, beach: 300, prevention: 350 },
-  { date: "2024-06-14", fishingForLitter: 426, adHoc: 380, beach: 300, prevention: 300 },
-  { date: "2024-10-15", fishingForLitter: 307, adHoc: 350, beach: 300, prevention: 300 },
-  { date: "2024-10-16", fishingForLitter: 371, adHoc: 310, beach: 200, prevention: 300 },
-  { date: "2024-10-17", fishingForLitter: 475, adHoc: 520, beach: 300, prevention: 200 },
-  { date: "2024-10-18", fishingForLitter: 407, adHoc: 170, beach: 300, prevention: 300 },
-  { date: "2024-10-19", fishingForLitter: 341, adHoc: 290, beach: 100, prevention: 300 },
-  { date: "2024-10-20", fishingForLitter: 408, adHoc: 450, beach: 300, prevention: 400 },
-  { date: "2024-10-21", fishingForLitter: 469, adHoc: 210, beach: 300, prevention: 300 },
-  { date: "2024-10-22", fishingForLitter: 317, adHoc: 270, beach: 300, prevention: 300 },
-  { date: "2024-10-23", fishingForLitter: 480, adHoc: 530, beach: 100, prevention: 300 },
-  { date: "2024-10-24", fishingForLitter: 432, adHoc: 180, beach: 300, prevention: 300 },
-  { date: "2024-10-25", fishingForLitter: 441, adHoc: 190, beach: 300, prevention: 300 },
-  { date: "2024-10-26", fishingForLitter: 434, adHoc: 380, beach: 300, prevention: 300 },
-  { date: "2024-10-27", fishingForLitter: 448, adHoc: 490, beach: 200, prevention: 200 },
+  { date: "2021-03-01", fishingForLitter: 222, adHoc: 150, beach: 130, prevention: 400 },
+  { date: "2021-04-02", fishingForLitter: 447, adHoc: 180, beach: 140, prevention: 340 },
+  { date: "2021-05-03", fishingForLitter: 167, adHoc: 120, beach: 160, prevention: 450 },
+  { date: "2021-06-04", fishingForLitter: 242, adHoc: 260, beach: 110, prevention: 300 },
+  { date: "2021-07-05", fishingForLitter: 373, adHoc: 290, beach: 130, prevention: 370 },
+  { date: "2021-08-06", fishingForLitter: 301, adHoc: 340, beach: 135, prevention: 460 },
+  { date: "2021-09-07", fishingForLitter: 245, adHoc: 180, beach: 155, prevention: 300 },
+  { date: "2021-10-08", fishingForLitter: 409, adHoc: 320, beach: 170, prevention: 330 },
+  { date: "2021-10-09", fishingForLitter: 459, adHoc: 110, beach: 180, prevention: 309 },
+  { date: "2021-11-10", fishingForLitter: 261, adHoc: 190, beach: 178, prevention: 400 },
+  { date: "2021-12-11", fishingForLitter: 327, adHoc: 350, beach: 135, prevention: 470 },
+  { date: "2021-12-12", fishingForLitter: 292, adHoc: 210, beach: 150, prevention: 370 },
+  { date: "2022-01-13", fishingForLitter: 342, adHoc: 380, beach: 130, prevention: 400 },
+  { date: "2022-01-14", fishingForLitter: 437, adHoc: 220, beach: 130, prevention: 300 },
+  { date: "2022-02-15", fishingForLitter: 420, adHoc: 170, beach: 140, prevention: 300 },
+  { date: "2022-02-16", fishingForLitter: 438, adHoc: 190, beach: 180, prevention: 300 },
+  { date: "2022-02-17", fishingForLitter: 446, adHoc: 360, beach: 165, prevention: 300 },
+  { date: "2022-02-18", fishingForLitter: 364, adHoc: 410, beach: 100, prevention: 300 },
+  { date: "2022-03-19", fishingForLitter: 243, adHoc: 180, beach: 110, prevention: 300 },
+  { date: "2022-03-20", fishingForLitter: 489, adHoc: 150, beach: 150, prevention: 300 },
+  { date: "2022-04-21", fishingForLitter: 437, adHoc: 200, beach: 170, prevention: 300 },
+  { date: "2022-04-22", fishingForLitter: 224, adHoc: 170, beach: 160, prevention: 300 },
+  { date: "2022-04-23", fishingForLitter: 438, adHoc: 230, beach: 100, prevention: 300 },
+  { date: "2022-04-24", fishingForLitter: 387, adHoc: 290, beach: 180, prevention: 300 },
+  { date: "2022-05-25", fishingForLitter: 215, adHoc: 250, beach: 160, prevention: 300 },
+  { date: "2022-05-26", fishingForLitter: 545, adHoc: 130, beach: 190, prevention: 300 },
+  { date: "2022-06-27", fishingForLitter: 383, adHoc: 420, beach: 130, prevention: 300 },
+  { date: "2022-07-28", fishingForLitter: 422, adHoc: 180, beach: 135, prevention: 300 },
+  { date: "2022-08-29", fishingForLitter: 315, adHoc: 240, beach: 145, prevention: 300 },
+  { date: "2022-09-30", fishingForLitter: 454, adHoc: 380, beach: 130, prevention: 300 },
+  { date: "2022-09-01", fishingForLitter: 465, adHoc: 220, beach: 160, prevention: 300 },
+  { date: "2022-09-02", fishingForLitter: 293, adHoc: 310, beach: 170, prevention: 300 },
+  { date: "2022-10-03", fishingForLitter: 247, adHoc: 190, beach: 130, prevention: 300 },
+  { date: "2022-10-04", fishingForLitter: 385, adHoc: 420, beach: 140, prevention: 300 },
+  { date: "2022-11-05", fishingForLitter: 481, adHoc: 390, beach: 190, prevention: 300 },
+  { date: "2022-11-06", fishingForLitter: 498, adHoc: 520, beach: 180, prevention: 200 },
+  { date: "2022-11-07", fishingForLitter: 388, adHoc: 300, beach: 170, prevention: 300 },
+  { date: "2022-11-08", fishingForLitter: 449, adHoc: 210, beach: 190, prevention: 300 },
+  { date: "2022-12-09", fishingForLitter: 427, adHoc: 180, beach: 190, prevention: 300 },
+  { date: "2022-12-10", fishingForLitter: 293, adHoc: 330, beach: 180, prevention: 200 },
+  { date: "2023-01-11", fishingForLitter: 335, adHoc: 270, beach: 170, prevention: 300 },
+  { date: "2023-01-12", fishingForLitter: 497, adHoc: 240, beach: 140, prevention: 300 },
+  { date: "2023-02-13", fishingForLitter: 497, adHoc: 160, beach: 100, prevention: 200 },
+  { date: "2023-02-14", fishingForLitter: 448, adHoc: 490, beach: 190, prevention: 300 },
+  { date: "2023-02-15", fishingForLitter: 473, adHoc: 380, beach: 170, prevention: 300 },
+  { date: "2023-02-16", fishingForLitter: 338, adHoc: 400, beach: 100, prevention: 300 },
+  { date: "2023-03-17", fishingForLitter: 499, adHoc: 420, beach: 140, prevention: 300 },
+  { date: "2023-03-18", fishingForLitter: 315, adHoc: 350, beach: 150, prevention: 300 },
+  { date: "2023-04-19", fishingForLitter: 235, adHoc: 180, beach: 140, prevention: 300 },
+  { date: "2023-04-20", fishingForLitter: 477, adHoc: 230, beach: 130, prevention: 300 },
+  { date: "2023-04-21", fishingForLitter: 482, adHoc: 140, beach: 150, prevention: 300 },
+  { date: "2023-05-22", fishingForLitter: 481, adHoc: 120, beach: 180, prevention: 400 },
+  { date: "2023-05-23", fishingForLitter: 252, adHoc: 290, beach: 300, prevention: 300 },
+  { date: "2023-05-24", fishingForLitter: 294, adHoc: 220, beach: 300, prevention: 300 },
+  { date: "2023-06-25", fishingForLitter: 201, adHoc: 250, beach: 300, prevention: 300 },
+  { date: "2023-06-26", fishingForLitter: 213, adHoc: 170, beach: 300, prevention: 200 },
+  { date: "2023-07-27", fishingForLitter: 420, adHoc: 460, beach: 200, prevention: 300 },
+  { date: "2023-08-28", fishingForLitter: 233, adHoc: 190, beach: 300, prevention: 300 },
+  { date: "2023-08-29", fishingForLitter: 478, adHoc: 130, beach: 300, prevention: 300 },
+  { date: "2023-09-30", fishingForLitter: 340, adHoc: 280, beach: 300, prevention: 300 },
+  { date: "2023-09-31", fishingForLitter: 478, adHoc: 230, beach: 300, prevention: 400 },
+  { date: "2023-09-01", fishingForLitter: 478, adHoc: 200, beach: 300, prevention: 300 },
+  { date: "2023-09-02", fishingForLitter: 470, adHoc: 410, beach: 400, prevention: 300 },
+  { date: "2023-09-03", fishingForLitter: 403, adHoc: 160, beach: 300, prevention: 300 },
+  { date: "2023-10-04", fishingForLitter: 439, adHoc: 380, beach: 300, prevention: 200 },
+  { date: "2023-10-05", fishingForLitter: 488, adHoc: 140, beach: 300, prevention: 300 },
+  { date: "2023-10-06", fishingForLitter: 294, adHoc: 250, beach: 200, prevention: 300 },
+  { date: "2023-11-07", fishingForLitter: 323, adHoc: 370, beach: 300, prevention: 300 },
+  { date: "2023-11-08", fishingForLitter: 385, adHoc: 320, beach: 300, prevention: 400 },
+  { date: "2023-11-09", fishingForLitter: 438, adHoc: 480, beach: 300, prevention: 300 },
+  { date: "2023-12-10", fishingForLitter: 455, adHoc: 200, beach: 400, prevention: 300 },
+  { date: "2023-12-11", fishingForLitter: 492, adHoc: 150, beach: 300, prevention: 300 },
+  { date: "2024-01-12", fishingForLitter: 492, adHoc: 420, beach: 300, prevention: 300 },
+  { date: "2024-01-13", fishingForLitter: 481, adHoc: 130, beach: 300, prevention: 350 },
+  { date: "2024-02-14", fishingForLitter: 426, adHoc: 380, beach: 300, prevention: 300 },
+  { date: "2024-02-15", fishingForLitter: 307, adHoc: 350, beach: 300, prevention: 300 },
+  { date: "2024-03-16", fishingForLitter: 371, adHoc: 310, beach: 200, prevention: 300 },
+  { date: "2024-03-17", fishingForLitter: 475, adHoc: 520, beach: 300, prevention: 200 },
+  { date: "2024-03-18", fishingForLitter: 407, adHoc: 170, beach: 300, prevention: 300 },
+  { date: "2024-04-19", fishingForLitter: 341, adHoc: 290, beach: 100, prevention: 300 },
+  { date: "2024-05-20", fishingForLitter: 408, adHoc: 450, beach: 300, prevention: 400 },
+  { date: "2024-06-21", fishingForLitter: 469, adHoc: 210, beach: 300, prevention: 300 },
+  { date: "2024-07-22", fishingForLitter: 317, adHoc: 270, beach: 300, prevention: 300 },
+  { date: "2024-07-23", fishingForLitter: 480, adHoc: 530, beach: 100, prevention: 300 },
+  { date: "2024-08-24", fishingForLitter: 432, adHoc: 180, beach: 300, prevention: 300 },
+  { date: "2024-08-25", fishingForLitter: 441, adHoc: 190, beach: 300, prevention: 300 },
+  { date: "2024-09-26", fishingForLitter: 434, adHoc: 380, beach: 300, prevention: 300 },
+  { date: "2024-09-27", fishingForLitter: 448, adHoc: 490, beach: 200, prevention: 200 },
   { date: "2024-10-28", fishingForLitter: 449, adHoc: 200, beach: 300, prevention: 300 },
   { date: "2024-10-29", fishingForLitter: 403, adHoc: 160, beach: 300, prevention: 400 },
   { date: "2024-10-30", fishingForLitter: 446, adHoc: 400, beach: 100, prevention: 300 },
@@ -237,26 +237,54 @@ const activitiesChartConfig = {
   },
 } satisfies ChartConfig
 
-interface WasteChartProps {
+interface CollectionsChartProps {
   category: string;
   timeRange: string;
 }
 
-export function CollectionsChart({ category, timeRange }: WasteChartProps) {
+export function CollectionsChart({ category, timeRange }: CollectionsChartProps) {
   const chartConfig = category === "materials" ? materialsChartConfig : activitiesChartConfig
   const chartData = category === "materials" ? materialsData : activitiesData
+
+
   const filteredData = chartData.filter((item) => {
     const date = new Date(item.date)
     const now = new Date()
-    let daysToSubtract = 700
-    if (timeRange === "Last 30 days") {
-      daysToSubtract = 30
+    const currentYear = now.getFullYear()
+    let startDate: Date
+
+    if (timeRange === "This year") {
+      startDate = new Date(currentYear, 0, 1)
     } else if (timeRange === "Last year") {
-      daysToSubtract = 365
+      startDate = new Date(currentYear - 1, 0, 1)
+    } else {
+      return true
     }
-    now.setDate(now.getDate() - daysToSubtract)
-  return date >= now
-  })
+    return date >= startDate
+  }).reduce((acc, item) => {
+    const month = new Date(item.date).toLocaleString('default', { month: 'short', year: 'numeric' });
+    if (!acc[month]) {
+      acc[month] = { date: month, plastics: 0, nets: 0, metal: 0, rubber: 0, fishingForLitter: 0, adHoc: 0, prevention: 0, beach: 0 };
+    }
+    // Accumulate values
+    if (category === "materials") {
+      const materialItem = item as { plastics: number; nets: number; metal: number; rubber: number; date: string };
+      acc[month].plastics += materialItem.plastics;
+      acc[month].nets += materialItem.nets;
+      acc[month].metal += materialItem.metal;
+      acc[month].rubber += materialItem.rubber;
+    } else {
+      const activityItem = item as { fishingForLitter: number; adHoc: number; beach: number; prevention: number; date: string };
+      acc[month].fishingForLitter += activityItem.fishingForLitter;
+      acc[month].adHoc += activityItem.adHoc;
+      acc[month].prevention += activityItem.prevention;
+      acc[month].beach += activityItem.beach;
+    }
+    return acc;
+  }, {} as Record<string, any>);
+  // Convert accumulated data back to an array
+  const accumulatedData = Object.values(filteredData);
+
 
   return (
     <ScrollArea className="max-w-[350px] md:max-w-[1500px]">
@@ -268,7 +296,7 @@ export function CollectionsChart({ category, timeRange }: WasteChartProps) {
           >         
             <AreaChart
               accessibilityLayer
-              data={filteredData}
+              data={accumulatedData}
               margin={{
                 left: -20,
                 right: 12,
@@ -285,7 +313,8 @@ export function CollectionsChart({ category, timeRange }: WasteChartProps) {
                   const date = new Date(value)
                   return date.toLocaleDateString("en-US", {
                     month: "short",
-                    day: "numeric",
+                    year: "2-digit"
+                    // day: "numeric",
                   })
                 }}
               />

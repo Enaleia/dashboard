@@ -4,7 +4,7 @@ import { StatsBar } from '@/components/stats-bar'
 import { ActivityMap } from '../components/activity-map'
 import { CollectionsChart } from '@/components/collections-chart'
 import { CustomChartLegend } from '@/components/custom-chart-legend'
-import { CircleArrowDown, CircleArrowUp } from 'lucide-react'
+import { CircleArrowDown } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { BackToTopButton } from '@/components/back-to-top'
 
@@ -13,8 +13,8 @@ export const Route = createFileRoute('/')({
 })
 
 function HomeComponent() {
-  const [selectedChartDates, setSelectedChartDates] = useState('All time')
-  const dateChoices = ["All time", "Last year", "Last 30 days"]
+  const [selectedChartDates, setSelectedChartDates] = useState('This year')
+  const dateChoices = ["All time", "Last year", "This year"]
 
   return (
     <main className='flex flex-col justify-center items-center gap-14 md:gap-24 m-auto pt-0 pb-20 md:pb-32 md:pt-16 max-w-[1500px]'>
