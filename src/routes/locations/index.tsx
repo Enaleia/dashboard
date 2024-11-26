@@ -1,17 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
 import { StatsBar } from '@/components/stats-bar'
+import { TableActionsBar } from '@/components/table-actions-bar'
 import { LocationsTable } from '@/components/locations-table'
 import { ActivityMap } from '@/components/activity-map'
-import { Button } from '@/components/ui/button'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import { useMediaQuery } from "@/hooks/use-media-query";
 
 export const Route = createFileRoute('/locations/')({
   component: LocationsComponent,
@@ -20,10 +12,10 @@ export const Route = createFileRoute('/locations/')({
 function LocationsComponent() {
   const locationTypes = ["See all", "Port", "Recycler", "Manufacturer", "Most active"]
   const viewTypes = ["List", "Map"]
+  const sortByOptions = ["Most to least active", "Least to most active", "Name A-Z", "Name Z-A", "Country A-Z", "Country Z-A", "Type A-Z", "Type Z-A"]
   const [selectedLocationType, setSelectedLocationType] = useState("See all")
-  const [selectedViewType, setSelectedViewType] = useState("List")
   const [selectedSortOrder, setSelectedSortOrder] = useState("")
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const [selectedViewType, setSelectedViewType] = useState("List")
 
   return (
     <main className='flex flex-col justify-center items-center gap-10 md:gap-16 m-auto md:pt-16 max-w-[1500px]'>
@@ -35,58 +27,18 @@ function LocationsComponent() {
       <StatsBar pageId='locations'/>
 
       <section className='w-full'>
-        <article className='flex items-center justify-between mx-4 md:mx-24'>
-          <div className='hidden md:flex items-center md:gap-2'>
-            <p className='text-xs md:text-sm font-extralight'>Location type:</p>
-            <div className='flex flex-row justify-center gap-2'>
-              {locationTypes.map((type) => (
-                <Button
-                  key={type} 
-                  variant={selectedLocationType === type ? "default" : "outline"}
-                  onClick={() => setSelectedLocationType(type)}
-                >
-                  {type}
-                </Button>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            {selectedViewType === "List" &&
-              <Select name="sort" onValueChange={(value) => setSelectedSortOrder(value)}>
-                <SelectTrigger className="w-[200px] border-black rounded-3xl">
-                  <SelectValue placeholder="Sort by" />
-                </SelectTrigger>
-                <SelectContent className='border-black rounded-3xl'>
-                  <SelectItem value="activityDesc">Most to least active</SelectItem>
-                  <SelectItem value="activityAsc">Least to most active</SelectItem>
-                  {isDesktop &&
-                    <>
-                      <SelectItem value="nameAZ">Name (A-Z)</SelectItem>
-                      <SelectItem value="nameZA">Name (Z-A)</SelectItem>
-                      <SelectItem value="countryAZ">Country (A-Z)</SelectItem>
-                      <SelectItem value="countryZA">Country (Z-A)</SelectItem>
-                      <SelectItem value="typeAZ">Type (A-Z)</SelectItem>
-                      <SelectItem value="typeZA">Type (Z-A)</SelectItem>
-                    </>
-                  }
-                </SelectContent>
-              </Select>         
-            }
-          </div>
-          
-          <div className='flex flex-row gap-2'>
-            {viewTypes.map((type) => (
-              <Button
-                key={type} 
-                variant={selectedViewType === type ? "default" : "outline"}
-                onClick={() => setSelectedViewType(type)}
-              >
-                {type}
-              </Button>
-            ))}
-          </div>
-        </article>
+        <TableActionsBar 
+          category='locations' 
+          partnerTypes={locationTypes} 
+          selectedPartnerType={selectedLocationType}
+          setSelectedPartnerType={setSelectedLocationType}
+          sortByOptions={sortByOptions}
+          selectedSortOrder={selectedSortOrder}
+          setSelectedSortOrder={setSelectedSortOrder}
+          viewTypes={viewTypes}
+          selectedViewType={selectedViewType}
+          setSelectedViewType={setSelectedViewType}
+        />
 
         <article className='overflow-hidden rounded-3xl m-4 md:mx-24'>
           {selectedViewType === "List" && <LocationsTable  locationType={selectedLocationType} sortOrder={selectedSortOrder}/>}

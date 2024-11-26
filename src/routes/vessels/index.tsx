@@ -1,8 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
 import { StatsBar } from '@/components/stats-bar'
+import { TableActionsBar } from '@/components/table-actions-bar'
 import { VesselsTable } from '@/components/vessels-table'
-import { Button } from '@/components/ui/button'
+import { ActivityMap } from '@/components/activity-map'
 
 export const Route = createFileRoute('/vessels/')({
   component: VesselsComponent,
@@ -10,7 +11,11 @@ export const Route = createFileRoute('/vessels/')({
 
 function VesselsComponent() {
   const vesselTypes = ["See all", "Trawler", "Seiner", "Other", "Most active"]
+  const sortByOptions = ["Most to least active", "Least to most active", "Name A-Z", "Name Z-A", "Country A-Z", "Country Z-A", "Type A-Z", "Type Z-A"]
+  const viewTypes = ["List", "Map"]
   const [selectedVesselType, setSelectedVesselType] = useState("See all")
+  const [selectedSortOrder, setSelectedSortOrder] = useState("")
+  const [selectedViewType, setSelectedViewType] = useState("List")
 
   return (
     <main className='flex flex-col justify-center items-center gap-10 md:gap-16 m-auto md:pt-16 max-w-[1500px]'>
@@ -22,23 +27,21 @@ function VesselsComponent() {
       <StatsBar pageId='locations'/>
 
       <section className='w-full'>
-        <article className='flex flex-col md:flex-row items-center md:gap-2'>
-          <p className='text-xs md:text-sm font-extralight'>Vessel type:</p>
-          <div className='flex flex-row justify-center gap-2'>
-            {vesselTypes.map((type) => (
-              <Button
-                key={type} 
-                variant={selectedVesselType === type ? "default" : "outline"}
-                onClick={() => setSelectedVesselType(type)}
-              >
-                {type}
-              </Button>
-            ))}
-          </div>
-        </article>
-
+        <TableActionsBar 
+          category='vessels' 
+          partnerTypes={vesselTypes} 
+          selectedPartnerType={selectedVesselType}
+          setSelectedPartnerType={setSelectedVesselType}
+          sortByOptions={sortByOptions}
+          selectedSortOrder={selectedSortOrder}
+          setSelectedSortOrder={setSelectedSortOrder}
+          viewTypes={viewTypes}
+          selectedViewType={selectedViewType}
+          setSelectedViewType={setSelectedViewType}
+        />
         <article className='overflow-hidden rounded-3xl mt-6'>
-          <VesselsTable  selectedVesselType={selectedVesselType}/>
+          {selectedViewType === "List" && <VesselsTable  selectedVesselType={selectedVesselType}/>}
+          {selectedViewType === "Map" && <ActivityMap locationType={selectedVesselType}/>}
         </article>          
       </section> 
     </main>
