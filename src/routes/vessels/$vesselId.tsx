@@ -73,7 +73,7 @@ function VesselDetailComponent() {
   
         <div className='py-6 md:py-0 md:pb-16'>
           <StatsBar pageId='port'/>
-          <CollectionsChart category='activities' timeRange='All time'/>
+          <CollectionsChart category='activities' timeRange={selectedChartDates}/>
           <article className='text-center tracking-tight p-6 md:px-40'>
             <p className='text-xl md:text-2xl font-bold leading-none md:leading-none pb-1'>What are the actions, and why do they matter?</p>
             <p className='text-sm md:text-lg font-extralight leading-tight md:leading-tight'>While fishing for litter is most common, sponsors also request ad-hoc clean-ups in neglected areas like abandoned fish farms. Tracking waste per action helps evaluate performance, allocate resources, and ensure transparency in combating marine pollution.</p>
