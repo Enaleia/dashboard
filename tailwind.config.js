@@ -2,10 +2,10 @@
 import { fontFamily } from "tailwindcss/defaultTheme";
 
 export default {
-    darkMode: ["class"],
-    content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+  darkMode: ["class"],
+  content: [
+  "./index.html",
+  "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
   	extend: {
@@ -17,6 +17,16 @@ export default {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
+      backgroundColor: {
+        plastics: 'hsl(var(--plastics))',
+        nets: 'hsl(var(--nets))',
+        metal: 'hsl(var(--metal))',
+        rubber: 'hsl(var(--rubber))',
+        fishingForLitter: 'hsl(var(--plastics))',
+        adHoc: 'hsl(var(--nets))',
+        prevention: 'hsl(var(--metal))',
+        beach: 'hsl(var(--rubber))'
+      },
   		colors: {
         sand: 'hsl(var(--sand))',
         ocean: 'hsl(var(--ocean))',
@@ -70,6 +80,16 @@ export default {
   		}
   	}
   },
+  safelist: [
+    'bg-plastics',
+    'bg-nets',
+    'bg-metal',
+    'bg-rubber',
+    'bg-fishingForLitter',
+    'bg-adHoc',
+    'bg-prevention',
+    'bg-beach'
+  ],
   plugins: [require("tailwindcss-animate")],
 }
 

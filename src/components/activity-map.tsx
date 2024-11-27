@@ -40,7 +40,7 @@ const ActivityMap = ({ locationType }: {locationType: string}) => {
   }, [locationType, mapData])
 
 	return (
-    <article className='w-full h-[300px] md:h-[700px]'>
+    <article className='w-full h-[400px] md:h-[700px]'>
       <MapContainer className='h-full z-0' center={[38.32217739504656, 23.952204640936014]} zoom={5} scrollWheelZoom={false}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
