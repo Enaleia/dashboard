@@ -1,12 +1,13 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
+import { DetailPageHeading } from '@/components/detail-page-heading'
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
-import { ArrowUpRight } from 'lucide-react'
 import { StatsBar } from '@/components/stats-bar'
 import { CollectionsChart } from '@/components/collections-chart'
 import { CustomChartLegend } from '@/components/custom-chart-legend'
 import { AttestationsTable } from '@/components/attestations-table'
+import { DetailPageBackNav } from '@/components/detail-page-back-nav'
 import { BackToTopButton } from '@/components/back-to-top'
 import { dateChoices, partnerDetailInfo, attestationDescriptions } from '@/config/texts'
 import data from '@/map_data.json'
@@ -18,47 +19,17 @@ export const Route = createFileRoute('/locations/$locationId')({
 function LocationDetailComponent() {
   const { locationId } = Route.useParams()
   const locationData = data.filter(record => record.name === locationId)
-  const { name, country, coordinates, type, actions } = locationData[0] as { 
+  const { name, country, coordinates, type } = locationData[0] as { 
     name: string; 
     country: string; 
     coordinates: number[]; 
     type: 'Port' | 'Recycler' | 'Manufacturer';
-    actions: any; 
   }
   const [selectedChartDates, setSelectedChartDates] = useState('This year')
 
   return (
     <main className='flex flex-col justify-center items-center gap-12 md:gap-16 m-auto px-6 md:px-16 pt-0 pb-16 md:pb-32 md:pt-16 max-w-[1500px]'>
-      <section className='w-full'>
-        <div className='flex flex-row justify-between items-center'>
-          <div>
-            <p className='text-xs md:text-sm font-extralight'>Location detail</p>
-            <h1 className='font-bold text-4xl md:text-7xl tracking-tight'>{name}</h1>
-          </div>
-          <img src={`/${type}_icon.svg`} alt={`${locationData[0].type} icon`} className='h-16 w-16 md:h-28 md:w-28'/>
-        </div>
-
-        <div className='flex flex-col md:flex-row gap-0.5 md:gap-4 font-light'>
-          <div className='flex flex-row items-center gap-1'>
-            <img src={`/flag_${country}.svg`} alt={`country} flag`} className='h-7 w-7'/>
-            <p>{country}</p>
-          </div>
-          <div className='hidden md:flex'>
-            <Separator orientation='vertical' className='bg-gray-400 w-[1px]'/>
-          </div>
-          <a href='' className='flex flex-row items-center gap-1 hover:font-semibold'>
-            <p>{String(coordinates[0]).slice(0, 9)}, {String(coordinates[1]).slice(0, 9)}</p>
-            <ArrowUpRight strokeWidth={1}/>
-          </a>
-          <div className='hidden md:flex'>
-            <Separator orientation='vertical' className='bg-gray-400 w-[1.5px]'/>
-          </div>
-          <a href='' className='flex flex-row items-center gap-1 hover:font-semibold'>
-            <p>0x123d...1234</p>
-            <ArrowUpRight strokeWidth={1}/>
-          </a>
-        </div>
-      </section>
+      < DetailPageHeading name={name} country={country} coordinates={coordinates} type={type}/>
 
       <section className='border border-primary rounded-3xl overflow-hidden'>
         <article className='flex flex-col md:flex-row justify-between border-b border-primary p-4 pb-8 md:p-12'>
@@ -105,17 +76,8 @@ function LocationDetailComponent() {
         <Separator className='bg-black my-3'/>
         <AttestationsTable />
       </section>
-      
-      <section className='relative w-full rounded-3xl overflow-hidden'>
-        <img src='/location_img.jpg' alt="underwater scene" className='object-cover bg-center h-[120px] md:h-auto w-full'/>
-        <Link 
-          to='/locations' 
-          className='absolute inset-0 flex flex-col items-center justify-center text-center text-sand text-xl md:text-2xl font-semibold'
-        >
-          Go back to all locations
-        </Link>
-      </section>
 
+      <DetailPageBackNav detailType='location' />
       <BackToTopButton />
     </main>
   )
