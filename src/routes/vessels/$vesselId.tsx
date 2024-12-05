@@ -8,6 +8,7 @@ import { CollectionsChart } from '@/components/collections-chart'
 import { CustomChartLegend } from '@/components/custom-chart-legend'
 import { AttestationsTable } from '@/components/attestations-table'
 import { BackToTopButton } from '@/components/back-to-top'
+import { dateChoices, partnerDetailInfo, attestationDescriptions } from '@/config/texts'
 import data from '@/vessel_data.json'
 
 export const Route = createFileRoute('/vessels/$vesselId')({
@@ -19,7 +20,6 @@ function VesselDetailComponent() {
   const locationData = data.filter(record => record.name === vesselId)
   const { name, country, port, type, actions } = locationData[0]
   const [selectedChartDates, setSelectedChartDates] = useState('This year')
-  const dateChoices = ["All time", "Last year", "This year"]
 
   return (
     <main className='flex flex-col justify-center items-center gap-10 md:gap-16 m-auto px-6 md:px-16 pt-0 pb-16 md:pb-32 md:pt-16 max-w-[1500px]'>
@@ -53,7 +53,8 @@ function VesselDetailComponent() {
 
       <section className='border border-primary rounded-3xl overflow-hidden'>
         <article className='flex flex-col md:flex-row justify-between border-b border-primary p-4 pb-8 md:p-12'>
-          <h2 className='font-bold text-2xl md:text-4xl tracking-tight'>Waste removed by this vessel</h2>
+          <h2 className='font-bold text-2xl md:text-4xl tracking-tight'>{partnerDetailInfo["Vessel"].heading}</h2>
+          {/* <p className='font-extralight text-sm md:text-lg tracking-tight leading-tight md:leading-tight'>{partnerDetailInfo["Vessel"].description}</p> */}
           <div className='flex flex-col justify-end'>
             <p className='text-xs md:text-base font-extralight md:text-right pt-4 pb-2 md:py-0'>Last update: mm/dd/yyyy</p>
             <div className='flex flex-row justify-between items-end gap-2 md:py-4'>
@@ -74,17 +75,13 @@ function VesselDetailComponent() {
         <div className='py-6 md:py-0 md:pb-16'>
           <StatsBar pageId='port'/>
           <CollectionsChart category='activities' timeRange={selectedChartDates}/>
-          <article className='text-center tracking-tight p-6 md:px-40'>
-            <p className='text-xl md:text-2xl font-bold leading-none md:leading-none pb-1'>What are the actions, and why do they matter?</p>
-            <p className='text-sm md:text-lg font-extralight leading-tight md:leading-tight'>While fishing for litter is most common, sponsors also request ad-hoc clean-ups in neglected areas like abandoned fish farms. Tracking waste per action helps evaluate performance, allocate resources, and ensure transparency in combating marine pollution.</p>
-          </article>
           <CustomChartLegend category='activities' />
         </div>
       </section>
 
       <section className='flex flex-col gap-3 my-6 md:my-20 w-full md:w-[85%]'>
         <h2 className='font-bold text-3xl md:text-5xl tracking-tight'>Attestations</h2>
-        <p className='w-full md:w-[70%] font-extralight tracking-tight leading-tight md:leading-tight'>Each time a fisherman delivers waste, the port coordinator weighs it, records the data via a mobile app, and submits it to a blockchain for secure, transparent tracking.</p>
+        <p className='w-full md:w-[70%] font-extralight tracking-tight leading-tight md:leading-tight'>{attestationDescriptions["Vessel"]}</p>
         <Separator className='bg-black my-3'/>
         <AttestationsTable />
       </section>
