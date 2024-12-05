@@ -50,8 +50,8 @@ function AboutComponent() {
       
       <section className='flex flex-col items-center gap-6 text-center mx-4 md:mx-16'>
         <h1 className='w-full font-bold text-5xl md:text-7xl tracking-tight md:px-48'>Transparency. Accountability. Open source data on a distributed network.</h1>
-        <p className='w-full font-extralight text-lg md:text-xl tracking-tight leading-tight md:leading-tight'>Enaleia Hub is a step toward sustainable innovation, open collaboration, and fostering trust in the data driving ocean clean-up efforts.</p>
-        <img src='/about_photo.jpg' alt="photo of port operations" className='object-cover bg-center h-[350px] md:h-auto w-full md:pt-8 rounded-3xl'/>
+        <p className='w-full font-extralight text-lg md:text-xl tracking-tight leading-tight md:leading-tight'>Enaleia Hub is a step toward sustainable innovation, open collaboration, and fostering trust in the data that drives ocean clean-up efforts.</p>
+        <img src='/about_photo.jpg' alt="photo of port operations" className='object-cover bg-center h-[350px] md:h-auto w-full rounded-3xl overflow-hidden'/>
       </section> 
 
       <section className='text-center mx-4 md:mx-16'>
