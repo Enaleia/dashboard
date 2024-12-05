@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
+import { PageHero } from '@/components/page-hero'
 import { StatsBar } from '@/components/stats-bar'
 import { TableActionsBar } from '@/components/table-actions-bar'
 import { ActionsTable } from '@/components/actions-table'
@@ -19,11 +20,7 @@ function LocationsComponent() {
 
   return (
     <main className='flex flex-col justify-center items-center gap-8 md:gap-10 m-auto md:pt-16 max-w-[1500px]'>
-      <section className='flex flex-col items-center gap-6 px-6 text-center'>
-        <h1 className='w-full font-bold text-5xl md:text-7xl tracking-tight md:px-[24%]'>{heroTitle}</h1>
-        <p className='w-full font-extralight text-base md:text-lg md:px-56 leading-tight md:leading-tight'>{heroDescription}</p>
-      </section>
-
+      <PageHero title={heroTitle} description={heroDescription} width='60' /> 
       <StatsBar pageId='locations'/>
 
       <section className='w-full'>

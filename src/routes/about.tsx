@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { PageHero } from '@/components/page-hero'
 import { AboutCard } from '@/components/about-card'
 import { ArrowUpRight } from 'lucide-react'
 import { aboutPageTexts, aboutCardInfo, aboutPageLinks } from '@/config/texts'
@@ -19,11 +20,10 @@ function AboutComponent() {
   } = aboutPageTexts
 
   return (
-    <main className='flex flex-col justify-center items-center gap-20 md:gap-36 m-auto pt-0 pb-20 md:pb-32 md:pt-16 max-w-[1500px]'>
+    <main className='flex flex-col justify-center items-center gap-14 md:gap-24 m-auto pt-0 pb-20 px-6 md:pb-32 md:pt-16 max-w-[1500px]'>  
       
-      <section className='flex flex-col items-center gap-6 text-center mx-4 md:mx-16'>
-        <h1 className='w-full font-bold text-5xl md:text-7xl tracking-tight md:px-40'>{heroTitle}</h1>
-        <p className='w-full font-extralight text-lg md:text-xl tracking-tight leading-tight md:leading-tight'>{heroDescription}</p>
+      <section className='flex flex-col items-center gap-10'>
+        <PageHero title={heroTitle} description={heroDescription} width='75'/>
         <img src='/about_photo.jpg' alt="photo of port operations" className='object-cover bg-center h-[350px] md:h-auto w-full rounded-3xl overflow-hidden'/>
       </section> 
 

@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
+import { PageHero } from '@/components/page-hero'
 import { StatsBar } from '@/components/stats-bar'
 import { ActivityMap } from '../components/activity-map'
 import { CollectionsChart } from '@/components/collections-chart'
@@ -28,12 +29,11 @@ function HomeComponent() {
   const [selectedChartDates, setSelectedChartDates] = useState('This year')
 
   return (
-    <main className='flex flex-col justify-center items-center gap-14 md:gap-24 m-auto pt-0 pb-20 md:pb-32 md:pt-16 max-w-[1500px]'>
-      <section className='flex flex-col items-center gap-6 px-6 text-center'>
-        <h1 className='w-full font-bold text-5xl md:text-7xl tracking-tight md:px-60'>{heroTitle}</h1>
-        <p className='w-full font-extralight text-base md:text-lg tracking-tight md:px-60 leading-tight md:leading-tight'>{heroDescription}</p>
+    <main className='flex flex-col justify-center items-center gap-14 md:gap-24 m-auto pt-0 pb-20 px-6 md:pb-32 md:pt-16 max-w-[1500px]'>
+      <section className='flex flex-col items-center gap-10'>
+        <PageHero title={heroTitle} description={heroDescription} width='60'/>
         <div 
-          className='flex flex-row items-center gap-2 font-normal text-ocean cursor-pointer'
+          className='flex flex-row justify-center items-center gap-2 font-normal text-ocean cursor-pointer'
           onClick={() => window.scrollTo({ top: 2000, behavior: 'smooth'})}
         >
           <CircleArrowDown color="#2985D0" strokeWidth={2}/>
