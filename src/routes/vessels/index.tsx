@@ -20,7 +20,7 @@ function VesselsComponent() {
 
   return (
     <main className='flex flex-col justify-center items-center gap-8 md:gap-10 m-auto md:pt-16 max-w-[1500px]'>
-      <PageHero title={heroTitle} description={heroDescription} width='60' />
+      <PageHero title={heroTitle} description={heroDescription} width='85' />
       <StatsBar pageId='locations'/>
 
       <section className='w-full'>
@@ -36,7 +36,7 @@ function VesselsComponent() {
           selectedViewType={selectedViewType}
           setSelectedViewType={setSelectedViewType}
         />
-        <article className='overflow-hidden rounded-3xl m-4 md:mx-24 pb-16'>
+        <article className='overflow-hidden rounded-3xl pb-16'>
           {selectedViewType === "List" && <ActionsTable category='vessels' tableData={tableData} partnerType={selectedVesselType} sortOrder={selectedSortOrder}/>}
           {selectedViewType === "Map" && <ActivityMap locationType={selectedVesselType}/>}
         </article>          

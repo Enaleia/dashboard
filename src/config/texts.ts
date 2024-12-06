@@ -74,7 +74,7 @@ export const vesselsPageTexts = {
 // About page
 export const aboutPageTexts = {
   heroTitle: 'Transparency. Accountability. Open source data on a distributed network.',
-  heroDescription: 'Enaleia Hub is a step toward sustainable innovation, open collaboration, and fostering trust in the data that drives ocean clean-up efforts.',
+  heroDescription: 'Enaleia Hub is a step toward sustainable innovation and fostering trust in the data that drives ocean clean-up efforts.',
   hubFlowSectionTitle: 'How does Enaleia Hub work?',
   hubFlowSectionDescription: 'The Hub is a data visualization and traceability platform built to streamline operational workflows for Enaleia. By leveraging blockchain technology, it enhances transparency and efficiency in tracking and managing environmental efforts. The Hub integrates multiple interfaces, including a backend to store data and a custom connector to support the internal operations team in submitting data as attestations. It empowers all stakeholders—whether part of Enaleia or external partners—to contribute to data submission seamlessly.',
   collabSectionTitle: 'Collaboration for impact',

@@ -28,11 +28,11 @@ function LocationDetailComponent() {
   const [selectedChartDates, setSelectedChartDates] = useState('This year')
 
   return (
-    <main className='flex flex-col justify-center items-center gap-12 md:gap-16 m-auto px-6 md:px-16 pt-0 pb-16 md:pb-32 md:pt-16 max-w-[1500px]'>
+    <main className='flex flex-col justify-center items-center gap-8 m-auto pt-0 pb-16 md:pb-32 md:pt-16 max-w-[1500px]'>
       < DetailPageHeading name={name} country={country} coordinates={coordinates} type={type}/>
 
       <section className='border border-primary rounded-3xl overflow-hidden'>
-        <article className='flex flex-col md:flex-row justify-between border-b border-primary p-4 pb-8 md:p-12'>
+        <article className='flex flex-col md:flex-row justify-between border-b border-primary p-4 pb-8 md:p-8'>
           <div className=' w-full md:w-[65%]'>
             <h2 className='font-bold text-2xl md:text-4xl tracking-tight'>{partnerDetailInfo[type].heading}</h2>
             <p className='font-extralight text-sm md:text-lg tracking-tight leading-tight md:leading-tight'>{partnerDetailInfo[type].description}</p>
@@ -57,7 +57,7 @@ function LocationDetailComponent() {
         </article>
 
         {type === "Port" ? (
-          <div className='py-6 md:py-0 md:pb-16'>
+          <div className='py-6 md:py-0'>
             <StatsBar pageId='port'/>
             <CollectionsChart category='activities' timeRange={selectedChartDates}/>
             <CustomChartLegend category='activities' />
@@ -73,7 +73,7 @@ function LocationDetailComponent() {
       <section className='flex flex-col gap-3 my-6 md:my-20 w-full md:w-[85%]'>
         <h2 className='font-bold text-3xl md:text-5xl tracking-tight'>Attestations</h2>
         <p className='w-full md:w-[70%] font-extralight tracking-tight leading-tight md:leading-tight'>{attestationDescriptions[type]}</p>
-        <Separator className='bg-black my-3'/>
+        <Separator className='bg-black my-1'/>
         <AttestationsTable />
       </section>
 

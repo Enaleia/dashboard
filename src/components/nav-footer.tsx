@@ -16,11 +16,12 @@ const GithubLink = () => {
 const NavFooter = () => {
 	return (
 		<>
-      <nav className='md:hidden flex justify-between items-center m-auto px-10 pb-24'>
+      <nav className='md:hidden flex justify-between items-center m-auto px-8 pb-16'>
         <NavLogo showSubtitle={true}/>
         <GithubLink />
       </nav>
-      <nav className='hidden md:flex justify-between items-center m-auto px-16 pb-24 max-w-[1500px]'>
+
+      <nav className='hidden md:flex justify-between items-center m-auto pb-16 max-w-[1500px]'>
         <NavLogo showSubtitle={true}/>
         <NavLinks />
         <GithubLink />
