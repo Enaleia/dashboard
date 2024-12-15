@@ -50,7 +50,7 @@ const AttestationsTable = () => {
                 const { UUID, submittedOn, submittedBy, txLink } = attestation
                 return (
                   <TableRow key={UUID}>
-                    <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black rounded-l-3xl">{UUID}</div></TableCell>
+                    <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black rounded-l-3xl">{UUID.slice(0, 36)}....</div></TableCell>
                     <TableCell className="p-0"><div className="mb-2 px-8 py-5 border-y border-r border-black flex gap-2">{submittedOn}</div></TableCell>
                     <TableCell className="p-0"><div className="mb-2 px-8 py-5 border-y border-black flex gap-2">{submittedBy}</div></TableCell>
                     <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black rounded-r-3xl"><a href={`${txLink}`}><ArrowUpRight size={20} strokeWidth={1}/></a></div></TableCell>            

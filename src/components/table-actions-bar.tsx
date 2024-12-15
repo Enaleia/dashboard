@@ -37,7 +37,7 @@ const TableActionsBar = ({
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   return (
-    <article className='flex items-center justify-between mx-4 md:mx-24'>
+    <article className='flex items-center justify-between'>
       <div className='hidden md:flex items-center md:gap-2'>
         <p className='text-xs md:text-sm font-extralight'>Location type:</p>
         <div className='flex flex-row justify-center gap-2'>
