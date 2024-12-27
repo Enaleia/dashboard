@@ -10,6 +10,23 @@ export const viewTypes = ["List", "Map"]
 
 export const sortByOptions = ["Most to least active", "Least to most active", "Name A-Z", "Name Z-A", "Country A-Z", "Country Z-A", "Type A-Z", "Type Z-A"]
 
+export const statDescriptions: Record<string, Record<string, string>> = {
+  home_page_statistics: {
+    waste_removed_kg: "Collection containing plastic, metal, fishing nets, etc.",
+    active_vessels: "Fishers that participate in our actions.",
+    actions_performed: "Fishing for litter, prevention, beach clean-up & more.",
+    locations: "Ports, recyclers, and manufacturing sites.",
+    countries: "Countries participating within the Mediterranean area."
+  },
+  location_main_page_statistics: {
+    locations_counts: "From all the countries that participate.",
+    ports: "Ports that receive fisherman’s waste collection.",
+    recycler: "Companies that participate in plastic sorting and pelletization.",
+    manufacturer: "Producers of consumer products using recycled plastics."
+  },
+
+}
+
 export const partnerDetailInfo = {
   "Vessel": {heading: "Waste removed by this vessel", description: ""},
   "Port": {heading: "Waste removed by actions at this location", description: "As a coordinated port, it receives and weighs waste from fishers, ensuring accurate tracking and supporting various actions at the location."},
