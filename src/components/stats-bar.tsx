@@ -1,10 +1,18 @@
 import { useQuery } from "@tanstack/react-query"
 import { statDescriptions } from "@/config/texts"
 
-// type PageId = 'home_page_statistics' | 'location_main_page_statistics' | 'location_detail_page_statistics'
+const pageIds = [
+  'home_page_statistics',
+  'location_main_page_statistics',
+  'location_detail_page_statistics',
+  'vessel_main_page_statistics', 
+  'vessel_detail_page_statistics' 
+] as const
+
+type PageId = typeof pageIds[number];
 
 interface StatsBarProps {
-  pageId: 'home_page_statistics' | 'location_main_page_statistics' | 'location_detail_page_statistics';
+  pageId: PageId;
   partnerId?: string
 }
 
@@ -18,7 +26,9 @@ interface StatCardProps {
 const statEndpoints = {
   home_page_statistics: "352a7482-4a18-4484-a53b-78c381d4db61",
   location_main_page_statistics: "bb931cab-7d63-4287-9380-1fb87a5b6431",
-  location_detail_page_statistics: "50637703-8870-45ca-828d-bbab78ec917a"
+  location_detail_page_statistics: "50637703-8870-45ca-828d-bbab78ec917a",
+  vessel_main_page_statistics: "",
+  vessel_detail_page_statistics: ""
 }
 
 const StatsBar = ({ pageId, partnerId }: StatsBarProps) => {

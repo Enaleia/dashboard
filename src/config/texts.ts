@@ -24,6 +24,12 @@ export const statDescriptions: Record<string, Record<string, string>> = {
     recycler: "Companies that participate in plastic sorting and pelletization.",
     manufacturer: "Producers of consumer products using recycled plastics."
   },
+  vessel_main_page_statistics: {
+    vessel_count: "From all the countries that participate.",
+    trawler: "A type of fishing vessel specifically designed to catch fish by dragging a large net.",
+    purse_seiner: "A type of fishing vessel used to catch schools of fish, particularly species that swim near the surface, such as tuna, mackerel, and sardines.",
+    other: "Includes caique, swordfish boat, trechantiri and more."
+  }
 }
 
 export const partnerDetailInfo = {
