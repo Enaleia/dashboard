@@ -24,7 +24,6 @@ export const statDescriptions: Record<string, Record<string, string>> = {
     recycler: "Companies that participate in plastic sorting and pelletization.",
     manufacturer: "Producers of consumer products using recycled plastics."
   },
-
 }
 
 export const partnerDetailInfo = {

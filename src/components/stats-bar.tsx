@@ -1,7 +1,12 @@
 import { useQuery } from "@tanstack/react-query"
 import { statDescriptions } from "@/config/texts"
 
-type PageId = 'home_page_statistics' | 'location_main_page_statistics'
+// type PageId = 'home_page_statistics' | 'location_main_page_statistics' | 'location_detail_page_statistics'
+
+interface StatsBarProps {
+  pageId: 'home_page_statistics' | 'location_main_page_statistics' | 'location_detail_page_statistics';
+  partnerId?: string
+}
 
 interface StatCardProps {
   key: string;
@@ -12,16 +17,18 @@ interface StatCardProps {
 
 const statEndpoints = {
   home_page_statistics: "352a7482-4a18-4484-a53b-78c381d4db61",
-  location_main_page_statistics: "bb931cab-7d63-4287-9380-1fb87a5b6431"
+  location_main_page_statistics: "bb931cab-7d63-4287-9380-1fb87a5b6431",
+  location_detail_page_statistics: "50637703-8870-45ca-828d-bbab78ec917a"
 }
 
-const StatsBar = ({ pageId }: { pageId: PageId }) => {
+const StatsBar = ({ pageId, partnerId }: StatsBarProps) => {
 
-  const { isPending, error, data, isFetching } = useQuery({
+  const { isPending, error, data } = useQuery({
     queryKey: [pageId],
     queryFn: async () => {
+      const queryString = partnerId ? `?port_name=${partnerId}` : ''
       const response = await fetch(
-        `/api/flows/trigger/${statEndpoints[pageId]}`
+        `/api/flows/trigger/${statEndpoints[pageId]}${queryString}`
         // `https://hq.enaleia-hub.com/flows/trigger/${statEndpoints[pageId]}`,
       )
       return await response.json()
@@ -33,7 +40,7 @@ const StatsBar = ({ pageId }: { pageId: PageId }) => {
   // add description to each stat object
   const pageStats = data[pageId].map((stat: StatCardProps) => ({
     ...stat,
-    description: statDescriptions[pageId][stat.key] || 'No description available'
+    description: statDescriptions[pageId] ? statDescriptions[pageId][stat.key] : null
   }));
 
   return (
@@ -45,7 +52,7 @@ const StatsBar = ({ pageId }: { pageId: PageId }) => {
         >
           <p className="text-xl md:text-lg font-medium">{stat.title}</p>
           <p className="text-4xl md:text-5xl font-bold pt-4 pb-1">{stat.value}</p>
-          <p className="md:min-h-[30px] text-xs md:text-xs w-[80%] leading-tight md:leading-tight">{stat.description}</p>
+          {stat.description && <p className="md:min-h-[30px] text-xs md:text-xs w-[80%] leading-tight md:leading-tight">{stat.description}</p>}
         </div>
       ))}
     </article>
