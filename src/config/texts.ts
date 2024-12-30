@@ -19,16 +19,17 @@ export const statDescriptions: Record<string, Record<string, string>> = {
     countries: "Countries participating within the Mediterranean area."
   },
   location_main_page_statistics: {
-    locations_counts: "From all the countries that participate.",
+    total_locations: "From all the countries that participate.",
     ports: "Ports that receive fisherman’s waste collection.",
-    recycler: "Companies that participate in plastic sorting and pelletization.",
-    manufacturer: "Producers of consumer products using recycled plastics."
+    recyclers: "Companies that participate in plastic sorting and pelletization.",
+    manufacturers: "Producers of consumer products using recycled plastics."
   },
   vessel_main_page_statistics: {
-    vessel_count: "From all the countries that participate.",
+    vessels_count: "From all the countries that participate.",
     trawler: "A type of fishing vessel specifically designed to catch fish by dragging a large net.",
+    small_boats: "Description to come.",
     purse_seiner: "A type of fishing vessel used to catch schools of fish, particularly species that swim near the surface, such as tuna, mackerel, and sardines.",
-    other: "Includes caique, swordfish boat, trechantiri and more."
+    others: "Includes caique, swordfish boat, trechantiri and more."
   }
 }
 

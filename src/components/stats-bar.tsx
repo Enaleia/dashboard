@@ -13,7 +13,8 @@ type PageId = typeof pageIds[number];
 
 interface StatsBarProps {
   pageId: PageId;
-  partnerId?: string
+  portId?: string;
+  vesselId?: string
 }
 
 interface StatCardProps {
@@ -27,18 +28,21 @@ const statEndpoints = {
   home_page_statistics: "352a7482-4a18-4484-a53b-78c381d4db61",
   location_main_page_statistics: "bb931cab-7d63-4287-9380-1fb87a5b6431",
   location_detail_page_statistics: "50637703-8870-45ca-828d-bbab78ec917a",
-  vessel_main_page_statistics: "",
-  vessel_detail_page_statistics: ""
+  vessel_main_page_statistics: "9cb714f0-4d0b-46d0-8454-110811ad4418",
+  vessel_detail_page_statistics: "81947692-848c-4832-bc2d-dfe09bc577a1"
 }
 
-const StatsBar = ({ pageId, partnerId }: StatsBarProps) => {
+const StatsBar = ({ pageId, portId, vesselId }: StatsBarProps) => {
 
   const { isPending, error, data } = useQuery({
     queryKey: [pageId],
     queryFn: async () => {
-      const queryString = partnerId ? `?port_name=${partnerId}` : ''
+      const queryString = [
+        portId ? `port_id=${portId}` : '',
+        vesselId ? `vessel_name=${portId}` : ''
+      ].filter(Boolean).join('&')
       const response = await fetch(
-        `/api/flows/trigger/${statEndpoints[pageId]}${queryString}`
+        `/api/flows/trigger/${statEndpoints[pageId]}${queryString ? '?' + queryString : ''}`
         // `https://hq.enaleia-hub.com/flows/trigger/${statEndpoints[pageId]}`,
       )
       return await response.json()

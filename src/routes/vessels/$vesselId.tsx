@@ -47,7 +47,7 @@ function VesselDetailComponent() {
         </article>
   
         <div className='py-6 md:py-0'>
-          <StatsBar pageId='location_detail_page_statistics' partnerId='Patras'/>
+          <StatsBar pageId='vessel_detail_page_statistics' vesselId='ΕΥΑΓΓΕΛΙΣΤΡΙΑ%20ΝΕ%2012'/>
           <CollectionsChart category='activities' timeRange={selectedChartDates}/>
           <CustomChartLegend category='activities' />
         </div>

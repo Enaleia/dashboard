@@ -58,7 +58,7 @@ function LocationDetailComponent() {
 
         {type === "Port" ? (
           <div className='py-6 md:py-0'>
-            <StatsBar pageId='location_detail_page_statistics' partnerId="Patras"/>
+            <StatsBar pageId='location_detail_page_statistics' portId="48"/>
             <CollectionsChart category='activities' timeRange={selectedChartDates}/>
             <CustomChartLegend category='activities' />
           </div>
