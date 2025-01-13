@@ -6,7 +6,7 @@ import { TableActionsBar } from '@/components/table-actions-bar'
 import { ActionsTable } from '@/components/actions-table'
 import { ActivityMap } from '@/components/activity-map'
 import { locationsPageTexts, locationTypes, sortByOptions, viewTypes } from '@/config/texts'
-import tableData from '@/map_data.json'
+// import tableData from '@/map_data.json'
 
 export const Route = createFileRoute('/locations/')({
   component: LocationsComponent,
@@ -38,7 +38,7 @@ function LocationsComponent() {
         />
 
         <article className='overflow-hidden rounded-3xl pb-16'>
-          {selectedViewType === "List" && <ActionsTable category='locations' tableData={tableData} partnerType={selectedLocationType} sortOrder={selectedSortOrder}/>}
+          {selectedViewType === "List" && <ActionsTable pageId='locations' partnerType={selectedLocationType} sortOrder={selectedSortOrder}/>}
           {selectedViewType === "Map" && <ActivityMap locationType={selectedLocationType}/>}
         </article>          
       </section> 

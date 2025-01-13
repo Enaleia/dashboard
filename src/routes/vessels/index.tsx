@@ -6,7 +6,7 @@ import { TableActionsBar } from '@/components/table-actions-bar'
 import { ActionsTable } from '@/components/actions-table'
 import { ActivityMap } from '@/components/activity-map'
 import { vesselsPageTexts, vesselTypes, sortByOptions, viewTypes } from '@/config/texts'
-import tableData from '@/vessel_data.json'
+// import tableData from '@/vessel_data.json'
 
 export const Route = createFileRoute('/vessels/')({
   component: VesselsComponent,
@@ -37,7 +37,7 @@ function VesselsComponent() {
           setSelectedViewType={setSelectedViewType}
         />
         <article className='overflow-hidden rounded-3xl pb-16'>
-          {selectedViewType === "List" && <ActionsTable category='vessels' tableData={tableData} partnerType={selectedVesselType} sortOrder={selectedSortOrder}/>}
+          {selectedViewType === "List" && <ActionsTable pageId='locations' partnerType={selectedVesselType} sortOrder={selectedSortOrder}/>}
           {selectedViewType === "Map" && <ActivityMap locationType={selectedVesselType}/>}
         </article>          
       </section> 

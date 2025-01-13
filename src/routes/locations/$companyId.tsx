@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useSearch } from '@tanstack/react-router'
 import { useState } from 'react'
 import { DetailPageHeading } from '@/components/detail-page-heading'
 import { Separator } from '@/components/ui/separator'
@@ -10,21 +10,23 @@ import { AttestationsTable } from '@/components/attestations-table'
 import { DetailPageBackNav } from '@/components/detail-page-back-nav'
 import { BackToTopButton } from '@/components/back-to-top'
 import { dateChoices, partnerDetailInfo, attestationDescriptions } from '@/config/texts'
-import data from '@/map_data.json'
+// import data from '@/map_data.json'
 
-export const Route = createFileRoute('/locations/$locationId')({
+export const Route = createFileRoute('/locations/$companyId')({
   component: LocationDetailComponent,
 })
 
+interface SearchParams {
+  name: string
+  country: string
+  coordinates: string
+  type: 'Port' | 'Recycler' | 'Manufacturer'
+}
+
 function LocationDetailComponent() {
-  const { locationId } = Route.useParams()
-  const locationData = data.filter(record => record.name === locationId)
-  const { name, country, coordinates, type } = locationData[0] as { 
-    name: string; 
-    country: string; 
-    coordinates: number[]; 
-    type: 'Port' | 'Recycler' | 'Manufacturer';
-  }
+  const { companyId } = Route.useParams()
+  const search = useSearch({ from: `/locations/$companyId` }) as SearchParams
+  const { name, country, coordinates, type } = search
   const [selectedChartDates, setSelectedChartDates] = useState('This year')
 
   return (
@@ -56,9 +58,11 @@ function LocationDetailComponent() {
           }          
         </article>
 
+        <StatsBar pageId='location_detail_recycler_statistics' recyclerId={companyId}/>
+        
         {type === "Port" ? (
           <div className='py-6 md:py-0'>
-            <StatsBar pageId='location_detail_page_statistics' portId="48"/>
+            {/* <StatsBar pageId='location_detail_port_statistics' portId={companyId}/> */}
             <CollectionsChart category='activities' timeRange={selectedChartDates}/>
             <CustomChartLegend category='activities' />
           </div>

@@ -4,16 +4,18 @@ import { statDescriptions } from "@/config/texts"
 const pageIds = [
   'home_page_statistics',
   'location_main_page_statistics',
-  'location_detail_page_statistics',
+  'location_detail_port_statistics',
+  'location_detail_recycler_statistics',
   'vessel_main_page_statistics', 
   'vessel_detail_page_statistics' 
 ] as const
 
-type PageId = typeof pageIds[number];
+type PageId = typeof pageIds[number]
 
 interface StatsBarProps {
   pageId: PageId;
   portId?: string;
+  recyclerId?: string;
   vesselId?: string
 }
 
@@ -27,19 +29,21 @@ interface StatCardProps {
 const statEndpoints = {
   home_page_statistics: "352a7482-4a18-4484-a53b-78c381d4db61",
   location_main_page_statistics: "bb931cab-7d63-4287-9380-1fb87a5b6431",
-  location_detail_page_statistics: "50637703-8870-45ca-828d-bbab78ec917a",
+  location_detail_port_statistics: "50637703-8870-45ca-828d-bbab78ec917a",
+  location_detail_recycler_statistics: "f6495f96-4105-46fa-a904-fcda705ba889",
   vessel_main_page_statistics: "9cb714f0-4d0b-46d0-8454-110811ad4418",
   vessel_detail_page_statistics: "81947692-848c-4832-bc2d-dfe09bc577a1"
 }
 
-const StatsBar = ({ pageId, portId, vesselId }: StatsBarProps) => {
+const StatsBar = ({ pageId, portId, recyclerId, vesselId }: StatsBarProps) => {
 
   const { isPending, error, data } = useQuery({
     queryKey: [pageId],
     queryFn: async () => {
       const queryString = [
         portId ? `port_id=${portId}` : '',
-        vesselId ? `vessel_name=${portId}` : ''
+        recyclerId? `recycler_id=${recyclerId}`: '',
+        vesselId ? `vessel_id=${vesselId}` : ''
       ].filter(Boolean).join('&')
       const response = await fetch(
         `/api/flows/trigger/${statEndpoints[pageId]}${queryString ? '?' + queryString : ''}`

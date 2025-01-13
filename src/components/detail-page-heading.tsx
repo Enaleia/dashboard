@@ -4,7 +4,7 @@ import { Separator } from '@/components/ui/separator'
 interface DetailPageHeadingProps {
   name: string,
   country: string,
-  coordinates?: number[],
+  coordinates?: string,
   port?: string,
   type: string
 }
@@ -30,7 +30,7 @@ const DetailPageHeading = ({ name, country, coordinates, port, type}: DetailPage
         </div>
         {coordinates &&
           <a href='' className='flex flex-row items-center gap-1 hover:font-semibold'>
-            <p>{String(coordinates[0]).slice(0, 9)}, {String(coordinates[1]).slice(0, 9)}</p>
+            <p>{coordinates}</p>
             <ArrowUpRight strokeWidth={1}/>
           </a>
         }

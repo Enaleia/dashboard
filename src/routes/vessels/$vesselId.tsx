@@ -29,7 +29,7 @@ function VesselDetailComponent() {
       <section className='border border-primary rounded-3xl overflow-hidden'>
         <article className='flex flex-col md:flex-row justify-between border-b border-primary p-4 pb-8 md:p-8'>
           <h2 className='font-bold text-2xl md:text-4xl tracking-tight'>{partnerDetailInfo["Vessel"].heading}</h2>
-          {/* <p className='font-extralight text-sm md:text-lg tracking-tight leading-tight md:leading-tight'>{partnerDetailInfo["Vessel"].description}</p> */}
+          <p className='font-extralight text-sm md:text-lg tracking-tight leading-tight md:leading-tight'>{partnerDetailInfo["Vessel"].description}</p>
           <div className='flex flex-col justify-end'>
             <p className='text-xs md:text-base font-extralight md:text-right pt-4 pb-2 md:py-0'>Last update: mm/dd/yyyy</p>
             <div className='flex flex-row justify-between items-end gap-2 md:py-4'>
@@ -47,7 +47,7 @@ function VesselDetailComponent() {
         </article>
   
         <div className='py-6 md:py-0'>
-          <StatsBar pageId='vessel_detail_page_statistics' vesselId='ΕΥΑΓΓΕΛΙΣΤΡΙΑ%20ΝΕ%2012'/>
+          <StatsBar pageId='vessel_detail_page_statistics' vesselId='1182'/>
           <CollectionsChart category='activities' timeRange={selectedChartDates}/>
           <CustomChartLegend category='activities' />
         </div>
