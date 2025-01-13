@@ -38,7 +38,7 @@ const NavLinks = ({ closeMenu }: NavLinksProps) => {
           className: 'font-bold',
         }}
       >
-        Vessels
+        Collectors
       </Link>
       <Link
         to="/economy"

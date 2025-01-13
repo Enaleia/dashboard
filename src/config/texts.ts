@@ -90,7 +90,7 @@ export const locationsPageTexts = {
 // Vessels page
 export const vesselsPageTexts = {
   heroTitle: 'Vessels and fishers on the frontline of the marine plastic pollution crisis',
-  heroDescription: 'We collaborate with fishing communities across the Mediterranean, empowering them to adopt sustainable fishing practices while incentivizing the collection of plastic bycatch. By bringing this waste back to port, fishers play a crucial role in addressing marine plastic pollution and protecting the health of our oceans.'
+  heroDescription: 'We collaborate with fishing communities and other collectors across the Mediterranean, empowering them to adopt sustainable fishing practices while incentivizing the collection of plastic bycatch. By bringing this waste back to port, fishers play a crucial role in addressing marine plastic pollution and protecting the health of our oceans.'
 }
 
 
