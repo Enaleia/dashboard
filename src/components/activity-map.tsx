@@ -87,7 +87,10 @@ const ActivityMap = ({ locationType }: {locationType: string}) => {
               <Popup>
                 <div className='flex items-center gap-10 text-lg mt-8 h-[24px] mx-8'>
                   <p>{record.location_name}</p>
-                  <Link to={`/locations/${record.company_id}`}>
+                  <Link 
+                    to={`/locations/${record.company_id}`}
+                    search={{ name: record.location_name, country: record.country, coordinates: record.coordinates, type: record.type }}
+                  >
                     <MoveRight color='black'/>
                   </Link>
                 </div>
