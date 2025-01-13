@@ -47,6 +47,7 @@ const ActionsTable = ({ pageId, partnerType, sortOrder }: ActionsTableProps) => 
   const navigate = useNavigate()
   const isDesktop = useMediaQuery("(min-width: 768px)")
   const itemsPerPage = 8
+  
   const { isPending, error, data } = useQuery({
     queryKey: [pageId],
     queryFn: async () => {
