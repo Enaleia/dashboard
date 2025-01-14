@@ -37,8 +37,8 @@ function VesselsComponent() {
           // setSelectedViewType={setSelectedViewType}
         />
         <article className='overflow-hidden rounded-3xl pb-16'>
-          {selectedViewType === "List" && <ActionsTable pageId='locations' partnerType={selectedVesselType} sortOrder={selectedSortOrder}/>}
-          {selectedViewType === "Map" && <ActivityMap locationType={selectedVesselType}/>}
+          {selectedViewType === "List" && <ActionsTable pageId='vessels' partnerType={selectedVesselType} sortOrder={selectedSortOrder}/>}
+          {/* {selectedViewType === "Map" && <ActivityMap locationType={selectedVesselType}/>} */}
         </article>          
       </section> 
     </main>

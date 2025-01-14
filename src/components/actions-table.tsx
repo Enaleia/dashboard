@@ -23,18 +23,19 @@ type PageId = typeof pageIds[number]
 
 const tableEndpoints = {
   locations: "a9fc78b6-96a7-4be2-836b-153671fc367f?role=fcf2d257-495d-48d9-a2e0-a272ed3c44db&role=47eb616c-820c-4be9-abe1-9a41d385bc6d&role=0f0ca9f1-3f58-4c56-8361-9dd82ba2b476&sort=descending&page=1&limit=1000",
-  vessels: ""
+  vessels: "eb03d9a6-dff3-4aec-8fd1-c5816b936c7a"
 }
 
 interface TableItem {
+  id: string;
   company_id: string;
-  location_name: string;
+  name: string;
   country: string;
-  coordinates?: string;
-  port?: string;
+  coordinates?: number[];
+  registered_port?: string;
   type: string;
-  kg: number;
-  action_count: number
+  action_count: number;
+  collector_identity? : string
 }
 
 interface ActionsTableProps {
@@ -61,7 +62,7 @@ const ActionsTable = ({ pageId, partnerType, sortOrder }: ActionsTableProps) => 
       return await response.json()
     },
   })
-  const records = data?.locationPayload ?? []
+  const records = data?.data ?? []
 
   const filteredLocations = useMemo(() => {
     return records
@@ -99,25 +100,6 @@ const ActionsTable = ({ pageId, partnerType, sortOrder }: ActionsTableProps) => 
       }
     }
   }
-  // const sortedCountries = useMemo(() => {
-  //   return [...filteredLocations].sort((a, b) => {
-  //     return isAtoZ ? a.action_count - b.action_count : b.action_count - a.action_count;
-  //   });
-  // }, [filteredLocations, isAtoZ])
-
-  // const sortedActionCounts = useMemo(() => {
-  //   return [...filteredLocations].sort((a, b) => {
-  //     return isAscending ? a.action_count - b.action_count : b.action_count - a.action_count;
-  //   });
-  // }, [filteredLocations, isAscending])
-
-  // const toggleCountryOrder = () => {
-  //   setIsAtoZ(prev => !prev);
-  // }
-
-  // const toggleActionsOrder = () => {
-  //   setIsAscending(prev => !prev);
-  // }
 
   const {
 		currentPage,
@@ -170,19 +152,19 @@ const ActionsTable = ({ pageId, partnerType, sortOrder }: ActionsTableProps) => 
           <TableBody>
             {pageTransactions.map((partner) => (
               <TableRow 
-                key={partner.location_name}
+                key={partner.name}
                 onClick={() => navigate({
-                  to: `/${pageId}/${partner.company_id}`,
-                  search: { name: partner.location_name, country: partner.country, coordinates: partner.coordinates, type: partner.type }
+                  to: `/${pageId}/${partner.id}`,
+                  search: { name: partner.name, country: partner.country, type: partner.type }
                   })}
                 className="cursor-pointer hover:font-bold"
               >
-                <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black rounded-l-3xl">{partner.location_name}</div></TableCell>
+                <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black rounded-l-3xl">{partner.name}</div></TableCell>
                 {isDesktop &&
                   <>
                     <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border-y border-black flex gap-2"><img src={`/flag_${partner.country}.svg`} alt="country flag" className="h-5 w-5"/><span>{partner.country}</span></div></TableCell>
-                    {pageId === 'locations' && <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black">{partner.coordinates || 'not available'}</div></TableCell>}
-                    {pageId === 'vessels' && <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black">{partner.port || 'not available'}</div></TableCell>}
+                    {pageId === 'locations' && <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black">{partner.coordinates ? `${partner.coordinates[0]}, ${partner.coordinates[1]}` : 'not available'}</div></TableCell>}
+                    {pageId === 'vessels' && <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black">{partner.registered_port ? `${partner.registered_port}` : 'not available'}</div></TableCell>}
                     <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border-y border-black flex gap-2"><img src={`/${partner.type}_icon.svg`} alt="location icon" className="h-5 w-5"/><span>{partner.type}</span></div></TableCell>
                   </>
                 }

@@ -11,7 +11,7 @@ interface MapItem {
   company_id: string;
   location_name: string;
   country: string;
-  coordinates?: string;
+  coordinates?: number[];
   type: string;
 }
 
@@ -43,7 +43,7 @@ const ActivityMap = ({ locationType }: {locationType: string}) => {
       return await response.json()
     },
   })
-  const records = data?.locationPayload ?? []
+  const records = data?.data ?? []
 
   const filteredLocations = useMemo(() => {
     return records
@@ -56,7 +56,7 @@ const ActivityMap = ({ locationType }: {locationType: string}) => {
   if (isPending) return 'Loading...'
   if (error) return 'An error has occurred: ' + error.message
 
-  
+
 	return (
     <article className='w-full h-[400px] md:h-[700px] pt-3'>
       <MapContainer className='h-full z-0' center={[38.621971846028586, 13.204641636096362]} zoom={zoom} scrollWheelZoom={false}>
@@ -65,16 +65,12 @@ const ActivityMap = ({ locationType }: {locationType: string}) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <InvalidateMapSize />
-        {filteredLocations.map((record: MapItem) => {
-          const latLong = record.coordinates?.split(', ')    
-          const customIcon = new Icon({
-            iconUrl: `/${record.type}_icon.svg`,
-            iconSize: [16, 16], 
-            // iconAnchor: [5, 5], // Point of the icon which will correspond to marker's location
-            // popupAnchor: [0, -5] // Point from which the popup should open relative to the iconAnchor
-          });        
-          return latLong ? (
-            <Marker key={record.location_name} position={[Number(latLong[0]), Number(latLong[1])]} icon={customIcon}>
+        {filteredLocations.map((record: MapItem) => 
+          record.coordinates && (    
+            <Marker key={record.location_name} position={[record.coordinates[0], record.coordinates[1]]} icon={new Icon({
+              iconUrl: `/${record.type}_icon.svg`,
+              iconSize: [16, 16], 
+            })}>
               <Popup>
                 <div className='flex items-center gap-10 text-lg mt-8 h-[24px] mx-8'>
                   <p>{record.location_name}</p>
@@ -91,8 +87,8 @@ const ActivityMap = ({ locationType }: {locationType: string}) => {
                 </div>
               </Popup>
             </Marker>
-          ) : null;
-        })}
+          )
+        )}
       </MapContainer>
     </article>
 	);

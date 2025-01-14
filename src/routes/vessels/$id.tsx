@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useSearch } from '@tanstack/react-router'
 import { useState } from 'react'
 import { DetailPageHeading } from '@/components/detail-page-heading'
 import { Separator } from '@/components/ui/separator'
@@ -10,21 +10,27 @@ import { AttestationsTable } from '@/components/attestations-table'
 import { DetailPageBackNav } from '@/components/detail-page-back-nav'
 import { BackToTopButton } from '@/components/back-to-top'
 import { dateChoices, partnerDetailInfo, attestationDescriptions } from '@/config/texts'
-import data from '@/vessel_data.json'
 
-export const Route = createFileRoute('/vessels/$vesselId')({
+export const Route = createFileRoute('/vessels/$id')({
   component: VesselDetailComponent,
 })
 
+interface SearchParams {
+  name: string
+  country: string
+  registered_port: string
+  type: 'Trawler' | 'Small vessel' | 'Purse seiner' | 'Other'
+}
+
 function VesselDetailComponent() {
-  const { vesselId } = Route.useParams()
-  const vesselData = data.filter(record => record.name === vesselId)
-  const { name, country, port, type } = vesselData[0]
+  const { id } = Route.useParams()
+  const search = useSearch({ from: `/vessels/$id` }) as SearchParams
+  const { name, country, registered_port, type } = search
   const [selectedChartDates, setSelectedChartDates] = useState('This year')
 
   return (
     <main className='flex flex-col justify-center items-center gap-8 m-auto pt-0 pb-16 md:pb-32 md:pt-16 max-w-[1500px]'>
-      <DetailPageHeading name={name} country={country} port={port} type={type} />
+      <DetailPageHeading name={name} country={country} registered_port={registered_port} type={type} />
 
       <section className='border border-primary rounded-3xl overflow-hidden'>
         <article className='flex flex-col md:flex-row justify-between border-b border-primary p-4 pb-8 md:p-8'>
@@ -47,7 +53,7 @@ function VesselDetailComponent() {
         </article>
   
         <div className='py-6 md:py-0'>
-          <StatsBar pageId='vessel_detail_page_statistics' vesselId='1182'/>
+          {/* <StatsBar pageId='vessel_detail_page_statistics' vesselId={id}/> */}
           <CollectionsChart category='activities' timeRange={selectedChartDates}/>
           <CustomChartLegend category='activities' />
         </div>

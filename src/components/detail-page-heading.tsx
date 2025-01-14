@@ -5,11 +5,11 @@ interface DetailPageHeadingProps {
   name: string,
   country: string,
   coordinates?: string,
-  port?: string,
+  registered_port?: string,
   type: string
 }
 
-const DetailPageHeading = ({ name, country, coordinates, port, type}: DetailPageHeadingProps) => {
+const DetailPageHeading = ({ name, country, coordinates, registered_port, type}: DetailPageHeadingProps) => {
   return (
     <section className='w-full'>
       <div className='flex flex-row justify-between items-center'>
@@ -34,7 +34,7 @@ const DetailPageHeading = ({ name, country, coordinates, port, type}: DetailPage
             <ArrowUpRight strokeWidth={1}/>
           </a>
         }
-        {port && <p>Registered port: {port}</p>}
+        {registered_port && <p>Registered port: {registered_port}</p>}
         <div className='hidden md:flex'>
           <Separator orientation='vertical' className='bg-gray-400 w-[1.5px]'/>
         </div>
