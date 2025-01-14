@@ -28,13 +28,13 @@ const tableEndpoints = {
 
 interface TableItem {
   id: string;
-  company_id: string;
   name: string;
   country: string;
   coordinates?: number[];
   registered_port?: string;
   type: string;
   action_count: number;
+  wallet_addresses?: string[];
   collector_identity? : string
 }
 
@@ -150,27 +150,30 @@ const ActionsTable = ({ pageId, partnerType, sortOrder }: ActionsTableProps) => 
             </TableRow>
           </TableHeader>
           <TableBody>
-            {pageTransactions.map((partner) => (
-              <TableRow 
-                key={partner.name}
-                onClick={() => navigate({
-                  to: `/${pageId}/${partner.id}`,
-                  search: { name: partner.name, country: partner.country, type: partner.type }
-                  })}
-                className="cursor-pointer hover:font-bold"
-              >
-                <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black rounded-l-3xl">{partner.name}</div></TableCell>
-                {isDesktop &&
-                  <>
-                    <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border-y border-black flex gap-2"><img src={`/flag_${partner.country}.svg`} alt="country flag" className="h-5 w-5"/><span>{partner.country}</span></div></TableCell>
-                    {pageId === 'locations' && <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black">{partner.coordinates?.length === 2 ? `${partner.coordinates[0]}, ${partner.coordinates[1]}` : 'not available'}</div></TableCell>}
-                    {pageId === 'vessels' && <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black">{partner.registered_port ? `${partner.registered_port}` : 'not available'}</div></TableCell>}
-                    <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border-y border-black flex gap-2"><img src={`/${partner.type}_icon.svg`} alt="location icon" className="h-5 w-5"/><span>{partner.type}</span></div></TableCell>
-                  </>
-                }
-                <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black rounded-r-3xl">{partner.action_count}</div></TableCell>            
-              </TableRow>
-            ))}
+            {pageTransactions.map((partner) => {
+              const { id, name, country, coordinates, type, registered_port, action_count, wallet_addresses, collector_identity } = partner
+              return (
+                <TableRow 
+                  key={name}
+                  onClick={() => navigate({
+                    to: `/${pageId}/${id}`,
+                    search: { name: name, country: country, coordinates: coordinates, type: type, port: registered_port, addresses: wallet_addresses, collector_identity: collector_identity }
+                    })}
+                  className="cursor-pointer hover:font-bold"
+                >
+                  <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black rounded-l-3xl">{name}</div></TableCell>
+                  {isDesktop &&
+                    <>
+                      <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border-y border-black flex gap-2"><img src={`/flag_${country}.svg`} alt="country flag" className="h-5 w-5"/><span>{country}</span></div></TableCell>
+                      {pageId === 'locations' && <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black">{coordinates?.length === 2 ? `${coordinates[0]}, ${coordinates[1]}` : 'not available'}</div></TableCell>}
+                      {pageId === 'vessels' && <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black">{registered_port ? `${registered_port}` : 'not available'}</div></TableCell>}
+                      <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border-y border-black flex gap-2"><img src={`/${type}_icon.svg`} alt="location icon" className="h-5 w-5"/><span>{type}</span></div></TableCell>
+                    </>
+                  }
+                  <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black rounded-r-3xl">{action_count}</div></TableCell>            
+                </TableRow>
+              )
+            })}
           </TableBody>
         </Table>
       ):(

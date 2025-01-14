@@ -18,19 +18,20 @@ export const Route = createFileRoute('/vessels/$id')({
 interface SearchParams {
   name: string
   country: string
-  registered_port: string
+  port: string
   type: 'Trawler' | 'Small vessel' | 'Purse seiner' | 'Other'
+  collector_identity: string
 }
 
 function VesselDetailComponent() {
   const { id } = Route.useParams()
   const search = useSearch({ from: `/vessels/$id` }) as SearchParams
-  const { name, country, registered_port, type } = search
+  const { name, country, port, type, collector_identity } = search
   const [selectedChartDates, setSelectedChartDates] = useState('This year')
 
   return (
     <main className='flex flex-col justify-center items-center gap-8 m-auto pt-0 pb-16 md:pb-32 md:pt-16 max-w-[1500px]'>
-      <DetailPageHeading name={name} country={country} registered_port={registered_port} type={type} />
+      <DetailPageHeading name={name} country={country} registered_port={port} type={type} collector_id={collector_identity} />
 
       <section className='border border-primary rounded-3xl overflow-hidden'>
         <article className='flex flex-col md:flex-row justify-between border-b border-primary p-4 pb-8 md:p-8'>

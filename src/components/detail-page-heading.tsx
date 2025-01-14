@@ -8,9 +8,10 @@ interface DetailPageHeadingProps {
   registered_port?: string,
   type: string,
   addresses?: string[]
+  collector_id?: string
 }
 
-const DetailPageHeading = ({ name, country, coordinates, registered_port, type, addresses}: DetailPageHeadingProps) => {
+const DetailPageHeading = ({ name, country, coordinates, registered_port, type, addresses, collector_id}: DetailPageHeadingProps) => {
   return (
     <section className='w-full'>
       <div className='flex flex-row justify-between items-center'>
@@ -31,8 +32,14 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type, 
         </div>
         {coordinates &&
           <a href='' className='flex flex-row items-center gap-1 hover:font-semibold'>
-            <p>{coordinates[0]}, {coordinates[1]}</p>
-            <ArrowUpRight strokeWidth={1}/>
+            {coordinates.length === 2 ?
+              <>
+                <p>{coordinates[0]}, {coordinates[1]}</p>
+                <ArrowUpRight strokeWidth={1}/>
+              </>
+            :
+              <p>coordinates not available</p>
+            }
           </a>
         }
         {registered_port && <p>Registered port: {registered_port}</p>}
@@ -45,6 +52,7 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type, 
             <ArrowUpRight strokeWidth={1}/>
           </a>
         }
+        {collector_id && <p>Collector Identity: {collector_id}</p>}
       </div>
     </section>
   )
