@@ -5,7 +5,6 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { MapContainer, TileLayer, useMap, Marker, Tooltip, Popup } from 'react-leaflet'
 import { Icon } from "leaflet";
 import { MoveRight } from 'lucide-react';
-import mapData from '../map_data.json'
 import 'leaflet/dist/leaflet.css'
 
 interface MapItem {
@@ -13,43 +12,26 @@ interface MapItem {
   location_name: string;
   country: string;
   coordinates?: string;
-  port?: string;
   type: string;
-  // kg: number;
-  // action_count: number
 }
 
 // Helper component to trigger invalidateSize
 const InvalidateMapSize = () => {
   const map = useMap();
-  
   useEffect(() => {
     // Small delay to ensure the container has fully rendered
     const timeout = setTimeout(() => {
       map.invalidateSize();
-    }, 100);
-    
+    }, 100);   
     return () => clearTimeout(timeout);
-  }, [map]);
-  
+  }, [map]); 
   return null;
 };
 
 const ActivityMap = ({ locationType }: {locationType: string}) => {
   // set map zoom according to screen size
-  // const isDesktop = useMediaQuery("(min-width: 568px)");
-  // const zoom = isDesktop ? 6 : 4;
-
-  // const filteredLocations = useMemo(() => {
-  //   if (locationType === 'Most active') {
-  //     return mapData.sort((a, b) => b.actions - a.actions); // Sort in descending order
-  //   }
-  //   return mapData
-  //     .filter(record => {
-  //       if (locationType === 'See all') return true;
-  //       return record.type === locationType;
-  //     })
-  // }, [locationType, mapData])
+  const isDesktop = useMediaQuery("(min-width: 568px)");
+  const zoom = isDesktop ? 5 : 3;
 
   const { isPending, error, data } = useQuery({
     queryKey: ['landingMap'],
@@ -61,20 +43,28 @@ const ActivityMap = ({ locationType }: {locationType: string}) => {
       return await response.json()
     },
   })
+  const records = data?.locationPayload ?? []
+
+  const filteredLocations = useMemo(() => {
+    return records
+      .filter((record: MapItem) => {
+        if (locationType === 'See all') return true;
+        return record.type === locationType;
+      })
+  }, [locationType, records])
+
   if (isPending) return 'Loading...'
   if (error) return 'An error has occurred: ' + error.message
 
-  const records = data.locationPayload
-
 	return (
-    <article className='w-full h-[400px] md:h-[700px]'>
-      <MapContainer className='h-full z-0' center={[38.621971846028586, 13.204641636096362]} zoom={5} scrollWheelZoom={false}>
+    <article className='w-full h-[400px] md:h-[700px] pt-3'>
+      <MapContainer className='h-full z-0' center={[38.621971846028586, 13.204641636096362]} zoom={zoom} scrollWheelZoom={false}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <InvalidateMapSize />
-        {records.map((record: MapItem) => {
+        {filteredLocations.map((record: MapItem) => {
           const latLong = record.coordinates?.split(', ')    
           const customIcon = new Icon({
             iconUrl: `/${record.type}_icon.svg`,

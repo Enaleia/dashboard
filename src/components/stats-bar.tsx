@@ -69,7 +69,7 @@ const StatsBar = ({ pageId, portId, recyclerId, vesselId }: StatsBarProps) => {
           className={`flex flex-col w-full md:w-[20%] justify-center items-center text-center font-extralight ${index === pageStats.length - 1? "" : "border-b border-black pb-6"} md:border-none md:pb-0`}
         >
           <p className="text-xl md:text-lg font-medium">{stat.title}</p>
-          <p className="text-4xl md:text-5xl font-bold pt-4 pb-1">{stat.value}</p>
+          <p className="text-4xl md:text-5xl font-bold pt-4 pb-1">{stat.value > 9999 ? `${Math.round(stat.value / 1000)}K` : stat.value}</p>
           {stat.description && <p className="md:min-h-[30px] text-xs md:text-xs w-[80%] leading-tight md:leading-tight">{stat.description}</p>}
         </div>
       ))}
