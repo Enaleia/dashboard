@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { useNavigate } from "@tanstack/react-router"
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import {
   Table,
   TableBody,
@@ -12,6 +12,7 @@ import {
 import { usePagination } from "@/hooks/use-pagination"
 import { ShowingDisplay, Paginator } from "@/components/paginator"
 import { useMediaQuery } from "@/hooks/use-media-query"
+import { ArrowUpDown } from "lucide-react"
 
 const pageIds = [
   'locations',
@@ -38,7 +39,6 @@ interface TableItem {
 
 interface ActionsTableProps {
   pageId: PageId;
-  // tableData: TableItem[]
   partnerType: string;
   sortOrder: string
 }
@@ -47,67 +47,128 @@ const ActionsTable = ({ pageId, partnerType, sortOrder }: ActionsTableProps) => 
   const navigate = useNavigate()
   const isDesktop = useMediaQuery("(min-width: 768px)")
   const itemsPerPage = 8
+  const [isAtoZ , setIsAtoZ] = useState(false)
+  const [isAscending, setIsAscending] = useState(false)
+  const [sortCriteria, setSortCriteria] = useState<'action_count' | 'country'>('action_count')
   
   const { isPending, error, data } = useQuery({
     queryKey: [pageId],
     queryFn: async () => {
-      // const queryString = [
-      //   portId ? `port_id=${portId}` : '',
-      //   vesselId ? `vessel_id=${vesselId}` : ''
-      // ].filter(Boolean).join('&')
-      // const response = await fetch(
-      //   `/api/flows/trigger/${tableEndpoints[pageId]}${queryString ? '?' + queryString : ''}`
-      //   // `https://hq.enaleia-hub.com/flows/trigger/${statEndpoints[pageId]}`,
-      // )
-      const queryString = `&sort=${sortOrder}`
       const response = await fetch(
         `/api/flows/trigger/${tableEndpoints[pageId]}`
-        // `https://hq.enaleia-hub.com/flows/trigger/${statEndpoints[pageId]}`,
+        // `https://hq.enaleia-hub.com/flows/trigger/${tableEndpoints[pageId]}`,
       )
       return await response.json()
     },
   })
+  const records = data?.locationPayload ?? []
+
+  const filteredLocations = useMemo(() => {
+    return records
+      .filter((record: TableItem) => {
+        if (partnerType === 'See all') return true;
+        return record.type === partnerType;
+      })
+  }, [partnerType, records])
+
+  const sortedRecords = useMemo(() => {
+    return [...filteredLocations].sort((a, b) => {
+      if (sortCriteria === 'action_count') {
+        return isAscending ? a.action_count - b.action_count : b.action_count - a.action_count;
+      } else {
+        return isAtoZ ? a.country.localeCompare(b.country) : b.country.localeCompare(a.country);
+      }
+    });
+  }, [filteredLocations, isAscending, isAtoZ, sortCriteria]);
+
+  const toggleSortCriteria = (criteria: 'action_count' | 'country') => {
+    if (sortCriteria === criteria) {
+      // Toggle the order if the same criteria is selected
+      if (criteria === 'action_count') {
+        setIsAscending(prev => !prev);
+      } else {
+        setIsAtoZ(prev => !prev);
+      }
+    } else {
+      // Set the new criteria and reset the order
+      setSortCriteria(criteria);
+      if (criteria === 'action_count') {
+        setIsAscending(false);
+      } else {
+        setIsAtoZ(false);
+      }
+    }
+  }
+  // const sortedCountries = useMemo(() => {
+  //   return [...filteredLocations].sort((a, b) => {
+  //     return isAtoZ ? a.action_count - b.action_count : b.action_count - a.action_count;
+  //   });
+  // }, [filteredLocations, isAtoZ])
+
+  // const sortedActionCounts = useMemo(() => {
+  //   return [...filteredLocations].sort((a, b) => {
+  //     return isAscending ? a.action_count - b.action_count : b.action_count - a.action_count;
+  //   });
+  // }, [filteredLocations, isAscending])
+
+  // const toggleCountryOrder = () => {
+  //   setIsAtoZ(prev => !prev);
+  // }
+
+  // const toggleActionsOrder = () => {
+  //   setIsAscending(prev => !prev);
+  // }
+
+  const {
+		currentPage,
+		currentPageItems: pageTransactions,
+		loadPage,
+		maxPage,
+		needsPagination,
+	} = usePagination(sortedRecords, itemsPerPage) as {
+    currentPage: number; 
+    currentPageItems: TableItem[]; 
+    loadPage: () => void; 
+    maxPage: number; 
+    needsPagination: boolean;
+  }
+
   if (isPending) return 'Loading...'
   if (error) return 'An error has occurred: ' + error.message
-
-  const records = data.locationPayload
- 
-
-  // const filteredLocations = useMemo(() => {
-  //   return tableData
-  //     .filter(record => {
-  //       if (partnerType === 'See all') return true;
-  //       return record.type === partnerType;
-  //     })
-  // }, [partnerType, tableData])
-
-  // const {
-	// 	currentPage,
-	// 	currentPageItems: pageTransactions,
-	// 	loadPage,
-	// 	maxPage,
-	// 	needsPagination,
-	// } = usePagination(filteredLocations, itemsPerPage)
+  
   
   return (
     <>
-      {records.length ? (
+      {pageTransactions.length ? (
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-1 md:py-2 border border-black rounded-l-3xl">NAME</div></TableHead>
+              <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-1 md:py-2 border border-black rounded-l-3xl">{pageId === 'locations' ? 'LOCATION NAME' : 'VESSEL NAME'}</div></TableHead>
               {isDesktop &&
                 <>
-                  <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">COUNTRY</div></TableHead>
+                  <TableHead className="p-0">
+                    <div className="flex justify-between text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">
+                      <p>COUNTRY</p>
+                      <div className="cursor-pointer" onClick={() => toggleSortCriteria('country')}>
+                        <ArrowUpDown size={14} />
+                      </div>
+                    </div>
+                  </TableHead>
                   <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black">{pageId === 'locations' ? "COORDINATES" : "REGISTERED PORT"}</div></TableHead>
-                  <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">TYPE</div></TableHead>
-                </>
+                  <TableHead className="p-0"><div className="flex justify-between text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">TYPE</div></TableHead></>
               }
-              <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-1 md:py-2 border border-black rounded-r-3xl">ACTION COUNT</div></TableHead>
+              <TableHead className="p-0">
+                <div className="flex justify-between text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-1 md:py-2 border border-black rounded-r-3xl">
+                  <p>ACTIONS</p>
+                  <div className="cursor-pointer" onClick={() => toggleSortCriteria('action_count')}>
+                    <ArrowUpDown size={14} />
+                  </div>                
+                </div>
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {records.map((partner: TableItem) => (
+            {pageTransactions.map((partner) => (
               <TableRow 
                 key={partner.location_name}
                 onClick={() => navigate({
@@ -133,7 +194,7 @@ const ActionsTable = ({ pageId, partnerType, sortOrder }: ActionsTableProps) => 
       ):(
         <p>no records found</p>
       )}
-{/* 
+ 
       {needsPagination && (
         <article className="flex flex-col justify-center items-center gap-4">
           <Paginator
@@ -141,14 +202,14 @@ const ActionsTable = ({ pageId, partnerType, sortOrder }: ActionsTableProps) => 
             currentPage={currentPage}
             maxPage={maxPage}
             loadPage={loadPage}
-          /> */}
-          {/* <ShowingDisplay
+          />
+          <ShowingDisplay
             currentPage={currentPage}
             totalItemAmount={filteredLocations.length}
             itemsPerPage={itemsPerPage}
-          /> */}
-        {/* </article>
-			)} */}
+          />
+        </article>
+			)}
     </>
   )
 }

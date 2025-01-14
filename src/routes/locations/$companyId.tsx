@@ -59,6 +59,7 @@ function LocationDetailComponent() {
         </article>
 
         <StatsBar pageId='location_detail_recycler_statistics' recyclerId={companyId}/>
+        <StatsBar pageId='location_detail_manufacturer_statistics' manufacturerId={companyId}/>
         
         {type === "Port" ? (
           <div className='py-6 md:py-0'>

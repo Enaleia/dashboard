@@ -6,6 +6,7 @@ const pageIds = [
   'location_main_page_statistics',
   'location_detail_port_statistics',
   'location_detail_recycler_statistics',
+  'location_detail_manufacturer_statistics',
   'vessel_main_page_statistics', 
   'vessel_detail_page_statistics' 
 ] as const
@@ -16,6 +17,7 @@ interface StatsBarProps {
   pageId: PageId;
   portId?: string;
   recyclerId?: string;
+  manufacturerId?: string;
   vesselId?: string
 }
 
@@ -31,11 +33,12 @@ const statEndpoints = {
   location_main_page_statistics: "bb931cab-7d63-4287-9380-1fb87a5b6431",
   location_detail_port_statistics: "50637703-8870-45ca-828d-bbab78ec917a",
   location_detail_recycler_statistics: "f6495f96-4105-46fa-a904-fcda705ba889",
+  location_detail_manufacturer_statistics: "230ea17e-b2d2-4758-9cb6-383fe9574b28",
   vessel_main_page_statistics: "9cb714f0-4d0b-46d0-8454-110811ad4418",
   vessel_detail_page_statistics: "81947692-848c-4832-bc2d-dfe09bc577a1"
 }
 
-const StatsBar = ({ pageId, portId, recyclerId, vesselId }: StatsBarProps) => {
+const StatsBar = ({ pageId, portId, recyclerId, manufacturerId, vesselId }: StatsBarProps) => {
 
   const { isPending, error, data } = useQuery({
     queryKey: [pageId],
@@ -43,6 +46,7 @@ const StatsBar = ({ pageId, portId, recyclerId, vesselId }: StatsBarProps) => {
       const queryString = [
         portId ? `port_id=${portId}` : '',
         recyclerId? `recycler_id=${recyclerId}`: '',
+        manufacturerId? `manufacturer_id=${manufacturerId}`: '',
         vesselId ? `vessel_id=${vesselId}` : ''
       ].filter(Boolean).join('&')
       const response = await fetch(

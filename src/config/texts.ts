@@ -4,7 +4,7 @@ export const dateChoices = ["All time", "Last year", "This year"]
 
 export const locationTypes = ["See all", "Port", "Recycler", "Manufacturer"]
 
-export const vesselTypes = ["See all", "Trawler", "Seiner", "Other"]
+export const vesselTypes = ["See all", "Trawler", "Small vessel", "Purse seiner", "Other"]
 
 export const viewTypes = ["List", "Map"]
 

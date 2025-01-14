@@ -38,7 +38,7 @@ const ActivityMap = ({ locationType }: {locationType: string}) => {
     queryFn: async () => {
       const response = await fetch(
         `/api/flows/trigger/a9fc78b6-96a7-4be2-836b-153671fc367f?role=fcf2d257-495d-48d9-a2e0-a272ed3c44db&role=47eb616c-820c-4be9-abe1-9a41d385bc6d&role=0f0ca9f1-3f58-4c56-8361-9dd82ba2b476&sort=descending&page=1&limit=1000`
-        // `https://hq.enaleia-hub.com/flows/trigger/${statEndpoints[pageId]}`,
+        // `https://hq.enaleia-hub.com/`,
       )
       return await response.json()
     },
@@ -56,6 +56,7 @@ const ActivityMap = ({ locationType }: {locationType: string}) => {
   if (isPending) return 'Loading...'
   if (error) return 'An error has occurred: ' + error.message
 
+  
 	return (
     <article className='w-full h-[400px] md:h-[700px] pt-3'>
       <MapContainer className='h-full z-0' center={[38.621971846028586, 13.204641636096362]} zoom={zoom} scrollWheelZoom={false}>

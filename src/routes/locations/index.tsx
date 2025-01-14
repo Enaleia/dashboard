@@ -25,13 +25,13 @@ function LocationsComponent() {
 
       <section className='w-full'>
         <TableActionsBar 
-          category='locations' 
+          // category='locations' 
           partnerTypes={locationTypes} 
           selectedPartnerType={selectedLocationType}
           setSelectedPartnerType={setSelectedLocationType}
-          sortByOptions={sortByOptions}
-          selectedSortOrder={selectedSortOrder}
-          setSelectedSortOrder={setSelectedSortOrder}
+          // sortByOptions={sortByOptions}
+          // selectedSortOrder={selectedSortOrder}
+          // setSelectedSortOrder={setSelectedSortOrder}
           viewTypes={viewTypes}
           selectedViewType={selectedViewType}
           setSelectedViewType={setSelectedViewType}

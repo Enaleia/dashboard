@@ -25,16 +25,16 @@ function VesselsComponent() {
 
       <section className='w-full'>
         <TableActionsBar 
-          category='vessels' 
+          // category='vessels' 
           partnerTypes={vesselTypes} 
           selectedPartnerType={selectedVesselType}
           setSelectedPartnerType={setSelectedVesselType}
-          sortByOptions={sortByOptions}
-          selectedSortOrder={selectedSortOrder}
-          setSelectedSortOrder={setSelectedSortOrder}
-          viewTypes={viewTypes}
-          selectedViewType={selectedViewType}
-          setSelectedViewType={setSelectedViewType}
+          // sortByOptions={sortByOptions}
+          // selectedSortOrder={selectedSortOrder}
+          // setSelectedSortOrder={setSelectedSortOrder}
+          // viewTypes={viewTypes}
+          // selectedViewType={selectedViewType}
+          // setSelectedViewType={setSelectedViewType}
         />
         <article className='overflow-hidden rounded-3xl pb-16'>
           {selectedViewType === "List" && <ActionsTable pageId='locations' partnerType={selectedVesselType} sortOrder={selectedSortOrder}/>}

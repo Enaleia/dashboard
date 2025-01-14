@@ -9,26 +9,26 @@ import {
 import { useMediaQuery } from "@/hooks/use-media-query";
 
 interface TableActionsBarProps {
-  category: string;
+  // category: string;
   partnerTypes: string[];
   selectedPartnerType: string;
   setSelectedPartnerType: (partnerType: string) => void;
-  sortByOptions: string[];
-  selectedSortOrder: string,
-  setSelectedSortOrder: (sortby: string) => void;
-  viewTypes: string[] | null;
-  selectedViewType: string;
-  setSelectedViewType: (viewType: string) => void
+  // sortByOptions: string[];
+  // selectedSortOrder: string,
+  // setSelectedSortOrder: (sortby: string) => void;
+  viewTypes?: string[];
+  selectedViewType?: string;
+  setSelectedViewType?: (viewType: string) => void
 }
 
 const TableActionsBar = ({ 
-    category, 
+    // category, 
     partnerTypes,
     selectedPartnerType,
     setSelectedPartnerType, 
-    sortByOptions,
-    selectedSortOrder,
-    setSelectedSortOrder,
+    // sortByOptions,
+    // selectedSortOrder,
+    // setSelectedSortOrder,
     viewTypes, 
     selectedViewType, 
     setSelectedViewType 
@@ -53,7 +53,7 @@ const TableActionsBar = ({
         </div>
       </div>
 
-      <div>
+      {/* <div>
         {selectedViewType === "List" &&
           <Select name="sort" onValueChange={(value) => setSelectedSortOrder(value)}>
             <SelectTrigger className="w-[200px] border-black rounded-3xl">
@@ -75,19 +75,22 @@ const TableActionsBar = ({
             </SelectContent>
           </Select>         
         }
-      </div>
+      </div> */}
       
-      <div className='flex flex-row gap-2'>
-        {viewTypes?.map((type) => (
-          <Button
-            key={type} 
-            variant={selectedViewType === type ? "default" : "outline"}
-            onClick={() => setSelectedViewType(type)}
-          >
-            {type}
-          </Button>
-        ))}
-      </div>
+      {viewTypes && setSelectedViewType ?
+        <div className='flex flex-row gap-2'>
+          {viewTypes.map((type) => (
+            <Button
+              key={type} 
+              variant={selectedViewType === type ? "default" : "outline"}
+              onClick={() => setSelectedViewType(type)}
+            >
+              {type}
+            </Button>
+          ))}
+        </div>
+      : null
+      }
     </article>
   )
 }
