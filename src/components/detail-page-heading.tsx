@@ -6,10 +6,11 @@ interface DetailPageHeadingProps {
   country: string,
   coordinates?: string,
   registered_port?: string,
-  type: string
+  type: string,
+  addresses?: string[]
 }
 
-const DetailPageHeading = ({ name, country, coordinates, registered_port, type}: DetailPageHeadingProps) => {
+const DetailPageHeading = ({ name, country, coordinates, registered_port, type, addresses}: DetailPageHeadingProps) => {
   return (
     <section className='w-full'>
       <div className='flex flex-row justify-between items-center'>
@@ -30,7 +31,7 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type}:
         </div>
         {coordinates &&
           <a href='' className='flex flex-row items-center gap-1 hover:font-semibold'>
-            <p>{coordinates}</p>
+            <p>{coordinates[0]}, {coordinates[1]}</p>
             <ArrowUpRight strokeWidth={1}/>
           </a>
         }
@@ -38,10 +39,12 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type}:
         <div className='hidden md:flex'>
           <Separator orientation='vertical' className='bg-gray-400 w-[1.5px]'/>
         </div>
-        <a href='' className='flex flex-row items-center gap-1 hover:font-semibold'>
-          <p>0x123d...1234</p>
-          <ArrowUpRight strokeWidth={1}/>
-        </a>
+        {addresses &&
+          <a href='' className='flex flex-row items-center gap-1 hover:font-semibold'>
+            <p>{addresses[0]}</p>
+            <ArrowUpRight strokeWidth={1}/>
+          </a>
+        }
       </div>
     </section>
   )

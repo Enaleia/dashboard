@@ -17,7 +17,7 @@ import { Route as IndexImport } from './routes/index'
 import { Route as VesselsIndexImport } from './routes/vessels/index'
 import { Route as LocationsIndexImport } from './routes/locations/index'
 import { Route as VesselsIdImport } from './routes/vessels/$id'
-import { Route as LocationsCompanyIdImport } from './routes/locations/$companyId'
+import { Route as LocationsIdImport } from './routes/locations/$id'
 
 // Create/Update Routes
 
@@ -51,8 +51,8 @@ const VesselsIdRoute = VesselsIdImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const LocationsCompanyIdRoute = LocationsCompanyIdImport.update({
-  path: '/locations/$companyId',
+const LocationsIdRoute = LocationsIdImport.update({
+  path: '/locations/$id',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -81,11 +81,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EconomyImport
       parentRoute: typeof rootRoute
     }
-    '/locations/$companyId': {
-      id: '/locations/$companyId'
-      path: '/locations/$companyId'
-      fullPath: '/locations/$companyId'
-      preLoaderRoute: typeof LocationsCompanyIdImport
+    '/locations/$id': {
+      id: '/locations/$id'
+      path: '/locations/$id'
+      fullPath: '/locations/$id'
+      preLoaderRoute: typeof LocationsIdImport
       parentRoute: typeof rootRoute
     }
     '/vessels/$id': {
@@ -118,7 +118,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/economy': typeof EconomyRoute
-  '/locations/$companyId': typeof LocationsCompanyIdRoute
+  '/locations/$id': typeof LocationsIdRoute
   '/vessels/$id': typeof VesselsIdRoute
   '/locations': typeof LocationsIndexRoute
   '/vessels': typeof VesselsIndexRoute
@@ -128,7 +128,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/economy': typeof EconomyRoute
-  '/locations/$companyId': typeof LocationsCompanyIdRoute
+  '/locations/$id': typeof LocationsIdRoute
   '/vessels/$id': typeof VesselsIdRoute
   '/locations': typeof LocationsIndexRoute
   '/vessels': typeof VesselsIndexRoute
@@ -139,7 +139,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/economy': typeof EconomyRoute
-  '/locations/$companyId': typeof LocationsCompanyIdRoute
+  '/locations/$id': typeof LocationsIdRoute
   '/vessels/$id': typeof VesselsIdRoute
   '/locations/': typeof LocationsIndexRoute
   '/vessels/': typeof VesselsIndexRoute
@@ -151,7 +151,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/economy'
-    | '/locations/$companyId'
+    | '/locations/$id'
     | '/vessels/$id'
     | '/locations'
     | '/vessels'
@@ -160,7 +160,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/economy'
-    | '/locations/$companyId'
+    | '/locations/$id'
     | '/vessels/$id'
     | '/locations'
     | '/vessels'
@@ -169,7 +169,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/economy'
-    | '/locations/$companyId'
+    | '/locations/$id'
     | '/vessels/$id'
     | '/locations/'
     | '/vessels/'
@@ -180,7 +180,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   EconomyRoute: typeof EconomyRoute
-  LocationsCompanyIdRoute: typeof LocationsCompanyIdRoute
+  LocationsIdRoute: typeof LocationsIdRoute
   VesselsIdRoute: typeof VesselsIdRoute
   LocationsIndexRoute: typeof LocationsIndexRoute
   VesselsIndexRoute: typeof VesselsIndexRoute
@@ -190,7 +190,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   EconomyRoute: EconomyRoute,
-  LocationsCompanyIdRoute: LocationsCompanyIdRoute,
+  LocationsIdRoute: LocationsIdRoute,
   VesselsIdRoute: VesselsIdRoute,
   LocationsIndexRoute: LocationsIndexRoute,
   VesselsIndexRoute: VesselsIndexRoute,
@@ -211,7 +211,7 @@ export const routeTree = rootRoute
         "/",
         "/about",
         "/economy",
-        "/locations/$companyId",
+        "/locations/$id",
         "/vessels/$id",
         "/locations/",
         "/vessels/"
@@ -226,8 +226,8 @@ export const routeTree = rootRoute
     "/economy": {
       "filePath": "economy.tsx"
     },
-    "/locations/$companyId": {
-      "filePath": "locations/$companyId.tsx"
+    "/locations/$id": {
+      "filePath": "locations/$id.tsx"
     },
     "/vessels/$id": {
       "filePath": "vessels/$id.tsx"
