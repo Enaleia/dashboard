@@ -41,7 +41,7 @@ const statEndpoints = {
 const StatsBar = ({ pageId, portId, recyclerId, manufacturerId, vesselId }: StatsBarProps) => {
 
   const { isPending, error, data } = useQuery({
-    queryKey: [pageId],
+    queryKey: [`stats-${pageId}`],
     queryFn: async () => {
       const queryString = [
         portId ? `port_id=${portId}` : '',

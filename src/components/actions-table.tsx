@@ -52,7 +52,7 @@ const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
   const [sortCriteria, setSortCriteria] = useState<'action_count' | 'country'>('action_count')
   
   const { isPending, error, data } = useQuery({
-    queryKey: [pageId],
+    queryKey: [`table-${pageId}`],
     queryFn: async () => {
       const response = await fetch(
         `/api/flows/trigger/${tableEndpoints[pageId]}`
@@ -61,6 +61,7 @@ const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
       return await response.json()
     },
   })
+  console.log(data)
   const records = data?.data ?? []
 
   const filteredLocations = useMemo(() => {
