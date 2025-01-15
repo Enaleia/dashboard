@@ -60,11 +60,11 @@ const StatsBar = ({ pageId, portId, recyclerId, manufacturerId, vesselId }: Stat
   if (error) return 'An error has occurred: ' + error.message
 
   // Ensure data is defined and is an array before mapping
-  const pageStats = Array.isArray(data[data]) ? data[data].map((stat: StatCardProps) => ({
+  const pageStats = data['data'].map((stat: StatCardProps) => ({
     ...stat,
      // add description to each stat object
     description: statDescriptions[pageId] ? statDescriptions[pageId][stat.key] : null
-  })) : [];
+  }));
 
   return (
     <article className='flex flex-col md:flex-row justify-around gap-8 md:gap-0 items-center px-12 pb-12 md:py-8 md:px-2'>
