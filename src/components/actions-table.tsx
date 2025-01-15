@@ -41,10 +41,9 @@ interface TableItem {
 interface ActionsTableProps {
   pageId: PageId;
   partnerType: string;
-  sortOrder: string
 }
 
-const ActionsTable = ({ pageId, partnerType, sortOrder }: ActionsTableProps) => {
+const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
   const navigate = useNavigate()
   const isDesktop = useMediaQuery("(min-width: 768px)")
   const itemsPerPage = 8
@@ -154,7 +153,7 @@ const ActionsTable = ({ pageId, partnerType, sortOrder }: ActionsTableProps) => 
               const { id, name, country, coordinates, type, registered_port, action_count, wallet_addresses, collector_identity } = partner
               return (
                 <TableRow 
-                  key={name}
+                  key={id}
                   onClick={() => navigate({
                     to: `/${pageId}/${id}`,
                     search: { name: name, country: country, coordinates: coordinates, type: type, port: registered_port, addresses: wallet_addresses, collector_identity: collector_identity }

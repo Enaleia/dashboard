@@ -77,17 +77,17 @@ function LocationDetailComponent() {
         </article>
 
         <StatsBar
-          pageId="location_detail_recycler_statistics"
+          pageId="recyclerDetail"
           recyclerId={id}
         />
         <StatsBar
-          pageId="location_detail_manufacturer_statistics"
+          pageId="manufacturerDetail"
           manufacturerId={id}
         />
 
         {type === 'Port' ? (
           <div className="py-6 md:py-0">
-            {/* <StatsBar pageId='location_detail_port_statistics' portId={id}/> */}
+            <StatsBar pageId='portDetail' portId={id}/>
             <CollectionsChart
               category="activities"
               timeRange={selectedChartDates}

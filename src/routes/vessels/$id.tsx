@@ -54,7 +54,7 @@ function VesselDetailComponent() {
         </article>
   
         <div className='py-6 md:py-0'>
-          {/* <StatsBar pageId='vessel_detail_page_statistics' vesselId={id}/> */}
+          <StatsBar pageId='vesselDetail' vesselId={id}/>
           <CollectionsChart category='activities' timeRange={selectedChartDates}/>
           <CustomChartLegend category='activities' />
         </div>

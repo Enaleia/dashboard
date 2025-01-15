@@ -2,13 +2,13 @@ import { useQuery } from "@tanstack/react-query"
 import { statDescriptions } from "@/config/texts"
 
 const pageIds = [
-  'home_page_statistics',
-  'location_main_page_statistics',
-  'location_detail_port_statistics',
-  'location_detail_recycler_statistics',
-  'location_detail_manufacturer_statistics',
-  'vessel_main_page_statistics', 
-  'vessel_detail_page_statistics' 
+  'home',
+  'locations',
+  'portDetail',
+  'recyclerDetail',
+  'manufacturerDetail',
+  'vessels', 
+  'vesselDetail' 
 ] as const
 
 type PageId = typeof pageIds[number]
@@ -25,17 +25,17 @@ interface StatCardProps {
   key: string;
   title: string;
   value: number;
-  description?: string
+  description?: string | null
 }
 
 const statEndpoints = {
-  home_page_statistics: "352a7482-4a18-4484-a53b-78c381d4db61",
-  location_main_page_statistics: "bb931cab-7d63-4287-9380-1fb87a5b6431",
-  location_detail_port_statistics: "50637703-8870-45ca-828d-bbab78ec917a",
-  location_detail_recycler_statistics: "f6495f96-4105-46fa-a904-fcda705ba889",
-  location_detail_manufacturer_statistics: "230ea17e-b2d2-4758-9cb6-383fe9574b28",
-  vessel_main_page_statistics: "9cb714f0-4d0b-46d0-8454-110811ad4418",
-  vessel_detail_page_statistics: "81947692-848c-4832-bc2d-dfe09bc577a1"
+  home: "352a7482-4a18-4484-a53b-78c381d4db61",
+  locations: "bb931cab-7d63-4287-9380-1fb87a5b6431",
+  portDetail: "50637703-8870-45ca-828d-bbab78ec917a",
+  recyclerDetail: "f6495f96-4105-46fa-a904-fcda705ba889",
+  manufacturerDetail: "230ea17e-b2d2-4758-9cb6-383fe9574b28",
+  vessels: "9cb714f0-4d0b-46d0-8454-110811ad4418",
+  vesselDetail: "81947692-848c-4832-bc2d-dfe09bc577a1"
 }
 
 const StatsBar = ({ pageId, portId, recyclerId, manufacturerId, vesselId }: StatsBarProps) => {
@@ -59,11 +59,12 @@ const StatsBar = ({ pageId, portId, recyclerId, manufacturerId, vesselId }: Stat
   if (isPending) return 'Loading...'
   if (error) return 'An error has occurred: ' + error.message
 
-  // add description to each stat object
-  const pageStats = data[pageId].map((stat: StatCardProps) => ({
+  // Ensure data is defined and is an array before mapping
+  const pageStats = Array.isArray(data[data]) ? data[data].map((stat: StatCardProps) => ({
     ...stat,
+     // add description to each stat object
     description: statDescriptions[pageId] ? statDescriptions[pageId][stat.key] : null
-  }));
+  })) : [];
 
   return (
     <article className='flex flex-col md:flex-row justify-around gap-8 md:gap-0 items-center px-12 pb-12 md:py-8 md:px-2'>

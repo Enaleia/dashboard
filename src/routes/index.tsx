@@ -49,7 +49,7 @@ function HomeComponent() {
             <p className='w-[90%] md:w-[60%] font-extralight text-lg md-text-xl tracking-tight leading-tight md:leading-tight py-2 md:py-6'>{impactSectionDescription}</p>
           </div>
         </article>
-        <StatsBar pageId='home_page_statistics'/>
+        <StatsBar pageId='home'/>
         <ActivityMap locationType='See all'/>
       </section>
       
