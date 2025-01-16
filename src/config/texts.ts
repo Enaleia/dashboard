@@ -68,10 +68,10 @@ export const activitesChartLegendDescriptions = {
   "beach cleanup": "Waste collected during occasional beach cleanups where fishers are not involved; tracked separately."
 }
 
-export const activitesChartLegendHeading = {
-  title: "What are the actions, and why do they matter?",
-  description: "While fishing for litter is most common, sponsors also request ad-hoc clean-ups in neglected areas like abandoned fish farms. Tracking waste per action helps evaluate performance, allocate resources, and ensure transparency in combating marine pollution."
-}
+// export const activitesChartLegendHeading = {
+//   title: "What are the actions, and why do they matter?",
+//   description: "While fishing for litter is most common, sponsors also request ad-hoc clean-ups in neglected areas like abandoned fish farms. Tracking waste per action helps evaluate performance, allocate resources, and ensure transparency in combating marine pollution."
+// }
 
 
 // Home page
