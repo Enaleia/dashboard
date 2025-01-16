@@ -61,7 +61,6 @@ const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
       return await response.json()
     },
   })
-  console.log(data)
   const records = data?.data ?? []
 
   const filteredLocations = useMemo(() => {

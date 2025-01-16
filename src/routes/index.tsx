@@ -26,7 +26,7 @@ function HomeComponent() {
     collabSectionDescription
   } = homePageTexts
 
-  const [selectedChartDates, setSelectedChartDates] = useState('This year')
+  const [selectedChartDates, setSelectedChartDates] = useState('All time')
 
   return (
     <main className='flex flex-col justify-center items-center gap-8 md:gap-20 m-auto pb-16 md:pb-24 md:pt-24 max-w-[1500px]'>
@@ -49,7 +49,7 @@ function HomeComponent() {
             <p className='w-[90%] md:w-[60%] font-extralight text-lg md-text-xl tracking-tight leading-tight md:leading-tight py-2 md:py-6'>{impactSectionDescription}</p>
           </div>
         </article>
-        <StatsBar pageId='home'/>
+        <StatsBar pageId='Home'/>
         <ActivityMap locationType='See all'/>
       </section>
       

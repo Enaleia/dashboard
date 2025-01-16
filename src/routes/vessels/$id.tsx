@@ -27,23 +27,44 @@ function VesselDetailComponent() {
   const { id } = Route.useParams()
   const search = useSearch({ from: `/vessels/$id` }) as SearchParams
   const { name, country, port, type, collector_identity } = search
-  const [selectedChartDates, setSelectedChartDates] = useState('This year')
+  const [selectedChartDates, setSelectedChartDates] = useState('All time')
 
   return (
     <main className='flex flex-col justify-center items-center gap-8 m-auto pt-0 pb-16 md:pb-32 md:pt-16 max-w-[1500px]'>
       <DetailPageHeading name={name} country={country} registered_port={port} type={type} collector_id={collector_identity} />
 
-      <section className='border border-primary rounded-3xl overflow-hidden'>
-        <article className='flex flex-col md:flex-row justify-between border-b border-primary p-4 pb-8 md:p-8'>
-          <h2 className='font-bold text-2xl md:text-4xl tracking-tight'>{partnerDetailInfo["Vessel"].heading}</h2>
-          <p className='font-extralight text-sm md:text-lg tracking-tight leading-tight md:leading-tight'>{partnerDetailInfo["Vessel"].description}</p>
-          <div className='flex flex-col justify-end'>
-            <p className='text-xs md:text-base font-extralight md:text-right pt-4 pb-2 md:py-0'>Last update: mm/dd/yyyy</p>
-            <div className='flex flex-row justify-between items-end gap-2 md:py-4'>
+      <section className="border border-primary rounded-3xl overflow-hidden p-10">
+        <article className='text-center'>
+          <h2 className="font-bold text-2xl md:text-4xl tracking-tight pb-2">
+            {partnerDetailInfo["Vessel"].heading}
+          </h2>
+          <p className="font-extralight text-sm md:text-lg tracking-tight leading-tight md:leading-tight">
+            {partnerDetailInfo["Vessel"].description}
+          </p>       
+        </article>
+
+        <StatsBar 
+          pageId='VesselDetail' vesselId={id}/>
+
+        <article>
+
+        </article>
+      </section>
+
+      <section className="border border-primary rounded-3xl overflow-hidden">
+        <div className='flex justify-between p-10'>
+          <h2 className='font-bold text-2xl md:text-4xl tracking-tight'>Waste removed by this collector</h2>
+          <div className="flex flex-col justify-end">
+            <p className="text-xs md:text-base font-extralight md:text-right pt-4 pb-2 md:py-0">
+              Last update: mm/dd/yyyy
+            </p>
+            <div className="flex flex-row justify-between items-end gap-2 md:py-4">
               {dateChoices.map((choice) => (
-                <Button 
+                <Button
                   key={choice}
-                  variant={selectedChartDates === choice ? "default" : "outline"}
+                  variant={
+                    selectedChartDates === choice ? 'default' : 'outline'
+                  }
                   onClick={() => setSelectedChartDates(choice)}
                 >
                   {choice}
@@ -51,12 +72,14 @@ function VesselDetailComponent() {
               ))}
             </div>
           </div>
-        </article>
-  
-        <div className='py-6 md:py-0'>
-          <StatsBar pageId='vesselDetail' vesselId={id}/>
-          <CollectionsChart category='activities' timeRange={selectedChartDates}/>
-          <CustomChartLegend category='activities' />
+        </div>
+
+        <div className="py-6 md:py-0">
+          <CollectionsChart
+            category="activities"
+            timeRange={selectedChartDates}
+          />
+          <CustomChartLegend category="activities" />
         </div>
       </section>
 

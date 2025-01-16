@@ -2,13 +2,13 @@ import { useQuery } from "@tanstack/react-query"
 import { statDescriptions } from "@/config/texts"
 
 const pageIds = [
-  'home',
-  'locations',
-  'portDetail',
-  'recyclerDetail',
-  'manufacturerDetail',
-  'vessels', 
-  'vesselDetail' 
+  'Home',
+  'Locations',
+  'PortDetail',
+  'RecyclerDetail',
+  'ManufacturerDetail',
+  'Vessels', 
+  'VesselDetail' 
 ] as const
 
 type PageId = typeof pageIds[number]
@@ -29,13 +29,13 @@ interface StatCardProps {
 }
 
 const statEndpoints = {
-  home: "352a7482-4a18-4484-a53b-78c381d4db61",
-  locations: "bb931cab-7d63-4287-9380-1fb87a5b6431",
-  portDetail: "50637703-8870-45ca-828d-bbab78ec917a",
-  recyclerDetail: "f6495f96-4105-46fa-a904-fcda705ba889",
-  manufacturerDetail: "230ea17e-b2d2-4758-9cb6-383fe9574b28",
-  vessels: "9cb714f0-4d0b-46d0-8454-110811ad4418",
-  vesselDetail: "81947692-848c-4832-bc2d-dfe09bc577a1"
+  Home: "352a7482-4a18-4484-a53b-78c381d4db61",
+  Locations: "bb931cab-7d63-4287-9380-1fb87a5b6431",
+  PortDetail: "50637703-8870-45ca-828d-bbab78ec917a",
+  RecyclerDetail: "f6495f96-4105-46fa-a904-fcda705ba889",
+  ManufacturerDetail: "230ea17e-b2d2-4758-9cb6-383fe9574b28",
+  Vessels: "9cb714f0-4d0b-46d0-8454-110811ad4418",
+  VesselDetail: "81947692-848c-4832-bc2d-dfe09bc577a1"
 }
 
 const StatsBar = ({ pageId, portId, recyclerId, manufacturerId, vesselId }: StatsBarProps) => {
@@ -59,10 +59,9 @@ const StatsBar = ({ pageId, portId, recyclerId, manufacturerId, vesselId }: Stat
   if (isPending) return 'Loading...'
   if (error) return 'An error has occurred: ' + error.message
 
-  // Ensure data is defined and is an array before mapping
+  // add description to each stat object
   const pageStats = data['data'].map((stat: StatCardProps) => ({
     ...stat,
-     // add description to each stat object
     description: statDescriptions[pageId] ? statDescriptions[pageId][stat.key] : null
   }));
 
