@@ -4,12 +4,14 @@ import { Separator } from '@/components/ui/separator'
 interface DetailPageHeadingProps {
   name: string,
   country: string,
-  coordinates?: number[],
-  port?: string,
-  type: string
+  coordinates?: string,
+  registered_port?: string,
+  type: string,
+  addresses?: string[]
+  collector_id?: string
 }
 
-const DetailPageHeading = ({ name, country, coordinates, port, type}: DetailPageHeadingProps) => {
+const DetailPageHeading = ({ name, country, coordinates, registered_port, type, addresses, collector_id}: DetailPageHeadingProps) => {
   return (
     <section className='w-full'>
       <div className='flex flex-row justify-between items-center'>
@@ -30,18 +32,27 @@ const DetailPageHeading = ({ name, country, coordinates, port, type}: DetailPage
         </div>
         {coordinates &&
           <a href='' className='flex flex-row items-center gap-1 hover:font-semibold'>
-            <p>{String(coordinates[0]).slice(0, 9)}, {String(coordinates[1]).slice(0, 9)}</p>
-            <ArrowUpRight strokeWidth={1}/>
+            {coordinates.length === 2 ?
+              <>
+                <p>{coordinates[0]}, {coordinates[1]}</p>
+                <ArrowUpRight strokeWidth={1}/>
+              </>
+            :
+              <p>coordinates not available</p>
+            }
           </a>
         }
-        {port && <p>Registered port: {port}</p>}
+        {registered_port && <p>Registered port: {registered_port}</p>}
         <div className='hidden md:flex'>
           <Separator orientation='vertical' className='bg-gray-400 w-[1.5px]'/>
         </div>
-        <a href='' className='flex flex-row items-center gap-1 hover:font-semibold'>
-          <p>0x123d...1234</p>
-          <ArrowUpRight strokeWidth={1}/>
-        </a>
+        {addresses &&
+          <a href='' className='flex flex-row items-center gap-1 hover:font-semibold'>
+            <p>{addresses[0]}</p>
+            <ArrowUpRight strokeWidth={1}/>
+          </a>
+        }
+        {collector_id && <p>Collector Identity: {collector_id}</p>}
       </div>
     </section>
   )

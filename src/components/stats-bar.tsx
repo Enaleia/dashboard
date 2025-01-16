@@ -1,94 +1,81 @@
-import { Separator } from "@radix-ui/react-select";
+import { useQuery } from "@tanstack/react-query"
+import { statDescriptions } from "@/config/texts"
 
-const landingStats = [
-  {
-    title: "Waste removed (kgs)",
-    stat: 107.7,
-    isWeight: true,
-    description: "Collection containing plastic, metal, fishing nets, etc.",
-  },
-  {
-    title: "Active vessels",
-    stat: 132,
-    isWeight: false,
-    description: "Fishers that participate in our actions.",
-  },
-  {
-    title: "Actions performed",
-    stat: 2901,
-    isWeight: false,
-    description: "Fishing for litter, prevention, beach clean-up & more.",
-  },
-  {
-    title: "Locations",
-    stat: 92,
-    isWeight: false,
-    description: "Ports, recyclers, and manufacturing sites.",
-  },
-  {
-    title: "Countries",
-    stat: 4,
-    isWeight: false,
-    description: "Countries participating within the Mediterranean area.",
-  }
-]
+const pageIds = [
+  'Home',
+  'Locations',
+  'PortDetail',
+  'RecyclerDetail',
+  'ManufacturerDetail',
+  'Vessels', 
+  'VesselDetail' 
+] as const
 
-const locationsStats = [
-  {
-    title: "Location count",
-    stat: 152,
-    isWeight: false,
-    description: "From all the countries that participate",
-  },
-  {
-    title: "Ports",
-    stat: 92,
-    isWeight: false,
-    description: "Ports that receive fisherman’s waste collection",
-  },
-  {
-    title: "Recyclers",
-    stat: 4,
-    isWeight: false,
-    description: "Companies that participate in plastic sorting and pelletization.",
-  },
-  {
-    title: "Manufacturers",
-    stat: 1,
-    isWeight: false,
-    description: "Producers of consumer products using recycled plastics.",
-  }
-]
+type PageId = typeof pageIds[number]
+
+interface StatsBarProps {
+  pageId: PageId;
+  portId?: string;
+  recyclerId?: string;
+  manufacturerId?: string;
+  vesselId?: string
+}
 
 interface StatCardProps {
+  key: string;
   title: string;
-  stat: number;
-  isWeight: boolean;
-  description: string
+  value: number;
+  description?: string | null
 }
 
-const StatCard = ({ title, stat, isWeight, description, borderClass }: StatCardProps & { borderClass: string }) => {
-  return (
-    <div className={`flex flex-col w-full md:w-[20%] justify-center items-center text-center font-extralight ${borderClass} md:border-none md:pb-0`}>
-      <p className="text-xl md:text-lg font-medium">{title}</p>
-      <p className="text-4xl md:text-5xl font-bold pt-4 pb-1">{stat}{isWeight && <span>K</span>}</p>
-      <p className="md:min-h-[30px] text-xs md:text-xs w-[80%] leading-tight md:leading-tight">{description}</p>
-    </div>
-  )
+const statEndpoints = {
+  Home: "352a7482-4a18-4484-a53b-78c381d4db61",
+  Locations: "bb931cab-7d63-4287-9380-1fb87a5b6431",
+  PortDetail: "50637703-8870-45ca-828d-bbab78ec917a",
+  RecyclerDetail: "f6495f96-4105-46fa-a904-fcda705ba889",
+  ManufacturerDetail: "230ea17e-b2d2-4758-9cb6-383fe9574b28",
+  Vessels: "9cb714f0-4d0b-46d0-8454-110811ad4418",
+  VesselDetail: "81947692-848c-4832-bc2d-dfe09bc577a1"
 }
 
-const StatsBar = ({ pageId }: {pageId: string}) => {
-  let pageStats: StatCardProps[]
-  if (pageId === "landing") {
-    pageStats = landingStats
-  } else {
-    pageStats = locationsStats
-  }
+const StatsBar = ({ pageId, portId, recyclerId, manufacturerId, vesselId }: StatsBarProps) => {
+
+  const { isPending, error, data } = useQuery({
+    queryKey: [`stats-${pageId}`],
+    queryFn: async () => {
+      const queryString = [
+        portId ? `port_id=${portId}` : '',
+        recyclerId? `recycler_id=${recyclerId}`: '',
+        manufacturerId? `manufacturer_id=${manufacturerId}`: '',
+        vesselId ? `vessel_id=${vesselId}` : ''
+      ].filter(Boolean).join('&')
+      const response = await fetch(
+        `/api/flows/trigger/${statEndpoints[pageId]}${queryString ? '?' + queryString : ''}`
+        // `https://hq.enaleia-hub.com/flows/trigger/${statEndpoints[pageId]}`,
+      )
+      return await response.json()
+    },
+  })
+  if (isPending) return 'Loading...'
+  if (error) return 'An error has occurred: ' + error.message
+
+  // add description to each stat object
+  const pageStats = data['data'].map((stat: StatCardProps) => ({
+    ...stat,
+    description: statDescriptions[pageId] ? statDescriptions[pageId][stat.key] : null
+  }));
 
   return (
     <article className='flex flex-col md:flex-row justify-around gap-8 md:gap-0 items-center px-12 pb-12 md:py-8 md:px-2'>
       {pageStats.map((stat: StatCardProps, index: number) => (
-        <StatCard key={stat.title} title={stat.title} stat={stat.stat} isWeight={stat.isWeight} description={stat.description} borderClass={index === pageStats.length - 1? "" : "border-b border-black pb-6"}/>
+        <div
+          key={stat.key} 
+          className={`flex flex-col w-full md:w-[20%] justify-center items-center text-center font-extralight ${index === pageStats.length - 1? "" : "border-b border-black pb-6"} md:border-none md:pb-0`}
+        >
+          <p className="text-xl md:text-lg font-medium">{stat.title}</p>
+          <p className="text-4xl md:text-5xl font-bold pt-4 pb-1">{stat.value > 9999 ? `${Math.round(stat.value / 1000)}K` : stat.value}</p>
+          {stat.description && <p className="md:min-h-[30px] text-xs md:text-xs w-[80%] leading-tight md:leading-tight">{stat.description}</p>}
+        </div>
       ))}
     </article>
   )

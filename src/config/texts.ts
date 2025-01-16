@@ -4,17 +4,40 @@ export const dateChoices = ["All time", "Last year", "This year"]
 
 export const locationTypes = ["See all", "Port", "Recycler", "Manufacturer"]
 
-export const vesselTypes = ["See all", "Trawler", "Seiner", "Other"]
+export const vesselTypes = ["See all", "Trawler", "Small vessel", "Purse seiner", "Other"]
 
 export const viewTypes = ["List", "Map"]
 
 export const sortByOptions = ["Most to least active", "Least to most active", "Name A-Z", "Name Z-A", "Country A-Z", "Country Z-A", "Type A-Z", "Type Z-A"]
 
+export const statDescriptions: Record<string, Record<string, string>> = {
+  Home: {
+    waste_removed: "Collection containing plastic, metal, fishing nets, etc.",
+    active_vessels: "Fishers that participate in our actions.",
+    actions_performed: "Fishing for litter, prevention, beach clean-up & more.",
+    locations: "Ports, recyclers, and manufacturing sites.",
+    countries: "Countries participating within the Mediterranean area."
+  },
+  Locations: {
+    total_locations: "From all the countries that participate.",
+    ports: "Ports that receive fisherman’s waste collection.",
+    recyclers: "Companies that participate in plastic sorting and pelletization.",
+    manufacturers: "Producers of consumer products using recycled plastics."
+  },
+  Vessels: {
+    total_vessels: "From all the countries that participate.",
+    trawlers: "A type of fishing vessel specifically designed to catch fish by dragging a large net.",
+    small_vessels: "Description to come.",
+    purse_seiners: "A type of fishing vessel used to catch schools of fish, particularly species that swim near the surface, such as tuna, mackerel, and sardines.",
+    others: "Includes caique, swordfish boat, trechantiri and more."
+  }
+}
+
 export const partnerDetailInfo = {
-  "Vessel": {heading: "Waste removed by this vessel", description: ""},
-  "Port": {heading: "Waste removed by actions at this location", description: "As a coordinated port, it receives and weighs waste from fishers, ensuring accurate tracking and supporting various actions at the location."},
-  "Recycler": {heading: "Action performed at this location", description: "As a key recycling facility, it receives and weighs waste from ocean clean-ups, sorting materials like PET, HDPE, and PP to ensure proper processing and repurposing."},
-  "Manufacturer": {heading: "Action performed at this location", description: "As a sustainable manufacturer, it receives sorted ocean plastic, weighed and categorized by type (PET, HDPE, PP), to transform into high-quality consumer products, supporting a sustainable future."} 
+  "Vessel": {heading: "The impact conducted by this collector", description: ""},
+  "Port": {heading: "The impact at this location", description: "As a coordinated port, it receives and weighs waste from fishers, ensuring accurate tracking and supporting various actions at the location."},
+  "Recycler": {heading: "The impact at this location", description: "As a key recycling facility, it receives and weighs waste from ocean clean-ups, sorting materials like PET, HDPE, and PP to ensure proper processing and repurposing."},
+  "Manufacturer": {heading: "The impact at this location", description: "As a sustainable manufacturer, it receives sorted ocean plastic, weighed and categorized by type (PET, HDPE, PP), to transform into high-quality consumer products, supporting a sustainable future."} 
 }
 
 export const attestationDescriptions = {
@@ -67,7 +90,7 @@ export const locationsPageTexts = {
 // Vessels page
 export const vesselsPageTexts = {
   heroTitle: 'Vessels and fishers on the frontline of the marine plastic pollution crisis',
-  heroDescription: 'We collaborate with fishing communities across the Mediterranean, empowering them to adopt sustainable fishing practices while incentivizing the collection of plastic bycatch. By bringing this waste back to port, fishers play a crucial role in addressing marine plastic pollution and protecting the health of our oceans.'
+  heroDescription: 'We collaborate with fishing communities and other collectors across the Mediterranean, empowering them to adopt sustainable fishing practices while incentivizing the collection of plastic bycatch. By bringing this waste back to port, fishers play a crucial role in addressing marine plastic pollution and protecting the health of our oceans.'
 }
 
 

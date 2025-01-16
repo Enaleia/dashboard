@@ -16,8 +16,8 @@ import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as VesselsIndexImport } from './routes/vessels/index'
 import { Route as LocationsIndexImport } from './routes/locations/index'
-import { Route as VesselsVesselIdImport } from './routes/vessels/$vesselId'
-import { Route as LocationsLocationIdImport } from './routes/locations/$locationId'
+import { Route as VesselsIdImport } from './routes/vessels/$id'
+import { Route as LocationsIdImport } from './routes/locations/$id'
 
 // Create/Update Routes
 
@@ -46,13 +46,13 @@ const LocationsIndexRoute = LocationsIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const VesselsVesselIdRoute = VesselsVesselIdImport.update({
-  path: '/vessels/$vesselId',
+const VesselsIdRoute = VesselsIdImport.update({
+  path: '/vessels/$id',
   getParentRoute: () => rootRoute,
 } as any)
 
-const LocationsLocationIdRoute = LocationsLocationIdImport.update({
-  path: '/locations/$locationId',
+const LocationsIdRoute = LocationsIdImport.update({
+  path: '/locations/$id',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -81,18 +81,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EconomyImport
       parentRoute: typeof rootRoute
     }
-    '/locations/$locationId': {
-      id: '/locations/$locationId'
-      path: '/locations/$locationId'
-      fullPath: '/locations/$locationId'
-      preLoaderRoute: typeof LocationsLocationIdImport
+    '/locations/$id': {
+      id: '/locations/$id'
+      path: '/locations/$id'
+      fullPath: '/locations/$id'
+      preLoaderRoute: typeof LocationsIdImport
       parentRoute: typeof rootRoute
     }
-    '/vessels/$vesselId': {
-      id: '/vessels/$vesselId'
-      path: '/vessels/$vesselId'
-      fullPath: '/vessels/$vesselId'
-      preLoaderRoute: typeof VesselsVesselIdImport
+    '/vessels/$id': {
+      id: '/vessels/$id'
+      path: '/vessels/$id'
+      fullPath: '/vessels/$id'
+      preLoaderRoute: typeof VesselsIdImport
       parentRoute: typeof rootRoute
     }
     '/locations/': {
@@ -118,8 +118,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/economy': typeof EconomyRoute
-  '/locations/$locationId': typeof LocationsLocationIdRoute
-  '/vessels/$vesselId': typeof VesselsVesselIdRoute
+  '/locations/$id': typeof LocationsIdRoute
+  '/vessels/$id': typeof VesselsIdRoute
   '/locations': typeof LocationsIndexRoute
   '/vessels': typeof VesselsIndexRoute
 }
@@ -128,8 +128,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/economy': typeof EconomyRoute
-  '/locations/$locationId': typeof LocationsLocationIdRoute
-  '/vessels/$vesselId': typeof VesselsVesselIdRoute
+  '/locations/$id': typeof LocationsIdRoute
+  '/vessels/$id': typeof VesselsIdRoute
   '/locations': typeof LocationsIndexRoute
   '/vessels': typeof VesselsIndexRoute
 }
@@ -139,8 +139,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/economy': typeof EconomyRoute
-  '/locations/$locationId': typeof LocationsLocationIdRoute
-  '/vessels/$vesselId': typeof VesselsVesselIdRoute
+  '/locations/$id': typeof LocationsIdRoute
+  '/vessels/$id': typeof VesselsIdRoute
   '/locations/': typeof LocationsIndexRoute
   '/vessels/': typeof VesselsIndexRoute
 }
@@ -151,8 +151,8 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/economy'
-    | '/locations/$locationId'
-    | '/vessels/$vesselId'
+    | '/locations/$id'
+    | '/vessels/$id'
     | '/locations'
     | '/vessels'
   fileRoutesByTo: FileRoutesByTo
@@ -160,8 +160,8 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/economy'
-    | '/locations/$locationId'
-    | '/vessels/$vesselId'
+    | '/locations/$id'
+    | '/vessels/$id'
     | '/locations'
     | '/vessels'
   id:
@@ -169,8 +169,8 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/economy'
-    | '/locations/$locationId'
-    | '/vessels/$vesselId'
+    | '/locations/$id'
+    | '/vessels/$id'
     | '/locations/'
     | '/vessels/'
   fileRoutesById: FileRoutesById
@@ -180,8 +180,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   EconomyRoute: typeof EconomyRoute
-  LocationsLocationIdRoute: typeof LocationsLocationIdRoute
-  VesselsVesselIdRoute: typeof VesselsVesselIdRoute
+  LocationsIdRoute: typeof LocationsIdRoute
+  VesselsIdRoute: typeof VesselsIdRoute
   LocationsIndexRoute: typeof LocationsIndexRoute
   VesselsIndexRoute: typeof VesselsIndexRoute
 }
@@ -190,8 +190,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   EconomyRoute: EconomyRoute,
-  LocationsLocationIdRoute: LocationsLocationIdRoute,
-  VesselsVesselIdRoute: VesselsVesselIdRoute,
+  LocationsIdRoute: LocationsIdRoute,
+  VesselsIdRoute: VesselsIdRoute,
   LocationsIndexRoute: LocationsIndexRoute,
   VesselsIndexRoute: VesselsIndexRoute,
 }
@@ -211,8 +211,8 @@ export const routeTree = rootRoute
         "/",
         "/about",
         "/economy",
-        "/locations/$locationId",
-        "/vessels/$vesselId",
+        "/locations/$id",
+        "/vessels/$id",
         "/locations/",
         "/vessels/"
       ]
@@ -226,11 +226,11 @@ export const routeTree = rootRoute
     "/economy": {
       "filePath": "economy.tsx"
     },
-    "/locations/$locationId": {
-      "filePath": "locations/$locationId.tsx"
+    "/locations/$id": {
+      "filePath": "locations/$id.tsx"
     },
-    "/vessels/$vesselId": {
-      "filePath": "vessels/$vesselId.tsx"
+    "/vessels/$id": {
+      "filePath": "vessels/$id.tsx"
     },
     "/locations/": {
       "filePath": "locations/index.tsx"
