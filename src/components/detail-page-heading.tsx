@@ -19,7 +19,7 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type, 
           <p className='text-xs md:text-sm font-extralight'>Location detail</p>
           <h1 className='font-bold text-4xl md:text-7xl tracking-tight'>{name}</h1>
         </div>
-        <img src={`/${type}_icon.svg`} alt={`${type} icon`} className='h-16 w-16 md:h-28 md:w-28'/>
+        <img src={`/${type.replace(/ /g, '_')}_icon.svg`} alt={`${type} icon`} className='h-16 w-16 md:h-28 md:w-28'/>
       </div>
 
       <div className='flex flex-col md:flex-row gap-0.5 md:gap-4 font-light'>
