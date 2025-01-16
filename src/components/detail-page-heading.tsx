@@ -14,45 +14,70 @@ interface DetailPageHeadingProps {
 const DetailPageHeading = ({ name, country, coordinates, registered_port, type, addresses, collector_id}: DetailPageHeadingProps) => {
   return (
     <section className='w-full'>
-      <div className='flex flex-row justify-between items-center'>
-        <div>
+      <div className='flex flex-row justify-between items-start'>
+
+        <div className='flex flex-col gap-0.5 md:gap-4 font-light'>
           <p className='text-xs md:text-sm font-extralight'>Location detail</p>
           <h1 className='font-bold text-4xl md:text-7xl tracking-tight'>{name}</h1>
-        </div>
-        <img src={`/${type.replace(/ /g, '_')}_icon.svg`} alt={`${type} icon`} className='h-16 w-16 md:h-28 md:w-28'/>
-      </div>
 
-      <div className='flex flex-col md:flex-row gap-0.5 md:gap-4 font-light'>
-        <div className='flex flex-row items-center gap-1'>
-          <img src={`/flag_${country}.svg`} alt={`country} flag`} className='h-7 w-7'/>
-          <p>{country}</p>
-        </div>
-        <div className='hidden md:flex'>
-          <Separator orientation='vertical' className='bg-gray-400 w-[1px]'/>
-        </div>
-        {coordinates &&
-          <a href='' className='flex flex-row items-center gap-1 hover:font-semibold'>
-            {coordinates.length === 2 ?
-              <>
-                <p>{coordinates[0]}, {coordinates[1]}</p>
-                <ArrowUpRight strokeWidth={1}/>
-              </>
-            :
-              <p>coordinates not available</p>
+          <div className='flex flex-col md:flex-row gap-0.5 md:gap-4 font-light'>
+            <div className='flex flex-row items-center gap-1'>
+              <img src={`/flag_${country}.svg`} alt={`country} flag`} className='h-7 w-7'/>
+              <p>{country}</p>
+            </div>
+            <div className='hidden md:flex'>
+              <Separator orientation='vertical' className='bg-gray-400 w-[1px]'/>
+            </div>
+            {coordinates &&
+              <a href='' className='flex flex-row items-center gap-2 hover:font-semibold'>
+                <img src='/pin_icon.svg' alt='pin icon' className='h-6 w-6'/>
+                {coordinates.length === 2 ?
+                  <>
+                    <p>{coordinates[0]}, {coordinates[1]}</p>
+                    <ArrowUpRight strokeWidth={1}/>
+                  </>
+                :
+                  <p>coordinates not available</p>
+                }
+              </a>
             }
-          </a>
-        }
-        {registered_port && <p>Registered port: {registered_port}</p>}
-        <div className='hidden md:flex'>
-          <Separator orientation='vertical' className='bg-gray-400 w-[1.5px]'/>
+            {registered_port && 
+              <div className='flex flex-row items-center gap-2 hover:font-semibold'>
+                <img src='/pin_icon.svg' alt='pin icon' className='h-6 w-6'/>
+                <p><span className='font-extralight'>Registered port:</span> {registered_port}</p>
+              </div>
+            }
+            <div className='hidden md:flex'>
+              <Separator orientation='vertical' className='bg-gray-400 w-[1.5px]'/>
+            </div>
+            {addresses &&
+              <a href='' className='flex flex-row items-center gap-2 hover:font-semibold'>
+                <img src='/wallet_icon.svg' alt='wallet icon' className='h-6 w-6'/>
+                {addresses.length > 0 ?
+                  addresses.map(address => (
+                    <>
+                      <p>{address}</p>
+                      <ArrowUpRight strokeWidth={1}/>
+                    </>
+                  )) 
+                :
+                  <p>address not available</p>
+                }
+              </a>
+            }
+            {collector_id && 
+              <div className='flex flex-row items-center gap-2 hover:font-semibold'>
+                <img src='/id_card_icon.svg' alt='ID card icon' className='h-6 w-6'/>
+                <p><span className='font-extralight'>Collector ID:</span> {collector_id}</p>
+              </div>
+            }
+          </div>
         </div>
-        {addresses &&
-          <a href='' className='flex flex-row items-center gap-1 hover:font-semibold'>
-            <p>{addresses[0]}</p>
-            <ArrowUpRight strokeWidth={1}/>
-          </a>
-        }
-        {collector_id && <p>Collector Identity: {collector_id}</p>}
+
+        <div className='flex flex-col gap-1 items-center'>
+          <img src={`/${type.replace(/ /g, '_')}_icon.svg`} alt={`${type} icon`} className='h-16 w-16 md:h-28 md:w-28'/>
+          <p className='text-center uppercase'>{type}</p>
+        </div>
       </div>
     </section>
   )
