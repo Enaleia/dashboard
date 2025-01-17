@@ -36,7 +36,7 @@ function VesselDetailComponent() {
 
       <section className="border border-primary rounded-3xl overflow-hidden p-12 text-center">
         <h2 className="font-bold text-2xl md:text-4xl tracking-tight pb-2">{heading}</h2>
-        <StatsBar pageId='VesselDetail' vesselId={id}/>
+        <StatsBar pageId='VesselDetail' partnerId={id}/>
         <Separator className='bg-black'/>
         <h3 className='font-bold text-lg md:text-2xl tracking-tight pt-10 pb-2'>{statSubtitle}</h3>
         <p className='font-extralight'>{statDescription}</p>
