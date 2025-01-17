@@ -32,6 +32,7 @@ function LocationDetailComponent() {
   const search = useSearch({ from: `/locations/$id` }) as SearchParams
   const { name, country, coordinates, type, addresses } = search
   const [selectedChartDates, setSelectedChartDates] = useState('All time')
+  const { heading, description, statSubtitle, statDescription } = partnerDetailInfo[type]
 
   return (
     <main className="flex flex-col justify-center items-center gap-8 m-auto pt-0 pb-16 md:pb-32 md:pt-16 max-w-[1500px]">
@@ -43,15 +44,9 @@ function LocationDetailComponent() {
         addresses={addresses}
       />
 
-      <section className="border border-primary rounded-3xl overflow-hidden p-10">
-        <article className='text-center'>
-          <h2 className="font-bold text-2xl md:text-4xl tracking-tight pb-2">
-            {partnerDetailInfo[type].heading}
-          </h2>
-          <p className="font-extralight text-sm md:text-lg tracking-tight leading-tight md:leading-tight">
-            {partnerDetailInfo[type].description}
-          </p>       
-        </article>
+      <section className="border border-primary rounded-3xl overflow-hidden p-10 text-center">
+        <h2 className="font-bold text-2xl md:text-4xl tracking-tight pb-2">{heading}</h2>
+        <p className="font-extralight text-sm md:text-lg tracking-tight leading-tight md:leading-tight">{description}</p>       
 
         <StatsBar 
           pageId={`${type}Detail`} 
@@ -59,10 +54,14 @@ function LocationDetailComponent() {
           recyclerId={type === 'Recycler' ? id : undefined}
           manufacturerId={type === 'Manufacturer' ? id : undefined}
         />
-
-        <article>
-
-        </article>
+         
+        {statSubtitle &&
+          <>
+            <Separator className='bg-black' />
+            <h3 className='font-bold text-lg md:text-2xl tracking-tight pt-10 pb-2'>{statSubtitle}</h3>
+            <p className='font-extralight'>{statDescription}</p>
+          </>
+        }
       </section>
 
       {type === 'Port' && (

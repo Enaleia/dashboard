@@ -28,27 +28,18 @@ function VesselDetailComponent() {
   const search = useSearch({ from: `/vessels/$id` }) as SearchParams
   const { name, country, port, type, collector_identity } = search
   const [selectedChartDates, setSelectedChartDates] = useState('All time')
+  const { heading, statSubtitle, statDescription } = partnerDetailInfo["Vessel"]
 
   return (
     <main className='flex flex-col justify-center items-center gap-8 m-auto pt-0 pb-16 md:pb-32 md:pt-16 max-w-[1500px]'>
       <DetailPageHeading name={name} country={country} registered_port={port} type={type} collector_id={collector_identity} />
 
-      <section className="border border-primary rounded-3xl overflow-hidden p-10">
-        <article className='text-center'>
-          <h2 className="font-bold text-2xl md:text-4xl tracking-tight pb-2">
-            {partnerDetailInfo["Vessel"].heading}
-          </h2>
-          <p className="font-extralight text-sm md:text-lg tracking-tight leading-tight md:leading-tight">
-            {partnerDetailInfo["Vessel"].description}
-          </p>       
-        </article>
-
-        <StatsBar 
-          pageId='VesselDetail' vesselId={id}/>
-
-        <article>
-
-        </article>
+      <section className="border border-primary rounded-3xl overflow-hidden p-12 text-center">
+        <h2 className="font-bold text-2xl md:text-4xl tracking-tight pb-2">{heading}</h2>
+        <StatsBar pageId='VesselDetail' vesselId={id}/>
+        <Separator className='bg-black'/>
+        <h3 className='font-bold text-lg md:text-2xl tracking-tight pt-10 pb-2'>{statSubtitle}</h3>
+        <p className='font-extralight'>{statDescription}</p>
       </section>
 
       <section className="border border-primary rounded-3xl overflow-hidden">

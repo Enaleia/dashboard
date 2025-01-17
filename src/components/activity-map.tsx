@@ -38,8 +38,8 @@ const ActivityMap = ({ locationType }: {locationType: string}) => {
     queryKey: ['landingMap'],
     queryFn: async () => {
       const response = await fetch(
-        `/api/flows/trigger/a9fc78b6-96a7-4be2-836b-153671fc367f`
-        // `https://hq.enaleia-hub.com/`,
+        // `/api/flows/trigger/a9fc78b6-96a7-4be2-836b-153671fc367f`
+        `https://hq.enaleia-hub.com/flows/trigger/a9fc78b6-96a7-4be2-836b-153671fc367f`,
       )
       return await response.json()
     },

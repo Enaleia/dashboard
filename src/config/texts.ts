@@ -14,30 +14,37 @@ export const statDescriptions: Record<string, Record<string, string>> = {
   Home: {
     waste_removed: "Collection containing plastic, metal, fishing nets, etc.",
     active_vessels: "Fishers that participate in our actions.",
-    actions_performed: "Fishing for litter, prevention, beach clean-up & more.",
+    actions_performed: "Fishing for litter, prevention, beach cleanup & more.",
     locations: "Ports, recyclers, and manufacturing sites.",
     countries: "Countries participating within the Mediterranean area."
   },
   Locations: {
-    total_locations: "From all the countries that participate.",
+    total_locations: "All participating countries, spanning multiple countries.",
     ports: "Ports that receive fisherman’s waste collection.",
-    recyclers: "Companies that participate in plastic sorting and pelletization.",
-    manufacturers: "Producers of consumer products using recycled plastics."
+    recyclers: "Companies that participate in plastic sorting and processing ocean-sourced plastics.",
+    manufacturers: "Companies that create consumer products from ocean-sourced recycled plastics."
   },
   Vessels: {
-    total_vessels: "From all the countries that participate.",
-    trawlers: "A type of fishing vessel specifically designed to catch fish by dragging a large net.",
-    small_vessels: "Description to come.",
-    purse_seiners: "A type of fishing vessel used to catch schools of fish, particularly species that swim near the surface, such as tuna, mackerel, and sardines.",
-    others: "Includes caique, swordfish boat, trechantiri and more."
+    total_vessels: "All the collectors contributing to our impact.",
+    trawlers: "Robust fishing vessels with wide decks and gear for towing heavy nets.",
+    small_vessels: "Compact vessels designed for close-to-shore operations and light tasks.",
+    purse_seiners: "Vessels with a wide deck and equipment for deploying large encircling nets.",
+    others: "Includes caique, swordfish vessel, trechantiri, and more."
   }
 }
 
-export const partnerDetailInfo = {
-  "Vessel": {heading: "The impact conducted by this collector", description: ""},
-  "Port": {heading: "The impact at this location", description: "As a coordinated port, it receives and weighs waste from fishers, ensuring accurate tracking and supporting various actions at the location."},
-  "Recycler": {heading: "The impact at this location", description: "As a key recycling facility, it receives and weighs waste from ocean clean-ups, sorting materials like PET, HDPE, and PP to ensure proper processing and repurposing."},
-  "Manufacturer": {heading: "The impact at this location", description: "As a sustainable manufacturer, it receives sorted ocean plastic, weighed and categorized by type (PET, HDPE, PP), to transform into high-quality consumer products, supporting a sustainable future."} 
+interface PartnerDetail {
+  heading: string;
+  description?: string;
+  statSubtitle?: string;
+  statDescription?: string;
+}
+
+export const partnerDetailInfo: Record<string, PartnerDetail> = {
+  "Vessel": {heading: "The impact created by this collector", statSubtitle: "What are the actions, and why do they matter?", statDescription: "While Fishing for Litter is the most common activity, sponsors also request ad-hoc cleanups in neglected areas like abandoned fish farms. Tracking waste per action helps evaluate performance, allocate resources, and ensure transparency in combating marine pollution."},
+  "Port": {heading: "The impact at this location", description: "As a coordinated port, it receives and weighs waste from fishers, ensuring accurate tracking and supporting various actions at the location.", statSubtitle: "What are the actions, and why do they matter?", statDescription: "While Fishing for Litter is the most common activity, sponsors also request ad-hoc cleanups in neglected areas like abandoned fish farms. Tracking waste per action helps evaluate performance, allocate resources, and ensure transparency in combating marine pollution." },
+  "Recycler": {heading: "The impact at this location", description: "As a recycling company, it processes waste containers received from nearby ports, verifies their weight, sorts various materials, and produces plastic pellets for manufacturers. However, some recyclers may not perform all types of processes (such as pelletizing) which could result in certain data fields being left blank.", statSubtitle: "Why the weight is different after pelletizing?", statDescription: "Ocean-sourced plastics lose several viable properties due to prolonged exposure to sunlight and seawater. To ensure product quality and consistency, only about 10% of pelletized plastic can be derived from ocean sources."},
+  "Manufacturer": {heading: "The impact at this location", description: "As a manufacturing company, it receives pellets from recyclers and uses them in the production of various goods, incorporating sustainable materials into its manufacturing process."} 
 }
 
 export const attestationDescriptions = {
@@ -61,10 +68,10 @@ export const activitesChartLegendDescriptions = {
   "beach cleanup": "Waste collected during occasional beach cleanups where fishers are not involved; tracked separately."
 }
 
-export const activitesChartLegendHeading = {
-  title: "What are the actions, and why do they matter?",
-  description: "While fishing for litter is most common, sponsors also request ad-hoc clean-ups in neglected areas like abandoned fish farms. Tracking waste per action helps evaluate performance, allocate resources, and ensure transparency in combating marine pollution."
-}
+// export const activitesChartLegendHeading = {
+//   title: "What are the actions, and why do they matter?",
+//   description: "While fishing for litter is most common, sponsors also request ad-hoc clean-ups in neglected areas like abandoned fish farms. Tracking waste per action helps evaluate performance, allocate resources, and ensure transparency in combating marine pollution."
+// }
 
 
 // Home page

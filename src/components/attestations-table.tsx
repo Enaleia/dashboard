@@ -40,18 +40,16 @@ const AttestationsTable = () => {
             <TableHeader>
               <TableRow>
                 <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black rounded-l-3xl">Attestation UUID</div></TableHead>
-                <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-r border-black">Submitted on</div></TableHead>
                 <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">Submitted by</div></TableHead>
                 <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black rounded-r-3xl"><Link size={16}/></div></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {pageTransactions.map((attestation) => {
-                const { UUID, submittedOn, submittedBy, txLink } = attestation
+                const { UUID, submittedBy, txLink } = attestation
                 return (
                   <TableRow key={UUID}>
-                    <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black rounded-l-3xl">{UUID.slice(0, 36)}....</div></TableCell>
-                    <TableCell className="p-0"><div className="mb-2 px-8 py-5 border-y border-r border-black flex gap-2">{submittedOn}</div></TableCell>
+                    <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black rounded-l-3xl">{UUID}</div></TableCell>
                     <TableCell className="p-0"><div className="mb-2 px-8 py-5 border-y border-black flex gap-2">{submittedBy}</div></TableCell>
                     <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black rounded-r-3xl"><a href={`${txLink}`}><ArrowUpRight size={20} strokeWidth={1}/></a></div></TableCell>            
                   </TableRow>
@@ -61,12 +59,12 @@ const AttestationsTable = () => {
           </Table>
         ) : (
           pageTransactions.map((attestation: Attestation) => {
-            const { UUID, submittedOn, txLink } = attestation
+            const { UUID, submittedBy, txLink } = attestation
             return (
               <div className='flex flex-row justify-between w-full items-center border border-black rounded-3xl text-sm'>               
                 <div className='w-full flex flex-col justify-between border-r border-gray-400 pl-4'>
                   <div className="border-b border-gray-400 p-3">{UUID.slice(0, 28)}....</div>
-                  <div className='w-full flex flex-row justify-between p-3'>{submittedOn}</div> 
+                  <div className='w-full flex flex-row justify-between p-3'>{submittedBy}</div> 
                 </div>
                 <div className='h-full px-4'><a href={txLink}><ArrowUpRight size={28} strokeWidth={1}/></a></div>
               </div>
@@ -85,11 +83,11 @@ const AttestationsTable = () => {
             maxPage={maxPage}
             loadPage={loadPage}
           />
-          {/* <ShowingDisplay
+          <ShowingDisplay
             currentPage={currentPage}
-            totalItemAmount={filteredLocations.length}
+            totalItemAmount={attestationData.length}
             itemsPerPage={itemsPerPage}
-          /> */}
+          />
         </article>
 			)}
     </>
