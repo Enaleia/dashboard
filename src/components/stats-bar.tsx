@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query"
-import { useState } from "react"
 import { statDescriptions } from "@/config/texts"
 
 const pageIds = [
@@ -40,7 +39,7 @@ const statEndpoints = {
 }
 
 const StatsBar = ({ pageId, portId, recyclerId, manufacturerId, vesselId }: StatsBarProps) => {
-  const [isWrapped, setIsWrapped] = useState(false)
+
   const { isPending, error, data } = useQuery({
     queryKey: [`stats-${pageId}`],
     queryFn: async () => {
@@ -51,8 +50,8 @@ const StatsBar = ({ pageId, portId, recyclerId, manufacturerId, vesselId }: Stat
         vesselId ? `vessel_id=${vesselId}` : ''
       ].filter(Boolean).join('&')
       const response = await fetch(
-        `/api/flows/trigger/${statEndpoints[pageId]}${queryString ? '?' + queryString : ''}`
-        // `https://hq.enaleia-hub.com/flows/trigger/${statEndpoints[pageId]}`,
+        // `/api/flows/trigger/${statEndpoints[pageId]}${queryString ? '?' + queryString : ''}`
+        `https://hq.enaleia-hub.com/flows/trigger/${statEndpoints[pageId]}${queryString ? '?' + queryString : ''}`,
       )
       return await response.json()
     },
@@ -67,7 +66,7 @@ const StatsBar = ({ pageId, portId, recyclerId, manufacturerId, vesselId }: Stat
   }));
 
   return (
-    <article className={`flex ${pageId.includes('Detail') ? 'flex-wrap justify-center gap-8 md:gap-20' : 'flex-col md:flex-row gap-8 md:justify-around'} items-center px-12 pt-2 pb-12 md:py-8 md:px-2`}>
+    <article className={`flex ${pageStats.length > 5 ? 'flex-wrap justify-center gap-8 md:gap-20' : 'flex-col md:flex-row gap-8 md:justify-around'} items-center px-12 pt-2 pb-12 md:py-8 md:px-2`}>
       {pageStats.map((stat: StatCardProps, index: number) => (
         <div
           key={stat.key} 

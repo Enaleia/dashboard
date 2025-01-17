@@ -55,8 +55,8 @@ const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
     queryKey: [`table-${pageId}`],
     queryFn: async () => {
       const response = await fetch(
-        `/api/flows/trigger/${tableEndpoints[pageId]}`
-        // `https://hq.enaleia-hub.com/flows/trigger/${tableEndpoints[pageId]}`,
+        // `/api/flows/trigger/${tableEndpoints[pageId]}`
+        `https://hq.enaleia-hub.com/flows/trigger/${tableEndpoints[pageId]}`,
       )
       return await response.json()
     },
