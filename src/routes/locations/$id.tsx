@@ -85,7 +85,7 @@ function LocationDetailComponent() {
 
           <div className="py-6 md:py-0">
             <CollectionsChart
-              category="activities"
+              pageId='PortDetail'
               timeRange={selectedChartDates}
             />
             <CustomChartLegend category="activities" />

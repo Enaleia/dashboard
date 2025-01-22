@@ -67,7 +67,8 @@ function VesselDetailComponent() {
 
         <div className="py-6 md:py-0">
           <CollectionsChart
-            category="activities"
+            pageId='VesselDetail'
+            partnerId={id}
             timeRange={selectedChartDates}
           />
           <CustomChartLegend category="activities" />
