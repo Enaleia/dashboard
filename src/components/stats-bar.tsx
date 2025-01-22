@@ -15,7 +15,7 @@ type PageId = typeof pageIds[number]
 
 interface StatsBarProps {
   pageId: PageId
-  partnerId: string
+  partnerId?: string
 }
 
 interface StatCardProps {

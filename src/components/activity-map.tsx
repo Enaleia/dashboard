@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import { useEffect, useMemo } from 'react'
 import { Link } from '@tanstack/react-router'
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, useMap, Marker, Popup, Polygon } from 'react-leaflet'
 import { Icon } from "leaflet";
 import { MoveRight } from 'lucide-react';
 import 'leaflet/dist/leaflet.css'
@@ -57,6 +57,15 @@ const ActivityMap = ({ locationType }: {locationType: string}) => {
   if (isPending) return 'Loading...'
   if (error) return 'An error has occurred: ' + error.message
 
+  // for "fishing zone" map view
+  // const coordinates: [number, number][] = [
+  //   [16.0794933724974, 41.8170077448667],
+  //   [16.9175598550158, 34.8587337830427],
+  //   [46.2498867431885, 34.5831996108818],
+  //   [45.7470468536773, 44.8635965418939],
+  //   [16.0794933724974, 41.8170077448667]
+  // ];
+
 
 	return (
     <article className='w-full h-[400px] md:h-[700px] pt-3'>
@@ -66,6 +75,15 @@ const ActivityMap = ({ locationType }: {locationType: string}) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <InvalidateMapSize />
+        {/* for "fishing zone" map view */}
+        {/* <Polygon 
+          positions={coordinates}
+          pathOptions={{
+            color: 'blue',
+            fillColor: 'blue',
+            fillOpacity: 0.2,
+          }}
+        /> */}
         {filteredLocations.map((record: MapItem) => {
           const { id, name, country, coordinates, type, wallet_addresses } = record; 
           return coordinates?.length === 2 && (    
