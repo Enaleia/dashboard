@@ -73,12 +73,22 @@ const chartEndpoints = {
 }
 
 export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsChartProps) {
-  const chartConfig = pageId === "Home" ? materialsChartConfig : activitiesChartConfig
+  const chartConfig = pageId === "Home" ? materialsChartConfig : activitiesChartConfig  
 
   const { isPending, error, data } = useQuery({
-    queryKey: [`chart-${pageId}`],
+    queryKey: [`chart-${pageId}`, timeRange],
     queryFn: async () => {
-      const queryString = partnerId ? `?id=${partnerId}` : ''
+      let queryString = partnerId ? `?id=${partnerId}` : ''
+
+      if (timeRange !== 'All time') {
+        const endDate = new Date().toISOString().split('T')[0];
+        const startDate = new Date();
+        startDate.setMonth(startDate.getMonth() - (timeRange === 'Last 12 months' ? 12 : 6));
+        
+        const dateQuery = `${queryString ? '&' : '?'}start_date=${startDate.toISOString().split('T')[0]}&end_date=${endDate}`;
+        queryString += dateQuery;
+      }
+
       const response = await fetch(
         `https://hq.enaleia-hub.com/flows/trigger/${chartEndpoints[pageId]}${queryString}`
       )
@@ -140,7 +150,7 @@ export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsCh
         <CardContent className="md:p-12">   
           <ChartContainer 
             config={chartConfig} 
-            className=" w-full min-h-[400px] max-h-[600px]"
+            className=" w-full min-h-[400px] max-h-[400px]"
           >         
             <AreaChart
               accessibilityLayer

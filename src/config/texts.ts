@@ -1,6 +1,6 @@
 
 // Global
-export const dateChoices = ["All time", "Last year", "This year"]
+export const dateChoices = ["All time", "Last 12 months", "Last 6 months"]
 
 export const locationTypes = ["See all", "Port", "Recycler", "Manufacturer"]
 
