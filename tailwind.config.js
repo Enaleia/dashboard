@@ -18,19 +18,22 @@ export default {
   			sm: 'calc(var(--radius) - 4px)'
   		},
       backgroundColor: {
-        plastics: 'hsl(var(--plastics))',
-        nets: 'hsl(var(--nets))',
-        metal: 'hsl(var(--metal))',
-        rubber: 'hsl(var(--rubber))',
-        fishingForLitter: 'hsl(var(--plastics))',
-        adHoc: 'hsl(var(--nets))',
-        prevention: 'hsl(var(--metal))',
-        beach: 'hsl(var(--rubber))'
+        mixedPlastic: 'hsl(var(--chart-1))',
+        metal: 'hsl(var(--chart-2))',
+        rubber: 'hsl(var(--chart-3))',
+        preventionNet: 'hsl(var(--chart-4))',
+        ghostNet: 'hsl(var(--chart-5))',
+        rope: 'hsl(var(--chart-6))',
+        other: 'hsl(var(--chart-7))',
+        fishingForLitter: 'hsl(var(--chart-8))',
+        adHoc: 'hsl(var(--chart-9))',
+        prevention: 'hsl(var(--chart-10))',
+        beach: 'hsl(var(--chart-11))'
       },
   		colors: {
         sand: 'hsl(var(--sand))',
         ocean: 'hsl(var(--ocean))',
-        plastics: 'hsl(var(--plastics))',
+        mixedPlastic: 'hsl(var(--mixedPlastic))',
         nets: 'hsl(var(--nets))',
         metal: 'hsl(var(--metal))',
         rubber: 'hsl(var(--rubber))',

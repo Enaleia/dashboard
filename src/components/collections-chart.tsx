@@ -76,8 +76,6 @@ interface CollectionsChartProps {
   timeRange: string;
 }
 
-//https://hq.enaleia-hub.com/flows/trigger/729df9bd-d369-4489-b87a-628c02d51041?id=1139&start_date=2024-01-01&end_date=2024-05-01
-
 const chartEndpoints = {
   Home: "0ec1555a-082e-46bf-be91-422ab8793096",
   PortDetail: "729df9bd-d369-4489-b87a-628c02d51041",
@@ -102,8 +100,7 @@ export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsCh
         const startDate = new Date()
         startDate.setMonth(startDate.getMonth() - (timeRange === 'Last 12 months' ? 12 : 6))       
         queryString += (queryString ? '&' : '?') + `start_date=${startDate.toISOString().split('T')[0]}&end_date=${endDate}`       
-      }
-      
+      }    
       console.log(queryString)
 
       const response = await fetch(
@@ -173,12 +170,15 @@ export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsCh
                         <div className="capitalize font-bold">{name}</div>
                         <div className="m-auto text-gray-300">--</div>
                         <div className="ml-auto font-extralight">{value} Kgs</div>
-                        {index === 3 && (
+                        {index === (pageId === "Home" ? 6 : 3) && (
                           <div className="mt-1.5 flex basis-full items-center border-t border-gray-400 pt-1.5 text-sm md:text-lg">
                             Total
                             <div className="ml-auto font-extralight">
-                              {item.payload.mixedPlastic + item.payload.metal + item.payload.rubber + item.payload.preventionNet + item.payload.ghostNet + item.payload.rope + item.payload.other} Kgs
-                              {/* {item.payload.fishingForLitter + item.payload.adHoc + item.payload.beach + item.payload.prevention} Kgs */}
+                              {pageId === "Home" ? 
+                                (item.payload.mixedPlastic + item.payload.metal + item.payload.rubber + item.payload.preventionNet + item.payload.ghostNet + item.payload.rope + item.payload.other) + ' Kgs'
+                              :
+                                (item.payload.fishingForLitter + item.payload.adHoc + item.payload.beach + item.payload.prevention) + ' Kgs'
+                              }
                             </div>
                           </div>
                         )}
