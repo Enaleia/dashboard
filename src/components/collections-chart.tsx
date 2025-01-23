@@ -97,52 +97,8 @@ export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsCh
   })
   if (isPending) return 'Loading...'
   if (error) return 'An error has occurred: ' + error.message
-  const records = data?.activitiesData ?? []
+  const records = data?.data ?? []
   console.log("records:", records)
-
-
-  // const filteredData = records.filter((item: any) => {
-  //   const date = new Date(item.date)
-  //   const now = new Date()
-  //   const currentYear = now.getFullYear()
-  //   let startDate: Date
-
-  //   if (timeRange === "This year") {
-  //     startDate = new Date(currentYear, 0, 1); // Start from January 1st of the current year
-  //     return date >= startDate && date <= now; // Include dates up to the current date
-  //   } else if (timeRange === "Last year") {
-  //     startDate = new Date(currentYear - 1, 0, 1); // Start from January 1st of the last year
-  //     const endDate = new Date(currentYear, 0, 0); // End at December 31st of the last year
-  //     return date >= startDate && date <= endDate; // Include all dates of the last year
-  //   } else if (timeRange === "All time") {
-  //     return true // Include all data points for all time
-  //   }
-  // }).reduce((acc: any, item: any) => {
-  //   const month = new Date(item.date).toLocaleString('default', { month: 'short', year: 'numeric' });
-  //   if (!acc[month]) {
-  //     acc[month] = { date: month, plastics: 0, nets: 0, metal: 0, rubber: 0, fishingForLitter: 0, adHoc: 0, prevention: 0, beach: 0 };
-  //   }
-  //   // Accumulate values
-  //   if (pageId === "Home") {
-  //     const materialItem = item as { plastics: number; nets: number; metal: number; rubber: number; date: string };
-  //     acc[month].plastics += materialItem.plastics;
-  //     acc[month].nets += materialItem.nets;
-  //     acc[month].metal += materialItem.metal;
-  //     acc[month].rubber += materialItem.rubber;
-  //   } else {
-  //     const activityItem = item as { fishingForLitter: number; adHoc: number; beach: number; prevention: number; date: string };
-  //     acc[month].fishingForLitter += activityItem.fishingForLitter;
-  //     acc[month].adHoc += activityItem.adHoc;
-  //     acc[month].prevention += activityItem.prevention;
-  //     acc[month].beach += activityItem.beach;
-  //   }
-  //   return acc;
-  // }, {} as Record<string, any>);
-  // // Convert accumulated data back to an array
-  // const accumulatedData = Object.values(filteredData);
-
-  // const activitiesData = [{date:"2024-04-01",fishingForLitter:0,adHoc:9340,beach:0,prevention:0},{date:"2024-05-01",fishingForLitter:1345,adHoc:0,beach:0,prevention:0},{date:"2024-06-01",fishingForLitter:4860,adHoc:0,beach:0,prevention:0},{date:"2024-07-01",fishingForLitter:5633,adHoc:0,beach:0,prevention:1559},{date:"2024-08-01",fishingForLitter:8406,adHoc:0,beach:0,prevention:1254},{date:"2024-09-01",fishingForLitter:13841,adHoc:0,beach:0,prevention:997},{date:"2024-10-01",fishingForLitter:14042,adHoc:0,beach:0,prevention:2121},{date:"2024-11-01",fishingForLitter:6300,adHoc:0,beach:0,prevention:0}]
-  // console.log('activitiesData:', activitiesData)
 
   return (
     <ScrollArea className="max-w-[350px] md:max-w-[1500px]">
