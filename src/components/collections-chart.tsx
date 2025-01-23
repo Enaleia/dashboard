@@ -21,40 +21,52 @@ const pageIds = [
 type PageId = typeof pageIds[number]
 
 const materialsChartConfig = {
-  plastics: {
-    label: "Plastics",
+  mixedPastic: {
+    label: "Mixed plastic",
     color: "hsl(var(--chart-1))",
-  },
-  nets: {
-    label: "Nets",
-    color: "hsl(var(--chart-2))",
   },
   metal: {
     label: "Metal",
-    color: "hsl(var(--chart-3))",
+    color: "hsl(var(--chart-2))",
   },
   rubber: {
     label: "Rubber",
+    color: "hsl(var(--chart-3))",
+  },
+  preventionNet: {
+    label: "Prevention net",
     color: "hsl(var(--chart-4))",
+  },
+  ghostNet: {
+    label: "Ghost net",
+    color: "hsl(var(--chart-5))",
+  },
+  rope: {
+    label: "Rope",
+    color: "hsl(var(--chart-6))",
+  },
+  other: {
+    label: "Other",
+    color: "hsl(var(--chart-7))",
   },
 } satisfies ChartConfig
 
 const activitiesChartConfig = {
   litter: {
     label: "Fishing for litter",
-    color: "hsl(var(--chart-1))",
+    color: "hsl(var(--chart-8))",
   },
   adhoc: {
     label: "Ad hoc",
-    color: "hsl(var(--chart-2))",
+    color: "hsl(var(--chart-9))",
   },
   prevention: {
     label: "Prevention",
-    color: "hsl(var(--chart-3))",
+    color: "hsl(var(--chart-10))",
   },
   beach: {
     label: "Beach cleanup",
-    color: "hsl(var(--chart-4))",
+    color: "hsl(var(--chart-11))",
   },
 } satisfies ChartConfig
 
@@ -67,7 +79,7 @@ interface CollectionsChartProps {
 //https://hq.enaleia-hub.com/flows/trigger/729df9bd-d369-4489-b87a-628c02d51041?id=1139&start_date=2024-01-01&end_date=2024-05-01
 
 const chartEndpoints = {
-  Home: "729df9bd-d369-4489-b87a-628c02d51041",
+  Home: "0ec1555a-082e-46bf-be91-422ab8793096",
   PortDetail: "729df9bd-d369-4489-b87a-628c02d51041",
   VesselDetail: "729df9bd-d369-4489-b87a-628c02d51041"
 }
@@ -78,16 +90,21 @@ export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsCh
   const { isPending, error, data } = useQuery({
     queryKey: [`chart-${pageId}`, timeRange],
     queryFn: async () => {
-      let queryString = partnerId ? `?id=${partnerId}` : ''
+      console.log(timeRange)
+      let queryString = ''
+
+      if (partnerId) {
+        queryString += `?id=${partnerId}`
+      }
 
       if (timeRange !== 'All time') {
-        const endDate = new Date().toISOString().split('T')[0];
-        const startDate = new Date();
-        startDate.setMonth(startDate.getMonth() - (timeRange === 'Last 12 months' ? 12 : 6));
-        
-        const dateQuery = `${queryString ? '&' : '?'}start_date=${startDate.toISOString().split('T')[0]}&end_date=${endDate}`;
-        queryString += dateQuery;
+        const endDate = new Date().toISOString().split('T')[0]
+        const startDate = new Date()
+        startDate.setMonth(startDate.getMonth() - (timeRange === 'Last 12 months' ? 12 : 6))       
+        queryString += (queryString ? '&' : '?') + `start_date=${startDate.toISOString().split('T')[0]}&end_date=${endDate}`       
       }
+      
+      console.log(queryString)
 
       const response = await fetch(
         `https://hq.enaleia-hub.com/flows/trigger/${chartEndpoints[pageId]}${queryString}`
@@ -160,8 +177,8 @@ export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsCh
                           <div className="mt-1.5 flex basis-full items-center border-t border-gray-400 pt-1.5 text-sm md:text-lg">
                             Total
                             <div className="ml-auto font-extralight">
-                              {/* {item.payload.plastics + item.payload.nets + item.payload.metal + item.payload.rubber} Kgs */}
-                              {item.payload.fishingForLitter + item.payload.adHoc + item.payload.beach + item.payload.prevention} Kgs
+                              {item.payload.mixedPlastic + item.payload.metal + item.payload.rubber + item.payload.preventionNet + item.payload.ghostNet + item.payload.rope + item.payload.other} Kgs
+                              {/* {item.payload.fishingForLitter + item.payload.adHoc + item.payload.beach + item.payload.prevention} Kgs */}
                             </div>
                           </div>
                         )}
@@ -170,46 +187,123 @@ export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsCh
                   />
                 } 
               />
-              <Area
-                dataKey={pageId === "Home" ? "plastics" : "fishingForLitter"}
-                type="monotone"
-                baseValue={0}
-                fill="hsl(var(--chart-1))"
-                fillOpacity={0.4}
-                stroke="hsl(var(--chart-1))"
-                strokeWidth={3}
-                connectNulls={true}
-              />
-              <Area
-                dataKey={pageId === "Home" ? "nets" : "adHoc"}
-                type="monotone"
-                baseValue={0}
-                fill="hsl(var(--chart-2))"
-                fillOpacity={0.4}
-                stroke="hsl(var(--chart-2))"
-                strokeWidth={3}
-                connectNulls={true}
-              />
-              <Area
-                dataKey={pageId === "Home" ? "metal" : "prevention"}
-                type="monotone"
-                baseValue={0}
-                fill="hsl(var(--chart-3))"
-                fillOpacity={0.4}
-                stroke="hsl(var(--chart-3))"
-                strokeWidth={3}
-                connectNulls={true}
-              />
-              <Area
-                dataKey={pageId === "Home" ? "rubber" : "beach"}
-                type="monotone"
-                baseValue={0}
-                fill="hsl(var(--chart-4))"
-                fillOpacity={0.4}
-                stroke="hsl(var(--chart-4))"
-                strokeWidth={3}
-                connectNulls={true}
-              />
+              {pageId === "Home" ? (
+                <>
+                  <Area
+                    dataKey="mixedPlastic"
+                    type="monotone"
+                    baseValue={0}
+                    fill="hsl(var(--chart-1))"
+                    fillOpacity={0.4}
+                    stroke="hsl(var(--chart-1))"
+                    strokeWidth={3}
+                    connectNulls={true}
+                  />
+                  <Area
+                    dataKey="metal"
+                    type="monotone"
+                    baseValue={0}
+                    fill="hsl(var(--chart-2))"
+                    fillOpacity={0.4}
+                    stroke="hsl(var(--chart-2))"
+                    strokeWidth={3}
+                    connectNulls={true}
+                  />
+                  <Area
+                    dataKey="rubber"
+                    type="monotone"
+                    baseValue={0}
+                    fill="hsl(var(--chart-3))"
+                    fillOpacity={0.4}
+                    stroke="hsl(var(--chart-3))"
+                    strokeWidth={3}
+                    connectNulls={true}
+                  />
+                  <Area
+                    dataKey="preventionNet"
+                    type="monotone"
+                    baseValue={0}
+                    fill="hsl(var(--chart-4))"
+                    fillOpacity={0.4}
+                    stroke="hsl(var(--chart-4))"
+                    strokeWidth={3}
+                    connectNulls={true}
+                  />
+                  <Area
+                    dataKey="ghostNet"
+                    type="monotone"
+                    baseValue={0}
+                    fill="hsl(var(--chart-5))"
+                    fillOpacity={0.4}
+                    stroke="hsl(var(--chart-5))"
+                    strokeWidth={3}
+                    connectNulls={true}
+                  />
+                  <Area
+                    dataKey="rope"
+                    type="monotone"
+                    baseValue={0}
+                    fill="hsl(var(--chart-6))"
+                    fillOpacity={0.4}
+                    stroke="hsl(var(--chart-6))"
+                    strokeWidth={3}
+                    connectNulls={true}
+                  />
+                  <Area
+                    dataKey="other"
+                    type="monotone"
+                    baseValue={0}
+                    fill="hsl(var(--chart-7))"
+                    fillOpacity={0.4}
+                    stroke="hsl(var(--chart-7))"
+                    strokeWidth={3}
+                    connectNulls={true}
+                  />
+                </>
+              ):(
+                <>
+                  <Area
+                    dataKey="fishingForLitter"
+                    type="monotone"
+                    baseValue={0}
+                    fill="hsl(var(--chart-8))"
+                    fillOpacity={0.4}
+                    stroke="hsl(var(--chart-8))"
+                    strokeWidth={3}
+                    connectNulls={true}
+                  />
+                  <Area
+                    dataKey="adHoc"
+                    type="monotone"
+                    baseValue={0}
+                    fill="hsl(var(--chart-9))"
+                    fillOpacity={0.4}
+                    stroke="hsl(var(--chart-9))"
+                    strokeWidth={3}
+                    connectNulls={true}
+                  />
+                  <Area
+                    dataKey="prevention"
+                    type="monotone"
+                    baseValue={0}
+                    fill="hsl(var(--chart-10))"
+                    fillOpacity={0.4}
+                    stroke="hsl(var(--chart-10))"
+                    strokeWidth={3}
+                    connectNulls={true}
+                  />
+                  <Area
+                    dataKey="beach"
+                    type="monotone"
+                    baseValue={0}
+                    fill="hsl(var(--chart-11))"
+                    fillOpacity={0.4}
+                    stroke="hsl(var(--chart-11))"
+                    strokeWidth={3}
+                    connectNulls={true}
+                  />
+                </>
+              )}
             </AreaChart>            
           </ChartContainer>       
         </CardContent>
