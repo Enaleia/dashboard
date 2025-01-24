@@ -78,7 +78,7 @@ interface CollectionsChartProps {
 
 const chartEndpoints = {
   Home: "0ec1555a-082e-46bf-be91-422ab8793096",
-  PortDetail: "729df9bd-d369-4489-b87a-628c02d51041",
+  PortDetail: "697a7c75-c7ce-469a-8dea-38c8de1a6686",
   VesselDetail: "729df9bd-d369-4489-b87a-628c02d51041"
 }
 
