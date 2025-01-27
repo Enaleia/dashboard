@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
+import { useMemo } from "react"
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import {
@@ -11,14 +12,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-
-const pageIds = [
-  'Home',
-  'PortDetail', 
-  'VesselDetail' 
-] as const
-
-type PageId = typeof pageIds[number]
 
 const materialsChartConfig = {
   mixedPastic: {
@@ -71,15 +64,34 @@ const activitiesChartConfig = {
 } satisfies ChartConfig
 
 interface CollectionsChartProps {
-  pageId: PageId;
+  pageId: "Home" | "PortDetail" | "VesselDetail"
   partnerId?: string;
-  timeRange: string;
+  timeRange: string
 }
 
 const chartEndpoints = {
   Home: "0ec1555a-082e-46bf-be91-422ab8793096",
   PortDetail: "697a7c75-c7ce-469a-8dea-38c8de1a6686",
   VesselDetail: "729df9bd-d369-4489-b87a-628c02d51041"
+}
+
+interface MaterialsChartRecord {
+  date: string;
+  mixedPlastic: number;
+  metal: number;
+  rubber: number;
+  preventionNet: number;
+  ghostNet: number;
+  rope: number;
+  other: number
+}
+
+interface ActivitiesChartRecord {
+  date: string;
+  fishingForLitter: number;
+  adHoc: number;
+  beach: number;
+  prevention: number;
 }
 
 export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsChartProps) {
@@ -109,10 +121,52 @@ export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsCh
       return await response.json()
     },
   })
+  
+  // const records = data?.data ?? []
+  const records = (data?.data ?? []) as (CollectionsChartProps['pageId'] extends "Home" ? MaterialsChartRecord[] : ActivitiesChartRecord[])
+  console.log("records:", records)
+
+  const { ticks, tickFormatter } = useMemo(() => {
+    if (timeRange === 'All time') {
+      // Get unique years from the dataset
+      const uniqueYears = [...new Set(records.map((record) => {
+        const date = new Date(record.date);
+        return date.getUTCFullYear().toString();
+      }))]; 
+
+      // Create one tick per unique year (using the first date of each year in the data)
+      const yearTicks = uniqueYears.map(year => {
+        const firstDateInYear = records.find((record) => record.date.startsWith(year));
+        return firstDateInYear ? firstDateInYear.date : ''
+      });
+
+      return {
+        ticks: yearTicks,
+        tickFormatter: (value: string) => {
+          const date = new Date(value);
+          return date.getUTCFullYear().toString();
+        }
+      };
+    } else {
+      // Monthly view - show all dates
+      return {
+        ticks: records.map((record) => record.date),
+        tickFormatter: (value: string) => {
+          const date = new Date(value);
+          return date.toLocaleDateString("en-US", {
+            month: "short",
+            year: "numeric",
+            timeZone: "UTC"
+          });
+        }
+      };
+    }
+  }, [timeRange])
+
   if (isPending) return 'Loading...'
   if (error) return 'An error has occurred: ' + error.message
-  const records = data?.data ?? []
-  console.log("records:", records)
+
+  // const ticks = records.map((record: Record) => record.date)
 
   return (
     <ScrollArea className="max-w-[350px] md:max-w-[1500px]">
@@ -125,10 +179,11 @@ export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsCh
             <AreaChart
               accessibilityLayer
               data={records}
-              // margin={{
-              //   left: 10,
-              //   bottom: 20,
-              // }}
+              margin={{
+                // left: 10,
+                // bottom: 20,
+                right: 30
+              }}
             >
               <CartesianGrid vertical={false} />
               <XAxis
@@ -136,17 +191,17 @@ export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsCh
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
-                tickCount={4}
-                tickFormatter={(value) => {
-                  // console.log("Tick value:", value);
-                  const [year, month] = value.split('-'); // Split the value into year and month
-                  const date = new Date(Number(year), Number(month) - 1, 1)
-                  // console.log("new date:", date);
-                  return date.toLocaleDateString("en-US", {
-                    month: "short",
-                    year: "numeric"
-                  })
-                }}
+                ticks={ticks}
+                interval={0}
+                tickFormatter={tickFormatter}
+                // tickFormatter={(value) => {
+                //   const date = new Date(value)
+                //   return date.toLocaleDateString("en-US", {
+                //     month: "short",
+                //     year: "numeric",
+                //     timeZone: "UTC"
+                //   });
+                // }}
               />
               <YAxis
                 tickLine={false}
@@ -168,7 +223,6 @@ export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsCh
                       <>
                         <div className={`h-4 w-4 md:h-6 md:w-6 rounded-full bg-${name}`}/>
                         <div className="capitalize font-bold">{name}</div>
-                        <div className="m-auto text-gray-300">--</div>
                         <div className="ml-auto font-extralight">{value} Kgs</div>
                         {index === (pageId === "Home" ? 6 : 3) && (
                           <div className="mt-1.5 flex basis-full items-center border-t border-gray-400 pt-1.5 text-sm md:text-lg">
