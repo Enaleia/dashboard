@@ -15,7 +15,7 @@ const CustomChartLegend = ({ category }: {category: string}) => {
               <div className={`h-7 w-7 rounded-full bg-${type}`}></div>
             </div>
             <div>
-              <h3 className="text-lg font-bold capitalize">{type}</h3>
+              <h3 className="text-lg font-bold capitalize">{type.replace(/([A-Z])/g, ' $1').trim()}</h3>
               <p className="text-xs font-extralight leading-tight md:leading-tight">{description}</p>
             </div>
           </div>

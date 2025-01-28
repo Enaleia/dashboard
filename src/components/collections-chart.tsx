@@ -128,45 +128,42 @@ export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsCh
 
   const { ticks, tickFormatter } = useMemo(() => {
     if (timeRange === 'All time') {
-      // Get unique years from the dataset
-      const uniqueYears = [...new Set(records.map((record) => {
-        const date = new Date(record.date);
-        return date.getUTCFullYear().toString();
-      }))]; 
+      // Pre-process records to group by year
+      const yearGroups = records.reduce((acc, record) => {
+        const year = record.date.substring(0, 4)
+        if (!acc[year]) {
+          acc[year] = []
+        }
+        acc[year].push(record)
+        return acc;
+      }, {} as Record<string, Array<{ date: string }>>)
 
-      // Create one tick per unique year (using the first date of each year in the data)
-      const yearTicks = uniqueYears.map(year => {
-        const firstDateInYear = records.find((record) => record.date.startsWith(year));
-        return firstDateInYear ? firstDateInYear.date : ''
-      });
+      // Take the first record of each year for ticks
+      const yearTicks = Object.values(yearGroups).map(yearRecords => yearRecords[0].date)
 
       return {
         ticks: yearTicks,
-        tickFormatter: (value: string) => {
-          const date = new Date(value);
-          return date.getUTCFullYear().toString();
-        }
-      };
-    } else {
-      // Monthly view - show all dates
-      return {
-        ticks: records.map((record) => record.date),
-        tickFormatter: (value: string) => {
-          const date = new Date(value);
-          return date.toLocaleDateString("en-US", {
-            month: "short",
-            year: "numeric",
-            timeZone: "UTC"
-          });
-        }
-      };
+        tickFormatter: (value: string) => value.substring(0, 4)
+      }
     }
+    
+    return {
+      ticks: records.map(record => record.date),
+      tickFormatter: (value: string) => {
+        const date = new Date(value)
+        return date.toLocaleDateString("en-US", {
+          month: "short",
+          year: "numeric",
+          timeZone: "UTC"
+        });
+      }
+    };
   }, [timeRange])
 
-  if (isPending) return 'Loading...'
+  if (isPending) return <div className="w-full h-[490px] p-28">Loading...</div>
   if (error) return 'An error has occurred: ' + error.message
 
-  // const ticks = records.map((record: Record) => record.date)
+  // const ticks = records.map(record => record.date)
 
   return (
     <ScrollArea className="max-w-[350px] md:max-w-[1500px]">
@@ -191,9 +188,10 @@ export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsCh
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
-                ticks={ticks}
-                interval={0}
+                ticks={ticks}              
                 tickFormatter={tickFormatter}
+                interval={0}
+                // interval={timeRange === "All time" ? 4 : 0}
                 // tickFormatter={(value) => {
                 //   const date = new Date(value)
                 //   return date.toLocaleDateString("en-US", {
@@ -222,7 +220,7 @@ export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsCh
                     formatter={(value, name, item, index) => (
                       <>
                         <div className={`h-4 w-4 md:h-6 md:w-6 rounded-full bg-${name}`}/>
-                        <div className="capitalize font-bold">{name}</div>
+                        <div className="capitalize font-bold">{String(name).replace(/([A-Z])/g, ' $1').trim()}</div>
                         <div className="ml-auto font-extralight">{value} Kgs</div>
                         {index === (pageId === "Home" ? 6 : 3) && (
                           <div className="mt-1.5 flex basis-full items-center border-t border-gray-400 pt-1.5 text-sm md:text-lg">
