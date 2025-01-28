@@ -1,4 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
+import { CHART_ENDPOINTS } from "@/config/api"
+import { MaterialsChartRecord, ActivitiesChartRecord } from "@/types"
 import { useMemo } from "react"
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
@@ -69,36 +71,11 @@ interface CollectionsChartProps {
   timeRange: string
 }
 
-const chartEndpoints = {
-  Home: "0ec1555a-082e-46bf-be91-422ab8793096",
-  PortDetail: "697a7c75-c7ce-469a-8dea-38c8de1a6686",
-  VesselDetail: "729df9bd-d369-4489-b87a-628c02d51041"
-}
-
-interface MaterialsChartRecord {
-  date: string;
-  mixedPlastic: number;
-  metal: number;
-  rubber: number;
-  preventionNet: number;
-  ghostNet: number;
-  rope: number;
-  other: number
-}
-
-interface ActivitiesChartRecord {
-  date: string;
-  fishingForLitter: number;
-  adHoc: number;
-  beach: number;
-  prevention: number;
-}
-
 export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsChartProps) {
   const chartConfig = pageId === "Home" ? materialsChartConfig : activitiesChartConfig  
 
   const { isPending, error, data } = useQuery({
-    queryKey: [`chart-${pageId}`, timeRange],
+    queryKey: [`chartData-${pageId}`, timeRange],
     queryFn: async () => {
       console.log(timeRange)
       let queryString = ''
@@ -116,7 +93,7 @@ export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsCh
       console.log(queryString)
 
       const response = await fetch(
-        `https://hq.enaleia-hub.com/flows/trigger/${chartEndpoints[pageId]}${queryString}`
+        `https://hq.enaleia-hub.com/flows/trigger/${CHART_ENDPOINTS[pageId]}${queryString}`
       )
       return await response.json()
     },

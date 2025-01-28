@@ -1,4 +1,5 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router'
+import { VesselSearchParams } from '@/types'
 import { useState } from 'react'
 import { DetailPageHeading } from '@/components/detail-page-heading'
 import { Separator } from '@/components/ui/separator'
@@ -15,17 +16,9 @@ export const Route = createFileRoute('/vessels/$id')({
   component: VesselDetailComponent,
 })
 
-interface SearchParams {
-  name: string
-  country: string
-  port: string
-  type: 'Trawler' | 'Small vessel' | 'Purse seiner' | 'Other'
-  collector_identity: string
-}
-
 function VesselDetailComponent() {
   const { id } = Route.useParams()
-  const search = useSearch({ from: `/vessels/$id` }) as SearchParams
+  const search = useSearch({ from: `/vessels/$id` }) as VesselSearchParams
   const { name, country, port, type, collector_identity } = search
   const [selectedChartDates, setSelectedChartDates] = useState('All time')
   const { heading, statSubtitle, statDescription } = partnerDetailInfo["Vessel"]

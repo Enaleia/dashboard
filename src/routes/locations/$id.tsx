@@ -1,4 +1,5 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router'
+import { LocationSearchParams } from '@/types'
 import { useState } from 'react'
 import { DetailPageHeading } from '@/components/detail-page-heading'
 import { Separator } from '@/components/ui/separator'
@@ -19,17 +20,9 @@ export const Route = createFileRoute('/locations/$id')({
   component: LocationDetailComponent,
 })
 
-interface SearchParams {
-  name: string
-  country: string
-  coordinates: string
-  type: 'Port' | 'Recycler' | 'Manufacturer'
-  addresses: string[]
-}
-
 function LocationDetailComponent() {
   const { id } = Route.useParams()
-  const search = useSearch({ from: `/locations/$id` }) as SearchParams
+  const search = useSearch({ from: `/locations/$id` }) as LocationSearchParams
   const { name, country, coordinates, type, addresses } = search
   const [selectedChartDates, setSelectedChartDates] = useState('All time')
   const { heading, description, statSubtitle, statDescription } = partnerDetailInfo[type]

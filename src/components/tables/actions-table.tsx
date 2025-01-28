@@ -1,4 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
+import { TABLE_ENDPOINTS } from "@/config/api"
+import { TableItem } from "@/types"
 import { useNavigate } from "@tanstack/react-router"
 import { useMemo, useState } from "react"
 import {
@@ -14,27 +16,6 @@ import { ShowingDisplay, Paginator } from "@/components/tables/paginator"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { ArrowUpDown } from "lucide-react"
 
-// API endpoint mapping for different table types
-const tableEndpoints = {
-  locations: "a9fc78b6-96a7-4be2-836b-153671fc367f",
-  vessels: "eb03d9a6-dff3-4aec-8fd1-c5816b936c7a"
-}
-
-/**
- * Represents a single row item in the actions table
- * Can be either a location or vessel entry
- */
-interface TableItem {
-  id: string;
-  name: string;
-  country: string;
-  coordinates?: number[];       //only for locations
-  registered_port?: string;     //only for vessels
-  type: string;
-  action_count: number;
-  wallet_addresses?: string[];  //only for locations
-  collector_identity?: string   //only for vessels
-}
 
 /**
  * Props for the ActionsTable component
@@ -60,7 +41,7 @@ const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
     queryKey: [`actionsTable-${pageId}`],
     queryFn: async () => {
       const response = await fetch(
-        `https://hq.enaleia-hub.com/flows/trigger/${tableEndpoints[pageId]}`,
+        `https://hq.enaleia-hub.com/flows/trigger/${TABLE_ENDPOINTS[pageId]}`,
       )
       return await response.json()
     },

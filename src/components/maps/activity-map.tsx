@@ -1,20 +1,13 @@
 import { useQuery } from "@tanstack/react-query"
+import { MAP_ENDPOINT } from "@/config/api"
+import { MapItem } from "@/types"
 import { useEffect, useMemo } from 'react'
 import { Link } from '@tanstack/react-router'
-import { useMediaQuery } from "@/hooks/use-media-query";
+import { useMediaQuery } from "@/hooks/use-media-query"
 import { MapContainer, TileLayer, useMap, Marker, Popup, Polygon } from 'react-leaflet'
-import { Icon } from "leaflet";
-import { MoveRight } from 'lucide-react';
+import { Icon } from "leaflet"
+import { MoveRight } from 'lucide-react'
 import 'leaflet/dist/leaflet.css'
-
-interface MapItem {
-  id: string;
-  name: string;
-  country: string;
-  coordinates?: number[];
-  type: string;
-  wallet_addresses: string[]
-}
 
 // Helper component to trigger invalidateSize
 const InvalidateMapSize = () => {
@@ -35,20 +28,19 @@ const ActivityMap = ({ locationType }: {locationType: string}) => {
   const zoom = isDesktop ? 5 : 3;
 
   const { isPending, error, data } = useQuery({
-    queryKey: ['landingMap'],
+    queryKey: ['mapData'],
     queryFn: async () => {
       const response = await fetch(
-        // `/api/flows/trigger/a9fc78b6-96a7-4be2-836b-153671fc367f`
-        `https://hq.enaleia-hub.com/flows/trigger/a9fc78b6-96a7-4be2-836b-153671fc367f`,
+        `https://hq.enaleia-hub.com/flows/trigger/${MAP_ENDPOINT}`,
       )
       return await response.json()
     },
   })
-  const records = data?.data ?? []
+  const records: MapItem[] = data?.data ?? []
 
   const filteredLocations = useMemo(() => {
     return records
-      .filter((record: MapItem) => {
+      .filter((record) => {
         if (locationType === 'See all') return true;
         return record.type === locationType;
       })

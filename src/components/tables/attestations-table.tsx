@@ -1,4 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
+import { ATTESTATION_ENDPOINTS } from "@/config/api"
+import { AttestationItem } from "@/types"
 import {
   Table,
   TableBody,
@@ -11,20 +13,6 @@ import { usePagination } from "@/hooks/use-pagination"
 import { ShowingDisplay, Paginator } from "@/components/tables/paginator"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { Link, ArrowUpRight } from 'lucide-react'
-import attestationData from '@/attestation_data.json'
-
-const tableEndpoints = {
-  locationDetail: "37277177-5ac5-4c39-af25-9ae90b431a72",
-  vesselDetail: "f8858a9b-7f4c-4542-9ce0-9362563b8660"
-}
-
-interface AttestationItem {
-  // UUID: string;
-  // submittedOn: string;
-  id: string;
-  submittedBy: string;
-  // txLink: string
-}
 
 interface AttestationTableProps {
   pageId: "locationDetail" | "vesselDetail"
@@ -39,7 +27,7 @@ const AttestationsTable = ({ pageId, partnerId }: AttestationTableProps) => {
     queryKey: [`attestationsTable-${pageId}`],
     queryFn: async () => {
       const response = await fetch(
-        `https://hq.enaleia-hub.com/flows/trigger/${tableEndpoints[pageId]}?id=${partnerId}`,
+        `https://hq.enaleia-hub.com/flows/trigger/${ATTESTATION_ENDPOINTS[pageId]}?id=${partnerId}`,
       )
       return await response.json()
     },
@@ -61,7 +49,7 @@ const AttestationsTable = ({ pageId, partnerId }: AttestationTableProps) => {
 
   return (
     <>
-      <p className="font-semibold py-2">Total attestations: {attestationData.length}</p>
+      <p className="font-semibold py-2">Total attestations: {records.length}</p>
       {pageTransactions.length ? (
         isDesktop ? ( 
           <Table>
