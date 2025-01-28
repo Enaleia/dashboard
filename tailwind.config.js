@@ -84,10 +84,13 @@ export default {
   	}
   },
   safelist: [
-    'bg-plastics',
-    'bg-nets',
+    'bg-mixedPlastic',
     'bg-metal',
     'bg-rubber',
+    'bg-preventionNet',
+    'bg-ghostNet',
+    'bg-rope',
+    'bg-other',
     'bg-fishingForLitter',
     'bg-adHoc',
     'bg-prevention',
