@@ -67,7 +67,8 @@ function VesselDetailComponent() {
 
         <div className="py-6 md:py-0">
           <CollectionsChart
-            category="activities"
+            pageId='VesselDetail'
+            partnerId={id}
             timeRange={selectedChartDates}
           />
           <CustomChartLegend category="activities" />
@@ -78,7 +79,7 @@ function VesselDetailComponent() {
         <h2 className='font-bold text-3xl md:text-5xl tracking-tight'>Attestations</h2>
         <p className='w-full md:w-[70%] font-extralight tracking-tight leading-tight md:leading-tight'>{attestationDescriptions["Vessel"]}</p>
         <Separator className='bg-black my-1'/>
-        <AttestationsTable />
+        <AttestationsTable pageId='vesselDetail' partnerId={id}/>
       </section>
 
       <DetailPageBackNav detailType='vessel'/>

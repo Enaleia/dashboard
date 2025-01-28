@@ -75,7 +75,7 @@ function HomeComponent() {
           </div>
         </article>
 
-        <CollectionsChart category='materials' timeRange={selectedChartDates}/>
+        <CollectionsChart pageId='Home' timeRange={selectedChartDates}/>
         <CustomChartLegend category='materials' />
         <article className='font-extralight text-base md:text-lg text-center p-6 md:p-12'>
           <p>

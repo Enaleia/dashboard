@@ -85,7 +85,8 @@ function LocationDetailComponent() {
 
           <div className="py-6 md:py-0">
             <CollectionsChart
-              category="activities"
+              pageId='PortDetail'
+              partnerId={id}
               timeRange={selectedChartDates}
             />
             <CustomChartLegend category="activities" />
@@ -101,7 +102,7 @@ function LocationDetailComponent() {
           {attestationDescriptions[type]}
         </p>
         <Separator className="bg-black my-1" />
-        <AttestationsTable />
+        <AttestationsTable pageId='locationDetail' partnerId={id}/>
       </section>
 
       <DetailPageBackNav detailType="location" />

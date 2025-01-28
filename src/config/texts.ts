@@ -1,6 +1,6 @@
 
 // Global
-export const dateChoices = ["All time", "Last year", "This year"]
+export const dateChoices = ["All time", "Last 12 months", "Last 6 months"]
 
 export const locationTypes = ["See all", "Port", "Recycler", "Manufacturer"]
 
@@ -55,10 +55,13 @@ export const attestationDescriptions = {
 }
 
 export const materialsChartLegendDescriptions = {
-  "plastics": "All types of plastics, from beverage packaging to light weight plastics.",
-  "nets": "Used fishing gear and nets, collected from fishers to prevent disposal in the sea.",
+  "mixedPlastic": "Represents a collection that mainly contains plastics but can also contains other materials such as metals, rubbers, ocean floor debris and water.",
   "metal": "All types of metal collected from the ocean. Often these metals can be reused elsewhere.",
-  "rubber": "Mainly tires and other rubber material. This category has been recently added to the platform."
+  "rubber": "Mainly tires and other rubber material. This category has been recently added to the platform.",
+  "preventionNet": "Used fishing gear, such as fishing nets, collected from fishers to prevent disposal in the sea.",
+  "ghostNet": "Ghost nets are abandoned, lost, or discarded fishing nets that continue to drift through oceans and waterways. They trap fish, turtles, seabirds, and marine mammals, often causing injury or death.",
+  "rope": "Used fishing gear, collected from fishers to prevent disposal in the sea.",
+  "other": "Used fishing gear, such as fishing nets, collected from fishers to prevent disposal in the sea."
 }
 
 export const activitesChartLegendDescriptions = {
