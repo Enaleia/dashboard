@@ -10,7 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { usePagination } from "@/hooks/use-pagination"
-import { ShowingDisplay, Paginator } from "@/components/paginator"
+import { ShowingDisplay, Paginator } from "@/components/tables/paginator"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { ArrowUpDown } from "lucide-react"
 

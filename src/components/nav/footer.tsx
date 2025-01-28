@@ -1,5 +1,5 @@
-import { NavLogo } from './nav-logo'
-import { NavLinks } from './nav-links'
+import { NavLogo } from './logo'
+import { NavLinks } from './links'
 
 const GithubLink = () => {
   return (

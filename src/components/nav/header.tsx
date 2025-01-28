@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { NavLogo } from './nav-logo'
-import { NavLinks } from './nav-links'
-import { NavMenu } from './nav-menu'
+import { NavLogo } from './logo'
+import { NavLinks } from './links'
+import { NavMenu } from './menu'
 import { Menu } from 'lucide-react'
 
 const NavHeader = () => {
