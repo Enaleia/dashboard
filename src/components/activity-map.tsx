@@ -88,7 +88,7 @@ const ActivityMap = ({ locationType }: {locationType: string}) => {
           const { id, name, country, coordinates, type, wallet_addresses } = record; 
           return coordinates?.length === 2 && (    
             <Marker key={name} position={coordinates as [number, number]} icon={new Icon({
-              iconUrl: `/${type}_icon.svg`,
+              iconUrl: `/PartnerIcons/${type}.svg`,
               iconSize: [16, 16], 
             })}>
               <Popup>
@@ -102,7 +102,7 @@ const ActivityMap = ({ locationType }: {locationType: string}) => {
                   </Link>
                 </div>
                 <div className='flex items-center gap-2 text-sm mt-4 mb-8 h-[16px] mx-8'>
-                  <img src={`/${type}_icon.svg`} className='h-6 w-6' />
+                  <img src={`PartnerIcons/${type}.svg`} className='h-6 w-6' />
                   <p>{type}</p> 
                 </div>
               </Popup>

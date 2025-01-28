@@ -117,7 +117,7 @@ export const aboutPageTexts = {
 
 export const aboutCardInfo = [
   {
-    image: 'turtle_rings',
+    image: 'turtle',
     title: 'Log waste collection at the port',
     description: 'Using the mobile app, each port coordinator records and submits data directly to the blockchain. The mobile app operates as a distributed node, with each user having their own account (wallet) to interact securely with the blockchain.<br/><br/>The mobile app is currently in testing phase. If you are interested to learn more about our code, please visit the <a href="" style="font-weight: bold">repository</a>.',
   },

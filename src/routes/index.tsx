@@ -43,7 +43,7 @@ function HomeComponent() {
 
       <section className='overflow-hidden border border-primary rounded-3xl'>
         <article className='relative w-full pb-8'>
-          <img src='/impact_photo.jpg' alt="photo of port operations" className='object-cover bg-center h-[350px] md:h-auto w-full'/>
+          <img src='/Images/home.jpg' alt="photo of port operations" className='object-cover bg-center h-[350px] md:h-auto w-full'/>
           <div className='absolute inset-0 flex flex-col items-center justify-center text-center text-sand'>
             <p className='w-full font-bold text-5xl md:text-7xl tracking-tight px-10 pt-4 md:pt-10'>{impactSectionTitle}</p>
             <p className='w-[90%] md:w-[60%] font-extralight text-lg md-text-xl tracking-tight leading-tight md:leading-tight py-2 md:py-6'>{impactSectionDescription}</p>

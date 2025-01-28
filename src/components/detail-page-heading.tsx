@@ -22,7 +22,7 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type, 
 
           <div className='flex flex-col md:flex-row gap-0.5 md:gap-4 font-light'>
             <div className='flex flex-row items-center gap-1'>
-              <img src={`/flag_${country}.svg`} alt={`country} flag`} className='h-7 w-7'/>
+              <img src={`/CountryFlags/${country}.svg`} alt={`${country} flag`} className='h-7 w-7'/>
               <p>{country}</p>
             </div>
             <div className='hidden md:flex'>
@@ -30,7 +30,7 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type, 
             </div>
             {coordinates &&
               <a href='' className='flex flex-row items-center gap-2 hover:font-semibold'>
-                <img src='/pin_icon.svg' alt='pin icon' className='h-6 w-6'/>
+                <img src='/DataIcons/pin.svg' alt='pin icon' className='h-6 w-6'/>
                 {coordinates.length === 2 ?
                   <>
                     <p>{coordinates[0]}, {coordinates[1]}</p>
@@ -43,7 +43,7 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type, 
             }
             {registered_port && 
               <div className='flex flex-row items-center gap-2 hover:font-semibold'>
-                <img src='/pin_icon.svg' alt='pin icon' className='h-6 w-6'/>
+                <img src='/DataIcons/pin.svg' alt='pin icon' className='h-6 w-6'/>
                 <p><span className='font-extralight'>Registered port:</span> {registered_port}</p>
               </div>
             }
@@ -52,7 +52,7 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type, 
             </div>
             {addresses &&
               <a href='' className='flex flex-row items-center gap-2 hover:font-semibold'>
-                <img src='/wallet_icon.svg' alt='wallet icon' className='h-6 w-6'/>
+                <img src='/DataIcons/wallet.svg' alt='wallet icon' className='h-6 w-6'/>
                 {addresses.length > 0 ?
                   addresses.map(address => (
                     <>
@@ -67,7 +67,7 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type, 
             }
             {collector_id && 
               <div className='flex flex-row items-center gap-2 hover:font-semibold'>
-                <img src='/id_card_icon.svg' alt='ID card icon' className='h-6 w-6'/>
+                <img src='/DataIcons/id.svg' alt='ID card icon' className='h-6 w-6'/>
                 <p><span className='font-extralight'>Collector ID:</span> {collector_id}</p>
               </div>
             }
@@ -75,7 +75,7 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type, 
         </div>
 
         <div className='flex flex-col gap-1 items-center'>
-          <img src={`/${type.replace(/ /g, '_')}_icon.svg`} alt={`${type} icon`} className='h-16 w-16 md:h-28 md:w-28'/>
+          <img src={`/PartnerIcons/${type.replace(/ /g, '_')}.svg`} alt={`${type} icon`} className='h-16 w-16 md:h-28 md:w-28'/>
           <p className='text-center uppercase'>{type}</p>
         </div>
       </div>

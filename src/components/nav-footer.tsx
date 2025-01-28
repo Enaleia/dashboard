@@ -8,7 +8,7 @@ const GithubLink = () => {
       target="_blank"
       rel="noopener noreferrer"
     >
-      <img className="size-8" src={"/gitHub_icon.png"} alt="github icon" />
+      <img className="size-8" src={"/gitHub_logo.png"} alt="github icon" />
     </a>
   )
 }
