@@ -14,32 +14,35 @@ import { ShowingDisplay, Paginator } from "@/components/paginator"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { ArrowUpDown } from "lucide-react"
 
-const pageIds = [
-  'locations',
-  'vessels',
-] as const
-
-type PageId = typeof pageIds[number]
-
+// API endpoint mapping for different table types
 const tableEndpoints = {
   locations: "a9fc78b6-96a7-4be2-836b-153671fc367f",
   vessels: "eb03d9a6-dff3-4aec-8fd1-c5816b936c7a"
 }
 
+/**
+ * Represents a single row item in the actions table
+ * Can be either a location or vessel entry
+ */
 interface TableItem {
   id: string;
   name: string;
   country: string;
-  coordinates?: number[];
-  registered_port?: string;
+  coordinates?: number[];       //only for locations
+  registered_port?: string;     //only for vessels
   type: string;
   action_count: number;
-  wallet_addresses?: string[];
-  collector_identity? : string
+  wallet_addresses?: string[];  //only for locations
+  collector_identity?: string   //only for vessels
 }
 
+/**
+ * Props for the ActionsTable component
+ * @param pageId - Determines whether to display locations or vessels
+ * @param partnerType - Filter criterion for the type of partner to display
+ */
 interface ActionsTableProps {
-  pageId: PageId;
+  pageId: "locations" | "vessels"
   partnerType: string;
 }
 
@@ -47,22 +50,24 @@ const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
   const navigate = useNavigate()
   const isDesktop = useMediaQuery("(min-width: 768px)")
   const itemsPerPage = 8
+  // State for sorting controls
   const [isAtoZ , setIsAtoZ] = useState(false)
   const [isAscending, setIsAscending] = useState(false)
   const [sortCriteria, setSortCriteria] = useState<'action_count' | 'country'>('action_count')
   
+  // Fetch table data from API
   const { isPending, error, data } = useQuery({
-    queryKey: [`table-${pageId}`],
+    queryKey: [`actionsTable-${pageId}`],
     queryFn: async () => {
       const response = await fetch(
-        // `/api/flows/trigger/${tableEndpoints[pageId]}`
         `https://hq.enaleia-hub.com/flows/trigger/${tableEndpoints[pageId]}`,
       )
       return await response.json()
     },
   })
-  const records = data?.data ?? []
+  const records: TableItem[] = data?.data ?? []
 
+// Filter records based on partner type
   const filteredLocations = useMemo(() => {
     return records
       .filter((record: TableItem) => {
@@ -71,6 +76,7 @@ const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
       })
   }, [partnerType, records])
 
+  // Sort records based on current criteria and direction
   const sortedRecords = useMemo(() => {
     return [...filteredLocations].sort((a, b) => {
       if (sortCriteria === 'action_count') {
@@ -81,6 +87,10 @@ const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
     });
   }, [filteredLocations, isAscending, isAtoZ, sortCriteria]);
 
+  /**
+   * Handles toggling sort criteria and direction
+   * @param criteria - The column to sort by ('action_count' or 'country')
+   */
   const toggleSortCriteria = (criteria: 'action_count' | 'country') => {
     if (sortCriteria === criteria) {
       // Toggle the order if the same criteria is selected
@@ -100,20 +110,16 @@ const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
     }
   }
 
+   // Setup pagination for the sorted records
   const {
 		currentPage,
 		currentPageItems: pageTransactions,
 		loadPage,
 		maxPage,
 		needsPagination,
-	} = usePagination(sortedRecords, itemsPerPage) as {
-    currentPage: number; 
-    currentPageItems: TableItem[]; 
-    loadPage: () => void; 
-    maxPage: number; 
-    needsPagination: boolean;
-  }
+	} = usePagination(sortedRecords, itemsPerPage)
 
+  // Handle loading and error states
   if (isPending) return 'Loading...'
   if (error) return 'An error has occurred: ' + error.message
   
@@ -122,8 +128,10 @@ const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
     <>
       {pageTransactions.length ? (
         <Table>
+          {/* Table header with sortable columns */}
           <TableHeader>
             <TableRow>
+              {/* Header cells with conditional rendering for desktop view */}
               <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-1 md:py-2 border border-black rounded-l-3xl">{pageId === 'locations' ? 'LOCATION NAME' : 'VESSEL NAME'}</div></TableHead>
               {isDesktop &&
                 <>
@@ -149,6 +157,7 @@ const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
             </TableRow>
           </TableHeader>
           <TableBody>
+            {/* Map through paginated records to create table rows */}
             {pageTransactions.map((partner) => {
               const { id, name, country, coordinates, type, registered_port, action_count, wallet_addresses, collector_identity } = partner
               return (
@@ -179,6 +188,7 @@ const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
         <p>no records found</p>
       )}
  
+      {/* Pagination controls */}
       {needsPagination && (
         <article className="flex flex-col justify-center items-center gap-4">
           <Paginator
