@@ -1,10 +1,10 @@
-import { 
-  materialsChartLegendDescriptions, 
-  activitesChartLegendDescriptions, 
-  // activitesChartLegendHeading 
-} from "@/config/texts";
+import { materialsChartLegendDescriptions, activitesChartLegendDescriptions } from "@/config/texts"
 
-const CustomChartLegend = ({ category }: {category: string}) => {
+interface ChartLegendProps {
+  category: string
+}
+
+const CustomChartLegend = ({ category}: ChartLegendProps) => {
   const info = category === "materials" ? materialsChartLegendDescriptions : activitesChartLegendDescriptions
   return (
     <article className="flex justify-center">

@@ -3,53 +3,53 @@ import { ChartConfig } from "@/components/ui/chart"
 // config for CollectionsChart component representing the collection of materials,
 // used on the home page
 export const MaterialsChartConfig = {
-  mixedPastic: {
+  mixedPlastic: {
     label: "Mixed plastic",
-    color: "hsl(var(--chart-1))",
+    color: "hsl(var(--mixedPastic))",
   },
   metal: {
     label: "Metal",
-    color: "hsl(var(--chart-2))",
+    color: "hsl(var(--metal))",
   },
   rubber: {
     label: "Rubber",
-    color: "hsl(var(--chart-3))",
+    color: "hsl(var(--rubber))",
   },
   preventionNet: {
     label: "Prevention net",
-    color: "hsl(var(--chart-4))",
+    color: "hsl(var(--preventionNet))",
   },
   ghostNet: {
     label: "Ghost net",
-    color: "hsl(var(--chart-5))",
+    color: "hsl(var(--ghostNet))",
   },
   rope: {
     label: "Rope",
-    color: "hsl(var(--chart-6))",
+    color: "hsl(var(--rope))",
   },
   other: {
     label: "Other",
-    color: "hsl(var(--chart-7))",
+    color: "hsl(var(--other))",
   },
 } satisfies ChartConfig
 
 // config for CollectionsChart component representing the collection activity,
 // used on location detail and collector detail pages
 export const ActivitiesChartConfig = {
-  litter: {
+  fishingForLitter: {
     label: "Fishing for litter",
-    color: "hsl(var(--chart-8))",
+    color: "hsl(var(--fishingForLitter))",
   },
-  adhoc: {
+  adHoc: {
     label: "Ad hoc",
-    color: "hsl(var(--chart-9))",
+    color: "hsl(var(--adHoc))",
   },
   prevention: {
     label: "Prevention",
-    color: "hsl(var(--chart-10))",
+    color: "hsl(var(--prevention))",
   },
   beach: {
     label: "Beach cleanup",
-    color: "hsl(var(--chart-11))",
+    color: "hsl(var(--beach))",
   },
 } satisfies ChartConfig

@@ -9,9 +9,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { usePagination } from "@/hooks/use-pagination"
+import { usePagination } from "@/hooks/ui/usePagination"
 import { ShowingDisplay, Paginator } from "@/components/tables/paginator"
-import { useMediaQuery } from "@/hooks/use-media-query"
+import { useMediaQuery } from "@/hooks/ui/useMediaQuery"
 import { Link, ArrowUpRight } from 'lucide-react'
 
 interface AttestationTableProps {

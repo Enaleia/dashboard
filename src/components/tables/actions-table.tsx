@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query"
 import { useNavigate } from "@tanstack/react-router"
 import { useMemo } from "react"
-import { useMediaQuery } from "@/hooks/use-media-query"
-import { useTableSort } from "@/hooks/use-table-sort"
+import { useMediaQuery } from "@/hooks/ui/useMediaQuery"
+import { useTableSort } from "@/hooks/ui/useTableSort"
 import { processTableData } from "@/utils/tableProcessing"
 import { TABLE_ENDPOINTS } from "@/config/api"
 import {
@@ -13,7 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { usePagination } from "@/hooks/use-pagination"
+import { usePagination } from "@/hooks/ui/usePagination"
 import { ShowingDisplay, Paginator } from "@/components/tables/paginator"
 import { ArrowUpDown } from "lucide-react"
 

@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router"
 import { ArrowUpRight } from "lucide-react"
-import { useMediaQuery } from "@/hooks/use-media-query"
+import { useMediaQuery } from "@/hooks/ui/useMediaQuery"
 
 interface NavLinksProps {
   closeMenu?: (closeMenu: boolean) => void;

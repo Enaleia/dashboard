@@ -7,7 +7,7 @@ import {
 	PaginationNext,
 	PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useMediaQuery } from "@/hooks/use-media-query";
+import { useMediaQuery } from "@/hooks/ui/useMediaQuery";
 import { cn } from "@/lib/utils";
 
 interface IShowingDisplay {

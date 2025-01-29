@@ -3,7 +3,7 @@ import { MAP_ENDPOINT } from "@/config/api"
 import { MapItem } from "@/types"
 import { useEffect, useMemo } from 'react'
 import { Link } from '@tanstack/react-router'
-import { useMediaQuery } from "@/hooks/use-media-query"
+import { useMediaQuery } from "@/hooks/ui/useMediaQuery"
 import { MapContainer, TileLayer, useMap, Marker, Popup, Polygon } from 'react-leaflet'
 import { Icon } from "leaflet"
 import { MoveRight } from 'lucide-react'
