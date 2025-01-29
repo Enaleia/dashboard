@@ -1,6 +1,5 @@
-import { useQuery } from "@tanstack/react-query"
+import { useChartData } from "@/hooks/api/useChartData"
 import { useChartTicks } from "@/hooks/ui/useChartTicks"
-import { CHART_ENDPOINTS } from "@/config/api"
 import { MaterialsChartConfig, ActivitiesChartConfig } from "@/config/charts"
 import { MaterialsChartRecord, ActivitiesChartRecord } from "@/types"
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
@@ -16,33 +15,8 @@ interface CollectionsChartProps {
 }
 
 export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsChartProps) {
-
-  const { isPending, error, data } = useQuery({
-    queryKey: [`chartData-${pageId}`, timeRange],
-    queryFn: async () => {
-      console.log(timeRange)
-      let queryString = ''
-
-      if (partnerId) {
-        queryString += `?id=${partnerId}`
-      }
-
-      if (timeRange !== 'All time') {
-        const endDate = new Date().toISOString().split('T')[0]
-        const startDate = new Date()
-        startDate.setDate(1)
-        startDate.setMonth(startDate.getMonth() - (timeRange === 'Last 12 months' ? 11 : 5))       
-        queryString += (queryString ? '&' : '?') + `start_date=${startDate.toISOString().split('T')[0]}&end_date=${endDate}`       
-      }    
-      console.log(queryString)
-
-      const response = await fetch(
-        `https://hq.enaleia-hub.com/flows/trigger/${CHART_ENDPOINTS[pageId]}${queryString}`
-      )
-      return await response.json()
-    },
-  })
   
+  const { isPending, error, data } = useChartData({ pageId, partnerId, timeRange })
   const records = (data?.data ?? []) as (CollectionsChartProps['pageId'] extends "Home" ? MaterialsChartRecord[] : ActivitiesChartRecord[])
   console.log("records:", records)
   const chartConfig = pageId === "Home" ? MaterialsChartConfig : ActivitiesChartConfig
