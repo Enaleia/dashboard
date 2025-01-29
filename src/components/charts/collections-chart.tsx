@@ -87,7 +87,8 @@ export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsCh
       if (timeRange !== 'All time') {
         const endDate = new Date().toISOString().split('T')[0]
         const startDate = new Date()
-        startDate.setMonth(startDate.getMonth() - (timeRange === 'Last 12 months' ? 12 : 6))       
+        startDate.setDate(1)
+        startDate.setMonth(startDate.getMonth() - (timeRange === 'Last 12 months' ? 11 : 5))       
         queryString += (queryString ? '&' : '?') + `start_date=${startDate.toISOString().split('T')[0]}&end_date=${endDate}`       
       }    
       console.log(queryString)
