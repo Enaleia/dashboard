@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { CHART_ENDPOINTS } from "@/config/api"
+import { materialsChartConfig, activitiesChartConfig } from "@/config/charts"
 import { MaterialsChartRecord, ActivitiesChartRecord } from "@/types"
 import { useMemo } from "react"
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
@@ -9,61 +10,11 @@ import {
   CardContent,
 } from "@/components/ui/card"
 import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
 
-const materialsChartConfig = {
-  mixedPastic: {
-    label: "Mixed plastic",
-    color: "hsl(var(--chart-1))",
-  },
-  metal: {
-    label: "Metal",
-    color: "hsl(var(--chart-2))",
-  },
-  rubber: {
-    label: "Rubber",
-    color: "hsl(var(--chart-3))",
-  },
-  preventionNet: {
-    label: "Prevention net",
-    color: "hsl(var(--chart-4))",
-  },
-  ghostNet: {
-    label: "Ghost net",
-    color: "hsl(var(--chart-5))",
-  },
-  rope: {
-    label: "Rope",
-    color: "hsl(var(--chart-6))",
-  },
-  other: {
-    label: "Other",
-    color: "hsl(var(--chart-7))",
-  },
-} satisfies ChartConfig
-
-const activitiesChartConfig = {
-  litter: {
-    label: "Fishing for litter",
-    color: "hsl(var(--chart-8))",
-  },
-  adhoc: {
-    label: "Ad hoc",
-    color: "hsl(var(--chart-9))",
-  },
-  prevention: {
-    label: "Prevention",
-    color: "hsl(var(--chart-10))",
-  },
-  beach: {
-    label: "Beach cleanup",
-    color: "hsl(var(--chart-11))",
-  },
-} satisfies ChartConfig
 
 interface CollectionsChartProps {
   pageId: "Home" | "PortDetail" | "VesselDetail"
@@ -72,7 +23,6 @@ interface CollectionsChartProps {
 }
 
 export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsChartProps) {
-  const chartConfig = pageId === "Home" ? materialsChartConfig : activitiesChartConfig  
 
   const { isPending, error, data } = useQuery({
     queryKey: [`chartData-${pageId}`, timeRange],
@@ -148,7 +98,7 @@ export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsCh
       <Card className="border-none shadow-none"> 
         <CardContent className="md:p-12">   
           <ChartContainer 
-            config={chartConfig} 
+            config={pageId === "Home" ? materialsChartConfig : activitiesChartConfig} 
             className=" w-full min-h-[400px] max-h-[400px]"
           >         
             <AreaChart
