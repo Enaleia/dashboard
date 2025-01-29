@@ -1,6 +1,8 @@
 import { ChartConfig } from "@/components/ui/chart"
 
-export const materialsChartConfig = {
+// config for CollectionsChart component representing the collection of materials,
+// used on the home page
+export const MaterialsChartConfig = {
   mixedPastic: {
     label: "Mixed plastic",
     color: "hsl(var(--chart-1))",
@@ -31,7 +33,9 @@ export const materialsChartConfig = {
   },
 } satisfies ChartConfig
 
-export const activitiesChartConfig = {
+// config for CollectionsChart component representing the collection activity,
+// used on location detail and collector detail pages
+export const ActivitiesChartConfig = {
   litter: {
     label: "Fishing for litter",
     color: "hsl(var(--chart-8))",

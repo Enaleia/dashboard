@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { CHART_ENDPOINTS } from "@/config/api"
-import { materialsChartConfig, activitiesChartConfig } from "@/config/charts"
+import { MaterialsChartConfig, ActivitiesChartConfig } from "@/config/charts"
 import { MaterialsChartRecord, ActivitiesChartRecord } from "@/types"
 import { useMemo } from "react"
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
@@ -98,7 +98,7 @@ export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsCh
       <Card className="border-none shadow-none"> 
         <CardContent className="md:p-12">   
           <ChartContainer 
-            config={pageId === "Home" ? materialsChartConfig : activitiesChartConfig} 
+            config={pageId === "Home" ? MaterialsChartConfig : ActivitiesChartConfig} 
             className=" w-full min-h-[400px] max-h-[400px]"
           >         
             <AreaChart

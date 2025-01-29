@@ -1,8 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
-import { TABLE_ENDPOINTS } from "@/config/api"
-import { TableItem } from "@/types"
 import { useNavigate } from "@tanstack/react-router"
-import { useMemo, useState } from "react"
+import { useMemo } from "react"
+import { useMediaQuery } from "@/hooks/use-media-query"
+import { useTableSort } from "@/hooks/use-table-sort"
+import { processTableData } from "@/utils/tableProcessing"
+import { TABLE_ENDPOINTS } from "@/config/api"
 import {
   Table,
   TableBody,
@@ -13,9 +15,9 @@ import {
 } from "@/components/ui/table"
 import { usePagination } from "@/hooks/use-pagination"
 import { ShowingDisplay, Paginator } from "@/components/tables/paginator"
-import { useMediaQuery } from "@/hooks/use-media-query"
 import { ArrowUpDown } from "lucide-react"
 
+const ITEMS_PER_PAGE = 8
 
 /**
  * Props for the ActionsTable component
@@ -30,11 +32,7 @@ interface ActionsTableProps {
 const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
   const navigate = useNavigate()
   const isDesktop = useMediaQuery("(min-width: 768px)")
-  const itemsPerPage = 8
-  // State for sorting controls
-  const [isAtoZ , setIsAtoZ] = useState(false)
-  const [isAscending, setIsAscending] = useState(false)
-  const [sortCriteria, setSortCriteria] = useState<'action_count' | 'country'>('action_count')
+  const { sortState, toggleSortCriteria } = useTableSort()
   
   // Fetch table data from API
   const { isPending, error, data } = useQuery({
@@ -45,51 +43,14 @@ const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
       )
       return await response.json()
     },
+    // staleTime: 5 * 60 * 1000,  // Cache data for 5 minutes
+    // cacheTime: 30 * 60 * 1000, // Keep unused data in cache for 30 minutes
   })
-  const records: TableItem[] = data?.data ?? []
 
-// Filter records based on partner type
-  const filteredLocations = useMemo(() => {
-    return records
-      .filter((record: TableItem) => {
-        if (partnerType === 'See all') return true;
-        return record.type === partnerType;
-      })
-  }, [partnerType, records])
-
-  // Sort records based on current criteria and direction
-  const sortedRecords = useMemo(() => {
-    return [...filteredLocations].sort((a, b) => {
-      if (sortCriteria === 'action_count') {
-        return isAscending ? a.action_count - b.action_count : b.action_count - a.action_count;
-      } else {
-        return isAtoZ ? a.country.localeCompare(b.country) : b.country.localeCompare(a.country);
-      }
-    });
-  }, [filteredLocations, isAscending, isAtoZ, sortCriteria]);
-
-  /**
-   * Handles toggling sort criteria and direction
-   * @param criteria - The column to sort by ('action_count' or 'country')
-   */
-  const toggleSortCriteria = (criteria: 'action_count' | 'country') => {
-    if (sortCriteria === criteria) {
-      // Toggle the order if the same criteria is selected
-      if (criteria === 'action_count') {
-        setIsAscending(prev => !prev);
-      } else {
-        setIsAtoZ(prev => !prev);
-      }
-    } else {
-      // Set the new criteria and reset the order
-      setSortCriteria(criteria);
-      if (criteria === 'action_count') {
-        setIsAscending(false);
-      } else {
-        setIsAtoZ(false);
-      }
-    }
-  }
+  const processedRecords = useMemo(() => 
+    processTableData(data?.data ?? [], partnerType, sortState),
+    [data, partnerType, sortState]
+  )
 
    // Setup pagination for the sorted records
   const {
@@ -98,7 +59,7 @@ const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
 		loadPage,
 		maxPage,
 		needsPagination,
-	} = usePagination(sortedRecords, itemsPerPage)
+	} = usePagination(processedRecords, ITEMS_PER_PAGE)
 
   // Handle loading and error states
   if (isPending) return 'Loading...'
@@ -180,8 +141,8 @@ const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
           />
           <ShowingDisplay
             currentPage={currentPage}
-            totalItemAmount={filteredLocations.length}
-            itemsPerPage={itemsPerPage}
+            totalItemAmount={processedRecords.length}
+            itemsPerPage={ITEMS_PER_PAGE}
           />
         </article>
 			)}
