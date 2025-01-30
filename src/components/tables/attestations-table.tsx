@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { ATTESTATION_ENDPOINTS } from "@/config/api"
+import { ATTESTATION_ENDPOINTS } from "@/config/constants"
 import { AttestationItem } from "@/types"
 import {
   Table,

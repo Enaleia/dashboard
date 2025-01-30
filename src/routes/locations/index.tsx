@@ -6,6 +6,7 @@ import { TableActionsBar } from '@/components/tables/table-actions-bar'
 import { ActionsTable } from '@/components/tables/actions-table'
 import { ActivityMap } from '@/components/maps/activity-map'
 import { locationsPageTexts, locationTypes, viewTypes } from '@/config/texts'
+import { PartnerType } from '@/types'
 
 export const Route = createFileRoute('/locations/')({
   component: LocationsComponent,
@@ -13,7 +14,7 @@ export const Route = createFileRoute('/locations/')({
 
 function LocationsComponent() {
   const { heroTitle, heroDescription } = locationsPageTexts
-  const [selectedLocationType, setSelectedLocationType] = useState("See all")
+  const [selectedLocationType, setSelectedLocationType] = useState<PartnerType>("See all")
   const [selectedViewType, setSelectedViewType] = useState("List")
 
   return (
@@ -33,7 +34,7 @@ function LocationsComponent() {
 
         <article className='overflow-hidden rounded-3xl pb-16'>
           {selectedViewType === "List" && <ActionsTable pageId='locations' partnerType={selectedLocationType}/>}
-          {selectedViewType === "Map" && <ActivityMap locationType={selectedLocationType}/>}
+          {selectedViewType === "Map" && <ActivityMap partnerType={selectedLocationType}/>}
         </article>          
       </section> 
     </main>

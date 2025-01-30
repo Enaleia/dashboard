@@ -1,4 +1,4 @@
-import { ChartConfig } from "@/components/ui/chart"
+import { ChartConfig } from "@/components/ui/charts/chart"
 
 // config for CollectionsChart component representing the collection of materials,
 // used on the home page

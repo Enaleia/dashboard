@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { CHART_ENDPOINTS } from "@/config/api"
+import { CHART_ENDPOINTS } from "@/config/constants"
 
 interface ChartDataParams {
   pageId: "Home" | "PortDetail" | "VesselDetail"

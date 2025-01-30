@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { STATS_ENDPOINTS } from "@/config/api"
+import { STATS_ENDPOINTS } from "@/config/constants"
 import { StatItem } from "@/types"
 import { statDescriptions } from "@/config/texts"
 

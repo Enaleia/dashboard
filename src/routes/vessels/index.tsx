@@ -5,6 +5,8 @@ import { StatsBar } from '@/components/stats-bar'
 import { TableActionsBar } from '@/components/tables/table-actions-bar'
 import { ActionsTable } from '@/components/tables/actions-table'
 import { vesselsPageTexts, vesselTypes } from '@/config/texts'
+import { PartnerType } from '@/types'
+
 
 export const Route = createFileRoute('/vessels/')({
   component: VesselsComponent,
@@ -12,7 +14,7 @@ export const Route = createFileRoute('/vessels/')({
 
 function VesselsComponent() {
   const { heroTitle, heroDescription } = vesselsPageTexts
-  const [selectedVesselType, setSelectedVesselType] = useState("See all")
+  const [selectedVesselType, setSelectedVesselType] = useState<PartnerType>("See all")
 
   return (
     <main className='flex flex-col justify-center items-center gap-8 md:gap-10 m-auto md:pt-16 max-w-[1500px]'>

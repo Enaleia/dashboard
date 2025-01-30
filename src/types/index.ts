@@ -53,10 +53,18 @@ export interface TableItem {
   collector_identity?: string   //only for vessels
 }
 
+export type PartnerType = "See all" | "Port" | "Recycler" | "Manufacturer" | "Trawler" | "Small vessel" | "Purse seiner" | "Other"
+
+export type SortCriteria = 'action_count' | 'country'
+
 export interface SortState {
-  isAtoZ: boolean;
-  isAscending: boolean;
-  criteria: 'action_count' | 'country';
+  isAtoZ?: boolean;
+  isAscending?: boolean;
+  criteria: SortCriteria
+}
+
+export interface BaseLocationRecord {
+  type: string
 }
 
 export interface LocationSearchParams {

@@ -1,9 +1,9 @@
-import { useQuery } from "@tanstack/react-query"
-import { MAP_ENDPOINT } from "@/config/api"
-import { MapItem } from "@/types"
-import { useEffect, useMemo } from 'react'
+import { useEffect } from 'react'
 import { Link } from '@tanstack/react-router'
+import { useMapData } from "@/hooks/api/useMapData"
+import { useProcessedRecords } from '@/hooks/ui/useProcessedRecords'
 import { useMediaQuery } from "@/hooks/ui/useMediaQuery"
+import { PartnerType, MapItem } from "@/types"
 import { MapContainer, TileLayer, useMap, Marker, Popup, Polygon } from 'react-leaflet'
 import { Icon } from "leaflet"
 import { MoveRight } from 'lucide-react'
@@ -22,29 +22,18 @@ const InvalidateMapSize = () => {
   return null;
 };
 
-const ActivityMap = ({ locationType }: {locationType: string}) => {
+interface ActivityMapProps {
+  partnerType: PartnerType
+}
+
+const ActivityMap = ({ partnerType }: ActivityMapProps) => {
   // set map zoom according to screen size
   const isDesktop = useMediaQuery("(min-width: 568px)");
   const zoom = isDesktop ? 5 : 3;
 
-  const { isPending, error, data } = useQuery({
-    queryKey: ['mapData'],
-    queryFn: async () => {
-      const response = await fetch(
-        `https://hq.enaleia-hub.com/flows/trigger/${MAP_ENDPOINT}`,
-      )
-      return await response.json()
-    },
-  })
+  const { isPending, error, data} = useMapData()
   const records: MapItem[] = data?.data ?? []
-
-  const filteredLocations = useMemo(() => {
-    return records
-      .filter((record) => {
-        if (locationType === 'See all') return true;
-        return record.type === locationType;
-      })
-  }, [locationType, records])
+  const filteredLocations = useProcessedRecords(records, partnerType)
 
   if (isPending) return 'Loading...'
   if (error) return 'An error has occurred: ' + error.message

@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
 import { useNavigate } from "@tanstack/react-router"
-import { useMemo } from "react"
 import { useMediaQuery } from "@/hooks/ui/useMediaQuery"
+import { useProcessedRecords } from "@/hooks/ui/useProcessedRecords"
 import { useTableSort } from "@/hooks/ui/useTableSort"
-import { processTableData } from "@/utils/tableProcessing"
-import { TABLE_ENDPOINTS } from "@/config/api"
+import { TABLE_ENDPOINTS } from "@/config/constants"
+import { PartnerType, TableItem } from "@/types"
 import {
   Table,
   TableBody,
@@ -26,7 +26,7 @@ const ITEMS_PER_PAGE = 8
  */
 interface ActionsTableProps {
   pageId: "locations" | "vessels"
-  partnerType: string;
+  partnerType: PartnerType
 }
 
 const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
@@ -47,10 +47,8 @@ const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
     // cacheTime: 30 * 60 * 1000, // Keep unused data in cache for 30 minutes
   })
 
-  const processedRecords = useMemo(() => 
-    processTableData(data?.data ?? [], partnerType, sortState),
-    [data, partnerType, sortState]
-  )
+  const records: TableItem[] = data?.data ?? []
+  const processedRecords = useProcessedRecords(records, partnerType, sortState)
 
    // Setup pagination for the sorted records
   const {
