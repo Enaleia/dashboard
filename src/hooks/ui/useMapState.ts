@@ -1,5 +1,6 @@
 import { atom, useAtom } from 'jotai'
 import { LatLngTuple } from 'leaflet'
+// import { MAP_CONSTANTS } from '@/config/constants'
 import { PageName } from '@/types'
 
 interface MapState {

@@ -1,28 +1,13 @@
-import { useEffect } from 'react'
-import { Link } from '@tanstack/react-router'
-import { useMapData } from "@/hooks/api/useMapData"
+import { useMapData } from '@/hooks/api/useMapData'
 import { useMapState } from '@/hooks/ui/useMapState'
 import { useProcessedRecords } from '@/hooks/ui/useProcessedRecords'
-import { useMediaQuery } from "@/hooks/ui/useMediaQuery"
+// import { useMediaQuery } from '@/hooks/ui/useMediaQuery'
 import { PageName, PartnerType, MapItem } from "@/types"
-import { MapContainer, TileLayer, useMap, Marker, Popup, Polygon } from 'react-leaflet'
+import { MapContainer, TileLayer, Polygon } from 'react-leaflet'
 import { MapStateController } from './MapStateController'
-import { Icon } from "leaflet"
-import { MoveRight } from 'lucide-react'
+import { MapSizeHandler } from './MapSizeHandler'
+import { LocationMarker } from './LocationMarker'
 import 'leaflet/dist/leaflet.css'
-
-// Helper component to trigger invalidateSize
-const InvalidateMapSize = () => {
-  const map = useMap();
-  useEffect(() => {
-    // Small delay to ensure the container has fully rendered
-    const timeout = setTimeout(() => {
-      map.invalidateSize();
-    }, 100);   
-    return () => clearTimeout(timeout);
-  }, [map]); 
-  return null;
-};
 
 interface ActivityMapProps {
   pageName: PageName
@@ -31,9 +16,9 @@ interface ActivityMapProps {
 
 const ActivityMap = ({ pageName, partnerType }: ActivityMapProps) => {
   // set map zoom according to screen size
-  const isDesktop = useMediaQuery("(min-width: 568px)")
-  const ZOOM = isDesktop ? 5 : 3
-  const MAP_CENTER = [38.621971846028586, 13.204641636096362]
+  // const isDesktop = useMediaQuery("(min-width: 568px)")
+  // const ZOOM = isDesktop ? 5 : 3
+  // const MAP_CENTER = [38.621971846028586, 13.204641636096362]
 
   const { isPending, error, data} = useMapData()
   const records: MapItem[] = data?.data ?? []
@@ -72,7 +57,7 @@ const ActivityMap = ({ pageName, partnerType }: ActivityMapProps) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <InvalidateMapSize />
+        <MapSizeHandler />
         <MapStateController  pageName={pageName}/>
         {/* for "fishing zone" map view */}
         {/* <Polygon 
@@ -83,34 +68,12 @@ const ActivityMap = ({ pageName, partnerType }: ActivityMapProps) => {
             fillOpacity: 0.2,
           }}
         /> */}
-        {filteredLocations.map((record: MapItem) => {
-          const { id, name, country, coordinates, type, wallet_addresses } = record; 
-          return coordinates?.length === 2 && (    
-            <Marker key={name} position={coordinates as [number, number]} icon={new Icon({
-              iconUrl: `/PartnerIcons/${type}.svg`,
-              iconSize: [16, 16], 
-            })}>
-              <Popup>
-                <div className='flex items-center gap-10 text-lg mt-8 h-[24px] mx-8'>
-                  <p>{name}</p>
-                  <Link 
-                    to={`/locations/${id}`}
-                    search={{ name: name, country: country, coordinates: coordinates, type: type, addresses: wallet_addresses }}
-                  >
-                    <MoveRight color='black'/>
-                  </Link>
-                </div>
-                <div className='flex items-center gap-2 text-sm mt-4 mb-8 h-[16px] mx-8'>
-                  <img src={`PartnerIcons/${type}.svg`} className='h-6 w-6' />
-                  <p>{type}</p> 
-                </div>
-              </Popup>
-            </Marker>
-          )
-        })}
+        {filteredLocations.map((record) => (
+          <LocationMarker key={record.id} record={record} />
+        ))}
       </MapContainer>
     </article>
-	);
-};
+	)
+}
 
-export { ActivityMap };
+export { ActivityMap }

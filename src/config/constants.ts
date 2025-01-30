@@ -1,5 +1,6 @@
 import { PageName } from "@/types"
 
+// API endpoints
 export const STATS_ENDPOINTS: Partial<Record<PageName, string>> = {
   Home: "352a7482-4a18-4484-a53b-78c381d4db61",
   Locations: "bb931cab-7d63-4287-9380-1fb87a5b6431",
@@ -27,3 +28,17 @@ export const ATTESTATION_ENDPOINTS: Partial<Record<PageName, string>> = {
   LocationDetail: "37277177-5ac5-4c39-af25-9ae90b431a72",
   VesselDetail: "f8858a9b-7f4c-4542-9ce0-9362563b8660"
 }
+
+
+// map
+export const MAP_CONSTANTS = {
+  DESKTOP_BREAKPOINT: "(min-width: 568px)",
+  DESKTOP_ZOOM: 5,
+  MOBILE_ZOOM: 3,
+  DEFAULT_CENTER: [38.621971846028586, 13.204641636096362] as [number, number],
+  ICON_SIZE: [16, 16] as [number, number],
+  MAP_HEIGHT: {
+    MOBILE: "400px",
+    DESKTOP: "700px"
+  }
+} as const
