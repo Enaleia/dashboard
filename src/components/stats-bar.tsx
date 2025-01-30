@@ -1,45 +1,32 @@
-import { useQuery } from "@tanstack/react-query"
-import { STATS_ENDPOINTS } from "@/config/constants"
-import { StatItem } from "@/types"
+import { useStatsData } from "@/hooks/api/useStatsData"
+import { PageName, StatItem } from "@/types"
 import { statDescriptions } from "@/config/texts"
 
-const pageIds = [
-  'Home',
-  'Locations',
-  'PortDetail',
-  'RecyclerDetail',
-  'ManufacturerDetail',
-  'Vessels', 
-  'VesselDetail' 
-] as const
-
-type PageId = typeof pageIds[number]
-
 interface StatsBarProps {
-  pageId: PageId
+  pageName: PageName
   partnerId?: string
 }
 
-const StatsBar = ({ pageId, partnerId }: StatsBarProps) => {
-
-  const { isPending, error, data } = useQuery({
-    queryKey: [`stats-${pageId}`],
-    queryFn: async () => {
-      const queryString = partnerId ? `?id=${partnerId}` : ''
-      const response = await fetch(
-        `https://hq.enaleia-hub.com/flows/trigger/${STATS_ENDPOINTS[pageId]}${queryString}`
-      )
-      return await response.json()
-    },
-  })
-  if (isPending) return 'Loading...'
-  if (error) return 'An error has occurred: ' + error.message
-
+const StatsBar = ({ pageName, partnerId }: StatsBarProps) => {
+  console.log(pageName, partnerId)
+  const { isPending, error, data } = useStatsData({ pageName, partnerId })
+  const records: StatItem[] = data?.data ?? []
   // add description to each stat object
-  const pageStats = data['data'].map((stat: StatItem) => ({
+  const pageStats = records.map((stat) => ({
     ...stat,
-    description: statDescriptions[pageId] ? statDescriptions[pageId][stat.key] : null
+    description: statDescriptions[pageName] ? statDescriptions[pageName][stat.key] : null
   }));
+
+  if (isPending || error) {
+    return (
+      <article className='flex justify-center gap-8 md:gap-20'>
+        <div className="flex flex-col w-full md:w-[20%] justify-center items-center text-center font-extralight">
+          <p className="text-xl md:text-lg font-medium">{isPending ? 'Loading...' : 'An error has occurred'}</p>
+          <p className="text-4xl md:text-5xl font-bold pt-4 pb-1">{isPending ? '' : error.message}</p>
+        </div>
+      </article>
+    );
+  }
 
   return (
     <article className={`flex ${pageStats.length > 5 ? 'flex-wrap justify-center gap-8 md:gap-20' : 'flex-col md:flex-row gap-8 md:justify-around'} items-center px-12 pt-2 pb-12 md:py-8 md:px-2`}>

@@ -41,7 +41,7 @@ function LocationDetailComponent() {
         <h2 className="font-bold text-2xl md:text-4xl tracking-tight pb-2">{heading}</h2>
         <p className="font-extralight text-sm md:text-lg tracking-tight leading-tight md:leading-tight">{description}</p>       
 
-        <StatsBar pageId={`${type}Detail`} partnerId={id}/>
+        <StatsBar pageName={`${type}Detail`} partnerId={id}/>
          
         {statSubtitle &&
           <>
