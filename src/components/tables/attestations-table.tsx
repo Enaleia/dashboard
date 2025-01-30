@@ -1,6 +1,5 @@
-import { useQuery } from "@tanstack/react-query"
-import { ATTESTATION_ENDPOINTS } from "@/config/constants"
-import { AttestationItem } from "@/types"
+import { useAttestationData } from "@/hooks/api/useAttestationData"
+import { PageName, AttestationItem } from "@/types"
 import {
   Table,
   TableBody,
@@ -15,23 +14,15 @@ import { useMediaQuery } from "@/hooks/ui/useMediaQuery"
 import { Link, ArrowUpRight } from 'lucide-react'
 
 interface AttestationTableProps {
-  pageId: "locationDetail" | "vesselDetail"
+  pageName: PageName
   partnerId: string;
 }
 
-const AttestationsTable = ({ pageId, partnerId }: AttestationTableProps) => {
+const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
   const isDesktop = useMediaQuery("(min-width: 768px)")
   const itemsPerPage = isDesktop ? 8 : 5
 
-  const { isPending, error, data } = useQuery({
-    queryKey: [`attestationsTable-${pageId}`],
-    queryFn: async () => {
-      const response = await fetch(
-        `https://hq.enaleia-hub.com/flows/trigger/${ATTESTATION_ENDPOINTS[pageId]}?id=${partnerId}`,
-      )
-      return await response.json()
-    },
-  })
+  const { isPending, error, data } = useAttestationData({ pageName, partnerId })
   const records: AttestationItem[] = data?.data ?? []
   console.log('attestations:', records)
 

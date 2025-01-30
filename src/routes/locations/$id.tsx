@@ -95,7 +95,7 @@ function LocationDetailComponent() {
           {attestationDescriptions[type]}
         </p>
         <Separator className="bg-black my-1" />
-        <AttestationsTable pageId='locationDetail' partnerId={id}/>
+        <AttestationsTable pageName='LocationDetail' partnerId={id}/>
       </section>
 
       <DetailPageBackNav detailType="location" />

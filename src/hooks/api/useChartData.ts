@@ -10,7 +10,7 @@ interface ChartDataParams {
 
 export function useChartData({ pageName, partnerId, timeRange }: ChartDataParams) {
   return useQuery({
-    queryKey: [`chartData-${pageName}`, timeRange],
+    queryKey: [`chartData-${pageName}-${partnerId || ''}`, timeRange],
     queryFn: async () => {
       const queryString = buildQueryString(partnerId, timeRange)
       const response = await fetch(

@@ -53,7 +53,7 @@ export interface TableItem {
   collector_identity?: string   //only for vessels
 }
 
-export type PageName = "Home" | "Locations" | "PortDetail" |"RecyclerDetail" | "ManufacturerDetail" | "Vessels" | "VesselDetail"
+export type PageName = "Home" | "Locations" | "LocationDetail" | "PortDetail" |"RecyclerDetail" | "ManufacturerDetail" | "Vessels" | "VesselDetail"
 
 export type PartnerType = "See all" | "Port" | "Recycler" | "Manufacturer" | "Trawler" | "Small vessel" | "Purse seiner" | "Other"
 

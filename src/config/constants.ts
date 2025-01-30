@@ -1,6 +1,6 @@
 import { PageName } from "@/types"
 
-export const STATS_ENDPOINTS: Record<PageName, string> = {
+export const STATS_ENDPOINTS: Partial<Record<PageName, string>> = {
   Home: "352a7482-4a18-4484-a53b-78c381d4db61",
   Locations: "bb931cab-7d63-4287-9380-1fb87a5b6431",
   PortDetail: "50637703-8870-45ca-828d-bbab78ec917a",
@@ -18,12 +18,12 @@ export const CHART_ENDPOINTS: Partial<Record<PageName, string>> = {
   VesselDetail: "729df9bd-d369-4489-b87a-628c02d51041"
 }
 
-export const TABLE_ENDPOINTS = {
-  locations: "a9fc78b6-96a7-4be2-836b-153671fc367f",
-  vessels: "eb03d9a6-dff3-4aec-8fd1-c5816b936c7a"
+export const TABLE_ENDPOINTS: Partial<Record<PageName, string>> = {
+  Locations: "a9fc78b6-96a7-4be2-836b-153671fc367f",
+  Vessels: "eb03d9a6-dff3-4aec-8fd1-c5816b936c7a"
 }
 
-export const ATTESTATION_ENDPOINTS = {
-  locationDetail: "37277177-5ac5-4c39-af25-9ae90b431a72",
-  vesselDetail: "f8858a9b-7f4c-4542-9ce0-9362563b8660"
+export const ATTESTATION_ENDPOINTS: Partial<Record<PageName, string>> = {
+  LocationDetail: "37277177-5ac5-4c39-af25-9ae90b431a72",
+  VesselDetail: "f8858a9b-7f4c-4542-9ce0-9362563b8660"
 }

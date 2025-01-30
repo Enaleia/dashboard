@@ -1,10 +1,9 @@
-import { useQuery } from "@tanstack/react-query"
 import { useNavigate } from "@tanstack/react-router"
+import { useTableData } from "@/hooks/api/useTableData"
 import { useMediaQuery } from "@/hooks/ui/useMediaQuery"
 import { useProcessedRecords } from "@/hooks/ui/useProcessedRecords"
 import { useTableSort } from "@/hooks/ui/useTableSort"
-import { TABLE_ENDPOINTS } from "@/config/constants"
-import { PartnerType, TableItem } from "@/types"
+import { PageName, PartnerType, TableItem } from "@/types"
 import {
   Table,
   TableBody,
@@ -25,28 +24,17 @@ const ITEMS_PER_PAGE = 8
  * @param partnerType - Filter criterion for the type of partner to display
  */
 interface ActionsTableProps {
-  pageId: "locations" | "vessels"
+  pageName: PageName
   partnerType: PartnerType
 }
 
-const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
+const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
   const navigate = useNavigate()
   const isDesktop = useMediaQuery("(min-width: 768px)")
   const { sortState, toggleSortCriteria } = useTableSort()
   
   // Fetch table data from API
-  const { isPending, error, data } = useQuery({
-    queryKey: [`actionsTable-${pageId}`],
-    queryFn: async () => {
-      const response = await fetch(
-        `https://hq.enaleia-hub.com/flows/trigger/${TABLE_ENDPOINTS[pageId]}`,
-      )
-      return await response.json()
-    },
-    // staleTime: 5 * 60 * 1000,  // Cache data for 5 minutes
-    // cacheTime: 30 * 60 * 1000, // Keep unused data in cache for 30 minutes
-  })
-
+  const { isPending, error, data } = useTableData({ pageName })
   const records: TableItem[] = data?.data ?? []
   const processedRecords = useProcessedRecords(records, partnerType, sortState)
 
@@ -72,7 +60,7 @@ const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
           <TableHeader>
             <TableRow>
               {/* Header cells with conditional rendering for desktop view */}
-              <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-1 md:py-2 border border-black rounded-l-3xl">{pageId === 'locations' ? 'LOCATION NAME' : 'VESSEL NAME'}</div></TableHead>
+              <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-1 md:py-2 border border-black rounded-l-3xl">{pageName === 'Locations' ? 'LOCATION NAME' : 'VESSEL NAME'}</div></TableHead>
               {isDesktop &&
                 <>
                   <TableHead className="p-0">
@@ -83,7 +71,7 @@ const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
                       </div>
                     </div>
                   </TableHead>
-                  <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black">{pageId === 'locations' ? "COORDINATES" : "REGISTERED PORT"}</div></TableHead>
+                  <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black">{pageName === 'Locations' ? "COORDINATES" : "REGISTERED PORT"}</div></TableHead>
                   <TableHead className="p-0"><div className="flex justify-between text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">TYPE</div></TableHead></>
               }
               <TableHead className="p-0">
@@ -104,7 +92,7 @@ const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
                 <TableRow 
                   key={id}
                   onClick={() => navigate({
-                    to: `/${pageId}/${id}`,
+                    to: `/${pageName.toLowerCase()}/${id}`,
                     search: { name: name, country: country, coordinates: coordinates, type: type, port: registered_port, addresses: wallet_addresses, collector_identity: collector_identity }
                     })}
                   className="cursor-pointer hover:font-bold"
@@ -113,8 +101,8 @@ const ActionsTable = ({ pageId, partnerType }: ActionsTableProps) => {
                   {isDesktop &&
                     <>
                       <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border-y border-black flex gap-2"><img src={`/CountryFlags/${country}.svg`} alt={`${country} flag`} className="h-5 w-5"/><span>{country}</span></div></TableCell>
-                      {pageId === 'locations' && <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black">{coordinates?.length === 2 ? `${coordinates[0]}, ${coordinates[1]}` : 'not available'}</div></TableCell>}
-                      {pageId === 'vessels' && <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black">{registered_port ? `${registered_port}` : 'not available'}</div></TableCell>}
+                      {pageName === 'Locations' && <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black">{coordinates?.length === 2 ? `${coordinates[0]}, ${coordinates[1]}` : 'not available'}</div></TableCell>}
+                      {pageName === 'Vessels' && <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border border-black">{registered_port ? `${registered_port}` : 'not available'}</div></TableCell>}
                       <TableCell className="p-0"><div className="mb-2 px-8 py-4 md:pt-5 border-y border-black flex gap-2"><img src={`/PartnerIcons/${type.replace(/ /g, '_')}.svg`} alt={`${type} icon`} className="h-5 w-5"/><span>{type}</span></div></TableCell>
                     </>
                   }

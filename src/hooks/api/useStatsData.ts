@@ -9,7 +9,7 @@ interface StatsDataParams {
 
 export function useStatsData({ pageName, partnerId }: StatsDataParams) {
   return useQuery({
-    queryKey: [`stats-${pageName}`],
+    queryKey: [`stats-${pageName}-${partnerId || ''}`],
     queryFn: async () => {
       const queryString = partnerId ? `?id=${partnerId}` : ''
       const response = await fetch(
