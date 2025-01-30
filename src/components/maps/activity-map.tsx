@@ -1,10 +1,12 @@
 import { useEffect } from 'react'
 import { Link } from '@tanstack/react-router'
 import { useMapData } from "@/hooks/api/useMapData"
+import { useMapState } from '@/hooks/ui/useMapState'
 import { useProcessedRecords } from '@/hooks/ui/useProcessedRecords'
 import { useMediaQuery } from "@/hooks/ui/useMediaQuery"
-import { PartnerType, MapItem } from "@/types"
+import { PageName, PartnerType, MapItem } from "@/types"
 import { MapContainer, TileLayer, useMap, Marker, Popup, Polygon } from 'react-leaflet'
+import { MapStateController } from './MapStateController'
 import { Icon } from "leaflet"
 import { MoveRight } from 'lucide-react'
 import 'leaflet/dist/leaflet.css'
@@ -23,16 +25,20 @@ const InvalidateMapSize = () => {
 };
 
 interface ActivityMapProps {
+  pageName: PageName
   partnerType: PartnerType
 }
 
-const ActivityMap = ({ partnerType }: ActivityMapProps) => {
+const ActivityMap = ({ pageName, partnerType }: ActivityMapProps) => {
   // set map zoom according to screen size
-  const isDesktop = useMediaQuery("(min-width: 568px)");
-  const zoom = isDesktop ? 5 : 3;
+  const isDesktop = useMediaQuery("(min-width: 568px)")
+  const ZOOM = isDesktop ? 5 : 3
+  const MAP_CENTER = [38.621971846028586, 13.204641636096362]
 
   const { isPending, error, data} = useMapData()
   const records: MapItem[] = data?.data ?? []
+  const [mapState] = useMapState(pageName)
+
   const filteredLocations = useProcessedRecords(records, partnerType)
 
   if (isPending) return 'Loading...'
@@ -50,12 +56,24 @@ const ActivityMap = ({ partnerType }: ActivityMapProps) => {
 
 	return (
     <article className='w-full h-[400px] md:h-[700px] pt-3'>
-      <MapContainer className='h-full z-0' center={[38.621971846028586, 13.204641636096362]} zoom={zoom} scrollWheelZoom={false}>
+      <MapContainer 
+        className='h-full z-0' 
+        center={mapState.center} 
+        zoom={mapState.zoom} 
+        scrollWheelZoom={false}
+        dragging={true}
+        doubleClickZoom={true}
+        touchZoom={true}
+        zoomControl={true}
+        keyboard={true}
+        attributionControl={true}
+      >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <InvalidateMapSize />
+        <MapStateController  pageName={pageName}/>
         {/* for "fishing zone" map view */}
         {/* <Polygon 
           positions={coordinates}

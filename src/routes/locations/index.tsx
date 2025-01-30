@@ -34,7 +34,7 @@ function LocationsComponent() {
 
         <article className='overflow-hidden rounded-3xl pb-16'>
           {selectedViewType === "List" && <ActionsTable pageName='Locations' partnerType={selectedLocationType}/>}
-          {selectedViewType === "Map" && <ActivityMap partnerType={selectedLocationType}/>}
+          {selectedViewType === "Map" && <ActivityMap pageName='Locations' partnerType={selectedLocationType}/>}
         </article>          
       </section> 
     </main>
