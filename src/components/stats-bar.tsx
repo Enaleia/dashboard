@@ -8,7 +8,6 @@ interface StatsBarProps {
 }
 
 const StatsBar = ({ pageName, partnerId }: StatsBarProps) => {
-  console.log(pageName, partnerId)
   const { isPending, error, data } = useStatsData({ pageName, partnerId })
   const records: StatItem[] = data?.data ?? []
   // add description to each stat object

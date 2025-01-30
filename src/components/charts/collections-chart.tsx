@@ -1,7 +1,7 @@
 import { useChartData } from "@/hooks/api/useChartData"
 import { useChartTicks } from "@/hooks/ui/useChartTicks"
 import { MaterialsChartConfig, ActivitiesChartConfig } from "@/config/charts"
-import { MaterialsChartRecord, ActivitiesChartRecord } from "@/types"
+import { PageName, MaterialsChartRecord, ActivitiesChartRecord } from "@/types"
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { Card, CardContent } from "@/components/ui/card"
@@ -9,17 +9,17 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/
 import { calculateTooltipTotal } from "@/utils/chartTooltipCalculation"
 
 interface CollectionsChartProps {
-  pageId: "Home" | "PortDetail" | "VesselDetail"
+  pageName: PageName
   partnerId?: string;
   timeRange: string
 }
 
-export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsChartProps) {
+const CollectionsChart = ({ pageName, partnerId, timeRange }: CollectionsChartProps) => {
   
-  const { isPending, error, data } = useChartData({ pageId, partnerId, timeRange })
-  const records = (data?.data ?? []) as (CollectionsChartProps['pageId'] extends "Home" ? MaterialsChartRecord[] : ActivitiesChartRecord[])
+  const { isPending, error, data } = useChartData({ pageName, partnerId, timeRange })
+  const records = (data?.data ?? []) as (CollectionsChartProps['pageName'] extends "Home" ? MaterialsChartRecord[] : ActivitiesChartRecord[])
   console.log("records:", records)
-  const chartConfig = pageId === "Home" ? MaterialsChartConfig : ActivitiesChartConfig
+  const chartConfig = pageName === "Home" ? MaterialsChartConfig : ActivitiesChartConfig
   const { ticks, tickFormatter } = useChartTicks(records, timeRange)
 
   if (isPending) return <div className="w-full h-[490px] p-28">Loading...</div>
@@ -70,7 +70,7 @@ export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsCh
                         <div className={`h-4 w-4 md:h-6 md:w-6 rounded-full bg-${name}`}/>
                         <div className="capitalize font-bold">{String(name).replace(/([A-Z])/g, ' $1').trim()}</div>
                         <div className="ml-auto font-extralight">{value} Kgs</div>
-                        {index === (pageId === "Home" ? 6 : 3) && (
+                        {index === (pageName === "Home" ? 6 : 3) && (
                           <div className="mt-1.5 flex basis-full items-center border-t border-gray-400 pt-1.5 text-sm md:text-lg">
                             Total
                             <div className="ml-auto font-extralight">
@@ -104,3 +104,5 @@ export function CollectionsChart({ pageId, partnerId, timeRange }: CollectionsCh
     </ScrollArea>
   )
 }
+
+export { CollectionsChart };

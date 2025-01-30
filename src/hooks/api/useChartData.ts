@@ -1,19 +1,20 @@
 import { useQuery } from "@tanstack/react-query"
 import { CHART_ENDPOINTS } from "@/config/constants"
+import { PageName } from "@/types"
 
 interface ChartDataParams {
-  pageId: "Home" | "PortDetail" | "VesselDetail"
+  pageName: PageName
   partnerId?: string
   timeRange: string
 }
 
-export function useChartData({ pageId, partnerId, timeRange }: ChartDataParams) {
+export function useChartData({ pageName, partnerId, timeRange }: ChartDataParams) {
   return useQuery({
-    queryKey: [`chartData-${pageId}`, timeRange],
+    queryKey: [`chartData-${pageName}`, timeRange],
     queryFn: async () => {
       const queryString = buildQueryString(partnerId, timeRange)
       const response = await fetch(
-        `https://hq.enaleia-hub.com/flows/trigger/${CHART_ENDPOINTS[pageId]}${queryString}`
+        `https://hq.enaleia-hub.com/flows/trigger/${CHART_ENDPOINTS[pageName]}${queryString}`
       )
       return response.json()
     },

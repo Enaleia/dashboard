@@ -1,5 +1,6 @@
+import { PageName } from "@/types"
 
-export const STATS_ENDPOINTS = {
+export const STATS_ENDPOINTS: Record<PageName, string> = {
   Home: "352a7482-4a18-4484-a53b-78c381d4db61",
   Locations: "bb931cab-7d63-4287-9380-1fb87a5b6431",
   PortDetail: "50637703-8870-45ca-828d-bbab78ec917a",
@@ -11,7 +12,7 @@ export const STATS_ENDPOINTS = {
 
 export const MAP_ENDPOINT = "a9fc78b6-96a7-4be2-836b-153671fc367f"
 
-export const CHART_ENDPOINTS = {
+export const CHART_ENDPOINTS: Partial<Record<PageName, string>> = {
   Home: "0ec1555a-082e-46bf-be91-422ab8793096",
   PortDetail: "697a7c75-c7ce-469a-8dea-38c8de1a6686",
   VesselDetail: "729df9bd-d369-4489-b87a-628c02d51041"
