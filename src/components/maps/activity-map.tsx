@@ -1,7 +1,6 @@
 import { useMapData } from '@/hooks/api/useMapData'
 import { useMapState } from '@/hooks/ui/useMapState'
 import { useProcessedRecords } from '@/hooks/ui/useProcessedRecords'
-// import { useMediaQuery } from '@/hooks/ui/useMediaQuery'
 import { PageName, PartnerType, MapItem } from "@/types"
 import { MapContainer, TileLayer, Polygon } from 'react-leaflet'
 import { MapStateController } from './MapStateController'
@@ -15,10 +14,6 @@ interface ActivityMapProps {
 }
 
 const ActivityMap = ({ pageName, partnerType }: ActivityMapProps) => {
-  // set map zoom according to screen size
-  // const isDesktop = useMediaQuery("(min-width: 568px)")
-  // const ZOOM = isDesktop ? 5 : 3
-  // const MAP_CENTER = [38.621971846028586, 13.204641636096362]
 
   const { isPending, error, data} = useMapData()
   const records: MapItem[] = data?.data ?? []

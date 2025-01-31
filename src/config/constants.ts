@@ -32,9 +32,11 @@ export const ATTESTATION_ENDPOINTS: Partial<Record<PageName, string>> = {
 
 // map
 export const MAP_CONSTANTS = {
-  DESKTOP_BREAKPOINT: "(min-width: 568px)",
-  DESKTOP_ZOOM: 5,
-  MOBILE_ZOOM: 3,
+  DESKTOP_BREAKPOINT: "(min-width: 768px)",
+  ZOOM_LEVELS: {
+    DESKTOP: 5,
+    MOBILE: 3
+  },
   DEFAULT_CENTER: [38.621971846028586, 13.204641636096362] as [number, number],
   ICON_SIZE: [16, 16] as [number, number],
   MAP_HEIGHT: {
