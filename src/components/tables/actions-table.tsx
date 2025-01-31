@@ -4,6 +4,8 @@ import { useMediaQuery } from "@/hooks/ui/useMediaQuery"
 import { useProcessedRecords } from "@/hooks/ui/useProcessedRecords"
 import { useTableSort } from "@/hooks/ui/useTableSort"
 import { PageName, PartnerType, TableItem } from "@/types"
+import { DESKTOP_BREAKPOINT, ITEMS_PER_PAGE } from "@/config/constants"
+
 import {
   Table,
   TableBody,
@@ -16,8 +18,6 @@ import { usePagination } from "@/hooks/ui/usePagination"
 import { ShowingDisplay, Paginator } from "@/components/tables/paginator"
 import { ArrowUpDown } from "lucide-react"
 
-const ITEMS_PER_PAGE = 8
-
 /**
  * Props for the ActionsTable component
  * @param pageId - Determines whether to display locations or vessels
@@ -29,8 +29,9 @@ interface ActionsTableProps {
 }
 
 const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
+  const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT)
+  const itemsPerPage = isDesktop ? ITEMS_PER_PAGE.DESKTOP : ITEMS_PER_PAGE.MOBILE
   const navigate = useNavigate()
-  const isDesktop = useMediaQuery("(min-width: 768px)")
   const { sortState, toggleSortCriteria } = useTableSort()
   
   // Fetch table data from API
@@ -45,7 +46,7 @@ const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
 		loadPage,
 		maxPage,
 		needsPagination,
-	} = usePagination(processedRecords, ITEMS_PER_PAGE)
+	} = usePagination(processedRecords, itemsPerPage)
 
   // Handle loading and error states
   if (isPending) return 'Loading...'
@@ -128,7 +129,7 @@ const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
           <ShowingDisplay
             currentPage={currentPage}
             totalItemAmount={processedRecords.length}
-            itemsPerPage={ITEMS_PER_PAGE}
+            itemsPerPage={itemsPerPage}
           />
         </article>
 			)}

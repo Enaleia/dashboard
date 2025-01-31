@@ -30,9 +30,17 @@ export const ATTESTATION_ENDPOINTS: Partial<Record<PageName, string>> = {
 }
 
 
+// global
+export const DESKTOP_BREAKPOINT = "(min-width: 768px)"
+
+export const ITEMS_PER_PAGE = {
+  DESKTOP: 8,
+  MOBILE: 5
+}
+
+
 // map
 export const MAP_CONSTANTS = {
-  DESKTOP_BREAKPOINT: "(min-width: 768px)",
   ZOOM_LEVELS: {
     DESKTOP: 5,
     MOBILE: 3
@@ -44,3 +52,4 @@ export const MAP_CONSTANTS = {
     DESKTOP: "700px"
   }
 } as const
+

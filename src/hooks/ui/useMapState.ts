@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { atom, useAtom } from 'jotai'
 import { LatLngTuple } from 'leaflet'
 import { useMediaQuery } from './useMediaQuery'
-import { MAP_CONSTANTS } from '@/config/constants'
+import { MAP_CONSTANTS, DESKTOP_BREAKPOINT } from '@/config/constants'
 import { PageName } from '@/types'
 
 interface MapState {
@@ -23,7 +23,7 @@ const LocationsPageMapStateAtom = atom<MapState>({
 
 export const useMapState = (pageName: PageName) => {
   // Initialize state based on window width
-  const isDesktop = useMediaQuery(MAP_CONSTANTS.DESKTOP_BREAKPOINT)
+  const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT)
   const initialRenderRef = useRef(true)
 
   const [homePageState, setHomePageState] = useAtom(homePageMapStateAtom)

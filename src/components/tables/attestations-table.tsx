@@ -1,5 +1,8 @@
 import { useAttestationData } from "@/hooks/api/useAttestationData"
+import { useMediaQuery } from "@/hooks/ui/useMediaQuery"
+import { usePagination } from "@/hooks/ui/usePagination"
 import { PageName, AttestationItem } from "@/types"
+import { DESKTOP_BREAKPOINT, ITEMS_PER_PAGE } from "@/config/constants"
 import {
   Table,
   TableBody,
@@ -8,9 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { usePagination } from "@/hooks/ui/usePagination"
 import { ShowingDisplay, Paginator } from "@/components/tables/paginator"
-import { useMediaQuery } from "@/hooks/ui/useMediaQuery"
 import { Link, ArrowUpRight } from 'lucide-react'
 
 interface AttestationTableProps {
@@ -19,8 +20,8 @@ interface AttestationTableProps {
 }
 
 const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
-  const isDesktop = useMediaQuery("(min-width: 768px)")
-  const itemsPerPage = isDesktop ? 8 : 5
+  const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT)
+  const itemsPerPage = isDesktop ? ITEMS_PER_PAGE.DESKTOP : ITEMS_PER_PAGE.MOBILE
 
   const { isPending, error, data } = useAttestationData({ pageName, partnerId })
   const records: AttestationItem[] = data?.data ?? []
