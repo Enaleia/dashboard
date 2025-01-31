@@ -2,9 +2,9 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import { PageHero } from '@/components/page-hero'
 import { StatsBar } from '@/components/stats-bar'
-import { ActivityMap } from '../components/activity-map'
-import { CollectionsChart } from '@/components/collections-chart'
-import { CustomChartLegend } from '@/components/custom-chart-legend'
+import { ActivityMap } from '../components/maps/activity-map'
+import { CollectionsChart } from '@/components/charts/collections-chart'
+import { CustomChartLegend } from '@/components/charts/custom-chart-legend'
 import { CircleArrowDown } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { BackToTopButton } from '@/components/back-to-top'
@@ -43,14 +43,14 @@ function HomeComponent() {
 
       <section className='overflow-hidden border border-primary rounded-3xl'>
         <article className='relative w-full pb-8'>
-          <img src='/impact_photo.jpg' alt="photo of port operations" className='object-cover bg-center h-[350px] md:h-auto w-full'/>
+          <img src='/Images/home.jpg' alt="photo of port operations" className='object-cover bg-center h-[350px] md:h-auto w-full'/>
           <div className='absolute inset-0 flex flex-col items-center justify-center text-center text-sand'>
             <p className='w-full font-bold text-5xl md:text-7xl tracking-tight px-10 pt-4 md:pt-10'>{impactSectionTitle}</p>
             <p className='w-[90%] md:w-[60%] font-extralight text-lg md-text-xl tracking-tight leading-tight md:leading-tight py-2 md:py-6'>{impactSectionDescription}</p>
           </div>
         </article>
-        <StatsBar pageId='Home'/>
-        <ActivityMap locationType='See all'/>
+        <StatsBar pageName='Home'/>
+        <ActivityMap pageName='Home' partnerType='See all'/>
       </section>
       
       <section className='flex flex-col border border-primary rounded-3xl'>
@@ -75,7 +75,7 @@ function HomeComponent() {
           </div>
         </article>
 
-        <CollectionsChart pageId='Home' timeRange={selectedChartDates}/>
+        <CollectionsChart pageName='Home' timeRange={selectedChartDates}/>
         <CustomChartLegend category='materials' />
         <article className='font-extralight text-base md:text-lg text-center p-6 md:p-12'>
           <p>

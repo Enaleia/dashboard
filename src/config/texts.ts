@@ -1,14 +1,13 @@
+import { PartnerType } from "@/types"
 
 // Global
 export const dateChoices = ["All time", "Last 12 months", "Last 6 months"]
 
-export const locationTypes = ["See all", "Port", "Recycler", "Manufacturer"]
+export const locationTypes: PartnerType[] = ["See all", "Port", "Recycler", "Manufacturer"]
 
-export const vesselTypes = ["See all", "Trawler", "Small vessel", "Purse seiner", "Other"]
+export const vesselTypes: PartnerType[] = ["See all", "Trawler", "Small vessel", "Purse seiner", "Other"]
 
 export const viewTypes = ["List", "Map"]
-
-export const sortByOptions = ["Most to least active", "Least to most active", "Name A-Z", "Name Z-A", "Country A-Z", "Country Z-A", "Type A-Z", "Type Z-A"]
 
 export const statDescriptions: Record<string, Record<string, string>> = {
   Home: {
@@ -71,11 +70,6 @@ export const activitesChartLegendDescriptions = {
   "beach cleanup": "Waste collected during occasional beach cleanups where fishers are not involved; tracked separately."
 }
 
-// export const activitesChartLegendHeading = {
-//   title: "What are the actions, and why do they matter?",
-//   description: "While fishing for litter is most common, sponsors also request ad-hoc clean-ups in neglected areas like abandoned fish farms. Tracking waste per action helps evaluate performance, allocate resources, and ensure transparency in combating marine pollution."
-// }
-
 
 // Home page
 export const homePageTexts = {
@@ -117,7 +111,7 @@ export const aboutPageTexts = {
 
 export const aboutCardInfo = [
   {
-    image: 'turtle_rings',
+    image: 'turtle',
     title: 'Log waste collection at the port',
     description: 'Using the mobile app, each port coordinator records and submits data directly to the blockchain. The mobile app operates as a distributed node, with each user having their own account (wallet) to interact securely with the blockchain.<br/><br/>The mobile app is currently in testing phase. If you are interested to learn more about our code, please visit the <a href="" style="font-weight: bold">repository</a>.',
   },

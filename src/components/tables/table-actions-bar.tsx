@@ -1,11 +1,12 @@
+import { PartnerType } from '@/types';
 import { Button } from '@/components/ui/button'
 
 interface TableActionsBarProps {
-  partnerTypes: string[];
-  selectedPartnerType: string;
-  setSelectedPartnerType: (partnerType: string) => void;
-  viewTypes?: string[];
-  selectedViewType?: string;
+  partnerTypes: PartnerType[]
+  selectedPartnerType: PartnerType
+  setSelectedPartnerType: (partnerType: PartnerType) => void
+  viewTypes?: string[]
+  selectedViewType?: string
   setSelectedViewType?: (viewType: string) => void
 }
 

@@ -1,13 +1,15 @@
 import { Link } from "@tanstack/react-router"
 import { ArrowUpRight } from "lucide-react"
-import { useMediaQuery } from "@/hooks/use-media-query"
+import { useMediaQuery } from "@/hooks/ui/useMediaQuery"
+import { DESKTOP_BREAKPOINT } from "@/config/constants"
+
 
 interface NavLinksProps {
   closeMenu?: (closeMenu: boolean) => void;
 }
 
 const NavLinks = ({ closeMenu }: NavLinksProps) => {
-  const isDesktop = useMediaQuery("(min-width: 768px)")
+  const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT)
 
   return (
     <div className='flex flex-col md:flex-row gap-6 text-right md:text-center md:gap-8 text-2xl md:text-base font-extralight'>

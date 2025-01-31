@@ -1,12 +1,13 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router'
+import { VesselSearchParams } from '@/types'
 import { useState } from 'react'
 import { DetailPageHeading } from '@/components/detail-page-heading'
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
 import { StatsBar } from '@/components/stats-bar'
-import { CollectionsChart } from '@/components/collections-chart'
-import { CustomChartLegend } from '@/components/custom-chart-legend'
-import { AttestationsTable } from '@/components/attestations-table'
+import { CollectionsChart } from '@/components/charts/collections-chart'
+import { CustomChartLegend } from '@/components/charts/custom-chart-legend'
+import { AttestationsTable } from '@/components/tables/attestations-table'
 import { DetailPageBackNav } from '@/components/detail-page-back-nav'
 import { BackToTopButton } from '@/components/back-to-top'
 import { dateChoices, partnerDetailInfo, attestationDescriptions } from '@/config/texts'
@@ -15,17 +16,9 @@ export const Route = createFileRoute('/vessels/$id')({
   component: VesselDetailComponent,
 })
 
-interface SearchParams {
-  name: string
-  country: string
-  port: string
-  type: 'Trawler' | 'Small vessel' | 'Purse seiner' | 'Other'
-  collector_identity: string
-}
-
 function VesselDetailComponent() {
   const { id } = Route.useParams()
-  const search = useSearch({ from: `/vessels/$id` }) as SearchParams
+  const search = useSearch({ from: `/vessels/$id` }) as VesselSearchParams
   const { name, country, port, type, collector_identity } = search
   const [selectedChartDates, setSelectedChartDates] = useState('All time')
   const { heading, statSubtitle, statDescription } = partnerDetailInfo["Vessel"]
@@ -36,7 +29,7 @@ function VesselDetailComponent() {
 
       <section className="border border-primary rounded-3xl overflow-hidden p-12 text-center">
         <h2 className="font-bold text-2xl md:text-4xl tracking-tight pb-2">{heading}</h2>
-        <StatsBar pageId='VesselDetail' partnerId={id}/>
+        <StatsBar pageName='VesselDetail' partnerId={id}/>
         <Separator className='bg-black'/>
         <h3 className='font-bold text-lg md:text-2xl tracking-tight pt-10 pb-2'>{statSubtitle}</h3>
         <p className='font-extralight'>{statDescription}</p>
@@ -67,7 +60,7 @@ function VesselDetailComponent() {
 
         <div className="py-6 md:py-0">
           <CollectionsChart
-            pageId='VesselDetail'
+            pageName='VesselDetail'
             partnerId={id}
             timeRange={selectedChartDates}
           />
@@ -79,7 +72,7 @@ function VesselDetailComponent() {
         <h2 className='font-bold text-3xl md:text-5xl tracking-tight'>Attestations</h2>
         <p className='w-full md:w-[70%] font-extralight tracking-tight leading-tight md:leading-tight'>{attestationDescriptions["Vessel"]}</p>
         <Separator className='bg-black my-1'/>
-        <AttestationsTable pageId='vesselDetail' partnerId={id}/>
+        <AttestationsTable pageName='VesselDetail' partnerId={id}/>
       </section>
 
       <DetailPageBackNav detailType='vessel'/>

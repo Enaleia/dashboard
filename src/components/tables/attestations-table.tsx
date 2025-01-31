@@ -1,4 +1,8 @@
-import { useQuery } from "@tanstack/react-query"
+import { useAttestationData } from "@/hooks/api/useAttestationData"
+import { useMediaQuery } from "@/hooks/ui/useMediaQuery"
+import { usePagination } from "@/hooks/ui/usePagination"
+import { PageName, AttestationItem } from "@/types"
+import { DESKTOP_BREAKPOINT, ITEMS_PER_PAGE } from "@/config/constants"
 import {
   Table,
   TableBody,
@@ -7,43 +11,19 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { usePagination } from "@/hooks/use-pagination"
-import { ShowingDisplay, Paginator } from "@/components/paginator"
-import { useMediaQuery } from "@/hooks/use-media-query"
+import { ShowingDisplay, Paginator } from "@/components/tables/paginator"
 import { Link, ArrowUpRight } from 'lucide-react'
-import attestationData from '@/attestation_data.json'
-
-const tableEndpoints = {
-  locationDetail: "37277177-5ac5-4c39-af25-9ae90b431a72",
-  vesselDetail: "f8858a9b-7f4c-4542-9ce0-9362563b8660"
-}
-
-interface AttestationItem {
-  // UUID: string;
-  // submittedOn: string;
-  id: string;
-  submittedBy: string;
-  // txLink: string
-}
 
 interface AttestationTableProps {
-  pageId: "locationDetail" | "vesselDetail"
+  pageName: PageName
   partnerId: string;
 }
 
-const AttestationsTable = ({ pageId, partnerId }: AttestationTableProps) => {
-  const isDesktop = useMediaQuery("(min-width: 768px)")
-  const itemsPerPage = isDesktop ? 8 : 5
+const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
+  const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT)
+  const itemsPerPage = isDesktop ? ITEMS_PER_PAGE.DESKTOP : ITEMS_PER_PAGE.MOBILE
 
-  const { isPending, error, data } = useQuery({
-    queryKey: [`attestationsTable-${pageId}`],
-    queryFn: async () => {
-      const response = await fetch(
-        `https://hq.enaleia-hub.com/flows/trigger/${tableEndpoints[pageId]}?id=${partnerId}`,
-      )
-      return await response.json()
-    },
-  })
+  const { isPending, error, data } = useAttestationData({ pageName, partnerId })
   const records: AttestationItem[] = data?.data ?? []
   console.log('attestations:', records)
 
@@ -61,7 +41,7 @@ const AttestationsTable = ({ pageId, partnerId }: AttestationTableProps) => {
 
   return (
     <>
-      <p className="font-semibold py-2">Total attestations: {attestationData.length}</p>
+      <p className="font-semibold py-2">Total attestations: {records.length}</p>
       {pageTransactions.length ? (
         isDesktop ? ( 
           <Table>

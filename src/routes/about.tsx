@@ -24,7 +24,7 @@ function AboutComponent() {
     <main className='flex flex-col justify-center items-center gap-8 m-auto pt-0 pb-16 md:pb-24 md:pt-24 max-w-[1500px]'>      
       <section className='flex flex-col items-center gap-10'>
         <PageHero title={heroTitle} description={heroDescription} width='90'/>
-        <img src='/about_photo.jpg' alt="photo of port operations" className='object-cover bg-center h-[350px] md:h-auto w-full rounded-3xl overflow-hidden'/>
+        <img src='/Images/about_hero.jpg' alt="photo of port operations" className='object-cover bg-center h-[350px] md:h-auto w-full rounded-3xl overflow-hidden'/>
       </section> 
 
       <section className='text-center my-10 md:my-24'>
@@ -38,7 +38,7 @@ function AboutComponent() {
       </section>
 
       <section className='relative w-full overflow-hidden rounded-3xl'>
-        <img src='/ocean_photo.jpg' alt="photo of sun shining on the ocean" className='object-cover bg-center h-[1000px] md:h-[500px] w-full'/>
+        <img src='/Images/about_collab.jpg' alt="photo of sun shining on the ocean" className='object-cover bg-center h-[1000px] md:h-[500px] w-full'/>
         <div className='absolute inset-0 flex flex-col md:flex-row items-start justify-start md:justify-between p-4 pt-12 md:p-10'>
           <div className='md:w-[75%]'>
             <h2 className='font-bold text-4xl md:text-6xl tracking-tight'>{collabSectionTitle}</h2>

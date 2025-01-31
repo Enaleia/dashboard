@@ -1,12 +1,13 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router'
+import { LocationSearchParams } from '@/types'
 import { useState } from 'react'
 import { DetailPageHeading } from '@/components/detail-page-heading'
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
 import { StatsBar } from '@/components/stats-bar'
-import { CollectionsChart } from '@/components/collections-chart'
-import { CustomChartLegend } from '@/components/custom-chart-legend'
-import { AttestationsTable } from '@/components/attestations-table'
+import { CollectionsChart } from '@/components/charts/collections-chart'
+import { CustomChartLegend } from '@/components/charts/custom-chart-legend'
+import { AttestationsTable } from '@/components/tables/attestations-table'
 import { DetailPageBackNav } from '@/components/detail-page-back-nav'
 import { BackToTopButton } from '@/components/back-to-top'
 import {
@@ -19,17 +20,9 @@ export const Route = createFileRoute('/locations/$id')({
   component: LocationDetailComponent,
 })
 
-interface SearchParams {
-  name: string
-  country: string
-  coordinates: string
-  type: 'Port' | 'Recycler' | 'Manufacturer'
-  addresses: string[]
-}
-
 function LocationDetailComponent() {
   const { id } = Route.useParams()
-  const search = useSearch({ from: `/locations/$id` }) as SearchParams
+  const search = useSearch({ from: `/locations/$id` }) as LocationSearchParams
   const { name, country, coordinates, type, addresses } = search
   const [selectedChartDates, setSelectedChartDates] = useState('All time')
   const { heading, description, statSubtitle, statDescription } = partnerDetailInfo[type]
@@ -48,7 +41,7 @@ function LocationDetailComponent() {
         <h2 className="font-bold text-2xl md:text-4xl tracking-tight pb-2">{heading}</h2>
         <p className="font-extralight text-sm md:text-lg tracking-tight leading-tight md:leading-tight">{description}</p>       
 
-        <StatsBar pageId={`${type}Detail`} partnerId={id}/>
+        <StatsBar pageName={`${type}Detail`} partnerId={id}/>
          
         {statSubtitle &&
           <>
@@ -85,7 +78,7 @@ function LocationDetailComponent() {
 
           <div className="py-6 md:py-0">
             <CollectionsChart
-              pageId='PortDetail'
+              pageName='PortDetail'
               partnerId={id}
               timeRange={selectedChartDates}
             />
@@ -102,7 +95,7 @@ function LocationDetailComponent() {
           {attestationDescriptions[type]}
         </p>
         <Separator className="bg-black my-1" />
-        <AttestationsTable pageId='locationDetail' partnerId={id}/>
+        <AttestationsTable pageName='LocationDetail' partnerId={id}/>
       </section>
 
       <DetailPageBackNav detailType="location" />

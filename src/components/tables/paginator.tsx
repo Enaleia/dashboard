@@ -1,4 +1,7 @@
-import { buttonVariants } from "@/components/ui/button";
+import { useMediaQuery } from "@/hooks/ui/useMediaQuery"
+import { DESKTOP_BREAKPOINT } from "@/config/constants"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
 import {
 	Pagination,
 	PaginationContent,
@@ -6,9 +9,8 @@ import {
 	PaginationLink,
 	PaginationNext,
 	PaginationPrevious,
-} from "@/components/ui/pagination";
-import { useMediaQuery } from "@/hooks/use-media-query";
-import { cn } from "@/lib/utils";
+} from "@/components/ui/pagination"
+
 
 interface IShowingDisplay {
 	currentPage: number;
@@ -77,7 +79,7 @@ const Paginator = ({
 	maxPage,
 	loadPage,
 }: IPaginator) => {
-	const isDesktop = useMediaQuery("(min-width: 768px)");
+	const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT);
 	const maxPagesInPagination = isDesktop ? 7 : 3;
 	if (!needsPagination) {
 		return null;
