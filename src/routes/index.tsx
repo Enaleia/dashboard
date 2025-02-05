@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
+import { useMediaQuery } from '@/hooks/ui/useMediaQuery'
 import { PageHero } from '@/components/page-hero'
 import { StatsBar } from '@/components/stats-bar'
 import { ActivityMap } from '../components/maps/activity-map'
@@ -9,6 +10,7 @@ import { CircleArrowDown } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { BackToTopButton } from '@/components/back-to-top'
 import { homePageTexts, dateChoices } from '@/config/texts'
+import { DESKTOP_BREAKPOINT } from '@/config/constants'
 
 export const Route = createFileRoute('/')({
   component: HomeComponent,
@@ -27,6 +29,7 @@ function HomeComponent() {
   } = homePageTexts
 
   const [selectedChartDates, setSelectedChartDates] = useState('All time')
+  const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT)
 
   return (
     <main className='flex flex-col justify-center items-center gap-8 md:gap-20 m-auto pb-16 md:pb-24 md:pt-24 max-w-[1500px]'>
@@ -34,7 +37,7 @@ function HomeComponent() {
         <PageHero title={heroTitle} description={heroDescription} width='75'/>
         <div 
           className='flex flex-row justify-center items-center gap-2 font-normal text-ocean cursor-pointer'
-          onClick={() => window.scrollTo({ top: 2000, behavior: 'smooth'})}
+          onClick={() => window.scrollTo({ top: isDesktop ? 1950: 2300, behavior: 'smooth'})}
         >
           <CircleArrowDown color="#2985D0" strokeWidth={2}/>
           <p>Explore the data</p>
