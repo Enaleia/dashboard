@@ -6,6 +6,7 @@ import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { Card, CardContent } from "@/components/ui/card"
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/charts/chart"
+import { formatCamelCaseString } from "@/utils/camelCaseFormatter"
 import { calculateTooltipTotal } from "@/utils/chartTooltipCalculation"
 
 interface CollectionsChartProps {
@@ -59,7 +60,7 @@ const CollectionsChart = ({ pageName, partnerId, timeRange }: CollectionsChartPr
                 cursor={false} 
                 content={
                   <ChartTooltipContent 
-                    className="w-[250px] md:w-[325px] rounded-3xl gap-2 md:gap-4 text-sm md:text-lg p-4 md:p-6"
+                    className="w-[250px] rounded-3xl gap-2 md:gap-3 text-sm md:text-lg p-4 md:p-6"
                     labelFormatter={(value) => (
                       <div className="font-extralight">
                         {new Date(value).toLocaleDateString("en-US", { month: "short",  year: "numeric" })}
@@ -67,9 +68,9 @@ const CollectionsChart = ({ pageName, partnerId, timeRange }: CollectionsChartPr
                     )}
                     formatter={(value, name, item, index) => (
                       <>
-                        <div className={`h-4 w-4 md:h-6 md:w-6 rounded-full bg-${name}`}/>
-                        <div className="capitalize font-bold">{String(name).replace(/([A-Z])/g, ' $1').trim()}</div>
-                        <div className="ml-auto font-extralight">{value} Kgs</div>
+                        <div className={`h-3 w-3 md:h-4 md:w-4 rounded-full bg-${name}`}/>
+                        <div className="font-semibold text-sm">{formatCamelCaseString(String(name))}</div>
+                        <div className="ml-auto font-extralight text-sm">{value} Kgs</div>
                         {index === (pageName === "Home" ? 6 : 3) && (
                           <div className="mt-1.5 flex basis-full items-center border-t border-gray-400 pt-1.5 text-sm md:text-lg">
                             Total
