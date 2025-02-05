@@ -53,16 +53,15 @@ function LocationDetailComponent() {
       </section>
 
       {type === 'Port' && (
-        <section className="border border-primary rounded-3xl overflow-hidden">
-          <article className='flex flex-col md:flex-row justify-between gap-6 md:items-end p-4 md:p-12 md:pb-0'>
+        <section className="border border-primary rounded-3xl overflow-hidden pb-6 md:pb-10">
+          <article className='flex flex-col md:flex-row justify-between gap-6 md:items-end px-4 py-8 md:p-12 md:pb-0'>
             <h2 className='font-bold text-4xl md:text-5xl tracking-tight'>Waste removed by action type</h2>
-            <div className="flex flex-row justify-between gap-2">
+            <div className="flex flex-row justify-center gap-1 md:gap-2">
               {dateChoices.map((choice) => (
                 <Button
                   key={choice}
-                  variant={
-                    selectedChartDates === choice ? 'default' : 'outline'
-                  }
+                  variant={selectedChartDates === choice ? 'default' : 'outline'}
+                  className='text-xs'
                   onClick={() => setSelectedChartDates(choice)}
                 >
                   {choice}

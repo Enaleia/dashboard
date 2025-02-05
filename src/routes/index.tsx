@@ -53,16 +53,17 @@ function HomeComponent() {
         <ActivityMap pageName='Home' partnerType='See all'/>
       </section>
       
-      <section className='flex flex-col border border-primary rounded-3xl'>
-        <article className='p-4 md:p-12 md:pb-0'>
+      <section className='flex flex-col border border-primary rounded-3xl pb-4'>
+        <article className='px-4 py-8 md:p-12 md:pb-0'>
           <p className='font-bold text-5xl md:text-6xl tracking-tight'>{wasteChartTitle}</p>
           <div className='flex flex-col md:flex-row justify-between gap-6 md:items-end pt-2'>
             <p className='md:w-[65%] font-extralight text-base md-text-xl tracking-tight leading-tight md:leading-tight'>{wasteChartDescription}</p>
-            <div className='flex flex-row justify-between gap-2'>
+            <div className='flex flex-row justify-center gap-1 md:gap-2'>
               {dateChoices.map((choice) => (
                 <Button 
                   key={choice}
                   variant={selectedChartDates === choice ? "default" : "outline"}
+                  className='text-xs'
                   onClick={() => setSelectedChartDates(choice)}
                 >
                   {choice}
@@ -74,6 +75,7 @@ function HomeComponent() {
         
         <CollectionsChart pageName='Home' timeRange={selectedChartDates}/>
         <CustomChartLegend category='materials' />
+
         <article className='font-extralight text-base md:text-lg text-center p-6 md:p-12'>
           <p>
             To understand the breakdown of plastic material and its origin, please view our
