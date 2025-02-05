@@ -54,36 +54,29 @@ function LocationDetailComponent() {
 
       {type === 'Port' && (
         <section className="border border-primary rounded-3xl overflow-hidden">
-          <div className='flex p-10'>
-            <h2 className='font-bold text-2xl md:text-4xl tracking-tight'>Waste removed by each action at this location</h2>
-            <div className="flex flex-col justify-end">
-              <p className="text-xs md:text-base font-extralight md:text-right pt-4 pb-2 md:py-0">
-                Last update: mm/dd/yyyy
-              </p>
-              <div className="flex flex-row justify-between items-end gap-2 md:py-4">
-                {dateChoices.map((choice) => (
-                  <Button
-                    key={choice}
-                    variant={
-                      selectedChartDates === choice ? 'default' : 'outline'
-                    }
-                    onClick={() => setSelectedChartDates(choice)}
-                  >
-                    {choice}
-                  </Button>
-                ))}
-              </div>
+          <article className='flex flex-col md:flex-row justify-between gap-6 md:items-end p-4 md:p-12 md:pb-0'>
+            <h2 className='font-bold text-4xl md:text-5xl tracking-tight'>Waste removed by action type</h2>
+            <div className="flex flex-row justify-between gap-2">
+              {dateChoices.map((choice) => (
+                <Button
+                  key={choice}
+                  variant={
+                    selectedChartDates === choice ? 'default' : 'outline'
+                  }
+                  onClick={() => setSelectedChartDates(choice)}
+                >
+                  {choice}
+                </Button>
+              ))}
             </div>
-          </div>
+          </article>
 
-          <div className="py-6 md:py-0">
-            <CollectionsChart
-              pageName='PortDetail'
-              partnerId={id}
-              timeRange={selectedChartDates}
-            />
-            <CustomChartLegend category="activities" />
-          </div>
+          <CollectionsChart
+            pageName='PortDetail'
+            partnerId={id}
+            timeRange={selectedChartDates}
+          />
+          <CustomChartLegend category="activities" />
         </section>
       )}
 

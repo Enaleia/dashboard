@@ -54,14 +54,11 @@ function HomeComponent() {
       </section>
       
       <section className='flex flex-col border border-primary rounded-3xl'>
-        <article className='flex flex-col md:flex-row justify-between items-end p-4 md:p-12 md:pb-0'>
-          <div className='w-full md:w-[65%] tracking-tight'>
-            <p className='font-bold text-5xl md:text-6xl pb-4 tracking-tight'>{wasteChartTitle}</p>
-            <p className='font-extralight text-base md-text-xl tracking-tight leading-tight md:leading-tight'>{wasteChartDescription}</p>
-          </div>
-          <div className='flex flex-col justify-end items-end m-auto md:m-0 pt-4 md:pt-0'>
-            <p className='text-xs font-extralight'>Last update: mm/dd/yyyy</p>
-            <div className='flex flex-row justify-between md:justify-start gap-2 py-4'>
+        <article className='p-4 md:p-12 md:pb-0'>
+          <p className='font-bold text-5xl md:text-6xl tracking-tight'>{wasteChartTitle}</p>
+          <div className='flex flex-col md:flex-row justify-between gap-6 md:items-end pt-2'>
+            <p className='md:w-[65%] font-extralight text-base md-text-xl tracking-tight leading-tight md:leading-tight'>{wasteChartDescription}</p>
+            <div className='flex flex-row justify-between gap-2'>
               {dateChoices.map((choice) => (
                 <Button 
                   key={choice}
@@ -74,7 +71,7 @@ function HomeComponent() {
             </div>
           </div>
         </article>
-
+        
         <CollectionsChart pageName='Home' timeRange={selectedChartDates}/>
         <CustomChartLegend category='materials' />
         <article className='font-extralight text-base md:text-lg text-center p-6 md:p-12'>
