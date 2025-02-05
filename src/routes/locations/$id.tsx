@@ -38,7 +38,7 @@ function LocationDetailComponent() {
       />
 
       <section className="border border-primary rounded-3xl overflow-hidden p-10 text-center">
-        <h2 className="font-bold text-2xl md:text-4xl tracking-tight pb-2">{heading}</h2>
+        <h2 className="font-bold text-4xl md:text-5xl tracking-tight pb-2">{heading}</h2>
         <p className="font-extralight text-sm md:text-lg tracking-tight leading-tight md:leading-tight">{description}</p>       
 
         <StatsBar pageName={`${type}Detail`} partnerId={id}/>

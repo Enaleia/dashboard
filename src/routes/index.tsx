@@ -90,8 +90,8 @@ function HomeComponent() {
       <section className='flex flex-col items-center gap-6 m-auto w-full md:w-[85%] text-center tracking-tight pt-10 px-4 md:px-0'>
         <p className='font-bold text-3xl md:text-5xl tracking-tight'>{collabSectionTitle}</p>
         <p className='w-full text-base md-text-lg font-extralight leading-tight md:leading-tight'>{collabSectionDescription}</p>
-        <Link to="/economy" >
-          <Button className='px-6'>Learn more about the circular economy</Button>        
+        <Link to="/about" >
+          <Button className='px-6'>Learn more about how it works</Button>        
         </Link>
         <BackToTopButton />
       </section>
