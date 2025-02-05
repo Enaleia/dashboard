@@ -35,7 +35,7 @@ function VesselDetailComponent() {
         <p className='font-extralight'>{statDescription}</p>
       </section>
 
-      <section className="border border-primary rounded-3xl overflow-hidden pb-6 md:pb-10">
+      <section className="border border-primary rounded-3xl overflow-hidden pb-4 md:pb-14">
         <article className='flex flex-col md:flex-row justify-between gap-6 md:items-end px-4 py-8 md:p-12 md:pb-0'>
           <h2 className='font-bold text-4xl md:text-5xl tracking-tight'>Waste removed by action type</h2>
           <div className="flex flex-row justify-center gap-1 md:gap-2">
