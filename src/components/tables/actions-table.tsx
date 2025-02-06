@@ -50,7 +50,7 @@ const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
   
   return (
     <>
-      <article className="w-full md:h-[598px] overflow-x-auto">
+      <article className="w-full lg:h-[598px] overflow-x-auto">
         {isPending ? (
           <div className="w-full h-full flex flex-col justify-center items-center text-center text-lg">
             <p>Loading table data...</p>

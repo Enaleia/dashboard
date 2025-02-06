@@ -37,7 +37,7 @@ const ActivityMap = ({ pageName, partnerType }: ActivityMapProps) => {
 
 
 	return (
-    <article className='w-full h-[400px] md:h-[700px] pt-3'>
+    <article className='w-full h-[400px] md:h-[500px] lg:h-[700px] pt-3'>
       <MapContainer 
         className='h-full z-0' 
         center={mapState.center} 

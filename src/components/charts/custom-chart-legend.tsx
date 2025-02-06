@@ -9,8 +9,8 @@ const CustomChartLegend = ({ category }: ChartLegendProps) => {
   const legendInfo = category === "materials" ? materialsChartLegendDescriptions : activitesChartLegendDescriptions;
   
   return (
-    <article className="w-full flex justify-center p-8 md:px-28 md:py-0">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-5 max-w-6xl">
+    <article className="w-full flex justify-center p-8 md:px-28 lg:py-0">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl">
         {Object.entries(legendInfo).map(([type, description]) => (
           <div key={type} className="flex items-start gap-3">
             <div className="flex-shrink-0">

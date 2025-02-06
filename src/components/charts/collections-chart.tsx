@@ -1,5 +1,7 @@
 import { useChartData } from "@/hooks/api/useChartData"
 import { useChartTicks } from "@/hooks/ui/useChartTicks"
+import { useMediaQuery } from "@/hooks/ui/useMediaQuery"
+import { DESKTOP_BREAKPOINT } from "@/config/constants"
 import { MaterialsChartConfig, ActivitiesChartConfig } from "@/config/charts"
 import { PageName, MaterialsChartRecord, ActivitiesChartRecord } from "@/types"
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
@@ -16,7 +18,7 @@ interface CollectionsChartProps {
 }
 
 const CollectionsChart = ({ pageName, partnerId, timeRange }: CollectionsChartProps) => {
-  
+  const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT)
   const { isPending, error, data } = useChartData({ pageName, partnerId, timeRange })
   const records = (data?.data ?? []) as (CollectionsChartProps['pageName'] extends "Home" ? MaterialsChartRecord[] : ActivitiesChartRecord[])
   console.log("records:", records)
@@ -24,7 +26,7 @@ const CollectionsChart = ({ pageName, partnerId, timeRange }: CollectionsChartPr
   const { ticks, tickFormatter } = useChartTicks(records, timeRange)
 
   return (
-    <ScrollArea className="max-w-[350px] md:max-w-[1500px]">
+    <ScrollArea className="max-w-[350px] md:max-w-[650px] lg:max-w-[1500px]">
       <Card className="border-none shadow-none"> 
         <CardContent className="md:p-12">   
           <ChartContainer 

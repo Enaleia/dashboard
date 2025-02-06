@@ -24,7 +24,7 @@ function VesselDetailComponent() {
   const { heading, statSubtitle, statDescription } = partnerDetailInfo["Vessel"]
 
   return (
-    <main className='flex flex-col justify-center items-center gap-8 m-auto pt-0 pb-16 md:pb-32 md:pt-16 max-w-[1500px]'>
+    <main className='flex flex-col justify-center items-center gap-8 m-auto pt-0 pb-16 lg:pb-32 md:pt-8 lg:pt-16 max-w-[1500px]'>
       <DetailPageHeading name={name} country={country} registered_port={port} type={type} collector_id={collector_identity} />
 
       <section className="border border-primary rounded-3xl overflow-hidden p-12 text-center">
@@ -36,8 +36,8 @@ function VesselDetailComponent() {
       </section>
 
       <section className="border border-primary rounded-3xl overflow-hidden pb-4 md:pb-14">
-        <article className='flex flex-col md:flex-row justify-between gap-6 md:items-end px-4 py-8 md:p-12 md:pb-0'>
-          <h2 className='font-bold text-4xl md:text-5xl tracking-tight'>Waste removed by action type</h2>
+        <article className='flex flex-col lg:flex-row justify-between gap-6 lg:items-end px-4 py-8 md:p-12 md:pb-0'>
+          <h2 className='font-bold text-4xl md:text-5xl text-center lg:text-left tracking-tight'>Waste removed by action type</h2>
           <div className="flex flex-row justify-center gap-1 md:gap-2">
             {dateChoices.map((choice) => (
               <Button

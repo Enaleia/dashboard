@@ -7,6 +7,12 @@ body {
   padding: 2rem 12rem;
 }
 
+@media (max-width: 1024px) {
+  body {
+    padding: 1rem 5rem;
+  }
+}
+
 @media (max-width: 768px) {
   body {
     padding: 1rem;
