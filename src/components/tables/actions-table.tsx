@@ -46,36 +46,43 @@ const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
 		maxPage,
 		needsPagination,
 	} = usePagination(processedRecords, itemsPerPage)
-
-  // Handle loading and error states
-  if (isPending) return 'Loading...'
-  if (error) return 'An error has occurred: ' + error.message
   
   
   return (
     <>
-      {pageTransactions.length ? (
-        <div className="w-full overflow-x-auto">
+      <article className="w-full md:h-[598px] overflow-x-auto">
+        {isPending ? (
+          <div className="w-full h-full flex flex-col justify-center items-center text-center text-lg">
+            <p>Loading table data...</p>
+            <img src="/Sealife/dolphin.svg" alt="dolphin illustration" className="w-[300px] h-[300px]"/>
+          </div>
+        ) : error || !pageTransactions.length ? (
+          <div className="w-full h-full flex flex-col justify-center items-center text-center text-lg px-10">
+            <p>😕 sorry!</p>
+            <p>We are not able to build the {pageName} table at this time.</p>
+            <img src="/Sealife/dolphin.svg" alt="dolphin illustration" className="w-[300px] h-[300px]"/>
+          </div>
+        ) : (
           <Table className="w-full table-fixed">
             <TableHeader>
               <TableRow>
                 {/* Header cells with conditional rendering for desktop view */}
-                <TableHead className="p-0 w-[30%]"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-1 md:py-2 border border-black rounded-l-3xl">{pageName === 'Locations' ? 'LOCATION NAME' : 'VESSEL NAME'}</div></TableHead>
+                <TableHead className="p-0 w-[30%]"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-4 md:px-8 py-1 md:py-2 border border-black rounded-l-3xl">{pageName === 'Locations' ? 'LOCATION NAME' : 'VESSEL NAME'}</div></TableHead>
                 {isDesktop &&
                   <>
-                    <TableHead className="p-0 w-[15%]">
-                      <div className="flex justify-between text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">
+                    <TableHead className="p-0 w-[17%]">
+                      <div className="flex gap-2 text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">
                         <p>COUNTRY</p>
                         <div className="cursor-pointer" onClick={() => toggleSortCriteria('country')}>
                           <ArrowUpDown size={14} />
                         </div>
                       </div>
                     </TableHead>
-                    <TableHead className="p-0 w-[25%]"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black">{pageName === 'Locations' ? "COORDINATES" : "REGISTERED PORT"}</div></TableHead>
-                    <TableHead className="p-0 w-[15%]"><div className="flex justify-between text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">TYPE</div></TableHead></>
+                    <TableHead className="p-0 w-[23%]"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black">{pageName === 'Locations' ? "COORDINATES" : "REGISTERED PORT"}</div></TableHead>
+                    <TableHead className="p-0 w-[17%]"><div className="flex justify-between text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">TYPE</div></TableHead></>
                 }
-                <TableHead className="p-0 w-[15%]">
-                  <div className="flex justify-between text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-1 md:py-2 border border-black rounded-r-3xl">
+                <TableHead className="p-0 w-[13%]">
+                  <div className="flex gap-2 text-xs font-bold text-black bg-gray-300 mt-2 mb-5 p-4 md:px-8 py-1 md:py-2 border border-black rounded-r-3xl">
                     <p>ACTIONS</p>
                     <div className="cursor-pointer" onClick={() => toggleSortCriteria('action_count')}>
                       <ArrowUpDown size={14} />
@@ -99,7 +106,7 @@ const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
                   >
                     <TableCell className="p-0 w-[30%]">
                       <div 
-                        className="mb-2 px-8 py-4 md:pt-5 border border-black rounded-l-3xl truncate"
+                        className="mb-2 px-4 md:px-8 py-4 md:pt-5 border border-black rounded-l-3xl truncate"
                         title={name}
                       >
                         {name}
@@ -107,22 +114,20 @@ const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
                     </TableCell>
                     {isDesktop &&
                       <>
-                        <TableCell className="p-0 w-[15%]"><div className="mb-2 px-8 py-4 md:pt-5 border-y border-black flex gap-2 trucate"><img src={`/CountryFlags/${country}.svg`} alt={`${country} flag`} className="h-5 w-5"/><span>{country}</span></div></TableCell>
-                        {pageName === 'Locations' && <TableCell className="p-0 w-[25%]"><div className="mb-2 px-8 py-4 md:pt-5 border border-black truncate">{coordinates?.length === 2 ? `${coordinates[0]}, ${coordinates[1]}` : 'not available'}</div></TableCell>}
-                        {pageName === 'Vessels' && <TableCell className="p-0 w-[25%]"><div className="mb-2 px-8 py-4 md:pt-5 border border-black truncate">{registered_port ? `${registered_port}` : 'not available'}</div></TableCell>}
-                        <TableCell className="p-0 w-[15%]"><div className="mb-2 px-8 py-4 md:pt-5 border-y border-black flex gap-2 truncate"><img src={`/PartnerIcons/${type.replace(/ /g, '_')}.svg`} alt={`${type} icon`} className="h-5 w-5"/><span>{type}</span></div></TableCell>
+                        <TableCell className="p-0 w-[17%]"><div className="mb-2 px-8 py-4 md:pt-5 border-y border-black flex gap-2 trucate"><img src={`/CountryFlags/${country}.svg`} alt={`${country} flag`} className="h-5 w-5"/><span>{country}</span></div></TableCell>
+                        {pageName === 'Locations' && <TableCell className="p-0 w-[23%]"><div className="mb-2 px-8 py-4 md:pt-5 border border-black truncate">{coordinates?.length === 2 ? `${coordinates[0]}, ${coordinates[1]}` : 'not available'}</div></TableCell>}
+                        {pageName === 'Vessels' && <TableCell className="p-0 w-[23%]"><div className="mb-2 px-8 py-4 md:pt-5 border border-black truncate">{registered_port ? `${registered_port}` : 'not available'}</div></TableCell>}
+                        <TableCell className="p-0 w-[17%]"><div className="mb-2 px-8 py-4 md:pt-5 border-y border-black flex gap-2 truncate"><img src={`/PartnerIcons/${type.replace(/ /g, '_')}.svg`} alt={`${type} icon`} className="h-5 w-5"/><span>{type}</span></div></TableCell>
                       </>
                     }
-                    <TableCell className="p-0 w-[15%]"><div className="mb-2 px-8 py-4 md:pt-5 border border-black rounded-r-3xl">{action_count}</div></TableCell>            
+                    <TableCell className="p-0 w-[13%]"><div className="mb-2 px-4 md:px-8 py-4 md:pt-5 border border-black rounded-r-3xl">{action_count}</div></TableCell>            
                   </TableRow>
                 )
               })}
             </TableBody>
           </Table>
-        </div>
-      ):(
-        <p>no records found</p>
-      )}
+        )}
+      </article>
  
       {/* Pagination controls */}
       {needsPagination && (

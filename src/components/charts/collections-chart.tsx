@@ -35,7 +35,7 @@ const CollectionsChart = ({ pageName, partnerId, timeRange }: CollectionsChartPr
               <div className="w-full h-full text-lg">
                 Loading chart data...
               </div>
-            ) : error || records.length < 1 ? (
+            ) : error || !records.length ? (
               <div className="w-[40%] md:w-full h-full flex flex-col justify-center md:items-center text-center text-lg">
                 <p>😕 sorry!</p>
                 <p>We were not able to build the chart you requested.</p>
