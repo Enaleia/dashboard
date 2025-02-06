@@ -1,22 +1,24 @@
 import { materialsChartLegendDescriptions, activitesChartLegendDescriptions } from "@/config/texts"
+import { formatCamelCaseString } from "@/utils/camelCaseFormatter"
 
 interface ChartLegendProps {
   category: string
 }
 
-const CustomChartLegend = ({ category}: ChartLegendProps) => {
-  const info = category === "materials" ? materialsChartLegendDescriptions : activitesChartLegendDescriptions
+const CustomChartLegend = ({ category }: ChartLegendProps) => {
+  const legendInfo = category === "materials" ? materialsChartLegendDescriptions : activitesChartLegendDescriptions;
+  
   return (
-    <article className="flex justify-center">
-      <div className="flex flex-wrap flex-col md:flex-row margin-auto gap-5 p-6 md:px-14">
-        {Object.entries(info).map(([type, description]) => (
-          <div key={type} className="flex flex-row gap-4 w-full md:w-[20%]">
-            <div className="w-[24px]">
-              <div className={`h-7 w-7 rounded-full bg-${type}`}></div>
+    <article className="w-full flex justify-center p-8 md:px-28 lg:py-0">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl">
+        {Object.entries(legendInfo).map(([type, description]) => (
+          <div key={type} className="flex items-start gap-3">
+            <div className="flex-shrink-0">
+              <div className={`h-6 w-6 rounded-full bg-${type}`}></div>
             </div>
             <div>
-              <h3 className="text-lg font-bold capitalize">{type.replace(/([A-Z])/g, ' $1').trim()}</h3>
-              <p className="text-xs font-extralight leading-tight md:leading-tight">{description}</p>
+              <h3 className="text-xl font-bold">{formatCamelCaseString(type)}</h3>
+              <p className="text-xs font-extralight leading-tight">{description}</p>
             </div>
           </div>
         ))}

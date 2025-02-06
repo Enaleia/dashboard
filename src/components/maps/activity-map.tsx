@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useMapData } from '@/hooks/api/useMapData'
 import { useMapState } from '@/hooks/ui/useMapState'
 import { useProcessedRecords } from '@/hooks/ui/useProcessedRecords'
@@ -15,6 +16,7 @@ interface ActivityMapProps {
 
 const ActivityMap = ({ pageName, partnerType }: ActivityMapProps) => {
 
+  const [tileError, setTileError] = useState(false);
   const { isPending, error, data} = useMapData()
   const records: MapItem[] = data?.data ?? []
   const [mapState] = useMapState(pageName)
@@ -35,7 +37,7 @@ const ActivityMap = ({ pageName, partnerType }: ActivityMapProps) => {
 
 
 	return (
-    <article className='w-full h-[400px] md:h-[700px] pt-3'>
+    <article className='w-full h-[400px] md:h-[500px] lg:h-[700px] pt-3'>
       <MapContainer 
         className='h-full z-0' 
         center={mapState.center} 
@@ -51,7 +53,18 @@ const ActivityMap = ({ pageName, partnerType }: ActivityMapProps) => {
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          eventHandlers={{
+            tileerror: () => {
+              setTileError(true);
+              console.error('Failed to load map tiles');
+            }
+          }}
         />
+        {tileError && (
+          <div className="absolute bottom-4 left-4 bg-red-50 text-red-600 px-4 py-2 rounded-md shadow-sm z-[1000]">
+            Failed to load map tiles. Map functionality may be limited.
+          </div>
+        )}
         <MapSizeHandler />
         <MapStateController  pageName={pageName}/>
         {/* for "fishing zone" map view */}
@@ -63,9 +76,16 @@ const ActivityMap = ({ pageName, partnerType }: ActivityMapProps) => {
             fillOpacity: 0.2,
           }}
         /> */}
-        {filteredLocations.map((record) => (
-          <LocationMarker key={record.id} record={record} />
-        ))}
+        {filteredLocations.length > 0 ?
+          filteredLocations.map((record) => (
+            <LocationMarker key={record.id} record={record} />
+        ))
+        : 
+          <div className='flex flex-col text-center text-lg md:text-2xl font-semibold px-20 pt-28 md:pt-72'>
+            <p>sorry!</p>
+            <p>We aren't able to mark our locations right now.</p>
+          </div>
+        }
       </MapContainer>
     </article>
 	)

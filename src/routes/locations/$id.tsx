@@ -28,7 +28,7 @@ function LocationDetailComponent() {
   const { heading, description, statSubtitle, statDescription } = partnerDetailInfo[type]
 
   return (
-    <main className="flex flex-col justify-center items-center gap-8 m-auto pt-0 pb-16 md:pb-32 md:pt-16 max-w-[1500px]">
+    <main className="flex flex-col justify-center items-center gap-8 m-auto pt-0 pb-16 lg:pb-32 md:pt-8 lg:pt-16 max-w-[1500px]">
       <DetailPageHeading
         name={name}
         country={country}
@@ -38,7 +38,7 @@ function LocationDetailComponent() {
       />
 
       <section className="border border-primary rounded-3xl overflow-hidden p-10 text-center">
-        <h2 className="font-bold text-2xl md:text-4xl tracking-tight pb-2">{heading}</h2>
+        <h2 className="font-bold text-4xl md:text-5xl tracking-tight pb-2">{heading}</h2>
         <p className="font-extralight text-sm md:text-lg tracking-tight leading-tight md:leading-tight">{description}</p>       
 
         <StatsBar pageName={`${type}Detail`} partnerId={id}/>
@@ -53,37 +53,29 @@ function LocationDetailComponent() {
       </section>
 
       {type === 'Port' && (
-        <section className="border border-primary rounded-3xl overflow-hidden">
-          <div className='flex p-10'>
-            <h2 className='font-bold text-2xl md:text-4xl tracking-tight'>Waste removed by each action at this location</h2>
-            <div className="flex flex-col justify-end">
-              <p className="text-xs md:text-base font-extralight md:text-right pt-4 pb-2 md:py-0">
-                Last update: mm/dd/yyyy
-              </p>
-              <div className="flex flex-row justify-between items-end gap-2 md:py-4">
-                {dateChoices.map((choice) => (
-                  <Button
-                    key={choice}
-                    variant={
-                      selectedChartDates === choice ? 'default' : 'outline'
-                    }
-                    onClick={() => setSelectedChartDates(choice)}
-                  >
-                    {choice}
-                  </Button>
-                ))}
-              </div>
+        <section className="border border-primary rounded-3xl overflow-hidden pb-4 md:pb-14">
+          <article className='flex flex-col lg:flex-row justify-between gap-6 lg:items-end px-4 py-8 md:p-12 md:pb-0'>
+            <h2 className='font-bold text-4xl md:text-5xl text-center lg:text-left tracking-tight'>Waste removed by action type</h2>
+            <div className="flex flex-row justify-center gap-1 md:gap-2">
+              {dateChoices.map((choice) => (
+                <Button
+                  key={choice}
+                  variant={selectedChartDates === choice ? 'default' : 'outline'}
+                  className='text-xs'
+                  onClick={() => setSelectedChartDates(choice)}
+                >
+                  {choice}
+                </Button>
+              ))}
             </div>
-          </div>
+          </article>
 
-          <div className="py-6 md:py-0">
-            <CollectionsChart
-              pageName='PortDetail'
-              partnerId={id}
-              timeRange={selectedChartDates}
-            />
-            <CustomChartLegend category="activities" />
-          </div>
+          <CollectionsChart
+            pageName='PortDetail'
+            partnerId={id}
+            timeRange={selectedChartDates}
+          />
+          <CustomChartLegend category="activities" />
         </section>
       )}
 

@@ -18,8 +18,8 @@ function LocationsComponent() {
   const [selectedViewType, setSelectedViewType] = useState("List")
 
   return (
-    <main className='flex flex-col justify-center items-center gap-8 md:gap-10 m-auto md:pt-16 max-w-[1500px]'>
-      <PageHero title={heroTitle} description={heroDescription} width='80' /> 
+    <main className='flex flex-col justify-center items-center gap-8 md:gap-10 m-auto md:pt-8 lg:pt-16 max-w-[1500px]'>
+      <PageHero title={heroTitle} description={heroDescription} width='70' /> 
       <StatsBar pageName='Locations'/>
 
       <section className='w-full'>

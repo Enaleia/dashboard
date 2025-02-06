@@ -21,7 +21,7 @@ const TableActionsBar = ({
     
   return (
     <article className='flex items-center justify-between'>
-      <div className='hidden md:flex items-center md:gap-2'>
+      <div className='hidden lg:flex items-center md:gap-2'>
         <p className='text-xs md:text-sm font-extralight'>Location type:</p>
         <div className='flex flex-row justify-center gap-2'>
           {partnerTypes.map((type) => (

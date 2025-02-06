@@ -31,7 +31,7 @@ export const ATTESTATION_ENDPOINTS: Partial<Record<PageName, string>> = {
 
 
 // global
-export const DESKTOP_BREAKPOINT = "(min-width: 768px)"
+export const DESKTOP_BREAKPOINT = "(min-width: 1024px)"
 
 export const ITEMS_PER_PAGE = {
   DESKTOP: 8,

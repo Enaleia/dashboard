@@ -16,11 +16,11 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type, 
     <section className='w-full'>
       <div className='flex flex-row justify-between items-start'>
 
-        <div className='flex flex-col gap-0.5 md:gap-4 font-light'>
+        <div className='flex flex-col gap-0.5 md:gap-2 lg:gap-4 font-light'>
           <p className='text-xs md:text-sm font-extralight'>Location detail</p>
-          <h1 className='font-bold text-4xl md:text-7xl tracking-tight'>{name}</h1>
+          <h1 className='font-bold text-5xl md:text-6xl lg:text-7xl tracking-tight'>{name}</h1>
 
-          <div className='flex flex-col md:flex-row gap-0.5 md:gap-4 font-light'>
+          <div className='flex flex-col lg:flex-row gap-0.5 lg:gap-4 font-light'>
             <div className='flex flex-row items-center gap-1'>
               <img src={`/CountryFlags/${country}.svg`} alt={`${country} flag`} className='h-7 w-7'/>
               <p>{country}</p>
@@ -74,7 +74,7 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type, 
           </div>
         </div>
 
-        <div className='flex flex-col gap-1 items-center'>
+        <div className='flex flex-col gap-1 items-center pl-2'>
           <img src={`/PartnerIcons/${type.replace(/ /g, '_')}.svg`} alt={`${type} icon`} className='h-16 w-16 md:h-28 md:w-28'/>
           <p className='text-center uppercase'>{type}</p>
         </div>

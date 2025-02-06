@@ -12,7 +12,7 @@ const NavLinks = ({ closeMenu }: NavLinksProps) => {
   const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT)
 
   return (
-    <div className='flex flex-col md:flex-row gap-6 text-right md:text-center md:gap-8 text-2xl md:text-base font-extralight'>
+    <div className='flex flex-col lg:flex-row gap-6 text-right lg:text-center md:gap-8 text-2xl md:text-3xl lg:text-base font-extralight'>
       {!isDesktop && 
         <Link
           to="/"
