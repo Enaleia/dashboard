@@ -42,7 +42,8 @@ const NavLinks = ({ closeMenu }: NavLinksProps) => {
       >
         Collectors
       </Link>
-      <Link
+      {/* save for future release */}
+      {/* <Link
         to="/economy"
         onClick={() => closeMenu && closeMenu(true)}
         activeProps={{
@@ -50,7 +51,7 @@ const NavLinks = ({ closeMenu }: NavLinksProps) => {
         }}
       >
         Circular Economy
-      </Link>
+      </Link> */}
       <Link
         to="/about"
         onClick={() => closeMenu && closeMenu(true)}
