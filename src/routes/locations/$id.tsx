@@ -45,7 +45,7 @@ function LocationDetailComponent() {
          
         {statSubtitle &&
           <>
-            <Separator className='bg-black' />
+            <Separator className='bg-softBlack' />
             <h3 className='font-bold text-lg md:text-2xl tracking-tight pt-10 pb-2'>{statSubtitle}</h3>
             <p className='font-extralight'>{statDescription}</p>
           </>
@@ -86,7 +86,7 @@ function LocationDetailComponent() {
         <p className="w-full md:w-[70%] font-extralight tracking-tight leading-tight md:leading-tight">
           {attestationDescriptions[type]}
         </p>
-        <Separator className="bg-black my-1" />
+        <Separator className="bg-softBlack my-1" />
         <AttestationsTable pageName='LocationDetail' partnerId={id}/>
       </section>
 

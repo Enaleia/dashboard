@@ -47,7 +47,7 @@ function AboutComponent() {
           </div>
           <div className='flex flex-col gap-6 pt-8 md:pt-16 lg:w-[20%]'>
             {aboutPageLinks.map(({ text, url }) => (
-              <a href={url} className='flex justify-between items-center border-b border-black hover:font-bold'>
+              <a href={url} className='flex justify-between items-center border-b border-softBlack hover:font-bold'>
                 <p>{text}</p>
                 <ArrowUpRight />
               </a>

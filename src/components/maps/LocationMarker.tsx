@@ -40,7 +40,7 @@ export const LocationMarker = ({ record }: MarkerProps) => {
               addresses: wallet_addresses 
             }}
           >
-            <MoveRight color='black'/>
+            <MoveRight color='softBlack'/>
           </Link>
         </div>
         <div className='flex items-center gap-2 text-sm mt-4 mb-8 h-[16px] mx-8'>

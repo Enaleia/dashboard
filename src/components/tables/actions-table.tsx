@@ -67,22 +67,22 @@ const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
             <TableHeader>
               <TableRow>
                 {/* Header cells with conditional rendering for desktop view */}
-                <TableHead className="p-0 w-[30%]"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-4 md:px-8 py-1 md:py-2 border border-black rounded-l-3xl">{pageName === 'Locations' ? 'LOCATION NAME' : 'VESSEL NAME'}</div></TableHead>
+                <TableHead className="p-0 w-[30%]"><div className="text-xs font-bold text-softBlack bg-gray-300 mt-2 mb-5 px-4 md:px-8 py-1 md:py-2 border border-black rounded-l-3xl">{pageName === 'Locations' ? 'LOCATION NAME' : 'VESSEL NAME'}</div></TableHead>
                 {isDesktop &&
                   <>
                     <TableHead className="p-0 w-[17%]">
-                      <div className="flex gap-2 text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">
+                      <div className="flex gap-2 text-xs font-bold text-softBlack bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">
                         <p>COUNTRY</p>
                         <div className="cursor-pointer" onClick={() => toggleSortCriteria('country')}>
                           <ArrowUpDown size={14} />
                         </div>
                       </div>
                     </TableHead>
-                    <TableHead className="p-0 w-[23%]"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black">{pageName === 'Locations' ? "COORDINATES" : "REGISTERED PORT"}</div></TableHead>
-                    <TableHead className="p-0 w-[17%]"><div className="flex justify-between text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">TYPE</div></TableHead></>
+                    <TableHead className="p-0 w-[23%]"><div className="text-xs font-bold text-softBlack bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black">{pageName === 'Locations' ? "COORDINATES" : "REGISTERED PORT"}</div></TableHead>
+                    <TableHead className="p-0 w-[17%]"><div className="flex justify-between text-xs font-bold text-softBlack bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">TYPE</div></TableHead></>
                 }
                 <TableHead className="p-0 w-[13%]">
-                  <div className="flex gap-2 text-xs font-bold text-black bg-gray-300 mt-2 mb-5 p-4 md:px-8 py-1 md:py-2 border border-black rounded-r-3xl">
+                  <div className="flex gap-2 text-xs font-bold text-softBlack bg-gray-300 mt-2 mb-5 p-4 md:px-8 py-1 md:py-2 border border-black rounded-r-3xl">
                     <p>ACTIONS</p>
                     <div className="cursor-pointer" onClick={() => toggleSortCriteria('action_count')}>
                       <ArrowUpDown size={14} />

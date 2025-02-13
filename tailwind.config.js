@@ -31,6 +31,7 @@ export default {
         beach: 'hsl(var(--chart-11))'
       },
   		colors: {
+        softBlack: 'hsl(var(--softBlack))',
         sand: 'hsl(var(--sand))',
         ocean: 'hsl(var(--ocean))',
         mixedPlastic: 'hsl(var(--mixedPlastic))',

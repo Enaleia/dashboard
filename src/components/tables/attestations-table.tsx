@@ -47,9 +47,9 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black rounded-l-3xl">Attestation UUID</div></TableHead>
-                <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">Submitted by</div></TableHead>
-                <TableHead className="p-0"><div className="text-xs font-bold text-black bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black rounded-r-3xl"><Link size={16}/></div></TableHead>
+                <TableHead className="p-0"><div className="text-xs font-bold text-softBlack bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black rounded-l-3xl">Attestation UUID</div></TableHead>
+                <TableHead className="p-0"><div className="text-xs font-bold text-softBlack bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">Submitted by</div></TableHead>
+                <TableHead className="p-0"><div className="text-xs font-bold text-softBlack bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black rounded-r-3xl"><Link size={16}/></div></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
