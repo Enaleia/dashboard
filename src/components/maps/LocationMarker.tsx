@@ -28,28 +28,29 @@ export const LocationMarker = ({ record }: MarkerProps) => {
       icon={markerIcon}
     >
       <Popup>
-        <div className='flex items-center gap-10 text-lg mt-8 h-[24px] mx-8'>
-          <p>{name}</p>
-          <Link 
-            to={`/locations/${id}`}
-            search={{ 
-              name,
-              country,
-              coordinates,
-              type,
-              addresses: wallet_addresses 
-            }}
-          >
-            <MoveRight color='softBlack'/>
-          </Link>
-        </div>
-        <div className='flex items-center gap-2 text-sm mt-4 mb-8 h-[16px] mx-8'>
+        <Link 
+          to={`/locations/${id}`}
+          search={{ 
+            name,
+            country,
+            coordinates,
+            type,
+            addresses: wallet_addresses 
+          }}
+        >
+          <div className='flex items-center gap-4 mt-6 h-[24px] mx-2'>
+            <p className='text-softBlack text-xl'>{name}</p>
+            <MoveRight color='black'/>
+          </div>
+        </Link>
+        
+        <div className='flex items-center gap-2 text-sm mt-3 mb-6 h-[16px] mx-2'>
           <img 
             src={`PartnerIcons/${type}.svg`} 
             className='h-6 w-6' 
             alt={`${type} icon`}
           />
-          <p>{type}</p> 
+          <p className='uppercase'>{type}</p> 
         </div>
       </Popup>
     </Marker>
