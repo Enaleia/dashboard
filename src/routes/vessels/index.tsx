@@ -17,7 +17,7 @@ function VesselsComponent() {
   const [selectedVesselType, setSelectedVesselType] = useState<PartnerType>("See all")
 
   return (
-    <main className='flex flex-col justify-center items-center gap-8 md:gap-10 m-auto md:pt-8 lg:pt-16 max-w-[1500px]'>
+    <main className='flex flex-col justify-center items-center gap-8 md:gap-12 m-auto md:pt-8 lg:pt-16 max-w-[1500px]'>
       <PageHero title={heroTitle} description={heroDescription} />
       <StatsBar pageName='Vessels'/>
 
@@ -27,7 +27,7 @@ function VesselsComponent() {
           selectedPartnerType={selectedVesselType}
           setSelectedPartnerType={setSelectedVesselType}
         />
-        <article className='overflow-hidden rounded-3xl pb-16'>
+        <article className='overflow-hidden rounded-3xl pt-8 pb-16'>
           <ActionsTable pageName='Vessels' partnerType={selectedVesselType} />
         </article>          
       </section> 
