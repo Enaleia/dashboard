@@ -44,22 +44,22 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
       <p className="font-semibold py-2">Total attestations: {records.length}</p>
       {pageTransactions.length ? (
         isDesktop ? ( 
-          <Table>
+          <Table className="w-full table-fixed lg:h-[598px] overflow-x-auto">
             <TableHeader>
               <TableRow>
-                <TableHead className="p-0"><div className="text-xs font-bold text-softBlack bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black rounded-l-3xl">Attestation UUID</div></TableHead>
-                <TableHead className="p-0"><div className="text-xs font-bold text-softBlack bg-gray-300 mt-2 mb-5 px-8 py-2 border-y border-black">Submitted by</div></TableHead>
-                <TableHead className="p-0"><div className="text-xs font-bold text-softBlack bg-gray-300 mt-2 mb-5 px-8 py-2 border border-black rounded-r-3xl"><Link size={16}/></div></TableHead>
+                <TableHead className="p-0 w-[46%]"><div className="text-xs font-light text-softBlack bg-sand mt-2 px-8 py-2 border border-darkSand rounded-l-full">Attestation UUID</div></TableHead>
+                <TableHead className="p-0 w-[46%]"><div className="text-xs font-light text-softBlack bg-sand mt-2 px-8 py-2 border-y border-darkSand">Submitted by</div></TableHead>
+                <TableHead className="p-0 w-[8%]"><div className="text-xs font-light text-softBlack bg-sand mt-2 px-8 py-2 border border-darkSand rounded-r-full"><Link size={16}/></div></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {pageTransactions.map((attestation) => {
                 const { id, submittedBy } = attestation
                 return (
-                  <TableRow key={id}>
-                    <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black rounded-l-3xl">{id || 'null'}</div></TableCell>
-                    <TableCell className="p-0"><div className="mb-2 px-8 py-5 border-y border-black flex gap-2">{submittedBy || 'null'}</div></TableCell>
-                    <TableCell className="p-0"><div className="mb-2 px-8 py-5 border border-black rounded-r-3xl"><a href=''><ArrowUpRight size={20} strokeWidth={1}/></a></div></TableCell>            
+                  <TableRow key={id} className="cursor-pointer group">
+                    <TableCell className="p-0 w-[46%]"><div className="mt-2 px-8 py-5 border border-darkSand rounded-l-full truncate group-hover:bg-sand transition-colors">{id || 'null'}</div></TableCell>
+                    <TableCell className="p-0 w-[46%]"><div className="mt-2 px-8 py-5 border-y border-darkSand flex gap-2 truncate group-hover:bg-sand transition-colors">{submittedBy || 'null'}</div></TableCell>
+                    <TableCell className="p-0 w-[8%]"><div className="mt-2 px-8 py-5 border border-darkSand rounded-r-full hover:bg-sand group-hover:bg-sand transition-colors"><a href=''><ArrowUpRight size={20} strokeWidth={1}/></a></div></TableCell>            
                   </TableRow>
                 )
               })}
@@ -69,12 +69,12 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
           pageTransactions.map((attestation: AttestationItem) => {
             const { id, submittedBy } = attestation
             return (
-              <div className='flex flex-row justify-between w-full items-center border border-black rounded-3xl text-sm'>               
-                <div className='w-full flex flex-col justify-between border-r border-gray-400 pl-4'>
-                  <div className="border-b border-gray-400 p-3">{id || 'null'}....</div>
-                  <div className='w-full flex flex-row justify-between p-3'>{submittedBy || 'null'}</div> 
+              <div className='flex flex-row justify-between w-full items-center border border-darkSand rounded-3xl text-sm'>               
+                <div className='w-[80%] flex flex-col justify-between border-r border-darkSand pl-4'>
+                  <div className="border-b border-darkSand p-3 truncate">{id || 'not available'}</div>
+                  <div className='w-full flex flex-row justify-between p-3 truncate'>{submittedBy || 'not available'}</div> 
                 </div>
-                <div className='h-full px-4'><a href=''><ArrowUpRight size={28} strokeWidth={1}/></a></div>
+                <div className='h-full w-[20%] px-4'><a href=''><ArrowUpRight size={28} strokeWidth={1}/></a></div>
               </div>
             )
           })
