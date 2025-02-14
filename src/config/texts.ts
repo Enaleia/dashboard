@@ -135,14 +135,14 @@ export const aboutCardInfo = [
 export const aboutPageLinks = [
   {
     text: 'Propose idea in Github forum',
-    url: ''
+    url: 'https://github.com/orgs/Enaleia/discussions/categories/ideas'
   },
   {
     text: 'Chat with us on Discord',
-    url: ''
+    url: 'https://discord.gg/5B3jP2sgWS'
   },
   {
     text: 'Follow updates on X',
-    url: ''
+    url: 'https://x.com/PollenLabs_'
   }
 ]
