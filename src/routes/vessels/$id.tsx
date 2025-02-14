@@ -27,12 +27,14 @@ function VesselDetailComponent() {
     <main className='flex flex-col justify-center items-center gap-8 m-auto pt-0 pb-16 lg:pb-32 md:pt-8 lg:pt-16 max-w-[1500px]'>
       <DetailPageHeading name={name} country={country} registered_port={port} type={type} collector_id={collector_identity} />
 
-      <section className="border border-primary rounded-3xl overflow-hidden p-12 text-center">
-        <h2 className="font-bold text-4xl md:text-5xl tracking-tight pb-2">{heading}</h2>
+      <section className="border border-primary rounded-3xl overflow-hidden text-center">
+        <h2 className="font-bold text-4xl md:text-5xl tracking-tight pt-12 px-4 md:px-10 lg:px-20">{heading}</h2>
         <StatsBar pageName='VesselDetail' partnerId={id}/>
-        <Separator className='bg-softBlack'/>
-        <h3 className='font-bold text-lg md:text-2xl tracking-tight pt-10 pb-2'>{statSubtitle}</h3>
-        <p className='font-extralight'>{statDescription}</p>
+        <Separator />
+        <div className='pt-12 lg:pb-8 px-4 md:px-10 lg:px-20'>
+          <h3 className='font-bold text-lg md:text-2xl tracking-tight pb-2'>{statSubtitle}</h3>
+          <p className='font-extralight tracking-tight'>{statDescription}</p>
+        </div>
       </section>
 
       <section className="border border-primary rounded-3xl overflow-hidden pb-4 md:pb-14">

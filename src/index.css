@@ -51,10 +51,12 @@ body {
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
+    /* --border: 240, 2%, 57%; */
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
 
     --softBlack: 0, 0%, 5%;
+    --darkSand: 240, 2%, 57%;
     --sand: 30, 18%, 96%;
     --ocean: 207, 67%, 49%;
     --port: 221, 72%, 33%;

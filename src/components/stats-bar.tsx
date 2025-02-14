@@ -18,6 +18,7 @@ const StatsBar = ({ pageName, partnerId }: StatsBarProps) => {
 
   // determine number of grid columns based on stat items for each page
   const gridColumns = {
+    3: 'lg:grid-cols-3',
     4: 'lg:grid-cols-4',
     5: 'lg:grid-cols-5',
     6: 'lg:grid-cols-3'
@@ -33,14 +34,14 @@ const StatsBar = ({ pageName, partnerId }: StatsBarProps) => {
         pageStats.map((stat: StatItem, index: number) => (
           <div
             key={stat.key}
-            className={`flex flex-col items-center text-center pb-6 lg:pb-0 ${index !== pageStats.length - 1 ? 'border-b lg:border-b-0' : ''} border-black`}
+            className={`flex flex-col items-center text-center pb-6 lg:pb-0 ${index !== pageStats.length - 1 ? 'border-b lg:border-b-0' : ''} border-darkSand`}
           >
-            <p className="text-xl md:text-lg font-medium">{stat.title}</p>
+            <p className="text-xl md:text-lg">{stat.title}</p>
             <p className="text-4xl md:text-5xl font-bold pt-4 pb-1">
               {stat.value > 9999 ? `${Math.round(stat.value / 1000)}K` : stat.value}
             </p>
             {stat.description && (
-              <p className="text-xs w-4/5 leading-tight min-h-[30px]">{stat.description}</p>
+              <p className="text-sm w-4/5 leading-tight">{stat.description}</p>
             )}
           </div>
         )))

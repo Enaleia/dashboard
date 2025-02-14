@@ -32,9 +32,9 @@ function HomeComponent() {
   const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT)
 
   return (
-    <main className='flex flex-col justify-center items-center gap-8 md:gap-20 m-auto pb-16 md:pb-24 md:pt-8 lg:pt-24 max-w-[1500px]'>
+    <main className='flex flex-col justify-center items-center gap-8 md:gap-20 m-auto pb-16 md:pb-24 md:pt-8 lg:pt-16 max-w-[1500px]'>
       <section className='flex flex-col items-center gap-6'>
-        <PageHero title={heroTitle} description={heroDescription} width='75'/>
+        <PageHero title={heroTitle} description={heroDescription}/>
         <div 
           className='flex flex-row justify-center items-center gap-2 font-normal text-ocean cursor-pointer'
           onClick={() => window.scrollTo({ top: isDesktop ? 1950: 2300, behavior: 'smooth'})}

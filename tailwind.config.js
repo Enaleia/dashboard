@@ -32,6 +32,7 @@ export default {
       },
   		colors: {
         softBlack: 'hsl(var(--softBlack))',
+        darkSand: 'hsl(var(--darkSand))',
         sand: 'hsl(var(--sand))',
         ocean: 'hsl(var(--ocean))',
         mixedPlastic: 'hsl(var(--mixedPlastic))',

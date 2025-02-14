@@ -18,7 +18,7 @@ function VesselsComponent() {
 
   return (
     <main className='flex flex-col justify-center items-center gap-8 md:gap-10 m-auto md:pt-8 lg:pt-16 max-w-[1500px]'>
-      <PageHero title={heroTitle} description={heroDescription} width='85' />
+      <PageHero title={heroTitle} description={heroDescription} />
       <StatsBar pageName='Vessels'/>
 
       <section className='w-full'>

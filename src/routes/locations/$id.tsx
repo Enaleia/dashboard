@@ -37,17 +37,21 @@ function LocationDetailComponent() {
         addresses={addresses}
       />
 
-      <section className="border border-primary rounded-3xl overflow-hidden p-10 text-center">
-        <h2 className="font-bold text-4xl md:text-5xl tracking-tight pb-2">{heading}</h2>
-        <p className="font-extralight text-sm md:text-lg tracking-tight leading-tight md:leading-tight">{description}</p>       
+      <section className="border border-primary rounded-3xl overflow-hidden text-center">
+        <div className='pt-12 lg:pb-8 px-4 md:px-10 lg:px-20'>
+          <h2 className="font-bold text-4xl md:text-5xl tracking-tight pb-2">{heading}</h2>
+          <p className="font-extralight text-sm md:text-lg tracking-tight leading-tight md:leading-tight">{description}</p>       
+        </div>
 
         <StatsBar pageName={`${type}Detail`} partnerId={id}/>
          
         {statSubtitle &&
           <>
-            <Separator className='bg-softBlack' />
-            <h3 className='font-bold text-lg md:text-2xl tracking-tight pt-10 pb-2'>{statSubtitle}</h3>
-            <p className='font-extralight'>{statDescription}</p>
+            <Separator />
+            <div className='py-12 px-8 md:px-10 lg:px-20'>
+              <h3 className='font-bold text-lg md:text-2xl tracking-tight pb-2'>{statSubtitle}</h3>
+              <p className='font-extralight tracking-tight'>{statDescription}</p>
+            </div>
           </>
         }
       </section>

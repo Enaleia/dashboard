@@ -21,9 +21,9 @@ function AboutComponent() {
   } = aboutPageTexts
 
   return (
-    <main className='flex flex-col justify-center items-center gap-8 m-auto pb-16 lg:pb-24 md:pt-8 lg:pt-24 max-w-[1500px]'>      
+    <main className='flex flex-col justify-center items-center gap-8 m-auto pb-16 lg:pb-24 md:pt-8 lg:pt-16 max-w-[1500px]'>      
       <section className='flex flex-col items-center gap-10'>
-        <PageHero title={heroTitle} description={heroDescription} width='90'/>
+        <PageHero title={heroTitle} description={heroDescription}/>
         <img src='/Images/about_hero.jpg' alt="photo of port operations" className='object-cover bg-center h-[350px] md:h-[550px] lg:h-auto w-full rounded-3xl overflow-hidden'/>
       </section> 
 
