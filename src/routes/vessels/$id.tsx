@@ -28,18 +28,18 @@ function VesselDetailComponent() {
       <DetailPageHeading name={name} country={country} registered_port={port} type={type} collector_id={collector_identity} />
 
       <section className="border border-primary rounded-3xl overflow-hidden text-center">
-        <h2 className="font-bold text-4xl md:text-5xl tracking-tight pt-12 px-4 md:px-10 lg:px-20">{heading}</h2>
+        <h2 className="font-bold text-4xl md:text-5xl tracking-tight pt-12 lg:pb-12 px-4 md:px-10 lg:px-20">{heading}</h2>
         <StatsBar pageName='VesselDetail' partnerId={id}/>
         <Separator />
-        <div className='pt-12 lg:pb-8 px-4 md:px-10 lg:px-20'>
-          <h3 className='font-bold text-lg md:text-2xl tracking-tight pb-2'>{statSubtitle}</h3>
-          <p className='font-extralight tracking-tight'>{statDescription}</p>
+        <div className='py-12 px-4 md:px-10 lg:px-20'>
+          <h3 className='font-bold text-lg md:text-2xl tracking-tight leading-tight px-12 pb-2'>{statSubtitle}</h3>
+          <p className='font-extralight tracking-tight leading-tight'>{statDescription}</p>
         </div>
       </section>
 
-      <section className="border border-primary rounded-3xl overflow-hidden pb-4 md:pb-14">
+      <section className="w-full border border-primary rounded-3xl overflow-hidden pb-4 md:pb-14">
         <article className='flex flex-col lg:flex-row justify-between gap-6 lg:items-end px-4 py-8 md:p-12 md:pb-0'>
-          <h2 className='font-bold text-4xl md:text-5xl text-center lg:text-left tracking-tight'>Waste removed by action type</h2>
+          <h2 className='font-bold text-3xl text-center lg:text-left tracking-tight'>Waste removed by action type</h2>
           <div className="flex flex-row justify-center gap-1 md:gap-2">
             {dateChoices.map((choice) => (
               <Button
