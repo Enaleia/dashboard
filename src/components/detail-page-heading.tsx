@@ -56,8 +56,8 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type, 
                 <img src='/DataIcons/wallet.svg' alt='wallet icon' className='h-6 w-6'/>
                 <div className='grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-1'>
                   {mockAddresses.length ?
-                    mockAddresses.map(address => (
-                      <a href='' className='flex flex-row gap-2'>
+                    mockAddresses.map((address, index) => (
+                      <a href='' key={index} className='flex flex-row gap-2'>
                         <p>{address.slice(0, 6)}...{address.slice(-4)}</p>
                         <ArrowUpRight strokeWidth={1}/>
                       </a>

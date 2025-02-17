@@ -68,10 +68,10 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {pageTransactions.map((attestation) => {
+              {pageTransactions.map((attestation, index) => {
                 const { id, submittedBy } = attestation
                 return (
-                  <TableRow key={id} className="cursor-pointer group border-none">
+                  <TableRow key={index} className="cursor-pointer group border-none">
                     <TableCell className="p-0 w-[46%]"><div className="mt-2 px-8 py-4 border border-darkSand rounded-l-full truncate group-hover:bg-sand transition-colors">{id || 'not available'}</div></TableCell>
                     <TableCell className="p-0 w-[46%]"><div className="mt-2 px-8 py-4 border-y border-darkSand truncate group-hover:bg-sand transition-colors">{submittedBy || 'not available'}</div></TableCell>
                     <TableCell className="p-0 w-[8%]"><div className="mt-2 px-8 py-4 border border-darkSand rounded-r-full hover:bg-sand group-hover:bg-sand transition-colors"><a href=''><ArrowUpRight size={20} strokeWidth={1}/></a></div></TableCell>            
@@ -115,4 +115,4 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
   )
 }
 
-export { AttestationsTable };
+export { AttestationsTable }
