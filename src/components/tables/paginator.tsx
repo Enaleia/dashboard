@@ -92,7 +92,7 @@ const Paginator = ({
 	);
 
 	return (
-		<Pagination className="pt-10">
+		<Pagination className="pt-10 md:pt-2">
 			<PaginationContent>
 				<PaginationItem className="hover:cursor-pointer">
 					<PaginationPrevious

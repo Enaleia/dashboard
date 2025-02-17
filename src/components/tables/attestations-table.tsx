@@ -35,18 +35,33 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
 		needsPagination,
 	} = usePagination(records, itemsPerPage)
 
-  if (isPending) return 'Loading...'
-  if (error) return 'An error has occurred: ' + error.message
-
+  if (isPending || error || !pageTransactions.length) {
+    return (
+      <article className="w-full lg:h-[598px] flex flex-col justify-center items-center text-center text-lg px-10">
+        {isPending ? (
+          <>
+            <p>Loading attestation data...</p>
+            <img src="/Sealife/dolphin.svg" alt="dolphin illustration" className="w-[300px] h-[300px]"/>
+          </>
+        ) : (
+          <>
+            <p>😕 sorry!</p>
+            <p>We are not able to build the attestation table at this time.</p>
+            <img src="/Sealife/dolphin.svg" alt="dolphin illustration" className="w-[300px] h-[300px]"/>
+          </>
+        )}
+      </article>
+    )
+  }
 
   return (
     <>
-      <p className="font-semibold py-2">Total attestations: {records.length}</p>
-      {pageTransactions.length ? (
-        isDesktop ? ( 
-          <Table className="w-full table-fixed lg:h-[598px] overflow-x-auto">
+      <article className="h-[620px] lg:h-[598px]">
+        <p className="font-semibold py-2">Total attestations: {records.length}</p>
+        {isDesktop ? ( 
+          <Table className="w-full table-fixed overflow-x-auto">
             <TableHeader>
-              <TableRow>
+              <TableRow className="border-none">
                 <TableHead className="p-0 w-[46%]"><div className="text-xs font-light text-softBlack bg-sand mt-2 px-8 py-2 border border-darkSand rounded-l-full">Attestation UUID</div></TableHead>
                 <TableHead className="p-0 w-[46%]"><div className="text-xs font-light text-softBlack bg-sand mt-2 px-8 py-2 border-y border-darkSand">Submitted by</div></TableHead>
                 <TableHead className="p-0 w-[8%]"><div className="text-xs font-light text-softBlack bg-sand mt-2 px-8 py-2 border border-darkSand rounded-r-full"><Link size={16}/></div></TableHead>
@@ -56,10 +71,10 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
               {pageTransactions.map((attestation) => {
                 const { id, submittedBy } = attestation
                 return (
-                  <TableRow key={id} className="cursor-pointer group">
-                    <TableCell className="p-0 w-[46%]"><div className="mt-2 px-8 py-5 border border-darkSand rounded-l-full truncate group-hover:bg-sand transition-colors">{id || 'null'}</div></TableCell>
-                    <TableCell className="p-0 w-[46%]"><div className="mt-2 px-8 py-5 border-y border-darkSand flex gap-2 truncate group-hover:bg-sand transition-colors">{submittedBy || 'null'}</div></TableCell>
-                    <TableCell className="p-0 w-[8%]"><div className="mt-2 px-8 py-5 border border-darkSand rounded-r-full hover:bg-sand group-hover:bg-sand transition-colors"><a href=''><ArrowUpRight size={20} strokeWidth={1}/></a></div></TableCell>            
+                  <TableRow key={id} className="cursor-pointer group border-none">
+                    <TableCell className="p-0 w-[46%]"><div className="mt-2 px-8 py-4 border border-darkSand rounded-l-full truncate group-hover:bg-sand transition-colors">{id || 'not available'}</div></TableCell>
+                    <TableCell className="p-0 w-[46%]"><div className="mt-2 px-8 py-4 border-y border-darkSand truncate group-hover:bg-sand transition-colors">{submittedBy || 'not available'}</div></TableCell>
+                    <TableCell className="p-0 w-[8%]"><div className="mt-2 px-8 py-4 border border-darkSand rounded-r-full hover:bg-sand group-hover:bg-sand transition-colors"><a href=''><ArrowUpRight size={20} strokeWidth={1}/></a></div></TableCell>            
                   </TableRow>
                 )
               })}
@@ -69,19 +84,17 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
           pageTransactions.map((attestation: AttestationItem) => {
             const { id, submittedBy } = attestation
             return (
-              <div className='flex flex-row justify-between w-full items-center border border-darkSand rounded-3xl text-sm'>               
+              <div className='flex flex-row my-2 justify-between w-full items-center border border-darkSand rounded-3xl text-sm'>               
                 <div className='w-[80%] flex flex-col justify-between border-r border-darkSand pl-4'>
                   <div className="border-b border-darkSand p-3 truncate">{id || 'not available'}</div>
-                  <div className='w-full flex flex-row justify-between p-3 truncate'>{submittedBy || 'not available'}</div> 
+                  <div className='p-3 truncate'>{submittedBy || 'not available'}</div> 
                 </div>
                 <div className='h-full w-[20%] px-4'><a href=''><ArrowUpRight size={28} strokeWidth={1}/></a></div>
               </div>
             )
           })
-        )
-      ) : (
-        <p>no records found</p>
-      )}
+        )}
+      </article>
 
       {needsPagination && (
         <article className="flex flex-col justify-center items-center gap-4">

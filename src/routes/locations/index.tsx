@@ -32,10 +32,10 @@ function LocationsComponent() {
           setSelectedViewType={setSelectedViewType}
         />
 
-        <article className='overflow-hidden rounded-3xl pt-8 pb-16'>
+        <div className='overflow-hidden rounded-3xl pt-8 pb-16'>
           {selectedViewType === "List" && <ActionsTable pageName='Locations' partnerType={selectedLocationType}/>}
           {selectedViewType === "Map" && <ActivityMap pageName='Locations' partnerType={selectedLocationType}/>}
-        </article>          
+        </div>          
       </section> 
     </main>
   )

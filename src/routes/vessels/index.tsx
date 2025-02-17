@@ -27,9 +27,9 @@ function VesselsComponent() {
           selectedPartnerType={selectedVesselType}
           setSelectedPartnerType={setSelectedVesselType}
         />
-        <article className='overflow-hidden rounded-3xl pt-8 pb-16'>
+        <div className='overflow-hidden rounded-3xl pt-8 pb-16'>
           <ActionsTable pageName='Vessels' partnerType={selectedVesselType} />
-        </article>          
+        </div>          
       </section> 
     </main>
   )
