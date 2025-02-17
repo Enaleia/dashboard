@@ -12,15 +12,16 @@ interface DetailPageHeadingProps {
 }
 
 const DetailPageHeading = ({ name, country, coordinates, registered_port, type, addresses, collector_id}: DetailPageHeadingProps) => {
+  const mockAddresses = ['0x7AbcB357d8a022811e0040358E19e43137cBad72', '0x7AbcB357d8a022811e0040358E19e43137cBad72', '0x7AbcB357d8a022811e0040358E19e43137cBad72', '0x7AbcB357d8a022811e0040358E19e43137cBad72', '0x7AbcB357d8a022811e0040358E19e43137cBad72']
   return (
     <section className='w-full'>
       <div className='flex flex-row justify-between items-start'>
 
         <div className='flex flex-col gap-0.5 md:gap-2 lg:gap-4 font-light'>
-          <p className='text-xs md:text-sm font-extralight'>Location detail</p>
+          <p className='text-xs md:text-sm font-extralight'>{coordinates ? 'Location detail' : 'Collector detail'}</p>
           <h1 className='font-bold text-5xl md:text-6xl lg:text-7xl tracking-tight'>{name}</h1>
 
-          <div className='flex flex-col lg:flex-row gap-0.5 lg:gap-4 font-light'>
+          <div className='flex flex-col lg:flex-row items-start gap-0.5 lg:gap-4 font-light'>
             <div className='flex flex-row items-center gap-1'>
               <img src={`/CountryFlags/${country}.svg`} alt={`${country} flag`} className='h-7 w-7'/>
               <p>{country}</p>
@@ -29,7 +30,7 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type, 
               <Separator orientation='vertical' className='bg-gray-400 w-[1px]'/>
             </div>
             {coordinates &&
-              <a href='' className='flex flex-row items-center gap-2 hover:font-semibold'>
+              <a href='' className='flex flex-row items-center gap-2'>
                 <img src='/DataIcons/pin.svg' alt='pin icon' className='h-6 w-6'/>
                 {coordinates.length === 2 ?
                   <>
@@ -42,7 +43,7 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type, 
               </a>
             }
             {registered_port && 
-              <div className='flex flex-row items-center gap-2 hover:font-semibold'>
+              <div className='flex flex-row items-center gap-2'>
                 <img src='/DataIcons/pin.svg' alt='pin icon' className='h-6 w-6'/>
                 <p><span className='font-extralight'>Registered port:</span> {registered_port}</p>
               </div>
@@ -51,22 +52,24 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type, 
               <Separator orientation='vertical' className='bg-gray-400 w-[1.5px]'/>
             </div>
             {addresses &&
-              <a href='' className='flex flex-row items-center gap-2 hover:font-semibold'>
+              <div className='flex flex-row items-start gap-2'>       
                 <img src='/DataIcons/wallet.svg' alt='wallet icon' className='h-6 w-6'/>
-                {addresses.length > 0 ?
-                  addresses.map(address => (
-                    <>
-                      <p>{address}</p>
-                      <ArrowUpRight strokeWidth={1}/>
-                    </>
-                  )) 
-                :
-                  <p>address not available</p>
-                }
-              </a>
+                <div className='grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-1'>
+                  {mockAddresses.length ?
+                    mockAddresses.map(address => (
+                      <a href='' className='flex flex-row gap-2'>
+                        <p>{address.slice(0, 6)}...{address.slice(-4)}</p>
+                        <ArrowUpRight strokeWidth={1}/>
+                      </a>
+                    )) 
+                  :
+                    <p>address not available</p>
+                  }
+                </div>
+              </div>
             }
             {collector_id && 
-              <div className='flex flex-row items-center gap-2 hover:font-semibold'>
+              <div className='flex flex-row items-center gap-2'>
                 <img src='/DataIcons/id.svg' alt='ID card icon' className='h-6 w-6'/>
                 <p><span className='font-extralight'>Collector ID:</span> {collector_id}</p>
               </div>
