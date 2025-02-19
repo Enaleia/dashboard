@@ -38,18 +38,12 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
   if (isPending || error || !pageTransactions.length) {
     return (
       <article className="w-full lg:h-[598px] flex flex-col justify-center items-center text-center text-lg px-10">
-        {isPending ? (
           <>
-            <p>Loading attestation data...</p>
+            {isPending && <p>Loading attestation data...</p>}
+            {error && <p>Sorry! We are not able to build the attestation table at this time.</p>}
+            {!pageTransactions.length && <p>This partner has not made any attestations yet.</p>}
             <img src="/Sealife/dolphin.svg" alt="dolphin illustration" className="w-[300px] h-[300px]"/>
           </>
-        ) : (
-          <>
-            <p>😕 sorry!</p>
-            <p>We are not able to build the attestation table at this time.</p>
-            <img src="/Sealife/dolphin.svg" alt="dolphin illustration" className="w-[300px] h-[300px]"/>
-          </>
-        )}
       </article>
     )
   }
