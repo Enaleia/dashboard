@@ -43,12 +43,12 @@ const StatsBar = ({ pageName, partnerId }: StatsBarProps) => {
           key={stat.key}
           className={`flex flex-col items-center text-center pb-6 lg:pb-0 ${index !== pageStats.length - 1 ? 'border-b lg:border-b-0' : ''} border-darkSand`}
         >
-          <p className="text-lg">{stat.title}</p>
+          <p className="text-lg font-extralight">{stat.title}</p>
           <p className="text-4xl md:text-5xl font-bold pt-4 pb-1">
             {stat.value > 9999 ? `${Math.round(stat.value / 1000)}K` : stat.value}
           </p>
           {stat.description && (
-            <p className="text-sm w-4/5 leading-tight">{stat.description}</p>
+            <p className="text-sm font-extralight leading-tight">{stat.description}</p>
           )}
         </div>
       ))}
