@@ -29,7 +29,12 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type, 
               <Separator orientation='vertical' className='bg-gray-400 w-[1px]'/>
             </div>
             {coordinates &&
-              <a href='' className='flex flex-row items-center gap-2'>
+              <a 
+                href={`https://www.google.com/maps?q={${coordinates[0]},${coordinates[1]}}`}
+                target="_blank"
+                rel="noopener noreferrer" 
+                className='flex flex-row items-center gap-2'
+              >
                 <img src='/DataIcons/pin.svg' alt='pin icon' className='h-6 w-6'/>
                 {coordinates.length === 2 ?
                   <>
