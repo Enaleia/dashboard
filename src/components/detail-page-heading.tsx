@@ -12,7 +12,6 @@ interface DetailPageHeadingProps {
 }
 
 const DetailPageHeading = ({ name, country, coordinates, registered_port, type, addresses, collector_id}: DetailPageHeadingProps) => {
-  const mockAddresses = ['0x7AbcB357d8a022811e0040358E19e43137cBad72', '0x7AbcB357d8a022811e0040358E19e43137cBad72', '0x7AbcB357d8a022811e0040358E19e43137cBad72', '0x7AbcB357d8a022811e0040358E19e43137cBad72', '0x7AbcB357d8a022811e0040358E19e43137cBad72']
   return (
     <section className='w-full'>
       <div className='flex flex-row justify-between items-start'>
@@ -55,9 +54,14 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type, 
               <div className='flex flex-row items-start gap-2'>       
                 <img src='/DataIcons/wallet.svg' alt='wallet icon' className='h-6 w-6'/>
                 <div className='grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-1'>
-                  {mockAddresses.length ?
-                    mockAddresses.map((address, index) => (
-                      <a href='' key={index} className='flex flex-row gap-2'>
+                  {addresses.length ?
+                    addresses.map((address, index) => (
+                      <a 
+                        key={index}
+                        href={`https://optimism.easscan.org/address/${address}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className='flex flex-row gap-2'>
                         <p>{address.slice(0, 6)}...{address.slice(-4)}</p>
                         <ArrowUpRight strokeWidth={1}/>
                       </a>

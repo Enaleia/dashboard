@@ -62,9 +62,21 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
           <Table className="w-full table-fixed overflow-x-auto">
             <TableHeader>
               <TableRow className="border-none">
-                <TableHead className="p-0 w-[46%]"><div className="text-xs font-light text-softBlack bg-sand mt-2 px-8 py-2 border border-darkSand rounded-l-full">Attestation UUID</div></TableHead>
-                <TableHead className="p-0 w-[46%]"><div className="text-xs font-light text-softBlack bg-sand mt-2 px-8 py-2 border-y border-darkSand">Submitted by</div></TableHead>
-                <TableHead className="p-0 w-[8%]"><div className="text-xs font-light text-softBlack bg-sand mt-2 px-8 py-2 border border-darkSand rounded-r-full"><Link size={16}/></div></TableHead>
+                <TableHead className="p-0 w-[46%]">
+                  <div className="text-xs font-light text-softBlack bg-sand mt-2 px-8 py-2 border border-darkSand rounded-l-full">
+                    Attestation UID
+                  </div>
+                </TableHead>
+                <TableHead className="p-0 w-[46%]">
+                  <div className="text-xs font-light text-softBlack bg-sand mt-2 px-8 py-2 border-y border-darkSand">
+                    Submitted by
+                  </div>
+                </TableHead>
+                <TableHead className="p-0 w-[8%]">
+                  <div className="text-xs font-light text-softBlack bg-sand mt-2 px-8 py-2 border border-darkSand rounded-r-full">
+                    <Link size={16}/>
+                  </div>
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -72,9 +84,23 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
                 const { id, submittedBy } = attestation
                 return (
                   <TableRow key={index} className="cursor-pointer group border-none">
-                    <TableCell className="p-0 w-[46%]"><div className="mt-2 px-8 py-4 border border-darkSand rounded-l-full truncate group-hover:bg-sand transition-colors">{id || 'not available'}</div></TableCell>
-                    <TableCell className="p-0 w-[46%]"><div className="mt-2 px-8 py-4 border-y border-darkSand truncate group-hover:bg-sand transition-colors">{submittedBy || 'not available'}</div></TableCell>
-                    <TableCell className="p-0 w-[8%]"><div className="mt-2 px-8 py-4 border border-darkSand rounded-r-full hover:bg-sand group-hover:bg-sand transition-colors"><a href=''><ArrowUpRight size={20} strokeWidth={1}/></a></div></TableCell>            
+                    <TableCell className="p-0 w-[46%]">
+                      <div className="mt-2 px-8 py-4 border border-darkSand rounded-l-full truncate group-hover:bg-sand transition-colors">
+                        {id || 'not available'}
+                      </div>
+                    </TableCell>
+                    <TableCell className="p-0 w-[46%]">
+                      <div className="mt-2 px-8 py-4 border-y border-darkSand truncate group-hover:bg-sand transition-colors">
+                        {submittedBy || 'not available'}
+                      </div>
+                    </TableCell>
+                    <TableCell className="p-0 w-[8%]">
+                      <div className="mt-2 px-8 py-4 border border-darkSand rounded-r-full hover:bg-sand group-hover:bg-sand transition-colors">
+                        <a href={`https://optimism.easscan.org/attestation/view/${id}`} target="_blank" rel="noopener noreferrer">
+                          <ArrowUpRight size={20} strokeWidth={1}/>
+                        </a>
+                      </div>
+                    </TableCell>            
                   </TableRow>
                 )
               })}
@@ -89,7 +115,11 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
                   <div className="border-b border-darkSand p-3 truncate">{id || 'not available'}</div>
                   <div className='p-3 truncate'>{submittedBy || 'not available'}</div> 
                 </div>
-                <div className='h-full w-[20%] px-4'><a href=''><ArrowUpRight size={28} strokeWidth={1}/></a></div>
+                <div className='h-full w-[20%] px-4'>
+                  <a href={`https://optimism.easscan.org/attestation/view/${id}`} target="_blank" rel="noopener noreferrer">
+                    <ArrowUpRight size={28} strokeWidth={1}/>
+                  </a>
+                </div>
               </div>
             )
           })
