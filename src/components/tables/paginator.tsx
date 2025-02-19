@@ -80,7 +80,7 @@ const Paginator = ({
 	loadPage,
 }: IPaginator) => {
 	const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT);
-	const maxPagesInPagination = isDesktop ? 7 : 3;
+	const maxPagesInPagination = isDesktop ? 7 : 5;
 	if (!needsPagination) {
 		return null;
 	}
@@ -92,7 +92,7 @@ const Paginator = ({
 	);
 
 	return (
-		<Pagination className="pt-10">
+		<Pagination className="pt-10 md:pt-2">
 			<PaginationContent>
 				<PaginationItem className="hover:cursor-pointer">
 					<PaginationPrevious

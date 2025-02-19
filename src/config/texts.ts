@@ -113,36 +113,36 @@ export const aboutCardInfo = [
   {
     image: 'turtle',
     title: 'Log waste collection at the port',
-    description: 'Using the mobile app, each port coordinator records and submits data directly to the blockchain. The mobile app operates as a distributed node, with each user having their own account (wallet) to interact securely with the blockchain.<br/><br/>The mobile app is currently in testing phase. If you are interested to learn more about our code, please visit the <a href="" style="font-weight: bold">repository</a>.',
+    description: 'Using the mobile app, each port coordinator records and submits data directly to the blockchain. The mobile app operates as a distributed node, with each user having their own account (wallet) to interact securely with the blockchain.<br/><br/>The mobile app is currently in testing phase. If you are interested to learn more about our code, please visit the <a href="https://github.com/Enaleia" target="_blank" rel="noopener noreferrer" style="font-weight: bold">repository</a>.',
   },
   {
     image: 'fish',
     title: 'Tag physical items with unique tracking codes',
-    description: 'Waste collected by the fisher community is sent to recyclers with a unique 6-digit tag for traceability.<br/><br/> As the waste is processed, it is tracked through each stage to its final destination. Enaleia supports a <a href="" style="font-weight: bold">circular economy</a>—learn more about the products created from our efforts.',
+    description: 'Waste collected by the fisher community is sent to recyclers with a unique 6-digit tag for traceability.<br/><br/> As the waste is processed, it is tracked through each stage to its final destination. Enaleia supports a <a href="https://enaleia-hub.com/economy" style="font-weight: bold">circular economy</a>—learn more about the products created from our efforts.',
   },
   {
     image: 'octopus',
     title: 'Immutably attest to collected data',
-    description: 'Each data submission by port coordinators is stored on the blockchain in a human-readable format. This ensures that future marine scientists or environmentalists can reference historical data for research.<br/><br/> We use <a href="" style="font-weight: bold">Ethereum Attestation Service</a> to certify the authenticity of this data. How to read the data we attested? Learn more about our <a href="" style="font-weight: bold">attestation scheme</a>.',
+    description: 'Each data submission by port coordinators is stored on the blockchain in a human-readable format. This ensures that future marine scientists or environmentalists can reference historical data for research.<br/><br/> We use <a href="https://attest.org/" target="_blank" rel="noopener noreferrer"style="font-weight: bold">Ethereum Attestation Service</a> to certify the authenticity of this data. How to read the data we attested? Learn more about our <a href="" target="_blank" rel="noopener noreferrer" style="font-weight: bold">attestation scheme</a>.',
   },
   {
     image: 'crab',
     title: 'Demonstrate transparency',
-    description: 'Our public dashboard is a critical tool for showcasing transparency and highlighting the impact of our efforts.<br/><br/> All data visualizations are backed by attestations, and public users can verify them via the <a href="" style="font-weight: bold">blockchain explorer</a>.',
+    description: 'Our public dashboard is a critical tool for showcasing transparency and highlighting the impact of our efforts.<br/><br/> All data visualizations are backed by attestations, and public users can verify them via the <a href=""target="_blank" rel="noopener noreferrer" style="font-weight: bold">blockchain explorer</a>.',
   }
 ]
 
 export const aboutPageLinks = [
   {
     text: 'Propose idea in Github forum',
-    url: ''
+    url: 'https://github.com/orgs/Enaleia/discussions/categories/ideas'
   },
   {
     text: 'Chat with us on Discord',
-    url: ''
+    url: 'https://discord.gg/5B3jP2sgWS'
   },
   {
     text: 'Follow updates on X',
-    url: ''
+    url: 'https://x.com/PollenLabs_'
   }
 ]

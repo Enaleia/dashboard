@@ -32,9 +32,9 @@ function HomeComponent() {
   const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT)
 
   return (
-    <main className='flex flex-col justify-center items-center gap-8 md:gap-20 m-auto pb-16 md:pb-24 md:pt-8 lg:pt-24 max-w-[1500px]'>
+    <main className='flex flex-col justify-center items-center gap-8 md:gap-20 m-auto pb-16 md:pb-24 md:pt-8 lg:pt-16 max-w-[1500px]'>
       <section className='flex flex-col items-center gap-6'>
-        <PageHero title={heroTitle} description={heroDescription} width='75'/>
+        <PageHero title={heroTitle} description={heroDescription}/>
         <div 
           className='flex flex-row justify-center items-center gap-2 font-normal text-ocean cursor-pointer'
           onClick={() => window.scrollTo({ top: isDesktop ? 1950: 2300, behavior: 'smooth'})}
@@ -57,20 +57,22 @@ function HomeComponent() {
       </section>
       
       <section className='flex flex-col border border-primary rounded-3xl pb-4'>
-        <article className='flex flex-col px-4 py-8 md:p-12 md:pb-0'>
+        <article className='px-4 py-8 md:p-12 md:pb-0'>
           <p className='font-bold text-5xl md:text-6xl tracking-tight'>{wasteChartTitle}</p>
-          <p className='font-extralight text-base md-text-xl tracking-tight leading-tight md:leading-tight pt-2 pb-4 lg:pb-0'>{wasteChartDescription}</p>
-          <div className='flex flex-row justify-end gap-1 md:gap-2'>
-            {dateChoices.map((choice) => (
-              <Button 
-                key={choice}
-                variant={selectedChartDates === choice ? "default" : "outline"}
-                className='text-xs'
-                onClick={() => setSelectedChartDates(choice)}
-              >
-                {choice}
-              </Button>
-            ))}
+          <div className='flex flex-col lg:flex-row lg:items-end lg:gap-8'>
+            <p className='font-extralight text-base md-text-xl tracking-tight leading-tight md:leading-tight pt-2 pb-4 lg:pb-0'>{wasteChartDescription}</p>
+            <div className='flex flex-row justify-center gap-1 md:gap-2'>        
+              {dateChoices.map((choice) => (
+                <Button 
+                  key={choice}
+                  variant={selectedChartDates === choice ? "default" : "outline"}
+                  className='text-xs'
+                  onClick={() => setSelectedChartDates(choice)}
+                >
+                  {choice}
+                </Button>
+              ))}
+            </div>
           </div>
         </article>
         
@@ -79,7 +81,7 @@ function HomeComponent() {
 
         <article className='font-extralight text-base md:text-lg text-center p-6 md:p-12'>
           <p>
-            To understand the breakdown of plastic material and its origin, please view our
+            To explore the individual collection activities of our partners, please view our
             <Link to="/locations" className='font-bold'>&nbsp;&nbsp;locations page</Link>
           </p>
         </article>

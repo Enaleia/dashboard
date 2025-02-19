@@ -4,6 +4,7 @@
 
 body {
   font-family: 'DM Sans Variable', sans-serif;
+  color: #0D0D0D;
   padding: 2rem 12rem;
 }
 
@@ -26,19 +27,19 @@ body {
 @layer base {
   :root {
     --background: 30, 18%, 96%;
-    --foreground: 0, 0%, 0%;
+    --foreground: 0, 0%, 5%;
 
     --card: 30, 18%, 96%;
-    --card-foreground: 0, 0%, 0%;
+    --card-foreground: 0, 0%, 5%;
 
     --popover: 0, 18%, 96%;
-    --popover-foreground: 0, 0%, 0%;
+    --popover-foreground: 0, 0%, 5%;
 
-    --primary: 0, 0%, 0%;
+    --primary: 0, 0%, 5%;
     --primary-foreground: 30, 18%, 96%;
 
     --secondary: 30, 18%, 96%;
-    --secondary-foreground: 0, 0%, 0%;
+    --secondary-foreground: 0, 0%, 5%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
@@ -50,10 +51,13 @@ body {
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
+    /* --border: 240, 2%, 57%; */
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
 
-    --sand: 30, 18%, 96%;
+    --softBlack: 0, 0%, 5%;
+    --darkSand: 240, 2%, 57%;
+    --sand: 30, 18%, 92%;
     --ocean: 207, 67%, 49%;
     --port: 221, 72%, 33%;
     --recycler: 139, 58%, 41%;

@@ -35,7 +35,7 @@ export const DESKTOP_BREAKPOINT = "(min-width: 1024px)"
 
 export const ITEMS_PER_PAGE = {
   DESKTOP: 8,
-  MOBILE: 5
+  MOBILE: 6
 }
 
 

@@ -42,6 +42,7 @@ const NavLinks = ({ closeMenu }: NavLinksProps) => {
       >
         Collectors
       </Link>
+      {/* save for future release */}
       <Link
         to="/economy"
         onClick={() => closeMenu && closeMenu(true)}

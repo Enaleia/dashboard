@@ -37,25 +37,29 @@ function LocationDetailComponent() {
         addresses={addresses}
       />
 
-      <section className="border border-primary rounded-3xl overflow-hidden p-10 text-center">
-        <h2 className="font-bold text-4xl md:text-5xl tracking-tight pb-2">{heading}</h2>
-        <p className="font-extralight text-sm md:text-lg tracking-tight leading-tight md:leading-tight">{description}</p>       
+      <section className="border border-primary rounded-3xl overflow-hidden text-center">
+        <div className='pt-12 lg:pb-12 px-4 md:px-10 lg:px-20'>
+          <h2 className="font-bold text-4xl md:text-5xl tracking-tight pb-2">{heading}</h2>
+          <p className="font-extralight text-sm md:text-lg tracking-tight leading-tight md:leading-tight">{description}</p>       
+        </div>
 
         <StatsBar pageName={`${type}Detail`} partnerId={id}/>
          
         {statSubtitle &&
           <>
-            <Separator className='bg-black' />
-            <h3 className='font-bold text-lg md:text-2xl tracking-tight pt-10 pb-2'>{statSubtitle}</h3>
-            <p className='font-extralight'>{statDescription}</p>
+            <Separator />
+            <div className='py-12 px-4 md:px-10 lg:px-20'>
+              <h3 className='font-bold text-lg md:text-2xl tracking-tight leading-tight px-12 pb-2'>{statSubtitle}</h3>
+              <p className='font-extralight tracking-tight leading-tight'>{statDescription}</p>
+            </div>
           </>
         }
       </section>
 
       {type === 'Port' && (
-        <section className="border border-primary rounded-3xl overflow-hidden pb-4 md:pb-14">
+        <section className="w-full border border-primary rounded-3xl overflow-hidden pb-4 md:pb-14">
           <article className='flex flex-col lg:flex-row justify-between gap-6 lg:items-end px-4 py-8 md:p-12 md:pb-0'>
-            <h2 className='font-bold text-4xl md:text-5xl text-center lg:text-left tracking-tight'>Waste removed by action type</h2>
+            <h2 className='font-bold text-3xl text-center lg:text-left tracking-tight'>Waste removed by action type</h2>
             <div className="flex flex-row justify-center gap-1 md:gap-2">
               {dateChoices.map((choice) => (
                 <Button
@@ -86,7 +90,7 @@ function LocationDetailComponent() {
         <p className="w-full md:w-[70%] font-extralight tracking-tight leading-tight md:leading-tight">
           {attestationDescriptions[type]}
         </p>
-        <Separator className="bg-black my-1" />
+        <Separator className="bg-softBlack my-1" />
         <AttestationsTable pageName='LocationDetail' partnerId={id}/>
       </section>
 

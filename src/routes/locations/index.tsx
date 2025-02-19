@@ -18,8 +18,8 @@ function LocationsComponent() {
   const [selectedViewType, setSelectedViewType] = useState("List")
 
   return (
-    <main className='flex flex-col justify-center items-center gap-8 md:gap-10 m-auto md:pt-8 lg:pt-16 max-w-[1500px]'>
-      <PageHero title={heroTitle} description={heroDescription} width='70' /> 
+    <main className='flex flex-col justify-center items-center gap-8 md:gap-16 m-auto md:pt-8 lg:pt-16 max-w-[1500px]'>
+      <PageHero title={heroTitle} description={heroDescription} /> 
       <StatsBar pageName='Locations'/>
 
       <section className='w-full'>
@@ -32,10 +32,10 @@ function LocationsComponent() {
           setSelectedViewType={setSelectedViewType}
         />
 
-        <article className='overflow-hidden rounded-3xl pb-16'>
+        <div className='overflow-hidden rounded-3xl pt-8 pb-16'>
           {selectedViewType === "List" && <ActionsTable pageName='Locations' partnerType={selectedLocationType}/>}
           {selectedViewType === "Map" && <ActivityMap pageName='Locations' partnerType={selectedLocationType}/>}
-        </article>          
+        </div>          
       </section> 
     </main>
   )
