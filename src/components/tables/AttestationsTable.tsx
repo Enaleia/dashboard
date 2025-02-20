@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { ShowingDisplay, Paginator } from "@/components/tables/Paginator"
+import { ShowingDisplay, Paginator } from "@/components/tables/paginator"
 import { Link, ArrowUpRight } from 'lucide-react'
 
 interface AttestationTableProps {
