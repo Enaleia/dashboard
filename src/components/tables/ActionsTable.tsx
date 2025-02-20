@@ -14,7 +14,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { usePagination } from "@/hooks/ui/usePagination"
-import { ShowingDisplay, Paginator } from "@/components/tables/Paginator"
+import { ShowingDisplay, TablePaginator } from "@/components/tables/TablePaginator"
 import { ArrowUpDown } from "lucide-react"
 
 interface ActionsTableProps {
@@ -165,7 +165,7 @@ const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
       {/* Pagination controls */}
       {needsPagination && (
         <article className="flex flex-col justify-center items-center gap-4">
-          <Paginator
+          <TablePaginator
             needsPagination={needsPagination}
             currentPage={currentPage}
             maxPage={maxPage}

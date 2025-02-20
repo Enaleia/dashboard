@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { ShowingDisplay, Paginator } from "@/components/tables/Paginator"
+import { ShowingDisplay, TablePaginator } from "@/components/tables/TablePaginator"
 import { Link, ArrowUpRight } from 'lucide-react'
 
 interface AttestationTableProps {
@@ -122,7 +122,7 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
 
       {needsPagination && (
         <article className="flex flex-col justify-center items-center gap-4">
-          <Paginator
+          <TablePaginator
             needsPagination={needsPagination}
             currentPage={currentPage}
             maxPage={maxPage}
