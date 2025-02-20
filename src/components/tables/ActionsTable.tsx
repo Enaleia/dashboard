@@ -14,7 +14,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { usePagination } from "@/hooks/ui/usePagination"
-import { ShowingDisplay, Paginator } from "@/components/tables/paginator"
+import { ShowingDisplay, Paginator } from "@/components/tables/Paginator"
 import { ArrowUpDown } from "lucide-react"
 
 interface ActionsTableProps {
