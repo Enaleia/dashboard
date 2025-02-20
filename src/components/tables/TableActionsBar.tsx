@@ -54,4 +54,4 @@ const TableActionsBar = ({
   )
 }
 
-export { TableActionsBar };
+export { TableActionsBar }

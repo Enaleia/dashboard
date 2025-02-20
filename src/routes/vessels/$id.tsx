@@ -1,15 +1,15 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router'
 import { VesselSearchParams } from '@/types'
 import { useState } from 'react'
-import { DetailPageHeading } from '@/components/detail-page-heading'
+import { DetailPageHeading } from '@/components/global/DetailPageHeading'
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
-import { StatsBar } from '@/components/stats-bar'
-import { CollectionsChart } from '@/components/charts/collections-chart'
-import { CustomChartLegend } from '@/components/charts/custom-chart-legend'
-import { AttestationsTable } from '@/components/tables/attestations-table'
-import { DetailPageBackNav } from '@/components/detail-page-back-nav'
-import { BackToTopButton } from '@/components/back-to-top'
+import { StatsBar } from '@/components/global/StatsBar'
+import { CollectionChart } from '@/components/charts/CollectionChart'
+import { CustomChartLegend } from '@/components/charts/CustomChartLegend'
+import { AttestationsTable } from '@/components/tables/AttestationsTable'
+import { DetailPageBackNav } from '@/components/global/DetailPageBackNav'
+import { BackToTopButton } from '@/components/global/BackToTopButton'
 import { dateChoices, partnerDetailInfo, attestationDescriptions } from '@/config/texts'
 
 export const Route = createFileRoute('/vessels/$id')({
@@ -54,7 +54,7 @@ function VesselDetailComponent() {
           </div>
         </article>
 
-        <CollectionsChart
+        <CollectionChart
           pageName='VesselDetail'
           partnerId={id}
           timeRange={selectedChartDates}

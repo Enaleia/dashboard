@@ -1,4 +1,4 @@
-import { NavLinks } from './links';
+import { NavLinks } from './NavLinks';
 import { X } from 'lucide-react'
 
 const NavMenu = ({ closeMenu }: { closeMenu: () => void }) => {
@@ -12,4 +12,4 @@ const NavMenu = ({ closeMenu }: { closeMenu: () => void }) => {
 	);
 };
 
-export { NavMenu };
+export { NavMenu }

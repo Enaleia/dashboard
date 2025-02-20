@@ -17,7 +17,7 @@ export const LocationMarker = ({ record }: MarkerProps) => {
   }
 
   const markerIcon = new Icon({
-    iconUrl: `/PartnerIcons/${type}.svg`,
+    iconUrl: `/partner-icons/${type}.svg`,
     iconSize: MAP_CONSTANTS.ICON_SIZE,
   })
 
@@ -46,7 +46,7 @@ export const LocationMarker = ({ record }: MarkerProps) => {
         
         <div className='flex items-center gap-2 text-sm mt-3 mb-6 h-[16px] mx-2'>
           <img 
-            src={`PartnerIcons/${type}.svg`} 
+            src={`partner-icons/${type}.svg`} 
             className='h-6 w-6' 
             alt={`${type} icon`}
           />

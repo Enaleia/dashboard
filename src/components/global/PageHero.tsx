@@ -12,4 +12,4 @@ const PageHero = ({ title, description }: PageHeroProps) => {
   )
 }
 
-export { PageHero };
+export { PageHero }

@@ -137,4 +137,4 @@ const Paginator = ({
 	);
 };
 
-export { ShowingDisplay, Paginator };
+export { ShowingDisplay, Paginator }

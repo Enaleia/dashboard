@@ -7,20 +7,20 @@ import { PageName, MaterialsChartRecord, ActivitiesChartRecord } from "@/types"
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { Card, CardContent } from "@/components/ui/card"
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/charts/chart"
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { formatCamelCaseString } from "@/utils/camelCaseFormatter"
 import { calculateTooltipTotal } from "@/utils/chartTooltipCalculation"
 
-interface CollectionsChartProps {
+interface CollectionChartProps {
   pageName: PageName
   partnerId?: string;
   timeRange: string
 }
 
-const CollectionsChart = ({ pageName, partnerId, timeRange }: CollectionsChartProps) => {
+const CollectionChart = ({ pageName, partnerId, timeRange }: CollectionChartProps) => {
   const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT)
   const { isPending, error, data } = useChartData({ pageName, partnerId, timeRange })
-  const records = (data?.data ?? []) as (CollectionsChartProps['pageName'] extends "Home" ? MaterialsChartRecord[] : ActivitiesChartRecord[])
+  const records = (data?.data ?? []) as (CollectionChartProps['pageName'] extends "Home" ? MaterialsChartRecord[] : ActivitiesChartRecord[])
   console.log("records:", records)
   const chartConfig = pageName === "Home" ? MaterialsChartConfig : ActivitiesChartConfig
   const { ticks, tickFormatter } = useChartTicks(records, timeRange)
@@ -41,7 +41,7 @@ const CollectionsChart = ({ pageName, partnerId, timeRange }: CollectionsChartPr
               <div className="w-[40%] md:w-full h-full flex flex-col justify-center md:items-center text-center text-lg">
                 <p>😕 sorry!</p>
                 <p>We were not able to build the chart you requested.</p>
-                <img src="/Sealife/dolphin.svg" alt="dolphin illustration" className="w-[300px] h-[300px]"/>
+                <img src="/illustrations/dolphin.svg" alt="dolphin illustration" className="w-[300px] h-[300px]"/>
               </div>
             ) : (
               <AreaChart
@@ -116,4 +116,4 @@ const CollectionsChart = ({ pageName, partnerId, timeRange }: CollectionsChartPr
   )
 }
 
-export { CollectionsChart };
+export { CollectionChart }

@@ -12,4 +12,4 @@ const BackToTopButton = () => {
   )
 }
 
-export { BackToTopButton };
+export { BackToTopButton }
