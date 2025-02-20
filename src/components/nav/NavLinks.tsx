@@ -76,4 +76,4 @@ const NavLinks = ({ closeMenu }: NavLinksProps) => {
   )
 }
 
-export { NavLinks };
+export { NavLinks }

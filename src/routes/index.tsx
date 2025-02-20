@@ -1,14 +1,14 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import { useMediaQuery } from '@/hooks/ui/useMediaQuery'
-import { PageHero } from '@/components/page-hero'
-import { StatsBar } from '@/components/stats-bar'
-import { ActivityMap } from '../components/maps/activity-map'
-import { CollectionsChart } from '@/components/charts/collections-chart'
-import { CustomChartLegend } from '@/components/charts/custom-chart-legend'
+import { PageHero } from '@/components/global/PageHero'
+import { StatsBar } from '@/components/global/StatsBar'
+import { ActivityMap } from '../components/maps/ActivityMap'
+import { CollectionChart } from '@/components/charts/CollectionChart'
+import { CustomChartLegend } from '@/components/charts/CustomChartLegend'
 import { CircleArrowDown } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-import { BackToTopButton } from '@/components/back-to-top'
+import { BackToTopButton } from '@/components/global/BackToTopButton'
 import { homePageTexts, dateChoices } from '@/config/texts'
 import { DESKTOP_BREAKPOINT } from '@/config/constants'
 
@@ -46,7 +46,7 @@ function HomeComponent() {
 
       <section className='overflow-hidden border border-primary rounded-3xl'>
         <article className='relative w-full pb-8'>
-          <img src='/Images/home.jpg' alt="photo of port operations" className='object-cover bg-center h-[350px] md:h-[450px] lg:h-auto w-full'/>
+          <img src='/images/home.jpg' alt="photo of port operations" className='object-cover bg-center h-[350px] md:h-[450px] lg:h-auto w-full'/>
           <div className='absolute inset-0 flex flex-col items-center justify-center text-center text-sand'>
             <p className='w-full font-bold text-5xl md:text-6xl lg:text-7xl tracking-tight px-10 pt-4 md:pt-10'>{impactSectionTitle}</p>
             <p className='w-[90%] md:w-[60%] font-extralight text-lg md-text-xl tracking-tight leading-tight md:leading-tight py-2 md:py-6'>{impactSectionDescription}</p>
@@ -76,7 +76,7 @@ function HomeComponent() {
           </div>
         </article>
         
-        <CollectionsChart pageName='Home' timeRange={selectedChartDates}/>
+        <CollectionChart pageName='Home' timeRange={selectedChartDates}/>
         <CustomChartLegend category='materials' />
 
         <article className='font-extralight text-base md:text-lg text-center p-6 md:p-12'>

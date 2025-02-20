@@ -15,9 +15,9 @@ const NavLogo = ({ showSubtitle }: NavLogoProps) => {
     >
       <div className='flex items-center gap-2 md:gap-3'>
         {showSubtitle ?
-        <img className="size-12 md:size-16" src={"/enaleiaHub_logo.svg"} alt="Enaleia Logo" />
+        <img className="size-12 md:size-16" src={"/logos/enaleiaHub_logo.svg"} alt="Enaleia Logo" />
         : 
-        <img className="size-7 md:size-10" src={"/enaleiaHub_logo.svg"} alt="Enaleia Logo" />
+        <img className="size-7 md:size-10" src={"/logos/enaleiaHub_logo.svg"} alt="Enaleia Logo" />
         }        
         <div>
           <p className='text-lg md:text-2xl'>ENALEIA Hub</p>
@@ -28,4 +28,4 @@ const NavLogo = ({ showSubtitle }: NavLogoProps) => {
   )
 }
 
-export { NavLogo };
+export { NavLogo }

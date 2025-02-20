@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
-import { PageHero } from '@/components/page-hero'
-import { StatsBar } from '@/components/stats-bar'
-import { TableActionsBar } from '@/components/tables/table-actions-bar'
-import { ActionsTable } from '@/components/tables/actions-table'
+import { PageHero } from '@/components/global/PageHero'
+import { StatsBar } from '@/components/global/StatsBar'
+import { TableActionsBar } from '@/components/tables/TableActionsBar'
+import { ActionsTable } from '@/components/tables/ActionsTable'
 import { vesselsPageTexts, vesselTypes } from '@/config/texts'
 import { PartnerType } from '@/types'
 

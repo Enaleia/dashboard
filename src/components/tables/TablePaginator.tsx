@@ -66,19 +66,19 @@ const calculatePaginationRange = (
 	);
 };
 
-interface IPaginator {
+interface ITablePaginator {
 	needsPagination: boolean;
 	currentPage: number;
 	maxPage: number;
 	loadPage: (pageNum: number) => void;
 }
 
-const Paginator = ({
+const TablePaginator = ({
 	needsPagination,
 	currentPage,
 	maxPage,
 	loadPage,
-}: IPaginator) => {
+}: ITablePaginator) => {
 	const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT);
 	const maxPagesInPagination = isDesktop ? 7 : 5;
 	if (!needsPagination) {
@@ -137,4 +137,4 @@ const Paginator = ({
 	);
 };
 
-export { ShowingDisplay, Paginator };
+export { ShowingDisplay, TablePaginator }

@@ -14,7 +14,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { usePagination } from "@/hooks/ui/usePagination"
-import { ShowingDisplay, Paginator } from "@/components/tables/paginator"
+import { ShowingDisplay, TablePaginator } from "@/components/tables/TablePaginator"
 import { ArrowUpDown } from "lucide-react"
 
 interface ActionsTableProps {
@@ -48,13 +48,13 @@ const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
         {isPending ? (
           <>
             <p>Loading table data...</p>
-            <img src="/Sealife/dolphin.svg" alt="dolphin illustration" className="w-[300px] h-[300px]"/>
+            <img src="/illustrations.svg" alt="dolphin illustration" className="w-[300px] h-[300px]"/>
           </>
         ) : (
           <>
             <p>😕 sorry!</p>
             <p>We are not able to build the {pageName} table at this time.</p>
-            <img src="/Sealife/dolphin.svg" alt="dolphin illustration" className="w-[300px] h-[300px]"/>
+            <img src="/illustrations/dolphin.svg" alt="dolphin illustration" className="w-[300px] h-[300px]"/>
           </>
         )}
       </article>
@@ -128,7 +128,7 @@ const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
                     <>
                       <TableCell className="p-0 w-[17%]">
                         <div className="mt-2 px-8 py-4 border-y border-darkSand flex gap-2 trucate group-hover:bg-sand transition-colors">
-                          <img src={`/CountryFlags/${country}.svg`} alt={`${country} flag`} className="h-5 w-5"/>
+                          <img src={`/country-flags/${country}.svg`} alt={`${country} flag`} className="h-5 w-5"/>
                           <span>{country}</span>
                         </div>
                       </TableCell>
@@ -144,7 +144,7 @@ const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
                       </TableCell>}
                       <TableCell className="p-0 w-[17%]">
                         <div className="mt-2 px-8 py-4 border-y border-darkSand flex gap-2 truncate group-hover:bg-sand transition-colors">
-                          <img src={`/PartnerIcons/${type.replace(/ /g, '_')}.svg`} alt={`${type} icon`} className="h-5 w-5"/>
+                          <img src={`/partner-icons/${type.replace(/ /g, '_')}.svg`} alt={`${type} icon`} className="h-5 w-5"/>
                           <span>{type}</span>
                         </div>
                       </TableCell>
@@ -165,7 +165,7 @@ const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
       {/* Pagination controls */}
       {needsPagination && (
         <article className="flex flex-col justify-center items-center gap-4">
-          <Paginator
+          <TablePaginator
             needsPagination={needsPagination}
             currentPage={currentPage}
             maxPage={maxPage}

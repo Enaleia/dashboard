@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { ShowingDisplay, Paginator } from "@/components/tables/paginator"
+import { ShowingDisplay, TablePaginator } from "@/components/tables/TablePaginator"
 import { Link, ArrowUpRight } from 'lucide-react'
 
 interface AttestationTableProps {
@@ -42,7 +42,7 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
             {isPending && <p>Loading attestation data...</p>}
             {error && <p>Sorry! We are not able to build the attestation table at this time.</p>}
             {!pageTransactions.length && <p>This partner has not made any attestations yet.</p>}
-            <img src="/Sealife/dolphin.svg" alt="dolphin illustration" className="w-[300px] h-[300px]"/>
+            <img src="/illustrations/dolphin.svg" alt="dolphin illustration" className="w-[300px] h-[300px]"/>
           </>
       </article>
     )
@@ -122,7 +122,7 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
 
       {needsPagination && (
         <article className="flex flex-col justify-center items-center gap-4">
-          <Paginator
+          <TablePaginator
             needsPagination={needsPagination}
             currentPage={currentPage}
             maxPage={maxPage}

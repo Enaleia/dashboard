@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { NavLogo } from './logo'
-import { NavLinks } from './links'
-import { NavMenu } from './menu'
+import { NavLogo } from './NavLogo'
+import { NavLinks } from './NavLinks'
+import { NavMenu } from './NavMenu'
 import { Menu } from 'lucide-react'
 
 const NavHeader = () => {
@@ -22,4 +22,4 @@ const NavHeader = () => {
 	);
 };
 
-export { NavHeader };
+export { NavHeader }

@@ -1,5 +1,5 @@
-import { NavLogo } from './logo'
-import { NavLinks } from './links'
+import { NavLogo } from './NavLogo'
+import { NavLinks } from './NavLinks'
 
 const GithubLink = () => {
   return (
@@ -8,7 +8,7 @@ const GithubLink = () => {
       target="_blank"
       rel="noopener noreferrer"
     >
-      <img className="size-8" src={"/gitHub_logo.png"} alt="github icon" />
+      <img className="size-8" src={"/logos/gitHub_logo.png"} alt="github icon" />
     </a>
   )
 }
@@ -30,4 +30,4 @@ const NavFooter = () => {
 	);
 };
 
-export { NavFooter };
+export { NavFooter }

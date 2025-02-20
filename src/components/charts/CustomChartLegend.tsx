@@ -27,4 +27,4 @@ const CustomChartLegend = ({ category }: ChartLegendProps) => {
   )
 }
 
-export { CustomChartLegend };
+export { CustomChartLegend }

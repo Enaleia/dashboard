@@ -56,4 +56,4 @@ const StatsBar = ({ pageName, partnerId }: StatsBarProps) => {
   )
 }
 
-export { StatsBar };
+export { StatsBar }
