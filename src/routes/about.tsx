@@ -32,7 +32,7 @@ function AboutComponent() {
         <p className='w-full font-extralight text-base md:text-lg tracking-tight leading-tight md:leading-tight md:px-12'>{hubFlowSectionDescription}</p>
         <div className='flex flex-col lg:flex-row gap-4 md:justify-between pt-8'>
           {aboutCardInfo.map(({ image, title, description }) => (
-            <Card image={image} title={title} description={description}/>
+            <Card key={title} image={image} title={title} description={description}/>
           ))}
         </div>
       </section>
@@ -48,6 +48,7 @@ function AboutComponent() {
           <div className='flex flex-col gap-6 pt-8 lg:pt-60 lg:w-[22%]'>
             {aboutPageLinks.map(({ text, url }) => (
               <a 
+                key={text}
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer" 

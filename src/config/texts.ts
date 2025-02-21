@@ -118,7 +118,7 @@ export const aboutCardInfo = [
   {
     image: 'fish',
     title: 'Tag physical items with unique tracking codes',
-    description: 'Waste collected by the fisher community is sent to recyclers with a unique 6-digit tag for traceability.<br/><br/> As the waste is processed, it is tracked through each stage to its final destination. Enaleia supports a <a href="https://enaleia-hub.com/economy" style="font-weight: bold">circular economy</a>—learn more about the products created from our efforts.',
+    description: 'Waste collected by the fisher community is sent to recyclers with a unique 6-digit tag for traceability.<br/><br/> As the waste is processed, it is tracked through each stage to its final destination. Enaleia supports a circular economy — learn more about product tracing with the example below:<br></br><a href="http://localhost:3001/products/3411" style="font-weight: bold">Kayak by Enaleia x Nelo</a>',
   },
   {
     image: 'octopus',
