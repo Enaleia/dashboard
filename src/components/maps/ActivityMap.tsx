@@ -7,6 +7,7 @@ import { MapContainer, TileLayer, Polygon } from 'react-leaflet'
 import { MapStateController } from './MapStateController'
 import { MapSizeHandler } from './MapSizeHandler'
 import { LocationMarker } from './LocationMarker'
+import { TracingLines } from './TracingLines'
 import 'leaflet/dist/leaflet.css'
 
 interface ActivityMapProps {
@@ -26,15 +27,11 @@ const ActivityMap = ({ pageName, partnerType }: ActivityMapProps) => {
   if (isPending) return 'Loading...'
   if (error) return 'An error has occurred: ' + error.message
 
-  // for "fishing zone" map view
-  // const coordinates: [number, number][] = [
-  //   [16.0794933724974, 41.8170077448667],
-  //   [16.9175598550158, 34.8587337830427],
-  //   [46.2498867431885, 34.5831996108818],
-  //   [45.7470468536773, 44.8635965418939],
-  //   [16.0794933724974, 41.8170077448667]
-  // ];
-
+  const tracingCoords = [
+    {startLat: 40.459179, startLng: 22.860999, endLat:37.935 , endLng: 21.145},
+    {startLat: 37.956992, startLng: 23.6137, endLat:37.935 , endLng: 21.145},
+    {startLat: 37.935, startLng: 21.145, endLat: 41.3263, endLng: -8.7166},
+  ]
 
 	return (
     <article className='w-full h-[400px] md:h-[500px] lg:h-[700px] pt-3'>
@@ -67,15 +64,6 @@ const ActivityMap = ({ pageName, partnerType }: ActivityMapProps) => {
         )}
         <MapSizeHandler />
         <MapStateController  pageName={pageName}/>
-        {/* for "fishing zone" map view */}
-        {/* <Polygon 
-          positions={coordinates}
-          pathOptions={{
-            color: 'blue',
-            fillColor: 'blue',
-            fillOpacity: 0.2,
-          }}
-        /> */}
         {filteredLocations.length > 0 ?
           filteredLocations.map((record) => (
             <LocationMarker key={record.id} record={record} />
@@ -86,6 +74,7 @@ const ActivityMap = ({ pageName, partnerType }: ActivityMapProps) => {
             <p>We aren't able to mark our locations right now.</p>
           </div>
         }
+        <TracingLines traces={tracingCoords}/>
       </MapContainer>
     </article>
 	)
