@@ -8,11 +8,9 @@ export const Route = createFileRoute('/products/$id')({
 
 function ProductDetailComponent() {
   const { id } = Route.useParams()
-  console.log('id:', id)
-
   return (
     <main className='flex flex-col justify-center items-center gap-8 md:gap-20 m-auto pb-16 md:pb-24 md:pt-8 lg:pt-16 max-w-[1500px]'>
-      <PageHeading />
+      <PageHeading productId={id} dataCategory="Heading"/>
       <section className='w-full'>
         <h2>Traceablitiy</h2>
         <p>Actions performed by each partner contributing to this product</p>

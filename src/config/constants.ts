@@ -1,4 +1,5 @@
 import { PageName } from "@/types"
+import { ProductData } from "@/types"
 
 // API endpoints
 export const STATS_ENDPOINTS: Partial<Record<PageName, string>> = {
@@ -27,6 +28,11 @@ export const TABLE_ENDPOINTS: Partial<Record<PageName, string>> = {
 export const ATTESTATION_ENDPOINTS: Partial<Record<PageName, string>> = {
   LocationDetail: "37277177-5ac5-4c39-af25-9ae90b431a72",
   VesselDetail: "f8858a9b-7f4c-4542-9ce0-9362563b8660"
+}
+
+export const PRODUCT_ENDPOINTS: Partial<Record<ProductData, string>> = {
+  Heading: "71ae55d2-7c17-4e05-bde6-603760e963d1",
+  Metadata: "14753914-caf1-4653-8929-a37dff2f877a"
 }
 
 

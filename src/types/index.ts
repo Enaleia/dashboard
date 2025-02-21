@@ -53,6 +53,8 @@ export interface TableItem {
   collector_identity?: string   //only for vessels
 }
 
+export type ProductData = "Heading" | "Metadata"
+
 export type PageName = "Home" | "Locations" | "LocationDetail" | "PortDetail" |"RecyclerDetail" | "ManufacturerDetail" | "Vessels" | "VesselDetail"
 
 export type PartnerType = "See all" | "Port" | "Recycler" | "Manufacturer" | "Trawler" | "Small vessel" | "Purse seiner" | "Other"
@@ -87,9 +89,6 @@ export interface VesselSearchParams {
 
 // represents a single row item in the attestations table
 export interface AttestationItem {
-  // UUID: string;
-  // submittedOn: string;
   id: string;
   submittedBy: string;
-  // txLink: string
 }
