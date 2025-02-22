@@ -1,3 +1,11 @@
+/**
+* PageHeading Component
+* 
+* Displays the main product information section at the top of a product page.
+* Handles responsive layout with different image placement for mobile/desktop.
+* Includes product details, description, and blockchain attestation information.
+*/
+
 import { useProductData } from '@/hooks/api/useProductData'
 import { useMediaQuery } from '@/hooks/ui/useMediaQuery'
 import { DESKTOP_BREAKPOINT } from '@/config/constants'
@@ -5,17 +13,22 @@ import { ProductData } from '@/types'
 import { ArrowUpRight } from 'lucide-react'
 
 interface PageHeadingProps {
-  productId: string
-  dataCategory: ProductData
+  productId: string               // Unique identifier for the product
+  dataCategory: ProductData       // Category of product data to fetch
 }
 
 const PageHeading = ({ productId, dataCategory }: PageHeadingProps) => {
+  // Check viewport size for responsive layout
   const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT)
-  // Fetch product data from API
+
+  // Fetch product data from API with loading/error states
   const { isPending, error, data } = useProductData({ productId, dataCategory })
   const { type, name, manufacturedBy, image, description, UID } = data?.product || {}
-  // const product = data.product
 
+  /*
+  * Loading/Error state view
+  * Shows loading message or error with dolphin illustration
+  */
   if (isPending || error) {
     return (
       <article className="w-full lg:h-[598px] flex flex-col justify-center items-center text-center text-lg px-10">
@@ -32,12 +45,18 @@ const PageHeading = ({ productId, dataCategory }: PageHeadingProps) => {
     <section className="w-full">
       <div className="flex flex-col lg:flex-row justify-between lg:gap-8 items-center">
 
+        {/* Product Information Section */}
         <article className="lg:w-[55%] flex flex-col gap-0.5 md:gap-2 lg:gap-4 font-light">
           <p className="text-xs md:text-sm font-extralight">{type}</p>
           <h1 className="font-bold text-5xl md:text-6xl lg:text-7xl tracking-tight">{name}</h1>
           <p className="text-xs md:text-sm font-extralight">Manufactured by:<strong> {manufacturedBy}</strong></p>
+          
+          {/* Product image for mobile view */}
           {!isDesktop && <img src={image} alt="product image" className="object-cover object-center h-[200px] md:h-[300px]"/>}
+          
           <p className="text-sm md:text-base font-extralight tracking-tight md:tracking-tight lg:tracking-tight leading-5 md:leading-5 lg:leading-5">{description}</p>
+          
+          {/* Blockchain Attestation Information */}
           <div className="bg-sand rounded-xl p-2 my-4">
             <p className='text-sm font-extralight pb-1'>This product has been attested with Ethereum Attestation Service on Optimism network</p>
             <a 
@@ -52,6 +71,7 @@ const PageHeading = ({ productId, dataCategory }: PageHeadingProps) => {
           </div>
         </article>
 
+        {/* Product image for desktop view */}
         {isDesktop &&
           <article className='lg:w-[45%]'>
             <img src={image} alt="product image"/>
