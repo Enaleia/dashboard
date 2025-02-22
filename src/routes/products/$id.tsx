@@ -24,9 +24,7 @@ function ProductDetailComponent() {
           Actions performed by each partner contributing to this product
         </p>
         <Separator className='bg-softBlack my-1'/>
-        <div className='overflow-hidden rounded-3xl'>
-          <ActivityMap pageName='Product' productId={id}/>
-        </div>
+        <ActivityMap pageName='Product' productId={id}/>
       </section>
 
       <section className='flex flex-col gap-3 my-6 w-full'>

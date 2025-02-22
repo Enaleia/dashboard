@@ -14,6 +14,7 @@ export interface MapItem {
   coordinates?: number[]
   type: string;
   wallet_addresses: string[]
+  events?: {string: number}
 }
 
 // represents a single tracing line in the ActivityMap

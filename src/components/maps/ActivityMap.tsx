@@ -54,11 +54,19 @@ const ActivityMap = ({ pageName, partnerType, productId }: ActivityMapProps) => 
     ? useProcessedRecords(records, partnerType)
     : records
 
-  if (isPending) return 'Loading...'
-  if (error) return 'An error has occurred: ' + error.message
+  if (isPending || error) {
+    return (
+      <article className='w-full h-[400px] md:h-[500px] lg:h-[700px] pt-3 text-center'>
+        <>
+        {isPending && <p>Loading map...</p>}
+        {error && <p>An error has occurred: {error.message}</p>}
+        </>
+      </article>
+    )
+  }
 
 	return (
-    <article className='w-full h-[400px] md:h-[500px] lg:h-[700px] pt-3'>
+    <article className={`w-full h-[400px] md:h-[500px] lg:h-[700px] ${pageName==='Home' ? 'pt-3': 'overflow-hidden rounded-3xl'}`}>
       <MapContainer 
         className='h-full z-0' 
         center={mapState.center} 

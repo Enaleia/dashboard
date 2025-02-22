@@ -10,7 +10,7 @@ export interface MarkerProps {
 }
 
 export const LocationMarker = ({ record }: MarkerProps) => {
-  const { id, name, country, coordinates, type, wallet_addresses } = record
+  const { id, name, country, coordinates, type, wallet_addresses, events } = record
 
   if (!coordinates?.length || coordinates.length !== 2) {
     return null
@@ -44,7 +44,7 @@ export const LocationMarker = ({ record }: MarkerProps) => {
           </div>
         </Link>
         
-        <div className='flex items-center gap-2 text-sm mt-3 mb-6 h-[16px] mx-2'>
+        <div className='flex items-center gap-2 text-sm mt-3 mb-8 h-[16px] mx-2'>
           <img 
             src={`/partner-icons/${type}.svg`} 
             className='h-6 w-6' 
@@ -52,6 +52,21 @@ export const LocationMarker = ({ record }: MarkerProps) => {
           />
           <p className='uppercase'>{type}</p> 
         </div>
+
+        {events &&
+          <div className='text-sm mx-2 pb-4'>
+            <p className='h-[14px] font-extralight'>Actions performed</p>
+            {Object.entries(events).map(([action, value]) => (
+              <div key={action} className='h-[14px] flex justify-between items-center mb-2'>
+                <div className='flex gap-1 items-center'>
+                  <div className={`rounded-full bg-${action} h-3 w-3`}></div>
+                  <p>{action}</p>
+                </div>
+                <p className='font-extralight'>{value}</p>
+              </div>
+            ))}
+          </div>
+        }
       </Popup>
     </Marker>
   )
