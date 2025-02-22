@@ -55,7 +55,7 @@ export interface TableItem {
 
 export type ProductData = "Heading" | "Metadata"
 
-export type PageName = "Home" | "Locations" | "LocationDetail" | "PortDetail" |"RecyclerDetail" | "ManufacturerDetail" | "Vessels" | "VesselDetail"
+export type PageName = "Home" | "Locations" | "LocationDetail" | "PortDetail" |"RecyclerDetail" | "ManufacturerDetail" | "Vessels" | "VesselDetail" | "Product"
 
 export type PartnerType = "See all" | "Port" | "Recycler" | "Manufacturer" | "Trawler" | "Small vessel" | "Purse seiner" | "Other"
 

@@ -44,7 +44,7 @@ function ProductDetailComponent() {
           {attestationDescriptions["Product"]}
         </p>
         <Separator className='bg-softBlack my-1'/>
-        <AttestationsTable pageName='VesselDetail' partnerId={id}/>
+        <AttestationsTable pageName='Product' partnerId={id}/>
       </section>
 
       <BackToTopButton />

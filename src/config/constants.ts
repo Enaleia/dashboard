@@ -27,7 +27,8 @@ export const TABLE_ENDPOINTS: Partial<Record<PageName, string>> = {
 
 export const ATTESTATION_ENDPOINTS: Partial<Record<PageName, string>> = {
   LocationDetail: "37277177-5ac5-4c39-af25-9ae90b431a72",
-  VesselDetail: "f8858a9b-7f4c-4542-9ce0-9362563b8660"
+  VesselDetail: "f8858a9b-7f4c-4542-9ce0-9362563b8660",
+  Product: "c60ec6e9-1833-40f2-8280-c975dc0d87ca"
 }
 
 export const PRODUCT_ENDPOINTS: Partial<Record<ProductData, string>> = {
