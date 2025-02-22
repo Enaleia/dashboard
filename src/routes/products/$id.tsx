@@ -25,7 +25,7 @@ function ProductDetailComponent() {
         </p>
         <Separator className='bg-softBlack my-1'/>
         <div className='overflow-hidden rounded-3xl'>
-          <ActivityMap pageName='Home' partnerType='See all'/>
+          <ActivityMap pageName='Product' partnerType='See all' productId={id}/>
         </div>
       </section>
 

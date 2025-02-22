@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useMapData } from '@/hooks/api/useMapData'
 import { useMapState } from '@/hooks/ui/useMapState'
 import { useProcessedRecords } from '@/hooks/ui/useProcessedRecords'
-import { PageName, PartnerType, MapItem } from "@/types"
+import { PageName, PartnerType, MapItem, TraceItem, ProductPageData } from "@/types"
 import { MapContainer, TileLayer, Polygon } from 'react-leaflet'
 import { MapStateController } from './MapStateController'
 import { MapSizeHandler } from './MapSizeHandler'
@@ -13,25 +13,34 @@ import 'leaflet/dist/leaflet.css'
 interface ActivityMapProps {
   pageName: PageName
   partnerType: PartnerType
+  productId? : string
 }
 
-const ActivityMap = ({ pageName, partnerType }: ActivityMapProps) => {
+const ActivityMap = ({ pageName, partnerType, productId }: ActivityMapProps) => {
 
   const [tileError, setTileError] = useState(false);
-  const { isPending, error, data} = useMapData()
-  const records: MapItem[] = data?.data ?? []
+  const { isPending, error, data} = useMapData({ pageName, productId })
+  
+  const isProductPage = (responseData: any): responseData is ProductPageData => {
+    return responseData && 'locations' in responseData && 'traces' in responseData;
+  };
+
+  const records: MapItem[] = isProductPage(data?.data) 
+    ? data?.data?.locations ?? [] 
+    : data?.data ?? [];
+
+  const traces: TraceItem[] = isProductPage(data?.data) 
+    ? data?.data?.traces ?? [] 
+    : [];
+
+  console.log('map records:', records)
+  console.log('map traces:', traces)
   const [mapState] = useMapState(pageName)
 
-  const filteredLocations = useProcessedRecords(records, partnerType)
+  // const filteredLocations = useProcessedRecords(records, partnerType)
 
   if (isPending) return 'Loading...'
   if (error) return 'An error has occurred: ' + error.message
-
-  const tracingCoords = [
-    {startLat: 40.459179, startLng: 22.860999, endLat:37.935 , endLng: 21.145},
-    {startLat: 37.956992, startLng: 23.6137, endLat:37.935 , endLng: 21.145},
-    {startLat: 37.935, startLng: 21.145, endLat: 41.3263, endLng: -8.7166},
-  ]
 
 	return (
     <article className='w-full h-[400px] md:h-[500px] lg:h-[700px] pt-3'>
@@ -64,7 +73,7 @@ const ActivityMap = ({ pageName, partnerType }: ActivityMapProps) => {
         )}
         <MapSizeHandler />
         <MapStateController  pageName={pageName}/>
-        {filteredLocations.length > 0 ?
+        {/* {filteredLocations.length > 0 ?
           filteredLocations.map((record) => (
             <LocationMarker key={record.id} record={record} />
         ))
@@ -73,8 +82,18 @@ const ActivityMap = ({ pageName, partnerType }: ActivityMapProps) => {
             <p>sorry!</p>
             <p>We aren't able to mark our locations right now.</p>
           </div>
+        } */}
+        {records.length > 0 ?
+          records.map((record) => (
+            <LocationMarker key={record.id} record={record} />
+        ))
+        : 
+          <div className='flex flex-col text-center text-lg md:text-2xl font-semibold px-20 pt-28 md:pt-72'>
+            <p>sorry!</p>
+            <p>We aren't able to mark our locations right now.</p>
+          </div>
         }
-        <TracingLines traces={tracingCoords}/>
+        <TracingLines traces={traces}/>
       </MapContainer>
     </article>
 	)

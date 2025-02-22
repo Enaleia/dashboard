@@ -6,14 +6,27 @@ export interface StatItem {
   description?: string | null
 }
 
-// represents a single location marker in the ActivityMap component
+// represents a single location marker on the ActivityMap
 export interface MapItem {
   id: string;
   name: string;
   country: string;
-  coordinates?: number[];
+  coordinates?: number[]
   type: string;
   wallet_addresses: string[]
+}
+
+// represents a single tracing line in the ActivityMap
+export interface TraceItem {
+  startLat: number
+  startLng: number
+  endLat: number
+  endLng: number
+}
+
+export interface ProductPageData {
+  locations: MapItem[]
+  traces: TraceItem[]
 }
 
 // represents a single data point in a CollectionsChart component, 

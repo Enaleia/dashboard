@@ -12,7 +12,11 @@ export const STATS_ENDPOINTS: Partial<Record<PageName, string>> = {
   VesselDetail: "81947692-848c-4832-bc2d-dfe09bc577a1"
 }
 
-export const MAP_ENDPOINT = "a9fc78b6-96a7-4be2-836b-153671fc367f"
+export const MAP_ENDPOINTS: Partial<Record<PageName, string>> = {
+  Home: "a9fc78b6-96a7-4be2-836b-153671fc367f",
+  Locations: "a9fc78b6-96a7-4be2-836b-153671fc367f",
+  Product: "ee39a1b1-12e7-4e40-9fb9-6808f3b0b0b7"
+}
 
 export const CHART_ENDPOINTS: Partial<Record<PageName, string>> = {
   Home: "0ec1555a-082e-46bf-be91-422ab8793096",
