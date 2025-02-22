@@ -2,14 +2,14 @@ import { useQuery } from "@tanstack/react-query"
 import { PRODUCT_ENDPOINTS } from "@/config/constants"
 import { ProductData } from "@/types"
 
-interface HeadingDataParams {
+interface ProductDataParams {
   productId: string
   dataCategory: ProductData
 }
 
-export function useHeadingData({ productId, dataCategory }: HeadingDataParams) {
+export function useProductData({ productId, dataCategory }: ProductDataParams) {
   return useQuery({
-    queryKey: [`headingData-${productId}`],
+    queryKey: [`product${dataCategory}-${productId}`],
     queryFn: async () => {
       const response = await fetch(
         `https://hq.enaleia-hub.com/flows/trigger/${PRODUCT_ENDPOINTS[dataCategory]}?id=${productId}`

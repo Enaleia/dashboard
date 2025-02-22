@@ -50,7 +50,8 @@ export const attestationDescriptions = {
   "Vessel": "Each time a fisherman delivers waste, the port coordinator weighs it, records the data via a mobile app, and submits it to a blockchain for secure, transparent tracking.",
   "Port": "Each time a fisherman delivers waste, the port coordinator weighs it, records the data via a mobile app, and submits it to a blockchain for secure, transparent tracking.",
   "Recycler": "Each time the recycling company receives a container, it is weighed on a bridge, issued a proof of weight slip, and then sorted for repurposing.",
-  "Manufacturer": "Production may not be as frequent as desired, which is normal since not all waste can be repurposed into new products. As a result, there are often long intervals between production cycles."
+  "Manufacturer": "Production may not be as frequent as desired, which is normal since not all waste can be repurposed into new products. As a result, there are often long intervals between production cycles.",
+  "Product": "Need copy here describing the partners and actions that create attestations."
 }
 
 export const materialsChartLegendDescriptions = {
@@ -128,7 +129,7 @@ export const aboutCardInfo = [
   {
     image: 'crab',
     title: 'Demonstrate transparency',
-    description: 'Our public dashboard is a critical tool for showcasing transparency and highlighting the impact of our efforts.<br/><br/> All data visualizations are backed by attestations, and public users can verify them via the <a href=""target="_blank" rel="noopener noreferrer" style="font-weight: bold">blockchain explorer</a>.',
+    description: 'Our public dashboard is a critical tool for showcasing transparency and highlighting the impact of our efforts.<br/><br/> All data visualizations are backed by attestations, and public users can verify them via the <a href="" target="_blank" rel="noopener noreferrer" style="font-weight: bold">blockchain explorer</a>.',
   }
 ]
 
