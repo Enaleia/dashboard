@@ -42,14 +42,11 @@ const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
 		needsPagination,
 	} = usePagination(processedRecords, itemsPerPage)
   
-  if (isPending || error || !pageTransactions.length) {
+  if (isPending || error) {
     return (
       <article className="w-full lg:h-[598px] flex flex-col justify-center items-center text-center text-lg px-10">
         {isPending ? (
-          <>
-            <p>Loading table data...</p>
-            <img src="/illustrations.svg" alt="dolphin illustration" className="w-[300px] h-[300px]"/>
-          </>
+          <p>Loading table data...</p>
         ) : (
           <>
             <p>😕 sorry!</p>

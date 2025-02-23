@@ -49,6 +49,11 @@ export default {
         port: 'hsl(var(--port))',
         recycler: 'hsl(var(--recycler))',
         manufacturer: 'hsl(var(--manufacturer))',
+        Batch: 'hsl(var(--batch))',
+        Sorting: 'hsl(var(--sorting))',
+        Pelletizing: 'hsl(var(--pelletizing))',
+        Shredding: 'hsl(var(--shredding))',
+        Manufacturing: 'hsl(var(--manufacturing))',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -103,7 +108,12 @@ export default {
     'bg-fishingForLitter',
     'bg-adHoc',
     'bg-prevention',
-    'bg-beach'
+    'bg-beach',
+    'bg-Batch',
+    'bg-Sorting',
+    'bg-Pelletizing',
+    'bg-Shredding',
+    'bg-Manufacturing'
   ],
   plugins: [require("tailwindcss-animate")],
 }

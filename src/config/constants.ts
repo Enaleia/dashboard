@@ -1,4 +1,5 @@
 import { PageName } from "@/types"
+import { ProductData } from "@/types"
 
 // API endpoints
 export const STATS_ENDPOINTS: Partial<Record<PageName, string>> = {
@@ -11,7 +12,11 @@ export const STATS_ENDPOINTS: Partial<Record<PageName, string>> = {
   VesselDetail: "81947692-848c-4832-bc2d-dfe09bc577a1"
 }
 
-export const MAP_ENDPOINT = "a9fc78b6-96a7-4be2-836b-153671fc367f"
+export const MAP_ENDPOINTS: Partial<Record<PageName, string>> = {
+  Home: "a9fc78b6-96a7-4be2-836b-153671fc367f",
+  Locations: "a9fc78b6-96a7-4be2-836b-153671fc367f",
+  Product: "ee39a1b1-12e7-4e40-9fb9-6808f3b0b0b7"
+}
 
 export const CHART_ENDPOINTS: Partial<Record<PageName, string>> = {
   Home: "0ec1555a-082e-46bf-be91-422ab8793096",
@@ -26,7 +31,13 @@ export const TABLE_ENDPOINTS: Partial<Record<PageName, string>> = {
 
 export const ATTESTATION_ENDPOINTS: Partial<Record<PageName, string>> = {
   LocationDetail: "37277177-5ac5-4c39-af25-9ae90b431a72",
-  VesselDetail: "f8858a9b-7f4c-4542-9ce0-9362563b8660"
+  VesselDetail: "f8858a9b-7f4c-4542-9ce0-9362563b8660",
+  Product: "c60ec6e9-1833-40f2-8280-c975dc0d87ca"
+}
+
+export const PRODUCT_ENDPOINTS: Partial<Record<ProductData, string>> = {
+  Heading: "71ae55d2-7c17-4e05-bde6-603760e963d1",
+  Metadata: "14753914-caf1-4653-8929-a37dff2f877a"
 }
 
 

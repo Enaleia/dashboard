@@ -1,12 +1,19 @@
 import { useQuery } from "@tanstack/react-query"
-import { MAP_ENDPOINT } from "@/config/constants"
+import { MAP_ENDPOINTS } from "@/config/constants"
+import { PageName } from "@/types"
 
-export function useMapData() {
+interface MapDataParams {
+  pageName: PageName
+  productId?: string
+}
+
+export function useMapData({ pageName, productId }: MapDataParams) {
   return useQuery({
-    queryKey: ['mapData'],
+    queryKey: [`mapData-${pageName}-${productId || ''}`],
     queryFn: async () => {
+      const queryString = productId ? `?id=${productId}` : ''
       const response = await fetch(
-        `https://hq.enaleia-hub.com/flows/trigger/${MAP_ENDPOINT}`
+        `https://hq.enaleia-hub.com/flows/trigger/${MAP_ENDPOINTS[pageName]}${queryString}`
       )
       return response.json()
     },

@@ -17,6 +17,7 @@ import { Route as IndexImport } from './routes/index'
 import { Route as VesselsIndexImport } from './routes/vessels/index'
 import { Route as LocationsIndexImport } from './routes/locations/index'
 import { Route as VesselsIdImport } from './routes/vessels/$id'
+import { Route as ProductsIdImport } from './routes/products/$id'
 import { Route as LocationsIdImport } from './routes/locations/$id'
 
 // Create/Update Routes
@@ -48,6 +49,11 @@ const LocationsIndexRoute = LocationsIndexImport.update({
 
 const VesselsIdRoute = VesselsIdImport.update({
   path: '/vessels/$id',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ProductsIdRoute = ProductsIdImport.update({
+  path: '/products/$id',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -88,6 +94,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocationsIdImport
       parentRoute: typeof rootRoute
     }
+    '/products/$id': {
+      id: '/products/$id'
+      path: '/products/$id'
+      fullPath: '/products/$id'
+      preLoaderRoute: typeof ProductsIdImport
+      parentRoute: typeof rootRoute
+    }
     '/vessels/$id': {
       id: '/vessels/$id'
       path: '/vessels/$id'
@@ -119,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/economy': typeof EconomyRoute
   '/locations/$id': typeof LocationsIdRoute
+  '/products/$id': typeof ProductsIdRoute
   '/vessels/$id': typeof VesselsIdRoute
   '/locations': typeof LocationsIndexRoute
   '/vessels': typeof VesselsIndexRoute
@@ -129,6 +143,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/economy': typeof EconomyRoute
   '/locations/$id': typeof LocationsIdRoute
+  '/products/$id': typeof ProductsIdRoute
   '/vessels/$id': typeof VesselsIdRoute
   '/locations': typeof LocationsIndexRoute
   '/vessels': typeof VesselsIndexRoute
@@ -140,6 +155,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/economy': typeof EconomyRoute
   '/locations/$id': typeof LocationsIdRoute
+  '/products/$id': typeof ProductsIdRoute
   '/vessels/$id': typeof VesselsIdRoute
   '/locations/': typeof LocationsIndexRoute
   '/vessels/': typeof VesselsIndexRoute
@@ -152,6 +168,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/economy'
     | '/locations/$id'
+    | '/products/$id'
     | '/vessels/$id'
     | '/locations'
     | '/vessels'
@@ -161,6 +178,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/economy'
     | '/locations/$id'
+    | '/products/$id'
     | '/vessels/$id'
     | '/locations'
     | '/vessels'
@@ -170,6 +188,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/economy'
     | '/locations/$id'
+    | '/products/$id'
     | '/vessels/$id'
     | '/locations/'
     | '/vessels/'
@@ -181,6 +200,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   EconomyRoute: typeof EconomyRoute
   LocationsIdRoute: typeof LocationsIdRoute
+  ProductsIdRoute: typeof ProductsIdRoute
   VesselsIdRoute: typeof VesselsIdRoute
   LocationsIndexRoute: typeof LocationsIndexRoute
   VesselsIndexRoute: typeof VesselsIndexRoute
@@ -191,6 +211,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   EconomyRoute: EconomyRoute,
   LocationsIdRoute: LocationsIdRoute,
+  ProductsIdRoute: ProductsIdRoute,
   VesselsIdRoute: VesselsIdRoute,
   LocationsIndexRoute: LocationsIndexRoute,
   VesselsIndexRoute: VesselsIndexRoute,
@@ -212,6 +233,7 @@ export const routeTree = rootRoute
         "/about",
         "/economy",
         "/locations/$id",
+        "/products/$id",
         "/vessels/$id",
         "/locations/",
         "/vessels/"
@@ -228,6 +250,9 @@ export const routeTree = rootRoute
     },
     "/locations/$id": {
       "filePath": "locations/$id.tsx"
+    },
+    "/products/$id": {
+      "filePath": "products/$id.tsx"
     },
     "/vessels/$id": {
       "filePath": "vessels/$id.tsx"

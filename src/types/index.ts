@@ -6,14 +6,28 @@ export interface StatItem {
   description?: string | null
 }
 
-// represents a single location marker in the ActivityMap component
+// represents a single location marker on the ActivityMap
 export interface MapItem {
   id: string;
   name: string;
   country: string;
-  coordinates?: number[];
+  coordinates?: number[]
   type: string;
   wallet_addresses: string[]
+  events?: {string: number}
+}
+
+// represents a single tracing line in the ActivityMap
+export interface TraceItem {
+  startLat: number
+  startLng: number
+  endLat: number
+  endLng: number
+}
+
+export interface ProductPageData {
+  locations: MapItem[]
+  traces: TraceItem[]
 }
 
 // represents a single data point in a CollectionsChart component, 
@@ -53,7 +67,9 @@ export interface TableItem {
   collector_identity?: string   //only for vessels
 }
 
-export type PageName = "Home" | "Locations" | "LocationDetail" | "PortDetail" |"RecyclerDetail" | "ManufacturerDetail" | "Vessels" | "VesselDetail"
+export type ProductData = "Heading" | "Metadata"
+
+export type PageName = "Home" | "Locations" | "LocationDetail" | "PortDetail" |"RecyclerDetail" | "ManufacturerDetail" | "Vessels" | "VesselDetail" | "Product"
 
 export type PartnerType = "See all" | "Port" | "Recycler" | "Manufacturer" | "Trawler" | "Small vessel" | "Purse seiner" | "Other"
 
@@ -87,9 +103,6 @@ export interface VesselSearchParams {
 
 // represents a single row item in the attestations table
 export interface AttestationItem {
-  // UUID: string;
-  // submittedOn: string;
   id: string;
   submittedBy: string;
-  // txLink: string
 }

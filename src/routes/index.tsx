@@ -53,7 +53,7 @@ function HomeComponent() {
           </div>
         </article>
         <StatsBar pageName='Home'/>
-        <ActivityMap pageName='Home' partnerType='See all'/>
+        <ActivityMap pageName='Home'/>
       </section>
       
       <section className='flex flex-col border border-primary rounded-3xl pb-4'>
