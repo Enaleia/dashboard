@@ -15,7 +15,11 @@ const homePageMapStateAtom = atom<MapState>({
   center: MAP_CONSTANTS.DEFAULT_CENTER,
   zoom: null
 })
-const LocationsPageMapStateAtom = atom<MapState>({
+const locationsPageMapStateAtom = atom<MapState>({
+  center: MAP_CONSTANTS.DEFAULT_CENTER,
+  zoom: null
+})
+const productPageMapStateAtom = atom<MapState>({
   center: MAP_CONSTANTS.DEFAULT_CENTER,
   zoom: null
 })
@@ -27,10 +31,18 @@ export const useMapState = (pageName: PageName) => {
   const initialRenderRef = useRef(true)
 
   const [homePageState, setHomePageState] = useAtom(homePageMapStateAtom)
-  const [locationsPageState, setLocationsPageState] = useAtom(LocationsPageMapStateAtom)
+  const [locationsPageState, setLocationsPageState] = useAtom(locationsPageMapStateAtom)
+  const [productPageState, setProductPageState] = useAtom(productPageMapStateAtom)
 
-  const currentState = pageName === 'Home' ? homePageState : locationsPageState
-  const setState = pageName === 'Home' ? setHomePageState : setLocationsPageState
+  const currentState = 
+    pageName === 'Home' ? homePageState : 
+    pageName === 'Locations' ? locationsPageState :
+    productPageState
+
+  const setState = 
+    pageName === 'Home' ? setHomePageState : 
+    pageName === 'Locations' ? setLocationsPageState :
+    setProductPageState
 
   // Set initial zoom only once
   useEffect(() => {
