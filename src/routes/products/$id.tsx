@@ -35,8 +35,8 @@ function ProductDetailComponent() {
         children={<ActivityMap pageName='Product' productId={id} />}
       />
       <Section 
-        title='Metadata'
-        description='Key information about this product & its production info'
+        title='Batch information'
+        description='Key production and compostion info for this product'
         children={<Metadata productId={id} dataCategory="Metadata" />}
       />  
       <Section 

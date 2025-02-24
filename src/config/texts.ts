@@ -51,7 +51,7 @@ export const attestationDescriptions = {
   "Port": "Each time a fisherman delivers waste, the port coordinator weighs it, records the data via a mobile app, and submits it to a blockchain for secure, transparent tracking.",
   "Recycler": "Each time the recycling company receives a container, it is weighed on a bridge, issued a proof of weight slip, and then sorted for repurposing.",
   "Manufacturer": "Production may not be as frequent as desired, which is normal since not all waste can be repurposed into new products. As a result, there are often long intervals between production cycles.",
-  "Product": "Need copy here describing the partners and actions that create attestations."
+  "Product": "Blockchain attestations for this product batch, attested by Enaleia or its community."
 }
 
 export const materialsChartLegendDescriptions = {
