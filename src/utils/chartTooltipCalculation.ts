@@ -5,6 +5,7 @@ type TooltipCalculationParams = {
   config: typeof MaterialsChartConfig | typeof ActivitiesChartConfig;
 }
 
+// sum the weights of all collection categories in the chart tooltip
 export function calculateTooltipTotal(params: TooltipCalculationParams): number {
   const { payload, config } = params
   const keys = Object.keys(config)

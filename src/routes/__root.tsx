@@ -21,8 +21,9 @@ function RootComponent() {
       <ScrollToTop />
       <Outlet />
       <NavFooter />
-      <TanStackRouterDevtools position="bottom-left" />
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* uncomment below to enable Router or Query devtools */}
+      {/* <TanStackRouterDevtools position="bottom-left" /> */}
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   )
 }

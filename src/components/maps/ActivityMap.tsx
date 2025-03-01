@@ -2,42 +2,85 @@ import { useState } from 'react'
 import { useMapData } from '@/hooks/api/useMapData'
 import { useMapState } from '@/hooks/ui/useMapState'
 import { useProcessedRecords } from '@/hooks/ui/useProcessedRecords'
-import { PageName, PartnerType, MapItem } from "@/types"
-import { MapContainer, TileLayer, Polygon } from 'react-leaflet'
-import { MapStateController } from './MapStateController'
-import { MapSizeHandler } from './MapSizeHandler'
-import { LocationMarker } from './LocationMarker'
+import { MapStateController } from '@/components/maps/MapStateController'
+import { MapSizeHandler } from '@/components/maps/MapSizeHandler'
+import { LocationMarker } from '@/components/maps/LocationMarker'
+import { TracingLines } from '@/components/maps/TracingLines'
+import { PageName, PartnerType, MapItem, TraceItem, ProductPageData } from "@/types"
+import { MapContainer, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 
+/**
+ * Interface for the ActivityMap component props
+ * @property {PageName} pageName - Determines which data to fetch and display
+ * @property {PartnerType} [partnerType] - Optional filter for location types on the Locations page
+ * @property {string} [productId] - Required for Product page to fetch specific product data
+ */
 interface ActivityMapProps {
-  pageName: PageName
-  partnerType: PartnerType
+  pageName: PageName              
+  partnerType?: PartnerType      
+  productId? : string             
 }
 
-const ActivityMap = ({ pageName, partnerType }: ActivityMapProps) => {
+/**
+ * ActivityMap - Interactive map component for visualizing location data
+ * 
+ * Uses Leaflet/React-Leaflet to render an OpenStreetMap-based visualization of:
+ * - Partner locations as map markers
+ * - Supply chain connections as trace lines (for product pages)
+ * 
+ * The component adapts its data and appearance based on the page context,
+ * fetching different data sets and applying appropriate styling.
+ */
+const ActivityMap = ({ pageName, partnerType, productId }: ActivityMapProps) => {
+  // Track tile loading errors for error handling UI
+  const [tileError, setTileError] = useState(false)
+  // Fetch map data based on current page context and product ID
+  const { isPending, error, data} = useMapData({ pageName, productId })
+  
+  /**
+   * Type guard to differentiate between Product page data structure and other pages' data structures
+   * Product pages have a nested structure with both locations and traces
+   */
+  const isProductPage = (responseData: any): responseData is ProductPageData => {
+    return responseData && 'locations' in responseData && 'traces' in responseData;
+  }
 
-  const [tileError, setTileError] = useState(false);
-  const { isPending, error, data} = useMapData()
-  const records: MapItem[] = data?.data ?? []
+  // Extract and normalize location data based on page type
+  const records: MapItem[] = isProductPage(data?.data) 
+    ? data?.data?.locations ?? [] 
+    : data?.data ?? []
+
+  // Extract trace data for Product page, empty array for other pages
+  const traces: TraceItem[] = isProductPage(data?.data) 
+    ? data?.data?.traces ?? [] 
+    : []
+  console.log('map records:', records)
+  console.log('map traces:', traces)
+
+  // Get map configuration (center, zoom) based on page type
   const [mapState] = useMapState(pageName)
 
-  const filteredLocations = useProcessedRecords(records, partnerType)
+  // Apply location filtering only when partnerType is provided (Locations page)
+  const displayedLocations = partnerType
+    ? useProcessedRecords(records, partnerType)
+    : records
 
-  if (isPending) return 'Loading...'
-  if (error) return 'An error has occurred: ' + error.message
-
-  // for "fishing zone" map view
-  // const coordinates: [number, number][] = [
-  //   [16.0794933724974, 41.8170077448667],
-  //   [16.9175598550158, 34.8587337830427],
-  //   [46.2498867431885, 34.5831996108818],
-  //   [45.7470468536773, 44.8635965418939],
-  //   [16.0794933724974, 41.8170077448667]
-  // ];
-
+  // Display loading/error states with appropriate messages
+  if (isPending || error) {
+    return (
+      <article className='w-full h-[400px] md:h-[500px] lg:h-[700px] pt-3 text-center'>
+        <>
+        {isPending && <p>Loading map...</p>}
+        {error && <p>An error has occurred: {error.message}</p>}
+        </>
+      </article>
+    )
+  }
 
 	return (
-    <article className='w-full h-[400px] md:h-[500px] lg:h-[700px] pt-3'>
+    // Map container with responsive height and conditional styling based on page type
+    <article className={`w-full h-[400px] md:h-[500px] lg:h-[700px] ${pageName==='Home' ? 'pt-3': 'overflow-hidden rounded-3xl'}`}>
       <MapContainer 
         className='h-full z-0' 
         center={mapState.center} 
@@ -50,6 +93,7 @@ const ActivityMap = ({ pageName, partnerType }: ActivityMapProps) => {
         keyboard={true}
         attributionControl={true}
       >
+        {/* OpenStreetMap tile layer with error handling */}
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -65,19 +109,12 @@ const ActivityMap = ({ pageName, partnerType }: ActivityMapProps) => {
             Failed to load map tiles. Map functionality may be limited.
           </div>
         )}
+        {/* Utility components for map resizing and state management */}
         <MapSizeHandler />
         <MapStateController  pageName={pageName}/>
-        {/* for "fishing zone" map view */}
-        {/* <Polygon 
-          positions={coordinates}
-          pathOptions={{
-            color: 'blue',
-            fillColor: 'blue',
-            fillOpacity: 0.2,
-          }}
-        /> */}
-        {filteredLocations.length > 0 ?
-          filteredLocations.map((record) => (
+        {/* Render location markers or empty state message if no locations available*/}
+        {displayedLocations.length ?
+          displayedLocations.map((record) => (
             <LocationMarker key={record.id} record={record} />
         ))
         : 
@@ -86,6 +123,8 @@ const ActivityMap = ({ pageName, partnerType }: ActivityMapProps) => {
             <p>We aren't able to mark our locations right now.</p>
           </div>
         }
+        {/* Render trace lines (only visible on Product page) */}
+        <TracingLines traces={traces}/>
       </MapContainer>
     </article>
 	)

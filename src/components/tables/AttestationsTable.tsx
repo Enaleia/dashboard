@@ -14,19 +14,44 @@ import {
 import { ShowingDisplay, TablePaginator } from "@/components/tables/TablePaginator"
 import { Link, ArrowUpRight } from 'lucide-react'
 
+/**
+ * Interface for the AttestationsTable component props
+ * @property {PageName} pageName - The page type where the table is displayed (affects data fetching)
+ * @property {string} partnerId - ID of the partner (location/vessel/product) to fetch attestations for
+ */
 interface AttestationTableProps {
   pageName: PageName
   partnerId: string;
 }
 
+/**
+ * AttestationsTable - Component that displays blockchain attestation records
+ * 
+ * Renders a table or list of blockchain attestations with:
+ * - Attestation unique identifiers
+ * - Submitter information
+ * - Links to external blockchain explorer
+ * 
+ * Features:
+ * - Responsive design (table on desktop, cards on mobile)
+ * - Pagination with configurable items per page
+ * - Loading, error, and empty states
+ * - External links to verify attestations on blockchain
+ * 
+ * The component fetches attestation data based on the page type and partner ID,
+ * then displays it with appropriate pagination controls.
+ */
 const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
+  // Determine device type for responsive layout and pagination settings
   const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT)
   const itemsPerPage = isDesktop ? ITEMS_PER_PAGE.DESKTOP : ITEMS_PER_PAGE.MOBILE
 
+  // Fetch attestation data based on page type and partner ID
   const { isPending, error, data } = useAttestationData({ pageName, partnerId })
   const records: AttestationItem[] = data?.data ?? []
   console.log('attestations:', records)
 
+  // Set up pagination for attestation records
   const {
 		currentPage,
 		currentPageItems: pageTransactions,
@@ -35,6 +60,7 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
 		needsPagination,
 	} = usePagination(records, itemsPerPage)
 
+  // Handle loading, error, and empty states with a placeholder view
   if (isPending || error || !pageTransactions.length) {
     return (
       <article className="w-full lg:h-[598px] flex flex-col justify-center items-center text-center text-lg px-10">
@@ -50,10 +76,13 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
 
   return (
     <>
+      {/* Main table container with fixed height */}
       <article className="h-[620px] lg:h-[598px]">
         <p className="font-semibold py-2">Total attestations: {records.length}</p>
+        {/* Desktop view: Full table with headers */}
         {isDesktop ? ( 
           <Table className="w-full table-fixed overflow-x-auto">
+            {/* Table headers with styled background */}
             <TableHeader>
               <TableRow className="border-none">
                 <TableHead className="p-0 w-[46%]">
@@ -73,21 +102,26 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
                 </TableHead>
               </TableRow>
             </TableHeader>
+
+            {/* Table body with attestation records */}
             <TableBody>
               {pageTransactions.map((attestation, index) => {
                 const { id, submittedBy } = attestation
                 return (
                   <TableRow key={index} className="cursor-pointer group border-none">
+                    {/* Attestation ID column with left-rounded border */}
                     <TableCell className="p-0 w-[46%]">
                       <div className="mt-2 px-8 py-4 border border-darkSand rounded-l-full truncate group-hover:bg-sand transition-colors">
                         {id || 'not available'}
                       </div>
                     </TableCell>
+                    {/* Submitter column */}
                     <TableCell className="p-0 w-[46%]">
                       <div className="mt-2 px-8 py-4 border-y border-darkSand truncate group-hover:bg-sand transition-colors">
                         {submittedBy || 'not available'}
                       </div>
                     </TableCell>
+                    {/* External link column with right-rounded border */}
                     <TableCell className="p-0 w-[8%]">
                       <div className="mt-2 px-8 py-4 border border-darkSand rounded-r-full hover:bg-sand group-hover:bg-sand transition-colors">
                         <a href={`https://optimism.easscan.org/attestation/view/${id}`} target="_blank" rel="noopener noreferrer">
@@ -101,6 +135,7 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
             </TableBody>
           </Table>
         ) : (
+          // Mobile view: Card-based layout for better small screen experience
           pageTransactions.map((attestation: AttestationItem) => {
             const { id, submittedBy } = attestation
             return (
@@ -120,14 +155,17 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
         )}
       </article>
 
+      {/* Pagination controls - only displayed if needed */}
       {needsPagination && (
         <article className="flex flex-col justify-center items-center gap-4">
+          {/* Page number buttons with prev/next controls */}
           <TablePaginator
             needsPagination={needsPagination}
             currentPage={currentPage}
             maxPage={maxPage}
             loadPage={loadPage}
           />
+          {/* "Showing X-Y of Z items" indicator */}
           <ShowingDisplay
             currentPage={currentPage}
             totalItemAmount={records.length}

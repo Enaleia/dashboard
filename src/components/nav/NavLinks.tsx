@@ -3,16 +3,32 @@ import { ArrowUpRight } from "lucide-react"
 import { useMediaQuery } from "@/hooks/ui/useMediaQuery"
 import { DESKTOP_BREAKPOINT } from "@/config/constants"
 
-
+/**
+ * Interface for the NavLinks component props
+ * @property {(closeMenu: boolean) => void} [closeMenu] - Optional callback function to close the mobile menu
+ */
 interface NavLinksProps {
-  closeMenu?: (closeMenu: boolean) => void;
+  closeMenu?: (closeMenu: boolean) => void
 }
 
+/**
+ * NavLinks - Component that renders navigation links for the application
+ * 
+ * Provides a collection of navigation links used in both the header and footer.
+ * Adapts its display based on the context (mobile menu vs desktop navigation):
+ * - Mobile: Vertical arrangement with larger text and "Home" link included
+ * - Desktop: Horizontal arrangement with smaller text and "Home" link omitted (as logo serves this purpose)
+ * 
+ * Each link closes the mobile menu when clicked if the closeMenu prop is provided.
+ * Active links are highlighted with bold text.
+ */
 const NavLinks = ({ closeMenu }: NavLinksProps) => {
+  // Check if viewport is desktop size for conditional rendering
   const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT)
 
   return (
     <div className='flex flex-col lg:flex-row gap-6 text-right lg:text-center md:gap-8 text-2xl md:text-3xl lg:text-base font-extralight'>
+      {/* Home link - Only shown in mobile menu (not in desktop navigation) */}
       {!isDesktop && 
         <Link
           to="/"
@@ -24,6 +40,7 @@ const NavLinks = ({ closeMenu }: NavLinksProps) => {
           Home
         </Link>
       }
+      {/* Locations page link */}
       <Link
         to="/locations"
         onClick={() => closeMenu && closeMenu(true)}
@@ -33,6 +50,7 @@ const NavLinks = ({ closeMenu }: NavLinksProps) => {
       >
         Locations
       </Link>
+      {/* Vessels/Collectors page link */}
       <Link
         to="/vessels"
         onClick={() => closeMenu && closeMenu(true)}
@@ -42,8 +60,8 @@ const NavLinks = ({ closeMenu }: NavLinksProps) => {
       >
         Collectors
       </Link>
-      {/* save for future release */}
-      <Link
+      {/* Circular Economy page link, commented out to save for future release */}
+      {/* <Link
         to="/economy"
         onClick={() => closeMenu && closeMenu(true)}
         activeProps={{
@@ -51,7 +69,8 @@ const NavLinks = ({ closeMenu }: NavLinksProps) => {
         }}
       >
         Circular Economy
-      </Link>
+      </Link> */}
+      {/* About page link */}
       <Link
         to="/about"
         onClick={() => closeMenu && closeMenu(true)}
@@ -61,6 +80,7 @@ const NavLinks = ({ closeMenu }: NavLinksProps) => {
       >
         About
       </Link>
+      {/* External link to attestations with arrow icon */}
       <a 
         href='https://optimism.easscan.org/'
         target="_blank"
