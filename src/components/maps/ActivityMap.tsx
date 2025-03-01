@@ -1,10 +1,3 @@
-/**
- * ActivityMap Component
-  
- * Map component used across multiple pages to display location markers and trace lines.
- * Supports different views for Home, Location, and Product pages, with optional filtering capabilities.
- */
-
 import { useState } from 'react'
 import { useMapData } from '@/hooks/api/useMapData'
 import { useMapState } from '@/hooks/ui/useMapState'
@@ -17,19 +10,38 @@ import { PageName, PartnerType, MapItem, TraceItem, ProductPageData } from "@/ty
 import { MapContainer, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 
+/**
+ * Interface for the ActivityMap component props
+ * @property {PageName} pageName - Determines which data to fetch and display
+ * @property {PartnerType} [partnerType] - Optional filter for location types on the Locations page
+ * @property {string} [productId] - Required for Product page to fetch specific product data
+ */
 interface ActivityMapProps {
-  pageName: PageName              // Determines which data to display
-  partnerType?: PartnerType       // Optional filter for Locations page
-  productId? : string             // Required for Product page to fetch specific data
+  pageName: PageName              
+  partnerType?: PartnerType      
+  productId? : string             
 }
 
+/**
+ * ActivityMap - Interactive map component for visualizing location data
+ * 
+ * Uses Leaflet/React-Leaflet to render an OpenStreetMap-based visualization of:
+ * - Partner locations as map markers
+ * - Supply chain connections as trace lines (for product pages)
+ * 
+ * The component adapts its data and appearance based on the page context,
+ * fetching different data sets and applying appropriate styling.
+ */
 const ActivityMap = ({ pageName, partnerType, productId }: ActivityMapProps) => {
   // Track tile loading errors for error handling UI
   const [tileError, setTileError] = useState(false)
-  // Fetch map data based on current page and product
+  // Fetch map data based on current page context and product ID
   const { isPending, error, data} = useMapData({ pageName, productId })
   
-  // Type guard to differentiate between Product page data structure and other pages' data structures
+  /**
+   * Type guard to differentiate between Product page data structure and other pages' data structures
+   * Product pages have a nested structure with both locations and traces
+   */
   const isProductPage = (responseData: any): responseData is ProductPageData => {
     return responseData && 'locations' in responseData && 'traces' in responseData;
   }
@@ -49,11 +61,12 @@ const ActivityMap = ({ pageName, partnerType, productId }: ActivityMapProps) => 
   // Get map configuration (center, zoom) based on page type
   const [mapState] = useMapState(pageName)
 
-  // Apply location filtering only when partnerType is provided
+  // Apply location filtering only when partnerType is provided (Locations page)
   const displayedLocations = partnerType
     ? useProcessedRecords(records, partnerType)
     : records
 
+  // Display loading/error states with appropriate messages
   if (isPending || error) {
     return (
       <article className='w-full h-[400px] md:h-[500px] lg:h-[700px] pt-3 text-center'>
@@ -66,6 +79,7 @@ const ActivityMap = ({ pageName, partnerType, productId }: ActivityMapProps) => 
   }
 
 	return (
+    // Map container with responsive height and conditional styling based on page type
     <article className={`w-full h-[400px] md:h-[500px] lg:h-[700px] ${pageName==='Home' ? 'pt-3': 'overflow-hidden rounded-3xl'}`}>
       <MapContainer 
         className='h-full z-0' 
@@ -95,10 +109,10 @@ const ActivityMap = ({ pageName, partnerType, productId }: ActivityMapProps) => 
             Failed to load map tiles. Map functionality may be limited.
           </div>
         )}
-        {/* Map utility components */}
+        {/* Utility components for map resizing and state management */}
         <MapSizeHandler />
         <MapStateController  pageName={pageName}/>
-        {/* Render location markers or empty state message */}
+        {/* Render location markers or empty state message if no locations available*/}
         {displayedLocations.length ?
           displayedLocations.map((record) => (
             <LocationMarker key={record.id} record={record} />

@@ -5,12 +5,21 @@ import 'leaflet-arrowheads'
 import { TraceItem } from '@/types'
 
 /**
-* Calculate number of arrows to display based on line distance
-* Returns more arrows for longer distances to maintain visual balance
-*/
+ * Calculate number of arrows to display based on line distance
+ * 
+ * Determines the appropriate number of directional arrows to show along a trace line
+ * based on the distance between the start and end points. This ensures visual balance
+ * with more arrows on longer lines and fewer on shorter ones.
+ * 
+ * @param {[number, number]} start - Starting coordinates [latitude, longitude]
+ * @param {[number, number]} end - Ending coordinates [latitude, longitude]
+ * @returns {number} The number of arrows to display along the line
+ */
 const getArrowFrequency = (start: [number, number], end: [number, number]): number => {
+  // Create Leaflet latLng objects for distance calculation
   const startPoint = L.latLng(start[0], start[1])
   const endPoint = L.latLng(end[0], end[1])
+  // Calculate distance in kilometers
   const distanceInKm = startPoint.distanceTo(endPoint) / 1000
 
   // Scale arrow frequency based on distance thresholds
@@ -20,13 +29,28 @@ const getArrowFrequency = (start: [number, number], end: [number, number]): numb
   return 5                              // Very long distance: 5 arrows
 }
 
+
+/**
+ * Interface for the TracingLines component props
+ * @property {TraceItem[]} traces - Array of trace data connecting points on the map
+ */
 interface TracingLinesProps {
   traces: TraceItem[]
 }
+
 /**
-* Component that renders dashed lines with directional arrows between points on a map
-* Each line represents a transfer of materials involved in the creation of a product
-*/
+ * TracingLines - Component that renders supply chain connections on the map
+ * 
+ * Creates dashed lines with directional arrows between points on a map to visualize
+ * the movement of materials or products through the supply chain. Used primarily
+ * on the product detail page to show the journey of materials.
+ * 
+ * Features:
+ * - Dashed lines for visual distinction from borders and other map elements
+ * - Directional arrows showing the flow direction (source to destination)
+ * - Dynamic arrow frequency based on distance (more arrows on longer lines)
+ * - Workaround for an initial render issue with the leaflet-arrowheads plugin
+ */
 export const TracingLines = ({ traces }: TracingLinesProps ) => {
   const map = useMap()
 
