@@ -17,9 +17,9 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
  * @template GT - The generic type parameter allows for the use of this hook with any type of item array.
  */
 export const usePagination = <GT>(items: GT[], itemsPerPage: number) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const currentPageRef = useRef(currentPage);
-  currentPageRef.current = currentPage;
+  const [currentPage, setCurrentPage] = useState(1)
+  const currentPageRef = useRef(currentPage)
+  currentPageRef.current = currentPage
 
   // `useMemo` because we don't want to recalculate these values on every render
   const maxPage = useMemo(
@@ -32,15 +32,15 @@ export const usePagination = <GT>(items: GT[], itemsPerPage: number) => {
   );
   // no 'useMemo' for these, we need to recalculate to render correct reports
   // when filter/sort options are updated
-  const start = (currentPage - 1) * itemsPerPage;
-  const end = start + itemsPerPage;
-  const currentPageItems = needsPagination ? items.slice(start, end) : items;
+  const start = (currentPage - 1) * itemsPerPage
+  const end = start + itemsPerPage
+  const currentPageItems = needsPagination ? items.slice(start, end) : items
 
   // 'useCallback' because we don't want to recreate this function on every render
   const loadPage = useCallback(
     (pageNumber: number) => {
       if (!needsPagination || pageNumber < 1 || pageNumber > maxPage) return;
-      setCurrentPage(pageNumber);
+      setCurrentPage(pageNumber)
     },
     [needsPagination, maxPage]
   );
@@ -49,9 +49,9 @@ export const usePagination = <GT>(items: GT[], itemsPerPage: number) => {
   useEffect(() => {
     const currentPage = currentPageRef.current;
     if (!needsPagination || currentPage < 1 || currentPage > maxPage) {
-      setCurrentPage(1);
+      setCurrentPage(1)
     }
-  }, [maxPage, needsPagination]);
+  }, [maxPage, needsPagination])
 
   return {
     currentPage,
@@ -59,5 +59,5 @@ export const usePagination = <GT>(items: GT[], itemsPerPage: number) => {
     loadPage,
     maxPage,
     needsPagination,
-  };
-};
+  }
+}
