@@ -82,7 +82,12 @@ const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
           <>
             <p>😕 sorry!</p>
             <p>We are not able to build the {pageName} table at this time.</p>
-            <img src="/illustrations/dolphin.svg" alt="dolphin illustration" className="w-[300px] h-[300px]"/>
+            <img 
+              src="/illustrations/dolphin.svg" 
+              alt="dolphin illustration" 
+              className="w-[300px] h-[300px]"
+              loading="lazy"
+            />
           </>
         )}
       </article>
@@ -169,7 +174,12 @@ const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
                       {/* Country cell with flag icon */}
                       <TableCell className="p-0 w-[17%]">
                         <div className="mt-2 px-8 py-4 border-y border-darkSand flex gap-2 trucate group-hover:bg-sand transition-colors">
-                          <img src={`/country-flags/${country}.svg`} alt={`${country} flag`} className="h-5 w-5"/>
+                          <img 
+                            src={`/country-flags/${country}.svg`} 
+                            alt={`${country} flag`} 
+                            className="h-5 w-5"
+                            loading="lazy"
+                          />
                           <span>{country}</span>
                         </div>
                       </TableCell>
@@ -188,7 +198,12 @@ const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
                       {/* Partner type cell with icon */}
                       <TableCell className="p-0 w-[17%]">
                         <div className="mt-2 px-8 py-4 border-y border-darkSand flex gap-2 truncate group-hover:bg-sand transition-colors">
-                          <img src={`/partner-icons/${type.replace(/ /g, '_')}.svg`} alt={`${type} icon`} className="h-5 w-5"/>
+                          <img 
+                            src={`/partner-icons/${type.replace(/ /g, '_')}.svg`} 
+                            alt={`${type} icon`} 
+                            className="h-5 w-5"
+                            loading="lazy"
+                          />
                           <span>{type}</span>
                         </div>
                       </TableCell>

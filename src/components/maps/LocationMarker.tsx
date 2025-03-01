@@ -76,6 +76,7 @@ export const LocationMarker = ({ record }: LocationMarkerProps) => {
             src={`/partner-icons/${type}.svg`} 
             className='h-6 w-6' 
             alt={`${type} icon`}
+            loading="lazy"
           />
           <p className='uppercase'>{type}</p> 
         </div>

@@ -39,7 +39,11 @@ function AboutComponent() {
       {/* Hero Section - Displays page title, description and hero image */}
       <section className='flex flex-col items-center gap-10'>
         <PageHero title={heroTitle} description={heroDescription}/>
-        <img src='/images/about_hero.jpg' alt="photo of port operations" className='object-cover bg-center h-[350px] md:h-[550px] lg:h-auto w-full rounded-3xl overflow-hidden'/>
+        <img 
+          src='/images/about_hero.jpg' 
+          alt="photo of port operations" 
+          className='object-cover bg-center h-[350px] md:h-[550px] lg:h-auto w-full rounded-3xl overflow-hidden'
+        />
       </section> 
       {/* Hub Flow Section - Explains the material collection and processing workflow */}
       <section className='text-center my-10 md:my-24'>
@@ -55,7 +59,12 @@ function AboutComponent() {
       {/* Collaboration Section - Highlights partnerships with resources to connect with Pollen Labs */}
       <section className='relative w-full overflow-hidden rounded-3xl'>
         {/* Background image with text overlay */}
-        <img src='/images/about_collab.jpg' alt="photo of sun shining on the ocean" className='object-cover bg-center h-[1000px] lg:h-[600px] w-full'/>
+        <img 
+          src='/images/about_collab.jpg' 
+          alt="photo of sun shining on the ocean" 
+          className='object-cover bg-center h-[1000px] lg:h-[600px] w-full'
+          loading="lazy"
+        />
         <div className='absolute inset-0 flex flex-col lg:flex-row items-start justify-start lg:justify-between p-4 pt-12 md:p-10'>
           <div className='lg:w-[75%]'>
             <h2 className='font-bold text-4xl md:text-6xl tracking-tight'>{collabSectionTitle}</h2>

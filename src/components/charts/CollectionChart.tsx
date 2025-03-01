@@ -72,7 +72,11 @@ const CollectionChart = ({ pageName, partnerId, timeRange }: CollectionChartProp
               <div className="w-[40%] md:w-full h-full flex flex-col justify-center md:items-center text-center text-lg">
                 <p>😕 sorry!</p>
                 <p>We were not able to build the chart you requested.</p>
-                <img src="/illustrations/dolphin.svg" alt="dolphin illustration" className="w-[300px] h-[300px]"/>
+                <img 
+                  src="/illustrations/dolphin.svg" 
+                  alt="dolphin illustration" 
+                  loading="lazy"
+                  className="w-[300px] h-[300px]"/>
               </div>
             ) : (
               // Main chart visualization

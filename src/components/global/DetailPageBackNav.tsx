@@ -21,7 +21,8 @@ const DetailPageBackNav = ({ detailType }: {detailType: string}) => {
       {/* Background image that changes based on detail type */}
       <img 
         src={`/images/${detailType}.jpg`} 
-        alt={detailType === "location" ?  'underwater scene' : 'fishing vessel helm'} 
+        alt={detailType === "location" ?  'underwater scene' : 'fishing vessel helm'}
+        loading="lazy" 
         className='object-cover bg-center h-[120px] md:h-auto w-full'
       />
       {/* Navigation link with text overlay */}

@@ -68,7 +68,12 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
             {isPending && <p>Loading attestation data...</p>}
             {error && <p>Sorry! We are not able to build the attestation table at this time.</p>}
             {!pageTransactions.length && <p>This partner has not made any attestations yet.</p>}
-            <img src="/illustrations/dolphin.svg" alt="dolphin illustration" className="w-[300px] h-[300px]"/>
+            <img 
+              src="/illustrations/dolphin.svg" 
+              alt="dolphin illustration" 
+              className="w-[300px] h-[300px]"
+              loading="lazy"
+            />
           </>
       </article>
     )
