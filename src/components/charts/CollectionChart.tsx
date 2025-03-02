@@ -44,7 +44,6 @@ const CollectionChart = ({ pageName, partnerId, timeRange }: CollectionChartProp
 
    // Extract and type records based on page type (Home page shows materials, detail pages show activities)
   const records = (data?.data ?? []) as (CollectionChartProps['pageName'] extends "Home" ? MaterialsChartRecord[] : ActivitiesChartRecord[])
-  console.log("records:", records)
 
   // Select appropriate chart configuration based on page type
   const chartConfig = pageName === "Home" ? MaterialsChartConfig : ActivitiesChartConfig

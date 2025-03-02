@@ -49,7 +49,6 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
   // Fetch attestation data based on page type and partner ID
   const { isPending, error, data } = useAttestationData({ pageName, partnerId })
   const records: AttestationItem[] = data?.data ?? []
-  console.log('attestations:', records)
 
   // Set up pagination for attestation records
   const {

@@ -55,9 +55,6 @@ function buildQueryString(partnerId?: string, timeRange?: string): string {
   // Convert parameters to query string
   const queryString = params.toString()
   
-  // Log query string for debugging
-  console.log('query string:', queryString)
-  
   // Return formatted query string (with leading '?' if parameters exist)
   return queryString ? `?${queryString}` : ''
 }
