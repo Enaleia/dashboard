@@ -25,7 +25,11 @@ const Card = ({ image, title, description }: CardProps) => {
   return (
     <article className="flex flex-col items-center gap-4 md:gap-2 w-full border border-black rounded-3xl">
       {/* Illustration from SVG file */}
-      <img src={`/illustrations/${image}.svg`} alt={`illustration of ${image}`} className="h-[200px] w-[200px] py-2"/>
+      <img 
+        src={`/illustrations/${image}.svg`} 
+        alt={`illustration of ${image}`} 
+        loading="lazy"
+        className="h-[200px] w-[200px] py-2"/>
       {/* Content container with title and description */}
       <div className="pb-8 pl-6 pr-3 text-left">
         {/* Card title */}

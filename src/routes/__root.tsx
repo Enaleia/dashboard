@@ -12,7 +12,24 @@ export const Route = createRootRoute({
   component: RootComponent,
 })
 
-const queryClient = new QueryClient()
+// Create a new QueryClient with custom default options
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // Cache data for 6 hours
+      staleTime: 1000 * 60 * 60 * 6, 
+      // Keep in garbage collection for 1 week
+      gcTime: 1000 * 60 * 60 * 24 * 7,
+      // Retry failed requests 3 times with increasing delays
+      retry: 3,
+      retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+      // Refetch only when user intentionally refreshes or revisits after a long time
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      refetchOnMount: false,
+    },
+  },
+})
 
 function RootComponent() {
   return (

@@ -55,8 +55,6 @@ const ActivityMap = ({ pageName, partnerType, productId }: ActivityMapProps) => 
   const traces: TraceItem[] = isProductPage(data?.data) 
     ? data?.data?.traces ?? [] 
     : []
-  console.log('map records:', records)
-  console.log('map traces:', traces)
 
   // Get map configuration (center, zoom) based on page type
   const [mapState] = useMapState(pageName)

@@ -29,7 +29,12 @@ const Metadata = ({ productId, dataCategory }: MetadataProps) => {
           <>
             {isPending && <p>Loading metadata stats...</p>}
             {error && <p>Sorry! We are not able to display the metadata at this time.</p>}
-            <img src="/illustrations/dolphin.svg" alt="dolphin illustration" className="w-[300px] h-[300px]"/>
+            <img 
+              src="/illustrations/dolphin.svg" 
+              alt="dolphin illustration" 
+              className="w-[300px] h-[300px]"
+              loading="lazy"
+            />
           </>
       </article>
     )
