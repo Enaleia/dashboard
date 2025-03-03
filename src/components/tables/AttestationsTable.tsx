@@ -111,28 +111,41 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
             <TableBody>
               {pageTransactions.map((attestation, index) => {
                 const { id, submittedBy } = attestation
+                const attestationUrl = `https://optimism.easscan.org/attestation/view/${id}`
                 return (
-                  <TableRow key={index} className="cursor-pointer group border-none">
-                    {/* Attestation ID column with left-rounded border */}
-                    <TableCell className="p-0 w-[46%]">
-                      <div className="mt-2 px-8 py-4 border border-darkSand rounded-l-full truncate group-hover:bg-sand transition-colors">
-                        {id || 'not available'}
-                      </div>
-                    </TableCell>
-                    {/* Submitter column */}
-                    <TableCell className="p-0 w-[46%]">
-                      <div className="mt-2 px-8 py-4 border-y border-darkSand truncate group-hover:bg-sand transition-colors">
-                        {submittedBy || 'not available'}
-                      </div>
-                    </TableCell>
-                    {/* External link column with right-rounded border */}
-                    <TableCell className="p-0 w-[8%]">
-                      <div className="mt-2 px-8 py-4 border border-darkSand rounded-r-full hover:bg-sand group-hover:bg-sand transition-colors">
-                        <a href={`https://optimism.easscan.org/attestation/view/${id}`} target="_blank" rel="noopener noreferrer">
-                          <ArrowUpRight size={20} strokeWidth={1}/>
-                        </a>
-                      </div>
-                    </TableCell>            
+                  <TableRow 
+                    key={index} 
+                    className="group border-none relative"
+                  >
+                    <TableCell colSpan={3} className="p-0">
+                      <a 
+                        href={attestationUrl}
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="block"
+                      >
+                        <div className="flex">
+                          {/* Attestation ID column with left-rounded border */}
+                          <div className="w-[46%]">
+                            <div className="mt-2 px-8 py-4 border border-darkSand rounded-l-full truncate group-hover:bg-sand transition-colors">
+                              {id || 'not available'}
+                            </div>
+                          </div>
+                          {/* Submitter column */}
+                          <div className="w-[46%]">
+                            <div className="mt-2 px-8 py-4 border-y border-darkSand truncate group-hover:bg-sand transition-colors">
+                              {submittedBy || 'not available'}
+                            </div>
+                          </div>
+                          {/* External link column with right-rounded border */}
+                          <div className="w-[8%]">
+                            <div className="mt-2 px-8 py-4 border border-darkSand rounded-r-full group-hover:bg-sand transition-colors flex justify-center items-center">
+                              <ArrowUpRight size={20} strokeWidth={1}/>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </TableCell>           
                   </TableRow>
                 )
               })}
@@ -142,6 +155,7 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
           // Mobile view: Card-based layout for better small screen experience
           pageTransactions.map((attestation: AttestationItem) => {
             const { id, submittedBy } = attestation
+            const attestationUrl = `https://optimism.easscan.org/attestation/view/${id}`
             return (
               <div className='flex flex-row my-2 justify-between w-full items-center border border-darkSand rounded-3xl text-sm'>               
                 <div className='w-[80%] flex flex-col justify-between border-r border-darkSand pl-4'>
@@ -149,7 +163,7 @@ const AttestationsTable = ({ pageName, partnerId }: AttestationTableProps) => {
                   <div className='p-3 truncate'>{submittedBy || 'not available'}</div> 
                 </div>
                 <div className='h-full w-[20%] px-4'>
-                  <a href={`https://optimism.easscan.org/attestation/view/${id}`} target="_blank" rel="noopener noreferrer">
+                  <a href={attestationUrl} target="_blank" rel="noopener noreferrer">
                     <ArrowUpRight size={28} strokeWidth={1}/>
                   </a>
                 </div>

@@ -1,7 +1,6 @@
 import { Marker, Popup } from 'react-leaflet'
 import { Link } from '@tanstack/react-router'
 import { Icon } from "leaflet"
-import { MoveRight } from 'lucide-react'
 import { MapItem } from '@/types'
 import { MAP_CONSTANTS } from '@/config/constants'
 
@@ -38,11 +37,32 @@ export const LocationMarker = ({ record }: LocationMarkerProps) => {
     return null
   }
 
-  // Create custom marker icon based on location type (Port, Recycler, Manufacturer)
-  // Uses SVG icons with consistent sizing from constants
+  // Map the type to the correct icon filenames
+  const getIconFilename = (type: string) => {
+    const pinIcon = {
+      manufacturer: 'map-pin-factory.svg',
+      port: 'map-pin-port.svg',
+      recycler: 'map-pin-recycler.svg'
+    }[type.toLowerCase()] || 'map-pin-factory.svg';
+
+    const popupIcon = {
+      manufacturer: 'Manufacturer.svg',
+      port: 'Port.svg',
+      recycler: 'Recycler.svg'
+    }[type.toLowerCase()] || 'Manufacturer.svg';
+
+    return { pinIcon, popupIcon };
+  }
+
+  const files = getIconFilename(type)
+
+  // Create custom marker icon based on location type
   const markerIcon = new Icon({
-    iconUrl: `/partner-icons/${type}.svg`,
-    iconSize: MAP_CONSTANTS.ICON_SIZE,
+    iconUrl: `/partner-icons/${files.pinIcon}`,
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -42],
+    className: 'hover:scale-110 transition-transform duration-200'
   })
 
   return (
@@ -51,9 +71,8 @@ export const LocationMarker = ({ record }: LocationMarkerProps) => {
       position={coordinates as [number, number]} 
       icon={markerIcon}
     >
-      <Popup>
+      <Popup className="rounded-xl">
         {/* Location name with link to detail page */}
-        {/* Includes all relevant data as search parameters for the detail page */}
         <Link 
           to={`/locations/${id}`}
           search={{ 
@@ -66,14 +85,16 @@ export const LocationMarker = ({ record }: LocationMarkerProps) => {
         >
           <div className='flex items-center gap-4 mt-6 h-[24px] mx-2'>
             <p className='text-softBlack text-xl'>{name}</p>
-            <MoveRight color='black'/>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="black" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
           </div>
         </Link>
 
         {/* Location type indicator with matching icon */}
-        <div className='flex items-center gap-2 text-sm mt-3 mb-8 h-[16px] mx-2'>
+        <div className='flex items-center gap-1 text-sm mt-2 mb-4 h-[16px] mx-1'>
           <img 
-            src={`/partner-icons/${type}.svg`} 
+            src={`/partner-icons/${files.popupIcon}`} 
             className='h-6 w-6' 
             alt={`${type} icon`}
             loading="lazy"
@@ -84,8 +105,8 @@ export const LocationMarker = ({ record }: LocationMarkerProps) => {
         {/* Activity metrics section - only rendered if events data exists */}
         {/* This section shows action types and counts for product page maps */}
         {events &&
-          <div className='text-sm mx-2 pb-4'>
-            <p className='h-[14px] font-extralight'>Actions performed</p>
+          <div className='text-base mx-1 pb-4'>
+            <p className='h-[14px] font-light'>Actions performed</p>
             {/* Map through each action type and its count */}
             {Object.entries(events).map(([action, value]) => (
               <div key={action} className='h-[14px] flex justify-between items-center mb-2'>
@@ -95,7 +116,7 @@ export const LocationMarker = ({ record }: LocationMarkerProps) => {
                   <p>{action}</p>
                 </div>
                 {/* Count of actions performed */}
-                <p className='font-extralight'>{value}</p>
+                <p className='font-light'>{value}</p>
               </div>
             ))}
           </div>

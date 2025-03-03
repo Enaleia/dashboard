@@ -47,25 +47,25 @@ const PageHeading = ({ productId, dataCategory }: PageHeadingProps) => {
 
         {/* Product Information Section */}
         <article className="lg:w-[55%] flex flex-col gap-0.5 md:gap-2 lg:gap-4 font-light">
-          <p className="text-xs md:text-sm font-extralight">{type}</p>
+          <p className="text-base md:text-base font-extralight">{type}</p>
           <h1 className="font-bold text-5xl md:text-6xl lg:text-7xl tracking-tight">{name}</h1>
-          <p className="text-xs md:text-sm font-extralight">Manufactured by:<strong> {manufacturedBy}</strong></p>
+          <p className="text-base md:text-base font-extralight">Manufactured by:<strong> {manufacturedBy}</strong></p>
           
           {/* Product image for mobile view */}
           {!isDesktop && <img src={image} alt="product image" className="object-cover object-center h-[200px] md:h-[300px]"/>}
           
-          <p className="text-sm md:text-base font-extralight tracking-tight md:tracking-tight lg:tracking-tight leading-5 md:leading-5 lg:leading-5">{description}</p>
+          <p className="font-extralight text-lg md:text-xl tracking-tight leading-tight md:leading-tight my-4">{description}</p>
           
           {/* Blockchain Attestation Information */}
-          <div className="bg-sand rounded-xl p-2 my-4">
-            <p className='text-sm font-extralight pb-1'>This product has been attested with Ethereum Attestation Service on Optimism network</p>
+          <div className="bg-sand rounded-xl p-4 my-4">
+            <p className='text-base font-extralight pb-1'>This product has been attested with Ethereum Attestation Service on Optimism network</p>
             <a 
               href={`https://optimism.easscan.org/attestation/view/${UID}`}
               target="_blank" 
               rel="noopener noreferrer"
               className="flex justify-between"
             >
-              <p className='text-sm font-semibold'>View Certification & Attestation</p>
+              <p className='text-base font-semibold'>View Certification & Attestation</p>
               <ArrowUpRight strokeWidth={2}/>
             </a>
           </div>
@@ -73,8 +73,8 @@ const PageHeading = ({ productId, dataCategory }: PageHeadingProps) => {
 
         {/* Product image for desktop view */}
         {isDesktop &&
-          <article className='lg:w-[45%]'>
-            <img src={image} alt="product image"/>
+          <article className='lg:w-[45%] rounded-3xl border border-sand overflow-hidden'>
+            <img src={image} alt="product image" className="w-full h-full object-cover object-center"/>
           </article>
         }
       </div>
