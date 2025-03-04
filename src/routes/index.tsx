@@ -116,11 +116,11 @@ function HomeComponent() {
       {/* Collaboration Section - Information about the project with CTA */}
       <section className='flex flex-col items-center gap-8 m-auto w-full lg:w-[85%] text-center tracking-tight pt-10 px-4 md:px-0'>
         <p className='font-bold text-3xl md:text-5xl tracking-tight'>{collabSectionTitle}</p>
-        <p className='w-full text-base md-text-lg font-extralight leading-tight md:leading-tight'>{collabSectionDescription}</p>
+        <p className='w-full text-lg md-text-lg font-extralight leading-tight md:leading-tight'>{collabSectionDescription}</p>
         <Link to="/about" >
           <Button className='px-6'>Learn more about how it works</Button>        
         </Link>
-        <Link to="https://enaleia-hub.com/products/4767" className="font-bold text-base">
+        <Link to="/products/4767" className="font-bold text-base">
           See product tracing demo
         </Link>
         {/* Button to scroll back to top of page */}

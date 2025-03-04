@@ -78,9 +78,9 @@ function AboutComponent() {
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer" 
-                className='flex justify-between items-center border-b border-softBlack hover:font-bold'
+                className='flex justify-between items-center border-b border-softBlack py-2'
               >
-                <p>{text}</p>
+                <p className='text-lg font-bold'>{text}</p>
                 <ArrowUpRight />
               </a>
             ))}
