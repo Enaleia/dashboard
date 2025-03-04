@@ -113,11 +113,11 @@ export const LocationMarker = ({ record }: LocationMarkerProps) => {
                 type,
                 addresses: wallet_addresses 
               }}
-              className="w-full"
+              className="w-full group"
             >
               <div className="h-10 flex items-center justify-between">
                 <p className='text-[hsl(var(--foreground))] text-2xl font-bold leading-none'>{name}</p>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 transition-transform group-hover:translate-x-0.5 ">
                   <path d="M21.3265 12.0001C21.3265 11.749 21.2261 11.5179 21.0251 11.3271L14.3756 4.68756C14.1546 4.46659 13.9336 4.38623 13.6925 4.38623C13.2004 4.38623 12.8187 4.74782 12.8187 5.25006C12.8187 5.49113 12.899 5.72213 13.0598 5.88289L15.3098 8.17304L18.6948 11.2567L16.264 11.1061H3.55751C3.04524 11.1061 2.67358 11.4777 2.67358 12.0001C2.67358 12.5224 3.04524 12.894 3.55751 12.894H16.264L18.7048 12.7434L15.3098 15.8271L13.0598 18.1172C12.899 18.2679 12.8187 18.509 12.8187 18.7501C12.8187 19.2523 13.2004 19.6139 13.6925 19.6139C13.9336 19.6139 14.1446 19.5235 14.3455 19.3327L21.0251 12.673C21.2261 12.4822 21.3265 12.2512 21.3265 12.0001Z" fill="#0D0D0D"/>
                 </svg>
               </div>

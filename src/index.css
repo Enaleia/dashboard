@@ -24,14 +24,6 @@ body {
   filter: saturate(50%)opacity(70%);
 }
 
-/* Override default Leaflet popup styles */
-.leaflet-popup-content-wrapper {
-  box-shadow: 10px 10px 45px -10px rgb(0 0 0 / 0.2) !important;
-  background-color: hsl(var(--background)) !important;
-}
-
-
-
 @layer base {
   :root {
     --background: 30, 18%, 96%;
