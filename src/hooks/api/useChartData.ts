@@ -39,10 +39,11 @@ function buildQueryString(partnerId?: string, timeRange?: string): string {
   if (timeRange !== 'All time') {
     // Create date range based on selected time range
     const endDate = new Date()
-    const startDate = new Date()
+    endDate.setHours(23, 59, 59, 999)  // Set to end of current day
     
-    // Reset to first day of the current month
+    const startDate = new Date()
     startDate.setDate(1)
+    startDate.setHours(0, 0, 0, 0)  // Set to start of day
     
     // Set start date based on time range selection
     startDate.setMonth(startDate.getMonth() - (timeRange === 'Last 12 months' ? 11 : 5))

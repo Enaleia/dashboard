@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useMapData } from '@/hooks/api/useMapData'
 import { useMapState } from '@/hooks/ui/useMapState'
 import { useProcessedRecords } from '@/hooks/ui/useProcessedRecords'
@@ -64,6 +64,20 @@ const ActivityMap = ({ pageName, partnerType, productId }: ActivityMapProps) => 
     ? useProcessedRecords(records, partnerType)
     : records
 
+  // Add style for map tiles saturation
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      .leaflet-tile-pane {
+        filter: saturate(1.6) !important;
+      }
+    `;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
   // Display loading/error states with appropriate messages
   if (isPending || error) {
     return (
@@ -83,7 +97,7 @@ const ActivityMap = ({ pageName, partnerType, productId }: ActivityMapProps) => 
         className='h-full z-0' 
         center={mapState.center} 
         zoom={mapState.zoom} 
-        scrollWheelZoom={false}
+        scrollWheelZoom={true}
         dragging={true}
         doubleClickZoom={true}
         touchZoom={true}
@@ -95,6 +109,7 @@ const ActivityMap = ({ pageName, partnerType, productId }: ActivityMapProps) => 
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          className="[filter:saturate(1.1)]"
           eventHandlers={{
             tileerror: () => {
               setTileError(true);

@@ -1,5 +1,6 @@
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, ChevronLeft } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
+import { Link } from '@tanstack/react-router'
 
 /**
  * Interface for the DetailPageHeading component props
@@ -43,13 +44,21 @@ interface DetailPageHeadingProps {
  * - Type icon displayed prominently
  */
 const DetailPageHeading = ({ name, country, coordinates, registered_port, type, addresses, collector_id}: DetailPageHeadingProps) => {
+  const pageType = coordinates ? 'locations' : 'vessels'
+  
   return (
     <section className='w-full'>
       <div className='flex flex-row justify-between items-start'>
         {/* Left side: Main information */}
         <div className='flex flex-col gap-0.5 md:gap-2 lg:gap-4 font-light'>
-          {/* Page type indicator */}
-          <p className='text-xs md:text-sm font-extralight'>{coordinates ? 'Location detail' : 'Collector detail'}</p>
+          {/* Page type indicator with back navigation */}
+          <Link
+            to={`/${pageType}`}
+            className="flex items-center gap-1 text-sm md:text-sm font-light group"
+          >
+            <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" />
+            <span>{coordinates ? 'Locations' : 'Collectors'}</span>
+          </Link>
           {/* Location/Vessel name (main heading) */}
           <h1 className='font-bold text-5xl md:text-6xl lg:text-7xl tracking-tight'>{name}</h1>
 
@@ -72,13 +81,13 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type, 
                 href={`https://www.google.com/maps?q={${coordinates[0]},${coordinates[1]}}`}
                 target="_blank"
                 rel="noopener noreferrer" 
-                className='flex flex-row items-center gap-2'
+                className='flex flex-row items-center gap-2 group'
               >
                 <img src='/data-icons/pin.svg' alt='pin icon' className='h-6 w-6'/>
                 {coordinates.length === 2 ?
                   <>
                     <p>{coordinates[0]}, {coordinates[1]}</p>
-                    <ArrowUpRight strokeWidth={1}/>
+                    <ArrowUpRight strokeWidth={1} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"/>
                   </>
                 :
                   <p>coordinates not available</p>
@@ -111,9 +120,9 @@ const DetailPageHeading = ({ name, country, coordinates, registered_port, type, 
                         href={`https://optimism.easscan.org/address/${address}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className='flex flex-row gap-2'>
+                        className='flex flex-row gap-2 group'>
                         <p>{address.slice(0, 6)}...{address.slice(-4)}</p>
-                        <ArrowUpRight strokeWidth={1}/>
+                        <ArrowUpRight strokeWidth={1} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"/>
                       </a>
                     )) 
                   :

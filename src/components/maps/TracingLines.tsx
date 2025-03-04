@@ -5,6 +5,42 @@ import 'leaflet-arrowheads'
 import { TraceItem } from '@/types'
 
 /**
+ * Creates a curved line between two points using quadratic bezier
+ * @param {[number, number]} start - Starting coordinates [latitude, longitude]
+ * @param {[number, number]} end - Ending coordinates [latitude, longitude]
+ * @returns {Array<[number, number]>} Array of points forming the curved line
+ */
+const createCurvedPath = (start: [number, number], end: [number, number]): Array<[number, number]> => {
+  const points: Array<[number, number]> = []
+  const segments = 16 // Number of segments in the curve
+  
+  // Calculate control point (mid-point with offset)
+  const midX = (start[0] + end[0]) / 2
+  const midY = (start[1] + end[1]) / 2
+  const offset = 0.15 // Curve offset factor
+  const dx = end[0] - start[0]
+  const dy = end[1] - start[1]
+  const controlPoint: [number, number] = [
+    midX - dy * offset,
+    midY + dx * offset
+  ]
+
+  // Generate curve points
+  for (let i = 0; i <= segments; i++) {
+    const t = i / segments
+    const x = Math.pow(1-t, 2) * start[0] + 
+              2 * (1-t) * t * controlPoint[0] + 
+              Math.pow(t, 2) * end[0]
+    const y = Math.pow(1-t, 2) * start[1] + 
+              2 * (1-t) * t * controlPoint[1] + 
+              Math.pow(t, 2) * end[1]
+    points.push([x, y])
+  }
+
+  return points
+}
+
+/**
  * Calculate number of arrows to display based on line distance
  * 
  * Determines the appropriate number of directional arrows to show along a trace line
@@ -22,13 +58,12 @@ const getArrowFrequency = (start: [number, number], end: [number, number]): numb
   // Calculate distance in kilometers
   const distanceInKm = startPoint.distanceTo(endPoint) / 1000
 
-  // Scale arrow frequency based on distance thresholds
-  if (distanceInKm < 100) return 2      // Short distance: 2 arrows
-  if (distanceInKm < 300) return 3      // Medium distance: 3 arrows
-  if (distanceInKm < 2000) return 4     // Long distance: 4 arrows
-  return 5                              // Very long distance: 5 arrows
+  // Scale arrow frequency based on distance thresholds with increased values
+  if (distanceInKm < 100) return 2      // Short distance: 5 arrows
+  if (distanceInKm < 300) return 3      // Medium distance: 6 arrows
+  if (distanceInKm < 2000) return 6     // Long distance: 7 arrows
+  return 8                              // Very long distance: 8 arrows
 }
-
 
 /**
  * Interface for the TracingLines component props
@@ -68,33 +103,57 @@ export const TracingLines = ({ traces }: TracingLinesProps ) => {
     }, 100)
   }, [map])
 
-  return traces.map((trace, index) => (
-    <Polyline
-      key={`line-${index}`}
-      positions={[
-        [trace.startLat, trace.startLng],
-        [trace.endLat, trace.endLng]
-      ]}
-      color="black"
-      weight={1}
-      dashArray="5,10"
-      eventHandlers={{
-        add: (e) => {
-          // Calculate and apply arrows when line is added to map
-          const frequency = getArrowFrequency(
-            [trace.startLat, trace.startLng],
-            [trace.endLat, trace.endLng]
-          )
+  return traces.map((trace, index) => {
+    const curvedPath = createCurvedPath(
+      [trace.startLat, trace.startLng],
+      [trace.endLat, trace.endLng]
+    )
 
-          e.target.arrowheads({
-            size: '10px',           // Size of arrowhead
-            frequency: frequency,   // Number of arrows along line
-            fill: true,             // Solid arrowhead fill
-            yawn: 45,               // Angle of arrowhead
-            thickness: 1,           // Weight of arrowhead lines
-          })
-        }
-      }}
-    />
-  ))
+    return (
+      <>
+        {/* Background line */}
+        <Polyline
+          key={`bg-line-${index}`}
+          positions={curvedPath}
+          color="#2985D0"
+          weight={5}
+          opacity={0.2}
+        />
+        {/* Animated dashed line */}
+        <Polyline
+          key={`line-${index}`}
+          positions={curvedPath}
+          color="black"
+          weight={1}
+          dashArray="4,6"
+          opacity={0.7}
+          eventHandlers={{
+            add: (e) => {
+              // Add animation to the path element
+              const path = e.target.getElement();
+              if (path) {
+                // Set up the animation properties
+                path.style.strokeDasharray = '4, 6';
+                path.style.strokeDashoffset = '40';
+                path.style.animation = 'dash 1.5s linear infinite';
+                // Add the keyframes if they don't exist
+                if (!document.getElementById('dash-keyframe')) {
+                  const style = document.createElement('style');
+                  style.id = 'dash-keyframe';
+                  style.textContent = `
+                    @keyframes dash {
+                      to {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                  `;
+                  document.head.appendChild(style);
+                }
+              }
+            }
+          }}
+        />
+      </>
+    )
+  })
 }

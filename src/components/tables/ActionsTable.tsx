@@ -240,7 +240,7 @@ const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
             itemsPerPage={itemsPerPage}
           />
         </article>
-			)}
+      )}
     </>
   )
 }

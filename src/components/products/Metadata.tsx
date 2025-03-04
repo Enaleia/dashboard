@@ -41,18 +41,18 @@ const Metadata = ({ productId, dataCategory }: MetadataProps) => {
   }
 
   return (
-    <article className='pt-2'>
+    <article>
       {/* Render each stat title and its value */}
       {Object.entries(stats).map(([title, value], index) => (
-        <div key={title} className={`flex justify-between text-sm ${index > 0 ? 'border-t border-darkSand' : ''} py-2`}>          
+        <div key={title} className={`flex justify-between text-base ${index > 0 ? 'border-t border-darkSand' : ''} py-2`}>          
           <p>{title}</p>
-          <p className='font-bold'>{value as string | number}<span className='font-extralight'>{typeof value === 'number' ? ' kg' : ''}</span></p>
+          <p className='font-bold'>{value as string | number}<span className='font-light'>{typeof value === 'number' ? ' kg' : ''}</span></p>
         </div>
       ))}
       {/* Render recycled plastics breakdown */}
       {Object.entries(plastics).map(([plastic, value]) => (
-        <div key={plastic} className='flex justify-between text-sm pl-2 pt-2'>
-          <p className='font-extralight'>{plastic}</p>
+        <div key={plastic} className='flex justify-between text-base pl-2 pt-2'>
+          <p className='font-light'>{plastic}</p>
           <p className='font-bold'>{value as number}</p>
         </div>
       ))}

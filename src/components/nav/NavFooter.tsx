@@ -13,9 +13,10 @@ const GithubLink = () => {
       href='https://github.com/Enaleia'
       target="_blank"
       rel="noopener noreferrer"
+      className="group"
     >
       <img 
-        className="size-8" 
+        className="size-8 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" 
         src={"/logos/gitHub_logo.png"} 
         alt="github icon" 
         loading="lazy" 
