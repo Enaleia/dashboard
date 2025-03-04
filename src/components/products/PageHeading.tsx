@@ -52,7 +52,11 @@ const PageHeading = ({ productId, dataCategory }: PageHeadingProps) => {
           <p className="text-base md:text-base font-extralight">Manufactured by:<strong> {manufacturedBy}</strong></p>
           
           {/* Product image for mobile view */}
-          {!isDesktop && <img src={image} alt="product image" className="object-cover object-center h-[200px] md:h-[300px]"/>}
+          {!isDesktop && 
+            <div className='rounded-3xl border border-sand overflow-hidden aspect-square'>
+              <img src={image} alt="product image" className="w-full h-full object-cover object-center"/>
+            </div>
+          }
           
           <p className="font-extralight text-lg md:text-xl tracking-tight leading-tight md:leading-tight my-4">{description}</p>
           

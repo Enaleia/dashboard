@@ -86,10 +86,11 @@ const NavLinks = ({ closeMenu }: NavLinksProps) => {
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => closeMenu && closeMenu(true)}
+        className="group"
       >
         <div className='flex gap-1 justify-end'>
           <p>Attestations</p>
-          <ArrowUpRight strokeWidth={1}/>
+          <ArrowUpRight strokeWidth={1} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"/>
         </div>
       </a>
     </div>

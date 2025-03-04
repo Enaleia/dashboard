@@ -78,10 +78,10 @@ function AboutComponent() {
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer" 
-                className='flex justify-between items-center border-b border-softBlack py-2'
+                className='flex justify-between items-center border-b border-softBlack py-2 group'
               >
-                <p className='text-lg font-bold'>{text}</p>
-                <ArrowUpRight />
+                <p className='text-lg'>{text}</p>
+                <ArrowUpRight className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"/>
               </a>
             ))}
           </div>

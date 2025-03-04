@@ -4,6 +4,7 @@ import { Icon } from "leaflet"
 import { MoveRight } from 'lucide-react'
 import { MapItem } from '@/types'
 import { MAP_CONSTANTS } from '@/config/constants'
+import { useEffect } from 'react'
 
 /**
  * Interface for the LocationMarker component props
@@ -29,6 +30,20 @@ interface LocationMarkerProps {
  * - Validation to prevent rendering markers with invalid coordinates
  */
 export const LocationMarker = ({ record }: LocationMarkerProps) => {
+  // Add styles for Leaflet popup shadow
+  useEffect(() => {
+    const style = document.createElement('style')
+    style.textContent = `
+      .leaflet-popup-content-wrapper {
+        box-shadow: 10px 10px 45px -10px rgb(0 0 0 / 0.2) !important;
+      }
+    `
+    document.head.appendChild(style)
+    return () => {
+      document.head.removeChild(style)
+    }
+  }, [])
+
   // Destructure location data from the record
   const { id, name, country, coordinates, type, wallet_addresses, events } = record
 
@@ -72,7 +87,7 @@ export const LocationMarker = ({ record }: LocationMarkerProps) => {
       position={coordinates as [number, number]} 
       icon={markerIcon}
     >
-      <Popup className="rounded-4xl px-2 py-2" closeButton={false}>
+      <Popup className="rounded-5xl px-2 py-2" closeButton={false}>
         {/* Location name with link to detail page */}
         <div className="min-w-[140px] max-w-[240px] flex-col justify-start items-start inline-flex">
           <div className="self-stretch flex-col justify-start items-start flex mb-1">

@@ -39,15 +39,15 @@ const ShowingDisplay = ({
 	totalItemAmount,
 	itemsPerPage,
 }: IShowingDisplay) => {
-  // If there are no items, don't render anything
+	// If there are no items, don't render anything
 	if (totalItemAmount === 0) {
 		return null
 	}
-  // Special case for a single item
+	// Special case for a single item
 	if (totalItemAmount === 1) {
 		return <p className="text-sm md:text-base">Showing 1 item</p>;
 	}
-  // Calculate and display the current range
+	// Calculate and display the current range
 	return (
 		<p className="text-sm md:text-base">
 			Showing {(currentPage - 1) * itemsPerPage + 1} -{" "}
@@ -97,7 +97,6 @@ const calculatePaginationRange = (
 	)
 }
 
-
 /**
  * Interface for the TablePaginator component props
  * @property {boolean} needsPagination - Whether pagination is needed (false for single page)
@@ -130,16 +129,16 @@ const TablePaginator = ({
 	maxPage,
 	loadPage,
 }: ITablePaginator) => {
-  // Use responsive behavior based on screen size
+	// Use responsive behavior based on screen size
 	const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT)
-  // Show more page numbers on desktop for better navigation
+	// Show more page numbers on desktop for better navigation
 	const maxPagesInPagination = isDesktop ? 7 : 5
-  // Don't render pagination if not needed (e.g., single page)
+	// Don't render pagination if not needed (e.g., single page)
 	if (!needsPagination) {
 		return null
 	}
 
-  // Calculate which page numbers to display
+	// Calculate which page numbers to display
 	const pagesInPagination = calculatePaginationRange(
 		currentPage,
 		maxPage,
