@@ -252,12 +252,12 @@ export const aboutCardInfo = [
   {
     image: 'octopus',
     title: 'Immutably attest to collected data',
-    description: 'Each data submission by port coordinators is stored on the blockchain in a human-readable format. This ensures that future marine scientists or environmentalists can reference historical data for research.<br/><br/> We use <a href="https://attest.org/" target="_blank" rel="noopener noreferrer"style="font-weight: bold">Ethereum Attestation Service</a> to certify the authenticity of this data. How to read the data we attested? Learn more about our <a href="" target="_blank" rel="noopener noreferrer" style="font-weight: bold">attestation scheme</a>.',
+    description: 'Each data submission by port coordinators is stored on the blockchain in a human-readable format. This ensures that future marine scientists or environmentalists can reference historical data for research.<br/><br/> We use <a href="https://attest.org/" target="_blank" rel="noopener noreferrer"style="font-weight: bold">Ethereum Attestation Service</a> to certify the authenticity of this data. How to read the data we attested? Learn more about our <a href="https://optimism.easscan.org/schema/view/0x1ac0face1fc9aabf1c2f9b46d3a8decb51ca0c3d06ef1f68a85d04c90820975b" target="_blank" rel="noopener noreferrer" style="font-weight: bold">attestation schema</a>.',
   },
   {
     image: 'crab',
     title: 'Demonstrate transparency',
-    description: 'Our public dashboard is a critical tool for showcasing transparency and highlighting the impact of our efforts.<br/><br/> All data visualizations are backed by attestations, and public users can verify them via the <a href="" target="_blank" rel="noopener noreferrer" style="font-weight: bold">blockchain explorer</a>.',
+    description: 'Our public dashboard is a critical tool for showcasing transparency and highlighting the impact of our efforts.<br/><br/> All data visualizations are backed by attestations, and public users can verify them via the <a href="https://optimism.easscan.org/schema/view/0x1ac0face1fc9aabf1c2f9b46d3a8decb51ca0c3d06ef1f68a85d04c90820975b" target="_blank" rel="noopener noreferrer" style="font-weight: bold">blockchain explorer</a>.',
   }
 ]
 

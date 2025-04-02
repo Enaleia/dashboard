@@ -82,7 +82,7 @@ const NavLinks = ({ closeMenu }: NavLinksProps) => {
       </Link>
       {/* External link to attestations with arrow icon */}
       <a 
-        href='https://optimism.easscan.org/'
+        href='https://optimism.easscan.org/schema/view/0x1ac0face1fc9aabf1c2f9b46d3a8decb51ca0c3d06ef1f68a85d04c90820975b'
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => closeMenu && closeMenu(true)}
