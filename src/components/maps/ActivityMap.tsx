@@ -7,7 +7,8 @@ import { MapSizeHandler } from '@/components/maps/MapSizeHandler'
 import { LocationMarker } from '@/components/maps/LocationMarker'
 import { TracingLines } from '@/components/maps/TracingLines'
 import { PageName, PartnerType, MapItem, TraceItem, ProductPageData } from "@/types"
-import { MapContainer, TileLayer } from 'react-leaflet'
+import { MapContainer, TileLayer, useMap } from 'react-leaflet'
+import L, { LatLngBoundsExpression } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
 /**
@@ -56,8 +57,8 @@ const ActivityMap = ({ pageName, partnerType, productId }: ActivityMapProps) => 
     ? data?.data?.traces ?? [] 
     : []
 
-  // Get map configuration (center, zoom) based on page type
-  const [mapState] = useMapState(pageName)
+  // Get map configuration (center, zoom) based on page type - Note: center/zoom are now handled dynamically
+  // const [mapState] = useMapState(pageName) // <-- REMOVED (or keep if needed for initial non-fitted state)
 
   // Apply location filtering only when partnerType is provided (Locations page)
   const displayedLocations = partnerType
@@ -78,6 +79,36 @@ const ActivityMap = ({ pageName, partnerType, productId }: ActivityMapProps) => 
     };
   }, []);
 
+  // Helper component to fit map bounds
+  const MapBoundsFitter = ({ locations }: { locations: MapItem[] }) => {
+    const map = useMap();
+
+    useEffect(() => {
+      if (!locations || locations.length === 0) return;
+
+      // Filter out locations with invalid coordinates before calculating bounds
+      const validLocations = locations.filter(loc => 
+        loc.coordinates && loc.coordinates.length === 2 && 
+        typeof loc.coordinates[0] === 'number' && 
+        typeof loc.coordinates[1] === 'number'
+      );
+      
+      if (validLocations.length === 0) return;
+
+      const bounds = L.latLngBounds(validLocations.map(loc => loc.coordinates as L.LatLngTuple));
+      
+      if (bounds.isValid()) {
+        map.fitBounds(bounds, { padding: [50, 50] }); // Add padding
+      } else if (validLocations.length === 1) {
+         // If only one marker, center on it with a reasonable zoom level
+         map.setView(validLocations[0].coordinates as L.LatLngTuple, 13); 
+      }
+
+    }, [locations, map]); // Rerun when locations or map instance changes
+
+    return null; // This component doesn't render anything itself
+  }
+
   // Display loading/error states with appropriate messages
   if (isPending || error) {
     return (
@@ -95,8 +126,8 @@ const ActivityMap = ({ pageName, partnerType, productId }: ActivityMapProps) => 
     <article className={`w-full h-[400px] md:h-[500px] lg:h-[700px] ${pageName==='Home' ? 'pt-3': 'overflow-hidden rounded-3xl'}`}>
       <MapContainer 
         className='h-full z-0' 
-        center={mapState.center} 
-        zoom={mapState.zoom} 
+        // center={mapState.center} // <-- REMOVED
+        // zoom={mapState.zoom} // <-- REMOVED
         scrollWheelZoom={true}
         dragging={true}
         doubleClickZoom={true}
@@ -138,6 +169,8 @@ const ActivityMap = ({ pageName, partnerType, productId }: ActivityMapProps) => 
         }
         {/* Render trace lines (only visible on Product page) */}
         <TracingLines traces={traces}/>
+        {/* Add the bounds fitter component */}
+        <MapBoundsFitter locations={displayedLocations} />
       </MapContainer>
     </article>
 	)

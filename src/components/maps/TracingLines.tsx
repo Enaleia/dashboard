@@ -3,6 +3,7 @@ import { Polyline, useMap } from 'react-leaflet'
 import  L from 'leaflet'
 import 'leaflet-arrowheads'
 import { TraceItem } from '@/types'
+import React from 'react'
 
 /**
  * Creates a curved line between two points using quadratic bezier
@@ -108,12 +109,16 @@ export const TracingLines = ({ traces }: TracingLinesProps ) => {
       [trace.startLat, trace.startLng],
       [trace.endLat, trace.endLng]
     )
+    
+    // Generate a unique key based on coordinates and index for stability
+    const traceKey = `trace-${trace.startLat}-${trace.startLng}-${trace.endLat}-${trace.endLng}-${index}`;
 
     return (
-      <>
+      // Add key to the React Fragment
+      <React.Fragment key={traceKey}>
         {/* Background line */}
         <Polyline
-          key={`bg-line-${index}`}
+          key={`bg-${traceKey}`}
           positions={curvedPath}
           color="#2985D0"
           weight={5}
@@ -121,7 +126,7 @@ export const TracingLines = ({ traces }: TracingLinesProps ) => {
         />
         {/* Animated dashed line */}
         <Polyline
-          key={`line-${index}`}
+          key={`line-${traceKey}`}
           positions={curvedPath}
           color="black"
           weight={1}
@@ -153,7 +158,7 @@ export const TracingLines = ({ traces }: TracingLinesProps ) => {
             }
           }}
         />
-      </>
+      </React.Fragment>
     )
   })
 }

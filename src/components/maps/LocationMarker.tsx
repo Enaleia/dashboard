@@ -49,7 +49,8 @@ export const LocationMarker = ({ record }: LocationMarkerProps) => {
 
   // Don't render marker if coordinates are invalid
   // This prevents map errors and ensures only valid locations are displayed
-  if (!coordinates?.length || coordinates.length !== 2) {
+  if (!coordinates?.length || coordinates.length !== 2 || typeof coordinates[0] !== 'number' || typeof coordinates[1] !== 'number' ) {
+    console.warn(`LocationMarker: Invalid coordinates for location ID ${id}, Name: ${name}:`, coordinates);
     return null
   }
 
@@ -70,7 +71,7 @@ export const LocationMarker = ({ record }: LocationMarkerProps) => {
     return { pinIcon, popupIcon };
   }
 
-  const files = getIconFilename(type)
+  const files = getIconFilename(type || '')
 
   // Create custom marker icon based on location type
   const markerIcon = new Icon({
@@ -83,9 +84,9 @@ export const LocationMarker = ({ record }: LocationMarkerProps) => {
 
   return (
     <Marker 
-      key={name} 
-      position={coordinates as [number, number]} 
-      icon={markerIcon}
+      key={id} 
+      position={coordinates as [number, number]} // Use original coordinates
+      icon={markerIcon} // Keep custom icon
     >
       <Popup className="rounded-5xl px-2 py-2" closeButton={false}>
         {/* Location name with link to detail page */}
