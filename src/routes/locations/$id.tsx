@@ -109,14 +109,14 @@ function LocationDetailComponent() {
             className="block text-current no-underline hover:text-current"
           >
             <div className='border border-darkSand rounded-2xl p-4 text-sm'> 
-                <div className='flex justify-between items-start mb-2'>
-                    <span className='text-xs text-gray-600'>{item.dateFormatted || 'N/A'}</span>
+                <div className='flex justify-between items-start mb-1'>
+                    <span className='text-sm text-gray-600'>{item.dateFormatted || 'N/A'}</span>
                 </div>
-                <p className='font-semibold text-base mb-3'>{item.action || 'N/A'}</p>
-                <p className='text-xs text-gray-700 mb-1'>
+                <p className='font-semibold text-2xl mb-1'>{item.action || 'N/A'}</p>
+                <p className='text-sm text-gray-700 mb-6'>
                     Submitted by: {item.submittedBy ? formatAddress(item.submittedBy) : 'N/A'}
                 </p>
-                <div className='text-xs text-gray-700 flex items-center'>
+                <div className='text-sm text-gray-700 flex items-center'>
                     Attestation UID: {item.id ? formatAddress(item.id, 10) : 'N/A'}
                     <ArrowUpRight size={14} strokeWidth={1.5} className="ml-1 flex-shrink-0" />
                 </div>

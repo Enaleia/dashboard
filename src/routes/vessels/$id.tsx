@@ -1,5 +1,5 @@
 import { createFileRoute, useSearch } from '@tanstack/react-router'
-import { VesselSearchParams } from '@/types'
+import { VesselSearchParams, AttestationItem } from '@/types'
 import { useState } from 'react'
 import { DetailPageHeading } from '@/components/global/DetailPageHeading'
 import { Separator } from '@/components/ui/separator'
@@ -7,7 +7,9 @@ import { Button } from '@/components/ui/button'
 import { StatsBar } from '@/components/global/StatsBar'
 import { CollectionChart } from '@/components/charts/CollectionChart'
 import { CustomChartLegend } from '@/components/charts/CustomChartLegend'
-import { AttestationsTable } from '@/components/tables/AttestationsTable'
+import { AttestationsTable, ColumnDef } from '@/components/tables/AttestationsTable'
+import { useAttestationData } from "@/hooks/api/useAttestationData"
+import { ArrowUpRight } from 'lucide-react'
 import { DetailPageBackNav } from '@/components/global/DetailPageBackNav'
 import { BackToTopButton } from '@/components/global/BackToTopButton'
 import { dateChoices, partnerDetailInfo, attestationDescriptions } from '@/config/texts'
@@ -43,6 +45,88 @@ function VesselDetailComponent() {
   const [selectedChartDates, setSelectedChartDates] = useState('All time')
   // Destructure text content from config
   const { heading, statSubtitle, statDescription } = partnerDetailInfo["Vessel"]
+
+  // --- Fetch Attestation Data for Vessel ---
+  const { isPending: isLoadingAttestations, error: attestationsError, data: attestationsResponse } = 
+    useAttestationData({ pageName: 'VesselDetail', partnerId: id });
+  
+  const attestationsData: AttestationItem[] = attestationsResponse?.data ?? [];
+  const totalAttestationRecords = attestationsResponse?.count ?? 0;
+  // --- End Fetch Attestation Data ---
+
+  // --- Define Columns for Vessel Table --- (5 columns)
+  const vesselColumns: ColumnDef<AttestationItem>[] = [
+    {
+      id: 'actionDate',
+      header: 'Action date',
+      cell: (item) => item.dateFormatted || 'N/A', 
+      width: 'w-[20%]', // Adjusted width
+      isSortable: true,
+      sortAccessor: (item) => item.timestamp ? new Date(item.timestamp) : null,
+    },
+    {
+      id: 'action',
+      header: 'Action type',
+      cell: (item) => item.action || 'N/A',
+      width: 'w-[20%]', // Adjusted width
+    },
+    {
+      id: 'totalWeight',
+      header: 'Total weight',
+      // Access totalInputWeight, append Kg
+      cell: (item) => item.totalInputWeight !== undefined ? `${item.totalInputWeight} Kg` : 'N/A', 
+      width: 'w-[20%]', // Adjusted width
+    },
+    {
+      id: 'submittedBy',
+      header: 'Submitted by',
+      cell: (item) => item.submittedBy ? formatAddress(item.submittedBy) : 'N/A',
+      width: 'w-[20%]', // Adjusted width
+    },
+    {
+      id: 'attestationUid',
+      header: 'Attestation UID',
+      cell: (item) => (
+        <div className="flex items-center justify-between">
+           <span>{item.id ? formatAddress(item.id, 10) : 'N/A'}</span> 
+           <ArrowUpRight size={16} strokeWidth={1.5} className="ml-2 flex-shrink-0" />
+        </div>
+      ),
+      width: 'w-[20%]', // Adjusted width
+    },
+  ];
+  // --- End Define Columns ---
+
+  // --- Define Mobile Card Renderer for Vessel --- 
+  const renderVesselMobileCard = (item: AttestationItem) => {
+      const attestationUrl = `https://optimism.easscan.org/attestation/view/${item.id}`;
+      return (
+          <a 
+            href={attestationUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="block text-current no-underline hover:text-current"
+          >
+            {/* Add Waste Collected info */}
+            <div className='border border-darkSand rounded-2xl p-4 text-sm'> 
+                <div className='flex justify-between items-start mb-1'>
+                    <span className='text-sm text-gray-600'>{item.dateFormatted || 'N/A'}</span>
+                </div>
+                <p className='font-semibold text-2xl mb-1'>{item.action || 'N/A'}</p>
+                {/* Add Waste Collected info */}
+                <p className='text-base text-gray-800 mb-6'>Wasted collected: {item.totalInputWeight !== undefined ? `${item.totalInputWeight} Kg` : 'N/A'}</p> 
+                <p className='text-sm text-gray-700 mb-1'>
+                    Submitted by: {item.submittedBy ? formatAddress(item.submittedBy) : 'N/A'}
+                </p>
+                <div className='text-sm text-gray-700 flex items-center'>
+                    Attestation UID: {item.id ? formatAddress(item.id, 10) : 'N/A'}
+                    <ArrowUpRight size={14} strokeWidth={1.5} className="ml-1 flex-shrink-0" />
+                </div>
+            </div>
+          </a>
+      );
+  };
+  // --- End Define Mobile Card Renderer ---
 
   return (
     <main className='flex flex-col justify-center items-center gap-8 m-auto pt-0 pb-16 lg:pb-32 md:pt-8 lg:pt-16 max-w-[1500px]'>
@@ -95,7 +179,14 @@ function VesselDetailComponent() {
         <h2 className='font-bold text-3xl md:text-5xl tracking-tight'>Attestations</h2>
         <p className='w-full md:w-[70%] font-extralight tracking-tight leading-tight md:leading-tight'>{attestationDescriptions["Vessel"]}</p>
         <Separator className='bg-softBlack my-1'/>
-        <AttestationsTable pageName='VesselDetail' partnerId={id}/>
+        <AttestationsTable
+          data={attestationsData}
+          columns={vesselColumns}
+          renderMobileCard={renderVesselMobileCard}
+          isLoading={isLoadingAttestations}
+          error={attestationsError}
+          totalRecords={totalAttestationRecords}
+        />
       </section>
 
       {/* Navigation back to vessels listing page */}   
@@ -105,3 +196,11 @@ function VesselDetailComponent() {
     </main>
   )
 }
+
+// --- Helper Function (Placeholder) ---
+const formatAddress = (address: string | undefined | null, charsToShow = 6): string => {
+  if (!address) return 'N/A';
+  if (address.length <= charsToShow * 2 + 2) return address; 
+  return `${address.substring(0, charsToShow + 2)}...${address.substring(address.length - charsToShow)}`;
+};
+// --- End Helper Function ---

@@ -130,4 +130,5 @@ export interface AttestationItem {
   timestamp?: string;     // Timestamp of the attestation
   action?: string;        // Action type
   company?: string;       // Company name
+  totalInputWeight?: number; // Total input weight of the attestation
 }
