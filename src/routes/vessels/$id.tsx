@@ -191,7 +191,8 @@ function VesselDetailComponent() {
         ) : materialBreakdownData && materialBreakdownData.breakdown.length > 0 ? (
            <MaterialBreakdownChart 
              data={materialBreakdownData} 
-             title="Waste collected by materials & weight" 
+             title="Collected waste by material type and weight" 
+             description="This chart shows the types of waste collected by collector, categorized by material. Each segment displays both the total weight in kilograms and its percentage share of the overall haul, offering a clear view of the composition and volume of recovered marine debris."
            />
         ) : (
           <div>No material breakdown data available for this vessel.</div>

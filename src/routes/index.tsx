@@ -6,6 +6,8 @@ import { StatsBar } from '@/components/global/StatsBar'
 import { ActivityMap } from '../components/maps/ActivityMap'
 import { CollectionChart } from '@/components/charts/CollectionChart'
 import { CustomChartLegend } from '@/components/charts/CustomChartLegend'
+import { MaterialBreakdownChart } from '@/components/charts/MaterialBreakdownChart'
+import { useHomeMaterialBreakdown } from '@/hooks/api/useHomeMaterialBreakdown'
 import { CircleArrowDown } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { BackToTopButton } from '@/components/global/BackToTopButton'
@@ -50,8 +52,25 @@ function HomeComponent() {
     // Responsive layout handling based on screen size
   const isDesktop = useMediaQuery(DESKTOP_BREAKPOINT)
 
+  // Fetch material breakdown data
+  const { 
+    data: materialData, 
+    isPending: isLoadingMaterials, 
+    error: materialError 
+  } = useHomeMaterialBreakdown();
+
+  // Format the total weight for the description
+  const formattedTotalWeight = materialData?.totalWeight !== undefined 
+    ? new Intl.NumberFormat().format(materialData.totalWeight)
+    : null;
+  
+  // Construct the dynamic description string using the full paragraph
+  const breakdownDescription = formattedTotalWeight
+    ? `While all waste has been collected through the efforts of our partner fishermen, approximately ${formattedTotalWeight} kg has been sorted by our recycling partners. This chart breaks down that sorted plastic by specific material types—such as PET, HDPE, and LDPE—offering a closer look at what enters the recycling stream and helping us better understand the composition of recovered ocean plastics.`
+    : "While all waste has been collected through the efforts of our partner fishermen, the total sorted weight is being calculated. This chart will break down sorted plastic by specific material types..." // Adjusted fallback text
+
   return (
-    <main className='flex flex-col justify-center items-center gap-8 md:gap-20 m-auto pb-16 md:pb-24 md:pt-8 lg:pt-16 max-w-[1500px]'>
+    <main className='flex flex-col justify-center items-center gap-8 m-auto pb-16 md:pb-24 md:pt-8 lg:pt-16 max-w-[1500px]'>
       {/* Hero Section - Displays page title, description and scrolling helper */}
       <section className='flex flex-col items-center gap-6'>
         <PageHero title={heroTitle} description={heroDescription}/>
@@ -113,14 +132,36 @@ function HomeComponent() {
           </p>
         </article>
       </section>
+      {/* --- New Section for Material Breakdown Chart --- */}
+      <section className='w-full border border-primary rounded-3xl overflow-hidden p-6 md:p-12'> 
+        {isLoadingMaterials ? (
+          <div>Loading material breakdown...</div>
+        ) : materialError ? (
+          <div>Error loading material breakdown: {materialError.message}</div>
+        ) : materialData ? (
+          <MaterialBreakdownChart 
+            data={materialData} 
+            title="Waste breakdown by type and weight"
+            description={breakdownDescription}
+          />
+        ) : (
+          <div>No material breakdown data available.</div>
+        )}
+      </section>
+      {/* --- End New Section --- */}
+
       {/* Collaboration Section - Information about the project with CTA */}
-      <section className='flex flex-col items-center gap-8 m-auto w-full lg:w-[85%] text-center tracking-tight pt-10 px-4 md:px-0'>
+      <section className='flex flex-col items-center gap-8 m-auto w-full lg:w-[85%] text-center tracking-tight px-4 md:px-0 mt-20 mb-16'>
         <p className='font-bold text-3xl md:text-5xl tracking-tight'>{collabSectionTitle}</p>
         <p className='w-full text-lg md-text-lg font-extralight leading-tight md:leading-tight'>{collabSectionDescription}</p>
         <Link to="/about" >
           <Button className='px-6'>Learn more about how it works</Button>        
         </Link>
-        <Link to="/products/4767" className="font-bold text-base">
+        <Link 
+          to="/products/$id" 
+          params={{ id: '4767' }}
+          className="font-bold text-base"
+        >
           See product tracing example
         </Link>
         {/* Button to scroll back to top of page */}
