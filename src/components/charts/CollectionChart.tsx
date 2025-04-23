@@ -107,7 +107,7 @@ const CollectionChart = ({ pageName, partnerId, timeRange }: CollectionChartProp
                   cursor={false} 
                   content={
                     <ChartTooltipContent 
-                      className="w-[250px] rounded-3xl gap-2 md:gap-3 text-sm md:text-lg p-4 md:p-6"
+                      className="w-[320px] rounded-3xl gap-2 md:gap-3 text-sm md:text-lg p-4 md:p-6"
                       // Format the tooltip label (month and year)
                       labelFormatter={(value) => (
                         <div className="font-extralight">

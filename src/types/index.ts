@@ -126,4 +126,9 @@ export interface VesselSearchParams {
 export interface AttestationItem {
   id: string;           // Unique identifier for the attestation
   submittedBy: string;  // Address or identity of the submitter
+  dateFormatted?: string; // Action date
+  timestamp?: string;     // Timestamp of the attestation
+  action?: string;        // Action type
+  company?: string;       // Company name
+  totalInputWeight?: number; // Total input weight of the attestation
 }
