@@ -191,7 +191,8 @@ function VesselDetailComponent() {
         ) : materialBreakdownData && materialBreakdownData.breakdown.length > 0 ? (
            <MaterialBreakdownChart 
              data={materialBreakdownData} 
-             title="Waste collected by materials & weight" 
+             title="What this collector collected at sea" 
+             description="This chart shows what this fishing crew pulled from the ocean. Each material—like ghost nets or mixed plastic—represents a piece of marine waste that’s no longer drifting at sea. It’s a snapshot of the impact made by just one vessel out on the water."
            />
         ) : (
           <div>No material breakdown data available for this vessel.</div>

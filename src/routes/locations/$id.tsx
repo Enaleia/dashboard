@@ -17,6 +17,8 @@ import {
 } from '@/config/texts'
 import { useAttestationData } from "@/hooks/api/useAttestationData"
 import { ArrowUpRight } from 'lucide-react'
+import { useLocationMaterialBreakdown } from "@/hooks/api/useLocationMaterialBreakdown";
+import { MaterialBreakdownChart } from "@/components/charts/MaterialBreakdownChart";
 
 /**
  * Creates a route for the location detail page using TanStack Router
@@ -60,7 +62,34 @@ function LocationDetailComponent() {
   // Provide default empty array if data is null/undefined
   const attestationsData: AttestationItem[] = attestationsResponse?.data ?? [];
   const totalAttestationRecords = attestationsResponse?.count ?? 0;
-  // --- End Fetch Attestation Data ---
+
+  // --- Fetch Location Material Breakdown Data --- 
+  const { 
+    data: materialData, 
+    isPending: isLoadingMaterials, 
+    error: materialError 
+  } = useLocationMaterialBreakdown({ partnerId: id, locationType: type });
+
+  // --- Define Chart Title and Description based on Location Type ---
+  let chartTitle = "Material Breakdown"; 
+  let chartDescription = "Percentage & weight breakdown of materials."; 
+
+  // Format the total weight safely, only if materialData exists
+  const formattedTotalWeight = materialData?.totalWeight !== undefined 
+    ? new Intl.NumberFormat().format(materialData.totalWeight)
+    : null;
+
+  if (type === 'Port') {
+    chartTitle = "What was collected at this port"; 
+    chartDescription = "Here you can see the types of ocean waste dropped off at this port by local fishers and collectors. From plastics to metals, each material tells part of the story of what’s being recovered from the sea—and how this port is helping keep our waters cleaner."; 
+  } else if (type === 'Recycler') {
+    chartTitle = "What this recycler sorted and tracked"; 
+    // Construct dynamic description for Recycler, using formatted weight
+    chartDescription = formattedTotalWeight
+      ? `This chart shows what this recycling facility was able to sort from the waste it received. Around ${formattedTotalWeight} kg of material has been organized by type—like HDPE—making it ready for reuse or further processing. It’s a small but important step in giving marine waste a second life.`
+      : "Calculating total sorted weight... This chart breaks down the materials processed by this recycler partner."; // Fallback for Recycler
+  }
+  // --- End Chart Content Definition ---
 
   // --- Define Columns for Location Table ---
   const locationColumns: ColumnDef<AttestationItem>[] = [
@@ -196,6 +225,26 @@ function LocationDetailComponent() {
           <CustomChartLegend category="activities" />
         </section>
       )}
+
+      {/* --- Material Breakdown Chart Section (Conditionally Rendered) --- */}
+      { (type === 'Port' || type === 'Recycler') && 
+        <section className="w-full border border-primary rounded-3xl overflow-hidden p-6 md:p-12">
+          {isLoadingMaterials ? (
+            <div>Loading material breakdown...</div>
+          ) : materialError ? (
+            <div>Error loading material breakdown: {materialError.message}</div>
+          ) : materialData && materialData.breakdown.length > 0 ? (
+            <MaterialBreakdownChart 
+              data={materialData} 
+              title={chartTitle}       // Use the defined variable
+              description={chartDescription} // Use the defined variable
+            />
+          ) : (
+            <div>No material breakdown data available for this {type}.</div>
+          )}
+        </section>
+      }
+      {/* --- End Material Breakdown Chart Section --- */}
 
       {/* Attestations Section - Displays blockchain verification records */}
       <section className="flex flex-col gap-3 my-6 md:my-20 w-full md:w-[100%]">

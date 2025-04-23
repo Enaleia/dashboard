@@ -110,7 +110,7 @@ const CollectionChart = ({ pageName, partnerId, timeRange }: CollectionChartProp
                       className="w-[320px] rounded-3xl gap-2 md:gap-3 text-sm md:text-lg p-4 md:p-6"
                       // Format the tooltip label (month and year)
                       labelFormatter={(value) => (
-                        <div className="font-extralight">
+                        <div className="font-light">
                           {new Date(value).toLocaleDateString("en-US", { month: "short",  year: "numeric" })}
                         </div>
                       )}
@@ -120,15 +120,15 @@ const CollectionChart = ({ pageName, partnerId, timeRange }: CollectionChartProp
                           {/* Colored indicator matching the area fill */}
                           <div className={`h-3 w-3 md:h-4 md:w-4 rounded-full bg-${name}`}/>
                           {/* Formatted category name (converting camelCase to space-separated sentence case) */}
-                          <div className="font-semibold text-sm">{formatCamelCaseString(String(name))}</div>
+                          <div className="font-semibold text-base">{formatCamelCaseString(String(name))}</div>
                           {/* Value with unit */}
-                          <div className="ml-auto font-extralight text-sm">{value} Kgs</div>
+                          <div className="ml-auto font-light text-base">{value} Kg</div>
                           {/* Show total on the last item */}
                           {index === (pageName === "Home" ? 6 : 3) && (
                             <div className="mt-1.5 flex basis-full items-center border-t border-gray-400 pt-1.5 text-sm md:text-lg">
                               Total
                               <div className="ml-auto font-extralight">
-                                {calculateTooltipTotal({payload: item.payload, config: chartConfig})} Kgs
+                                {calculateTooltipTotal({payload: item.payload, config: chartConfig})} Kg
                               </div>
                             </div>
                           )}

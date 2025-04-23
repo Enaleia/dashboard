@@ -83,6 +83,19 @@ export const PRODUCT_ENDPOINTS: Partial<Record<ProductData, string>> = {
   Metadata: "14753914-caf1-4653-8929-a37dff2f877a"
 }
 
+/**
+ * MATERIAL_BREAKDOWN_ENDPOINTS - API endpoints for material breakdown charts
+ * 
+ * Maps specific location types (Port, Recycler) to their full API endpoint URLs.
+ * Used by the useLocationMaterialBreakdown hook.
+ * NOTE: These now store only the flow trigger UUIDs.
+ */
+export const MATERIAL_BREAKDOWN_ENDPOINTS: Partial<Record<'Port' | 'Recycler' | 'Manufacturer', string>> = {
+  Port: "f9521cad-0eac-4a05-a9a9-aa5f98df3edb",
+  Recycler: "f2bcd246-a455-44fb-b907-d9618e241c83",
+  // Manufacturer: "MANUFACTURER_FLOW_UUID" // Placeholder if needed later
+}
+
 
 
 // APPLICATION LAYOUT CONSTANTS

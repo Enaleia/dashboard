@@ -77,6 +77,17 @@ body {
     --ghostNet: 216, 100%, 55%;
     --rope: 344, 100%, 74%;
     --other: 201, 19%, 72%;
+    /* --- New Material Colors --- */
+    --pp: 217, 39%, 62%;   
+    --pa: 238, 46%, 63%;
+    --pet: 287, 41%, 72%;
+    --net: 173, 80%, 40%;  /* teal-500 */
+    --ps: 227, 99%, 67%;
+    --pe: 195, 100%, 75%;
+    --ldpe: 185, 46%, 69%;
+    --hdpe: 140, 38%, 76%;
+    --nonRecyclable: 30, 28%, 45%;
+    /* --- End New Material Colors --- */
     /* actions */
     --fishingForLitter: 204, 74%, 66%;
     --adHoc: 178, 46%, 65%;

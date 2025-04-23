@@ -27,6 +27,42 @@ export const MaterialsChartConfig = {
     label: "Rope",
     color: "hsl(var(--rope))",
   },
+  PP: {
+    label: "PP",
+    color: "hsl(var(--pp))",
+  },
+  PA: {
+    label: "PA",
+    color: "hsl(var(--pa))",
+  },
+  PET: {
+    label: "PET",
+    color: "hsl(var(--pet))",
+  },
+  NET: {
+    label: "Net",
+    color: "hsl(var(--net))",
+  },
+  PS: {
+    label: "PS",
+    color: "hsl(var(--ps))",
+  },
+  PE: {
+    label: "PE",
+    color: "hsl(var(--pe))",
+  },
+  LDPE: {
+    label: "LDPE",
+    color: "hsl(var(--ldpe))",
+  },
+  HDPE: {
+    label: "HDPE",
+    color: "hsl(var(--hdpe))",
+  },
+  NON_RECYCLABLE: {
+    label: "Non-Recyclable",
+    color: "hsl(var(--nonRecyclable))",
+  },
   other: {
     label: "Other",
     color: "hsl(var(--other))",

@@ -161,7 +161,7 @@ interface SectionProps {
 
 // reusable component for product page sections with standarized styling
 const Section = ({ title, description, children }: SectionProps) => (
-  <section className='flex flex-col gap-3 my-6 w-full'>
+  <section className='flex flex-col gap-3 w-full'>
     <h2 className='font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight'>{title}</h2>
     <p className='w-full md:w-[70%] font-extralight tracking-tight leading-tight md:leading-tight'>
       {description}

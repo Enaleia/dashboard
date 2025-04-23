@@ -7,33 +7,66 @@ import {
   YAxis,
 } from 'recharts';
 import { MaterialsChartConfig } from '@/config/charts';
-import { MaterialBreakdownData, MaterialBreakdownItem } from '@/hooks/api/useVesselMaterialBreakdown';
+import { MaterialBreakdownData, MaterialBreakdownItem } from '@/hooks/api/useHomeMaterialBreakdown';
+import { ChartConfig } from "@/components/ui/chart";
 
-// Helper to map API material names to config keys (remains the same)
+// Helper to map API material names to config keys
 const getMaterialConfigKey = (materialName: string): string => {
-  const mapping: { [key: string]: string } = {
+  // Direct mapping for new uppercase/specific names
+  const directMapping: { [key: string]: string } = {
+    "PP": "PP",
+    "PA": "PA",
+    "PET": "PET",
+    "Net": "NET", // Map API "Net" to config "NET"
+    "PS": "PS",
+    "PE": "PE",
+    "LDPE": "LDPE",
+    "HDPE": "HDPE",
+    "Non-Recyclable": "NON_RECYCLABLE", // Map API "Non-Recyclable" to config "NON_RECYCLABLE"
+  };
+
+  if (directMapping[materialName]) {
+    return directMapping[materialName];
+  }
+
+  // Fallback mapping for older names or variations
+  const fallbackMapping: { [key: string]: string } = {
     "Mixed Plastic": "mixedPlastic",
     "Metal": "metal",
     "Rubber": "rubber",
     "Prevention Net": "preventionNet",
     "Ghost Net": "ghostNet",
     "Rope": "rope",
-    "Other": "other",
   };
-  // Handle potential variations like 'Other-2'
-  if (materialName.startsWith("Other")) return "other"; 
-  return mapping[materialName] || "other";
+
+  // Handle potential variations like 'Other' or 'Other-2'
+  if (materialName.startsWith("Other")) return "other";
+
+  // Try fallback mapping
+  if (fallbackMapping[materialName]) {
+    return fallbackMapping[materialName];
+  }
+
+  // Default to 'other' if no match found
+  console.warn(`No config key found for material: ${materialName}. Defaulting to 'other'.`);
+  return "other";
 };
 
 // Helper to get label from config key
-const getMaterialLabel = (configKey: string): string => {
-    const entry = MaterialsChartConfig[configKey as keyof typeof MaterialsChartConfig];
-    return entry ? entry.label : configKey; // Fallback to key if label not found
+const getMaterialLabel = (configKey: string): React.ReactNode => {
+    // Ensure configKey exists in the config before accessing label
+    const config = MaterialsChartConfig as ChartConfig; // Cast to ChartConfig for broader type access
+    if (config[configKey]) {
+        return config[configKey].label;
+    }
+    console.warn(`Label not found for config key: ${configKey}. Returning key.`);
+    return configKey; // Fallback to key if label not found
 };
 
 interface MaterialBreakdownChartProps {
   data: MaterialBreakdownData;
   title: string;
+  description?: string | React.ReactNode;
 }
 
 // Manual Tooltip Component
@@ -57,16 +90,16 @@ const HoverTooltip = ({ hoveredKey, data }: { hoveredKey: string | null; data: M
           className="w-5 h-5 rounded-full flex-shrink-0"
           style={{ backgroundColor: color }}
         ></div>
-        <span className="font-bold text-lg">{materialLabel}</span>
+        <span className="font-bold text-base">{materialLabel}</span>
       </div>
-      <span className="font-light text-lg">
+      <span className="font-light text-base">
         {`${percentage?.toFixed(1)}%`}
       </span>
     </div>
   );
 };
 
-export const MaterialBreakdownChart: React.FC<MaterialBreakdownChartProps> = ({ data, title }) => {
+export const MaterialBreakdownChart: React.FC<MaterialBreakdownChartProps> = ({ data, title, description }) => {
   const [hoveredMaterialKey, setHoveredMaterialKey] = useState<string | null>(null);
   // Updated mouse position state to include container width
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number; containerWidth: number } | null>(null);
@@ -128,9 +161,15 @@ export const MaterialBreakdownChart: React.FC<MaterialBreakdownChartProps> = ({ 
 
   return (
     <div className="self-stretch rounded-[40px] flex flex-col justify-start items-start gap-8"> 
-      {/* Title - Added text-center */}
+      {/* Title and Description Container */}
       <div className="self-stretch px-4 md:px-10 lg:px-12 pt-2 text-center"> 
-        <h2 className="text-black text-3xl md:text-3xl font-bold tracking-tight">{title}</h2>
+        <h2 className="text-black text-3xl md:text-3xl font-bold tracking-tight pb-2">{title}</h2>
+        {/* Description moved here */}
+        {description && (
+          <div className="text-sm md:text-base font-extralight tracking-tight leading-tight">
+            {description}
+          </div>
+        )}
       </div>
       
       {/* Chart Bar Section - Apply rounding and overflow to container */}
@@ -183,29 +222,31 @@ export const MaterialBreakdownChart: React.FC<MaterialBreakdownChartProps> = ({ 
           </div>
       </div>
      
-      {/* Legend Section - 2 columns left-aligned on mobile, flex wrap center on md+ */}
-      <div className="self-stretch py-8 grid grid-cols-2 justify-items-start gap-x-6 gap-y-6 md:flex md:flex-wrap md:justify-center md:px-12"> 
-        {allMaterialsForLegend.map((item: MaterialBreakdownItem) => {
-          const configKey = getMaterialConfigKey(item.material);
-          const colorEntry = MaterialsChartConfig[configKey as keyof typeof MaterialsChartConfig];
-          const color = colorEntry ? colorEntry.color : '#808080'; 
-          return (
-            // Removed default width, added responsive width for md+
-            <div key={item.material} className="flex items-start gap-2 md:w-40"> 
-               <span
-                className="inline-block w-3 h-full rounded-[64px] flex-shrink-0"
-                style={{ backgroundColor: color }}
-              />
-              <div className="inline-flex flex-col justify-start items-start gap-1">
-                <span className="text-black text-base font-light leading-normal">{item.material}</span> 
-                <div className="inline-flex justify-start items-baseline gap-0.5">
-                  <span className="text-black text-xl font-bold leading-tight">{new Intl.NumberFormat().format(item.weight)}</span> 
-                  <span className="text-black text-base  leading-tight">Kg</span> 
+      {/* Outer container for padding */}
+      <div className="self-stretch py-8 px-4 md:px-12">
+        {/* Legend Layout: 2-col grid mobile, centered flex wrap desktop */}
+        <div className="max-w-screen-lg mx-auto grid grid-cols-2 justify-items-start md:flex md:flex-wrap md:justify-center gap-x-6 gap-y-6"> 
+          {allMaterialsForLegend.map((item: MaterialBreakdownItem) => {
+            const configKey = getMaterialConfigKey(item.material);
+            const colorEntry = MaterialsChartConfig[configKey as keyof typeof MaterialsChartConfig];
+            const color = colorEntry ? colorEntry.color : '#808080'; 
+            return (
+              <div key={item.material} className="flex items-start gap-2"> 
+                 <span
+                  className="inline-block w-3 h-full rounded-[64px] flex-shrink-0"
+                  style={{ backgroundColor: color }}
+                />
+                <div className="inline-flex flex-col justify-start items-start gap-1">
+                  <span className="text-black text-base font-light leading-normal">{item.material}</span> 
+                  <div className="inline-flex justify-start items-baseline gap-0.5">
+                    <span className="text-black text-xl font-bold leading-tight">{new Intl.NumberFormat().format(item.weight)}</span> 
+                    <span className="text-black text-base  leading-tight">Kg</span> 
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );
