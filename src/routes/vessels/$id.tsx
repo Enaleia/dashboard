@@ -6,9 +6,11 @@ import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
 import { StatsBar } from '@/components/global/StatsBar'
 import { CollectionChart } from '@/components/charts/CollectionChart'
+import { MaterialBreakdownChart } from '@/components/charts/MaterialBreakdownChart'
 import { CustomChartLegend } from '@/components/charts/CustomChartLegend'
 import { AttestationsTable, ColumnDef } from '@/components/tables/AttestationsTable'
 import { useAttestationData } from "@/hooks/api/useAttestationData"
+import { useVesselMaterialBreakdown } from '@/hooks/api/useVesselMaterialBreakdown'
 import { ArrowUpRight } from 'lucide-react'
 import { DetailPageBackNav } from '@/components/global/DetailPageBackNav'
 import { BackToTopButton } from '@/components/global/BackToTopButton'
@@ -52,7 +54,13 @@ function VesselDetailComponent() {
   
   const attestationsData: AttestationItem[] = attestationsResponse?.data ?? [];
   const totalAttestationRecords = attestationsResponse?.count ?? 0;
-  // --- End Fetch Attestation Data ---
+
+  // --- Fetch Material Breakdown Data ---
+  const { 
+    isPending: isLoadingMaterialBreakdown, 
+    error: materialBreakdownError, 
+    data: materialBreakdownData 
+  } = useVesselMaterialBreakdown(id);
 
   // --- Define Columns for Vessel Table --- (5 columns)
   const vesselColumns: ColumnDef<AttestationItem>[] = [
@@ -134,7 +142,7 @@ function VesselDetailComponent() {
       <DetailPageHeading name={name} country={country} registered_port={port} type={type} collector_id={collector_identity} />
       
       {/* Statistics Section - Shows key metrics about the vessel's activities */}
-      <section className="border border-primary rounded-3xl overflow-hidden text-center">
+      <section className="border border-primary rounded-3xl overflow-hidden text-center w-full">
         <h2 className="font-bold text-4xl md:text-5xl tracking-tight pt-12 lg:pb-12 px-4 md:px-10 lg:px-20">{heading}</h2>
         {/* Stats dashboard with vessel-specific metrics */}
         <StatsBar pageName='VesselDetail' partnerId={id}/>
@@ -174,8 +182,24 @@ function VesselDetailComponent() {
         <CustomChartLegend category="activities" />
       </section>
 
+      {/* Material Breakdown Chart Section - NEW SECTION */}
+      <section className="w-full border border-primary rounded-3xl overflow-hidden p-6 md:p-12">
+        {isLoadingMaterialBreakdown ? (
+          <div>Loading material breakdown...</div>
+        ) : materialBreakdownError ? (
+          <div>Error loading material breakdown: {materialBreakdownError.message}</div>
+        ) : materialBreakdownData && materialBreakdownData.breakdown.length > 0 ? (
+           <MaterialBreakdownChart 
+             data={materialBreakdownData} 
+             title="Waste collected by materials & weight" 
+           />
+        ) : (
+          <div>No material breakdown data available for this vessel.</div>
+        )}
+      </section>
+
       {/* Attestations Section - Displays blockchain verification records */}
-      <section className='flex flex-col gap-3 my-6 md:my-20 w-full md:w-[85%]'>
+      <section className='flex flex-col gap-3 my-6 md:my-20 w-full md:w-[100%]'>
         <h2 className='font-bold text-3xl md:text-5xl tracking-tight'>Attestations</h2>
         <p className='w-full md:w-[70%] font-extralight tracking-tight leading-tight md:leading-tight'>{attestationDescriptions["Vessel"]}</p>
         <Separator className='bg-softBlack my-1'/>

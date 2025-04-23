@@ -5,7 +5,7 @@ import { ChartConfig } from "@/components/ui/chart"
 export const MaterialsChartConfig = {
   mixedPlastic: {
     label: "Mixed plastic",
-    color: "hsl(var(--mixedPastic))",
+    color: "hsl(var(--mixedPlastic))",
   },
   metal: {
     label: "Metal",

@@ -198,7 +198,7 @@ function LocationDetailComponent() {
       )}
 
       {/* Attestations Section - Displays blockchain verification records */}
-      <section className="flex flex-col gap-3 my-6 md:my-20 w-full md:w-[85%]">
+      <section className="flex flex-col gap-3 my-6 md:my-20 w-full md:w-[100%]">
         <h2 className="font-bold text-3xl md:text-5xl tracking-tight">
           Attestations
         </h2>
