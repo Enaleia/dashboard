@@ -66,7 +66,7 @@ function HomeComponent() {
   
   // Construct the dynamic description string using the full paragraph
   const breakdownDescription = formattedTotalWeight
-    ? `Thanks to our partners, approximately ${formattedTotalWeight}  kg of waste has been sorted by recyclers across all locations. This breakdown gives a closer look at what types of plastic are making it into the recycling stream—from PET to LDPE—helping us understand what’s actually being recovered and reused.`
+    ? `Thanks to our partners, approximately ${formattedTotalWeight}  kg of waste has been sorted by recyclers across all locations. This breakdown gives a closer look at what types of plastic are making it into the recycling stream—from PET to LDPE—helping us understand what's actually being recovered and reused.`
     : "While all waste has been collected through the efforts of our partner fishermen, the total sorted weight is being calculated. This chart will break down sorted plastic by specific material types..." // Adjusted fallback text
 
   return (
@@ -102,10 +102,10 @@ function HomeComponent() {
       {/* Waste Collection Data Section - Displays charts with time filtering */}
       <section className='flex flex-col border border-primary rounded-3xl pb-4'>
         {/* Chart header with title, description and time range filters */}
-        <article className='px-4 py-8 md:p-12 md:pb-0'>
-          <p className='font-bold text-5xl md:text-6xl tracking-tight'>{wasteChartTitle}</p>
-          <div className='flex flex-col lg:flex-row lg:items-end lg:gap-8'>
-            <p className='font-extralight text-base md-text-xl tracking-tight leading-tight md:leading-tight pt-2 pb-4 lg:pb-0'>{wasteChartDescription}</p>
+        <article className='px-4 py-8 md:p-12 md:pb-0 text-center'>
+          <p className='font-bold text-3xl tracking-tight pb-4'>{wasteChartTitle}</p>
+          <div className='flex flex-col items-center gap-4'>
+            <p className='font-extralight text-base md-text-xl tracking-tight leading-tight md:leading-tight text-center md:px-20'>{wasteChartDescription}</p>
             {/* Time range filter buttons */}
             <div className='flex flex-row justify-center gap-1 md:gap-2'>        
               {dateChoices.map((choice) => (

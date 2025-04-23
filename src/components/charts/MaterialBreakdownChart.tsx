@@ -163,10 +163,10 @@ export const MaterialBreakdownChart: React.FC<MaterialBreakdownChartProps> = ({ 
     <div className="self-stretch rounded-[40px] flex flex-col justify-start items-start gap-8"> 
       {/* Title and Description Container */}
       <div className="self-stretch px-4 md:px-10 lg:px-12 pt-2 text-center"> 
-        <h2 className="text-black text-3xl md:text-3xl font-bold tracking-tight pb-2">{title}</h2>
+        <h2 className="text-black font-bold text-3xl tracking-tight pb-2">{title}</h2>
         {/* Description moved here */}
         {description && (
-          <div className="text-sm md:text-base font-extralight tracking-tight leading-tight">
+          <div className="text-sm md:text-base font-extralight tracking-tight leading-tight md:px-12">
             {description}
           </div>
         )}
