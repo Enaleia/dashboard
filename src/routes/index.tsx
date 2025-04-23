@@ -121,7 +121,7 @@ function HomeComponent() {
           <Button className='px-6'>Learn more about how it works</Button>        
         </Link>
         <Link to="/products/4767" className="font-bold text-base">
-          See product tracing demo
+          See product tracing example
         </Link>
         {/* Button to scroll back to top of page */}
         <BackToTopButton />
