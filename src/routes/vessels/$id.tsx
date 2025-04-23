@@ -80,7 +80,7 @@ function VesselDetailComponent() {
     },
     {
       id: 'totalWeight',
-      header: 'Total weight',
+      header: 'Waste collected',
       // Access totalInputWeight, append Kg
       cell: (item) => item.totalInputWeight !== undefined ? `${item.totalInputWeight} Kg` : 'N/A', 
       width: 'w-[20%]', // Adjusted width
