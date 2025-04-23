@@ -66,7 +66,7 @@ function HomeComponent() {
   
   // Construct the dynamic description string using the full paragraph
   const breakdownDescription = formattedTotalWeight
-    ? `While all waste has been collected through the efforts of our partner fishermen, approximately ${formattedTotalWeight} kg has been sorted by our recycling partners. This chart breaks down that sorted plastic by specific material types—such as PET, HDPE, and LDPE—offering a closer look at what enters the recycling stream and helping us better understand the composition of recovered ocean plastics.`
+    ? `Thanks to our partners, approximately ${formattedTotalWeight}  kg of waste has been sorted by recyclers across all locations. This breakdown gives a closer look at what types of plastic are making it into the recycling stream—from PET to LDPE—helping us understand what’s actually being recovered and reused.`
     : "While all waste has been collected through the efforts of our partner fishermen, the total sorted weight is being calculated. This chart will break down sorted plastic by specific material types..." // Adjusted fallback text
 
   return (
@@ -141,7 +141,7 @@ function HomeComponent() {
         ) : materialData ? (
           <MaterialBreakdownChart 
             data={materialData} 
-            title="Waste breakdown by type and weight"
+            title="All sorted materials so far"
             description={breakdownDescription}
           />
         ) : (

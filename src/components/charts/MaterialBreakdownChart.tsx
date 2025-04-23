@@ -222,29 +222,31 @@ export const MaterialBreakdownChart: React.FC<MaterialBreakdownChartProps> = ({ 
           </div>
       </div>
      
-      {/* Legend Section - 2 cols mobile, auto-fit desktop, left aligned */}
-      <div className="self-stretch py-8 px-4 md:px-12 grid grid-cols-2 md:grid-cols-[repeat(auto-fit,minmax(160px,1fr))] justify-items-start gap-x-6 gap-y-6"> 
-        {allMaterialsForLegend.map((item: MaterialBreakdownItem) => {
-          const configKey = getMaterialConfigKey(item.material);
-          const colorEntry = MaterialsChartConfig[configKey as keyof typeof MaterialsChartConfig];
-          const color = colorEntry ? colorEntry.color : '#808080'; 
-          return (
-            // Removed default width, added responsive width for md+
-            <div key={item.material} className="flex items-start gap-2 md:w-40"> 
-               <span
-                className="inline-block w-3 h-full rounded-[64px] flex-shrink-0"
-                style={{ backgroundColor: color }}
-              />
-              <div className="inline-flex flex-col justify-start items-start gap-1">
-                <span className="text-black text-base font-light leading-normal">{item.material}</span> 
-                <div className="inline-flex justify-start items-baseline gap-0.5">
-                  <span className="text-black text-xl font-bold leading-tight">{new Intl.NumberFormat().format(item.weight)}</span> 
-                  <span className="text-black text-base  leading-tight">Kg</span> 
+      {/* Outer container for padding */}
+      <div className="self-stretch py-8 px-4 md:px-12">
+        {/* Legend Layout: 2-col grid mobile, centered flex wrap desktop */}
+        <div className="max-w-screen-lg mx-auto grid grid-cols-2 justify-items-start md:flex md:flex-wrap md:justify-center gap-x-6 gap-y-6"> 
+          {allMaterialsForLegend.map((item: MaterialBreakdownItem) => {
+            const configKey = getMaterialConfigKey(item.material);
+            const colorEntry = MaterialsChartConfig[configKey as keyof typeof MaterialsChartConfig];
+            const color = colorEntry ? colorEntry.color : '#808080'; 
+            return (
+              <div key={item.material} className="flex items-start gap-2"> 
+                 <span
+                  className="inline-block w-3 h-full rounded-[64px] flex-shrink-0"
+                  style={{ backgroundColor: color }}
+                />
+                <div className="inline-flex flex-col justify-start items-start gap-1">
+                  <span className="text-black text-base font-light leading-normal">{item.material}</span> 
+                  <div className="inline-flex justify-start items-baseline gap-0.5">
+                    <span className="text-black text-xl font-bold leading-tight">{new Intl.NumberFormat().format(item.weight)}</span> 
+                    <span className="text-black text-base  leading-tight">Kg</span> 
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );
