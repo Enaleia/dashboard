@@ -81,12 +81,12 @@ function LocationDetailComponent() {
 
   if (type === 'Port') {
     chartTitle = "What was collected at this port"; 
-    chartDescription = "Here you can see the types of ocean waste dropped off at this port by local fishers and collectors. From plastics to metals, each material tells part of the story of what’s being recovered from the sea—and how this port is helping keep our waters cleaner."; 
+    chartDescription = "Here you can see the types of ocean waste dropped off at this port by local fishers and collectors. From plastics to metals, each material tells part of the story of what's being recovered from the sea—and how this port is helping keep our waters cleaner."; 
   } else if (type === 'Recycler') {
     chartTitle = "What this recycler sorted and tracked"; 
     // Construct dynamic description for Recycler, using formatted weight
     chartDescription = formattedTotalWeight
-      ? `This chart shows what this recycling facility was able to sort from the waste it received. Around ${formattedTotalWeight} kg of material has been organized by type—like HDPE—making it ready for reuse or further processing. It’s a small but important step in giving marine waste a second life.`
+      ? `This chart shows what this recycling facility was able to sort from the waste it received. Around ${formattedTotalWeight} kg of material has been organized by type—like HDPE—making it ready for reuse or further processing. It's a small but important step in giving marine waste a second life.`
       : "Calculating total sorted weight... This chart breaks down the materials processed by this recycler partner."; // Fallback for Recycler
   }
   // --- End Chart Content Definition ---
@@ -200,20 +200,22 @@ function LocationDetailComponent() {
       {type === 'Port' && (
         <section className="w-full border border-primary rounded-3xl overflow-hidden pb-4 md:pb-14">
           {/* Chart header with title and time range filters */}
-          <article className='flex flex-col lg:flex-row justify-between gap-6 lg:items-end px-4 py-8 md:p-12 md:pb-0'>
-            <h2 className='font-bold text-3xl text-center lg:text-left tracking-tight'>Waste removed by action type</h2>
-            <div className="flex flex-row justify-center gap-1 md:gap-2">
-              {/* Time range filter buttons */}
-              {dateChoices.map((choice) => (
-                <Button
-                  key={choice}
-                  variant={selectedChartDates === choice ? 'default' : 'outline'}
-                  className='text-xs'
-                  onClick={() => setSelectedChartDates(choice)}
-                >
-                  {choice}
-                </Button>
-              ))}
+          <article className='px-4 py-8 md:p-12 md:pb-0 text-center'>
+            <div className='flex flex-col items-center gap-4'>
+              <h2 className='font-bold text-3xl tracking-tight pb-4'>Waste removed by action type</h2>
+              <div className="flex flex-row justify-center gap-1 md:gap-2">
+                {/* Time range filter buttons */}
+                {dateChoices.map((choice) => (
+                  <Button
+                    key={choice}
+                    variant={selectedChartDates === choice ? 'default' : 'outline'}
+                    className='text-xs'
+                    onClick={() => setSelectedChartDates(choice)}
+                  >
+                    {choice}
+                  </Button>
+                ))}
+              </div>
             </div>
           </article>
 

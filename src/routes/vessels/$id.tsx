@@ -157,20 +157,22 @@ function VesselDetailComponent() {
       {/* Collection Activity Chart Section - Visualizes collection data by action type */}
       <section className="w-full border border-primary rounded-3xl overflow-hidden pb-4 md:pb-14">
         {/* Chart header with title and time range filters */}
-        <article className='flex flex-col lg:flex-row justify-between gap-6 lg:items-end px-4 py-8 md:p-12 md:pb-0'>
-          <h2 className='font-bold text-3xl text-center lg:text-left tracking-tight'>Waste removed by action type</h2>
-          {/* Time range filter buttons */}
-          <div className="flex flex-row justify-center gap-1 md:gap-2">
-            {dateChoices.map((choice) => (
-              <Button
-                key={choice}
-                variant={selectedChartDates === choice ? 'default' : 'outline'}
-                className='text-xs'
-                onClick={() => setSelectedChartDates(choice)}
-              >
-                {choice}
-              </Button>
-            ))}
+        <article className='px-4 py-8 md:p-12 md:pb-0 text-center'>
+          <div className='flex flex-col items-center gap-4'>
+            <h2 className='font-bold text-3xl tracking-tight pb-4'>Waste removed by action type</h2>
+            {/* Time range filter buttons */}
+            <div className="flex flex-row justify-center gap-1 md:gap-2">
+              {dateChoices.map((choice) => (
+                <Button
+                  key={choice}
+                  variant={selectedChartDates === choice ? 'default' : 'outline'}
+                  className='text-xs'
+                  onClick={() => setSelectedChartDates(choice)}
+                >
+                  {choice}
+                </Button>
+              ))}
+            </div>
           </div>
         </article>
 
@@ -192,7 +194,7 @@ function VesselDetailComponent() {
            <MaterialBreakdownChart 
              data={materialBreakdownData} 
              title="What this collector collected at sea" 
-             description="This chart shows what this fishing crew pulled from the ocean. Each material—like ghost nets or mixed plastic—represents a piece of marine waste that’s no longer drifting at sea. It’s a snapshot of the impact made by just one vessel out on the water."
+             description="This chart shows what this fishing crew pulled from the ocean. Each material—like ghost nets or mixed plastic—represents a piece of marine waste that's no longer drifting at sea. It's a snapshot of the impact made by just one vessel out on the water."
            />
         ) : (
           <div>No material breakdown data available for this vessel.</div>
