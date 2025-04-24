@@ -110,7 +110,7 @@ function LocationDetailComponent() {
     {
       id: 'submittedBy',
       header: 'Submitted by',
-      cell: (item) => item.submittedBy ? formatAddress(item.submittedBy) : 'N/A',
+      cell: (item) => item.submittedBy ? formatAddress(item.submittedBy, 4, 5) : 'N/A',
       width: 'w-[30%]',
     },
     {
@@ -118,7 +118,7 @@ function LocationDetailComponent() {
       header: 'Attestation UID',
       cell: (item) => (
         <div className="flex items-center justify-between">
-           <span>{item.id ? formatAddress(item.id, 10) : 'N/A'}</span> 
+           <span>{item.id ? formatAddress(item.id, 10, 10) : 'N/A'}</span>
            <ArrowUpRight size={16} strokeWidth={1.5} className="ml-2 flex-shrink-0" />
         </div>
       ),
@@ -141,12 +141,12 @@ function LocationDetailComponent() {
                 <div className='flex justify-between items-start mb-1'>
                     <span className='text-sm text-gray-600'>{item.dateFormatted || 'N/A'}</span>
                 </div>
-                <p className='font-semibold text-2xl mb-1'>{item.action || 'N/A'}</p>
-                <p className='text-sm text-gray-700 mb-6'>
-                    Submitted by: {item.submittedBy ? formatAddress(item.submittedBy) : 'N/A'}
+                <p className='font-semibold text-2xl mb-6'>{item.action || 'N/A'}</p>
+                <p className='text-sm text-gray-700 mb-1'>
+                    Submitted by: {item.submittedBy ? formatAddress(item.submittedBy, 4, 5) : 'N/A'}
                 </p>
                 <div className='text-sm text-gray-700 flex items-center'>
-                    Attestation UID: {item.id ? formatAddress(item.id, 10) : 'N/A'}
+                    Attestation UID: {item.id ? formatAddress(item.id, 10, 10) : 'N/A'}
                     <ArrowUpRight size={14} strokeWidth={1.5} className="ml-1 flex-shrink-0" />
                 </div>
             </div>
@@ -158,10 +158,20 @@ function LocationDetailComponent() {
   // --- Helper Function (Placeholder) ---
   // Simple address formatting utility 
   // TODO: Replace with actual utility from @/utils/formatAddress if it exists
-  const formatAddress = (address: string | undefined | null, charsToShow = 6): string => {
+  const formatAddress = (address: string | undefined | null, startChars = 4, endChars = 4): string => {
     if (!address) return 'N/A';
-    if (address.length <= charsToShow * 2 + 2) return address; // Don't format if too short
-    return `${address.substring(0, charsToShow + 2)}...${address.substring(address.length - charsToShow)}`;
+
+    const trimmedAddress = address.trim();
+    const internalAddress = "0x7AbcB357d8a022811e0040358E19e43137cBad72";
+    const isInternal = trimmedAddress.toLowerCase() === internalAddress.toLowerCase();
+
+    // Use trimmedAddress for length check and truncation
+    // Check if total length is less than Ox + start + end + ...
+    if (trimmedAddress.length <= 2 + startChars + endChars && !isInternal) return trimmedAddress; 
+
+    const truncated = `${trimmedAddress.substring(0, startChars + 2)}...${trimmedAddress.substring(trimmedAddress.length - endChars)}`;
+    
+    return isInternal ? `${truncated} / Enaleia Internal` : truncated;
   };
   // --- End Helper Function ---
 
