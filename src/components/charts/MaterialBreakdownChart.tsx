@@ -166,7 +166,7 @@ export const MaterialBreakdownChart: React.FC<MaterialBreakdownChartProps> = ({ 
         <h2 className="text-black font-bold text-4xl tracking-tight pb-2">{title}</h2>
         {/* Description moved here */}
         {description && (
-          <div className="text-sm md:text-base font-extralight tracking-tight leading-tight md:px-12">
+          <div className="text-xl md:text-xl font-extralight tracking-tight leading-tight md:px-12">
             {description}
           </div>
         )}
