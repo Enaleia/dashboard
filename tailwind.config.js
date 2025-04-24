@@ -28,7 +28,7 @@ export default {
         fishingForLitter: 'hsl(var(--chart-8))',
         adHoc: 'hsl(var(--chart-9))',
         prevention: 'hsl(var(--chart-10))',
-        beach: 'hsl(var(--chart-11))'
+        beachCleanup: 'hsl(var(--chart-11))'
       },
   		colors: {
         softBlack: 'hsl(var(--softBlack))',
@@ -54,7 +54,7 @@ export default {
         fishingForLitter: 'hsl(var(--fishingForLitter))',
         adHoc: 'hsl(var(--adHoc))',
         prevention: 'hsl(var(--prevention))',
-        beach: 'hsl(var(--beach))',
+        beachCleanup: 'hsl(var(--beach))',
         port: 'hsl(var(--port))',
         recycler: 'hsl(var(--recycler))',
         manufacturer: 'hsl(var(--manufacturer))',
@@ -117,7 +117,7 @@ export default {
     'bg-fishingForLitter',
     'bg-adHoc',
     'bg-prevention',
-    'bg-beach',
+    'bg-beachCleanup',
     'bg-Batch',
     'bg-Sorting',
     'bg-Pelletizing',

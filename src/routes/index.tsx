@@ -103,7 +103,7 @@ function HomeComponent() {
       <section className='flex flex-col border border-primary rounded-3xl pb-4'>
         {/* Chart header with title, description and time range filters */}
         <article className='px-4 py-8 md:p-12 md:pb-0 text-center'>
-          <p className='font-bold text-3xl tracking-tight pb-4'>{wasteChartTitle}</p>
+          <p className='font-bold text-4xl tracking-tight pb-4'>{wasteChartTitle}</p>
           <div className='flex flex-col items-center gap-4'>
             <p className='font-extralight text-base md-text-xl tracking-tight leading-tight md:leading-tight text-center md:px-20'>{wasteChartDescription}</p>
             {/* Time range filter buttons */}

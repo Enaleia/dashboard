@@ -159,7 +159,7 @@ function VesselDetailComponent() {
         {/* Chart header with title and time range filters */}
         <article className='px-4 py-8 md:p-12 md:pb-0 text-center'>
           <div className='flex flex-col items-center gap-4'>
-            <h2 className='font-bold text-3xl tracking-tight pb-4'>Waste removed by action type</h2>
+            <h2 className='font-bold text-4xl tracking-tight pb-4'>Waste removed by action type</h2>
             {/* Time range filter buttons */}
             <div className="flex flex-row justify-center gap-1 md:gap-2">
               {dateChoices.map((choice) => (

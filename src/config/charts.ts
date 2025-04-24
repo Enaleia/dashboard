@@ -84,7 +84,7 @@ export const ActivitiesChartConfig = {
     label: "Prevention",
     color: "hsl(var(--prevention))",
   },
-  beach: {
+  beachCleanup: {
     label: "Beach cleanup",
     color: "hsl(var(--beach))",
   },
