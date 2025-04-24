@@ -163,7 +163,7 @@ export const MaterialBreakdownChart: React.FC<MaterialBreakdownChartProps> = ({ 
     <div className="self-stretch rounded-[40px] flex flex-col justify-start items-start gap-8"> 
       {/* Title and Description Container */}
       <div className="self-stretch px-4 md:px-10 lg:px-12 pt-2 text-center"> 
-        <h2 className="text-black font-bold text-3xl tracking-tight pb-2">{title}</h2>
+        <h2 className="text-black font-bold text-4xl tracking-tight pb-2">{title}</h2>
         {/* Description moved here */}
         {description && (
           <div className="text-sm md:text-base font-extralight tracking-tight leading-tight md:px-12">
@@ -225,7 +225,7 @@ export const MaterialBreakdownChart: React.FC<MaterialBreakdownChartProps> = ({ 
       {/* Outer container for padding */}
       <div className="self-stretch py-8 px-4 md:px-12">
         {/* Legend Layout: 2-col grid mobile, centered flex wrap desktop */}
-        <div className="max-w-screen-lg mx-auto grid grid-cols-2 justify-items-start md:flex md:flex-wrap md:justify-center gap-x-6 gap-y-6"> 
+        <div className="max-w-screen-lg mx-auto grid grid-cols-2 justify-items-start md:flex md:flex-wrap md:justify-center gap-x-12 gap-y-12"> 
           {allMaterialsForLegend.map((item: MaterialBreakdownItem) => {
             const configKey = getMaterialConfigKey(item.material);
             const colorEntry = MaterialsChartConfig[configKey as keyof typeof MaterialsChartConfig];
