@@ -86,6 +86,6 @@ export const ActivitiesChartConfig = {
   },
   beachCleanup: {
     label: "Beach cleanup",
-    color: "hsl(var(--beach))",
+    color: "hsl(var(--beachCleanup))",
   },
 } satisfies ChartConfig

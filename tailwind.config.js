@@ -54,7 +54,7 @@ export default {
         fishingForLitter: 'hsl(var(--fishingForLitter))',
         adHoc: 'hsl(var(--adHoc))',
         prevention: 'hsl(var(--prevention))',
-        beachCleanup: 'hsl(var(--beach))',
+        beachCleanup: 'hsl(var(--beachCleanup))',
         port: 'hsl(var(--port))',
         recycler: 'hsl(var(--recycler))',
         manufacturer: 'hsl(var(--manufacturer))',

@@ -51,6 +51,11 @@ const CollectionChart = ({ pageName, partnerId, timeRange }: CollectionChartProp
   // Get optimized X-axis ticks and formatter based on time range
   const { ticks, tickFormatter } = useChartTicks(records, timeRange)
 
+  // Helper function to convert space-separated keys to camelCase for CSS classes
+  const getCssClassName = (key: string): string => {
+    return key.replace(/\s+(\w)/g, (_, letter) => letter.toUpperCase());
+  };
+
   return (
     // Scrollable container for horizontal overflow on smaller screens
     <ScrollArea className="max-w-[350px] md:max-w-[650px] lg:max-w-[1500px]">
@@ -118,7 +123,7 @@ const CollectionChart = ({ pageName, partnerId, timeRange }: CollectionChartProp
                       formatter={(value, name, item, index) => (
                         <>
                           {/* Colored indicator matching the area fill */}
-                          <div className={`h-3 w-3 md:h-4 md:w-4 rounded-full bg-${name}`}/>
+                          <div className={`h-3 w-3 md:h-4 md:w-4 rounded-full bg-${getCssClassName(String(name))}`}/>
                           {/* Formatted category name (converting camelCase to space-separated sentence case) */}
                           <div className="font-semibold text-base">{formatCamelCaseString(String(name))}</div>
                           {/* Value with unit */}
@@ -145,9 +150,9 @@ const CollectionChart = ({ pageName, partnerId, timeRange }: CollectionChartProp
                     dataKey={key}
                     type="monotone"
                     baseValue={0}
-                    fill={`hsl(var(--${key}))`}
+                    fill={`hsl(var(--${getCssClassName(key)}))`}
                     fillOpacity={0.4}
-                    stroke={`hsl(var(--${key}))`}
+                    stroke={`hsl(var(--${getCssClassName(key)}))`}
                     strokeWidth={3}
                     connectNulls={true}
                   />

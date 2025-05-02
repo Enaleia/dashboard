@@ -30,6 +30,11 @@ const CustomChartLegend = ({ category }: ChartLegendProps) => {
   // Select the appropriate legend data based on category prop
   const legendInfo = category === "materials" ? materialsChartLegendDescriptions : activitesChartLegendDescriptions;
   
+  // Helper function to convert space-separated keys to camelCase for CSS classes
+  const getCssClassName = (key: string): string => {
+    return key.replace(/\s+(\w)/g, (_, letter) => letter.toUpperCase());
+  };
+  
   return (
     <article className="w-full flex justify-center p-8 md:px-28 lg:py-0">
       {/* Responsive grid layout with different column counts based on screen size */}
@@ -39,7 +44,7 @@ const CustomChartLegend = ({ category }: ChartLegendProps) => {
           <div key={type} className="flex items-start gap-2">
             {/* Color indicator circle matching chart colors */}
             <div className="flex-shrink-0">
-              <div className={`h-6 w-6 rounded-full bg-${type}`}></div>
+              <div className={`h-6 w-6 rounded-full bg-${getCssClassName(type)}`}></div>
             </div>
             <div>
               {/* Category name with camelCase formatting (e.g., "mixedPlastic" → "Mixed plastic") */}
