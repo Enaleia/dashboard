@@ -96,56 +96,59 @@ const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
   
   return (
     <>
-      {/* Main table container with fixed height */}
-      <article className="h-[450px] lg:h-[598px]">
+      {/* Main table container - fixed height ONLY on desktop */}
+      <article className="lg:h-[598px]">
         <Table className="w-full table-fixed overflow-x-auto">
-          <TableHeader>
-            <TableRow className="border-none">
-              {/* Partner name column header - always visible */}
-              <TableHead className="p-0 w-[30%]">
-                  <div className="text-xs font-light text-softBlack bg-sand px-4 md:px-8 py-1 md:py-2 border border-darkSand rounded-l-full">
-                    {pageName === 'Locations' ? 'LOCATION NAME' : 'VESSEL NAME'}
-                  </div>
-              </TableHead>
+          {/* Only render TableHeader on Desktop */}
+          {isDesktop && (
+            <TableHeader>
+              <TableRow className="border-none">
+                {/* Partner name column header - always visible */}
+                <TableHead className="p-0 w-[30%]">
+                    <div className="text-xs font-light text-softBlack bg-sand px-4 md:px-8 py-1 md:py-2 border border-darkSand rounded-l-full">
+                      {pageName === 'Locations' ? 'LOCATION NAME' : 'VESSEL NAME'}
+                    </div>
+                </TableHead>
 
-              {/* Additional columns - only visible on desktop */}
-              {isDesktop &&
-                <>
-                  {/* Country column with sort toggle */}
-                  <TableHead className="p-0 w-[17%]">
-                    <div className="flex gap-2 text-xs font-light text-softBlack bg-sand px-8 py-2 border-y border-darkSand">
-                      <p>COUNTRY</p>
-                      <div className="cursor-pointer" onClick={() => toggleSortCriteria('country')}>
-                        <ArrowUpDown size={14} />
+                {/* Additional columns - only visible on desktop */}
+                {isDesktop &&
+                  <>
+                    {/* Country column with sort toggle */}
+                    <TableHead className="p-0 w-[17%]">
+                      <div className="flex gap-2 text-xs font-light text-softBlack bg-sand px-8 py-2 border-y border-darkSand">
+                        <p>COUNTRY</p>
+                        <div className="cursor-pointer" onClick={() => toggleSortCriteria('country')}>
+                          <ArrowUpDown size={14} />
+                        </div>
                       </div>
-                    </div>
-                  </TableHead>
-                  {/* Coordinates/port column - content depends on page type */}
-                  <TableHead className="p-0 w-[23%]">
-                    <div className="text-xs font-light text-softBlack bg-sand px-8 py-2 border border-darkSand">
-                      {pageName === 'Locations' ? "COORDINATES" : "REGISTERED PORT"}
-                    </div>
-                  </TableHead>
-                  {/* Partner type column */}
-                  <TableHead className="p-0 w-[17%]">
-                    <div className="text-xs font-light text-softBlack bg-sand px-8 py-2 border-y border-darkSand">
-                      TYPE
-                    </div>
-                  </TableHead>
-                </>
-              }
+                    </TableHead>
+                    {/* Coordinates/port column - content depends on page type */}
+                    <TableHead className="p-0 w-[23%]">
+                      <div className="text-xs font-light text-softBlack bg-sand px-8 py-2 border border-darkSand">
+                        {pageName === 'Locations' ? "COORDINATES" : "REGISTERED PORT"}
+                      </div>
+                    </TableHead>
+                    {/* Partner type column */}
+                    <TableHead className="p-0 w-[17%]">
+                      <div className="text-xs font-light text-softBlack bg-sand px-8 py-2 border-y border-darkSand">
+                        TYPE
+                      </div>
+                    </TableHead>
+                  </>
+                }
 
-              {/* Actions count column with sort toggle - always visible */}
-              <TableHead className="p-0 w-[13%]">
-                <div className="flex gap-2 text-xs font-light text-softBlack bg-sand p-4 md:px-8 py-1 md:py-2 border border-darkSand rounded-r-full">
-                  <p>ACTIONS</p>
-                  <div className="cursor-pointer" onClick={() => toggleSortCriteria('action_count')}>
-                    <ArrowUpDown size={14} />
-                  </div>                
-                </div>
-              </TableHead>
-            </TableRow>
-          </TableHeader>
+                {/* Actions count column with sort toggle - always visible */}
+                <TableHead className="p-0 w-[13%]">
+                  <div className="flex gap-2 text-xs font-light text-softBlack bg-sand p-4 md:px-8 py-1 md:py-2 border border-darkSand rounded-r-full">
+                    <p>ACTIONS</p>
+                    <div className="cursor-pointer" onClick={() => toggleSortCriteria('action_count')}>
+                      <ArrowUpDown size={14} />
+                    </div>                
+                  </div>
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+          )}
 
           <TableBody>
             {/* Map through paginated records to create table rows */}
@@ -161,61 +164,99 @@ const ActionsTable = ({ pageName, partnerType }: ActionsTableProps) => {
                     })}
                   className="cursor-pointer group border-none"
                 >
-                  {/* Partner name cell - always visible */}
-                  <TableCell className="p-0 w-[30%]">
-                    <div className="mt-2 px-4 md:px-8 py-4 border border-darkSand rounded-l-full truncate group-hover:bg-sand transition-colors">
-                      {name}
-                    </div>
-                  </TableCell>
-
-                  {/* Additional cells - only visible on desktop */}
-                  {isDesktop &&
+                  {/* Conditional Rendering: Desktop Table Cells vs Mobile Cards */}
+                  {isDesktop ? (
                     <>
-                      {/* Country cell with flag icon */}
-                      <TableCell className="p-0 w-[17%]">
-                        <div className="mt-2 px-8 py-4 border-y border-darkSand flex gap-2 trucate group-hover:bg-sand transition-colors">
-                          <img 
-                            src={`/country-flags/${country}.svg`} 
-                            alt={`${country} flag`} 
-                            className="h-5 w-5"
-                            loading="lazy"
-                          />
-                          <span>{country}</span>
+                      {/* --- Desktop Table Cells --- */}
+                      {/* Partner name cell - always visible */}
+                      <TableCell className="p-0 w-[30%]">
+                        <div className="mt-2 px-4 md:px-8 py-4 border border-darkSand rounded-l-full truncate group-hover:bg-sand transition-colors">
+                          {name}
                         </div>
                       </TableCell>
-                      {/* Coordinates cell - only for Locations */}
-                      {pageName === 'Locations' && <TableCell className="p-0 w-[23%]">
-                        <div className="mt-2 px-8 py-4 border border-darkSand truncate group-hover:bg-sand transition-colors">
-                          {coordinates?.length === 2 ? `${coordinates[0]}, ${coordinates[1]}` : 'not available'}
+
+                      {/* Additional cells - only visible on desktop */}
+                      <>
+                        {/* Country cell with flag icon */}
+                        <TableCell className="p-0 w-[17%]">
+                          <div className="mt-2 px-8 py-4 border-y border-darkSand flex gap-2 trucate group-hover:bg-sand transition-colors">
+                            <img 
+                              src={`/country-flags/${country}.svg`} 
+                              alt={`${country} flag`} 
+                              className="h-5 w-5"
+                              loading="lazy"
+                            />
+                            <span>{country}</span>
+                          </div>
+                        </TableCell>
+                        {/* Coordinates cell - only for Locations */}
+                        {pageName === 'Locations' && <TableCell className="p-0 w-[23%]">
+                          <div className="mt-2 px-8 py-4 border border-darkSand truncate group-hover:bg-sand transition-colors">
+                            {coordinates?.length === 2 ? `${coordinates[0]}, ${coordinates[1]}` : 'not available'}
+                          </div>
+                        </TableCell>}
+                        {/* Registered port cell - only for Vessels */}
+                        {pageName === 'Vessels' && <TableCell className="p-0 w-[23%]">
+                          <div className="mt-2 px-8 py-4 border border-darkSand truncate group-hover:bg-sand transition-colors">
+                            {registered_port ? `${registered_port}` : 'not available'}
+                          </div>
+                        </TableCell>}
+                        {/* Partner type cell with icon */}
+                        <TableCell className="p-0 w-[17%]">
+                          <div className="mt-2 px-8 py-4 border-y border-darkSand flex gap-2 truncate group-hover:bg-sand transition-colors">
+                            <img 
+                              src={`/partner-icons/${type.replace(/ /g, '_')}.svg`} 
+                              alt={`${type} icon`} 
+                              className="h-5 w-5"
+                              loading="lazy"
+                            />
+                            <span>{type}</span>
+                          </div>
+                        </TableCell>
+                      </>
+
+                      {/* Actions count cell - always visible */}
+                      <TableCell className="p-0 w-[13%]">
+                        <div className="mt-2 px-4 md:px-8 py-4 border border-darkSand rounded-r-full group-hover:bg-sand transition-colors">
+                          {action_count}
                         </div>
-                      </TableCell>}
-                      {/* Registered port cell - only for Vessels */}
-                      {pageName === 'Vessels' && <TableCell className="p-0 w-[23%]">
-                        <div className="mt-2 px-8 py-4 border border-darkSand truncate group-hover:bg-sand transition-colors">
-                          {registered_port ? `${registered_port}` : 'not available'}
-                        </div>
-                      </TableCell>}
-                      {/* Partner type cell with icon */}
-                      <TableCell className="p-0 w-[17%]">
-                        <div className="mt-2 px-8 py-4 border-y border-darkSand flex gap-2 truncate group-hover:bg-sand transition-colors">
-                          <img 
-                            src={`/partner-icons/${type.replace(/ /g, '_')}.svg`} 
-                            alt={`${type} icon`} 
-                            className="h-5 w-5"
-                            loading="lazy"
-                          />
-                          <span>{type}</span>
+                      </TableCell>            
+                    </>
+                  ) : (
+                    <>
+                      {/* --- Mobile Card --- */}
+                      <TableCell colSpan={3} className="p-0 w-full">
+                        <div className="mt-2 mb-1 p-4 border border-darkSand rounded-2xl shadow-sm group-hover:bg-sand transition-colors">
+                          {/* Top row: Icon/Type and Flag */}
+                          <div className="flex justify-between items-start mb-2">
+                            <div className="flex items-center gap-2">
+                              <img 
+                                src={`/partner-icons/${type.replace(/ /g, '_')}.svg`} 
+                                alt={`${type} icon`} 
+                                className="h-5 w-5 flex-shrink-0"
+                                loading="lazy"
+                              />
+                              <span className="text-sm font-medium text-gray-700">{type}</span>
+                            </div>
+                            <img 
+                              src={`/country-flags/${country}.svg`} 
+                              alt={`${country} flag`} 
+                              className="h-5 w-5 flex-shrink-0"
+                              loading="lazy"
+                            />
+                          </div>
+                          {/* Middle row: Name */}
+                          <div className="mb-4 text-left">
+                            <h3 className="text-lg font-semibold truncate" title={name}>{name}</h3>
+                          </div>
+                          {/* Bottom row: Actions */}
+                          <div className="text-sm text-gray-600">
+                            Actions: {action_count}
+                          </div>
                         </div>
                       </TableCell>
                     </>
-                  }
-
-                  {/* Actions count cell - always visible */}
-                  <TableCell className="p-0 w-[13%]">
-                    <div className="mt-2 px-4 md:px-8 py-4 border border-darkSand rounded-r-full group-hover:bg-sand transition-colors">
-                      {action_count}
-                    </div>
-                  </TableCell>            
+                  )}
                 </TableRow>
               )
             })}
